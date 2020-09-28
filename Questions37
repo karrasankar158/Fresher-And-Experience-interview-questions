@@ -1,0 +1,182 @@
+
+                                                     JSP Interview Questions
+1.What is JSP?
+JSP is a tag based JEE web technologies to develop web application for providing dynamic response to end user.
+Compare to Servlet, JSP is used to develop web applications within the less time. JSP is not replacement of Servlet technology. It is one different way of developing web applications in JEE. Internally JSP uses servlet technology only.
+
+2.How many types of codes can us able to write JSP?
+There are three types of codes we are using in JSP, They are
+a. HTML Tags
+b. JAVA Code
+c. JSP Tags
+
+3. What are the advantages of JSP?
+Advantages:
+1. Faster development.
+2. Auto Compile.
+3. Auto reloaded.
+4. No need of using web.xml files to configure JSP file.
+5. No need mention project structure.
+6. It is very good at presentation or view.
+The above features are providing by the all servers.
+
+4.What PIC [Page Implementation Class]?
+The class which is developed by the JSP container in compilation phase is called PIC.
+
+5.What are the phases do we have in JSP?
+1. Verification:
+The code which we written in the .jsp file is valid or not.
+2. Translation:
+“.jsp” will be converted into .java file.
+Ex: Test.jsp (jsp file name)
+Test_jsp.java (.java file name)
+3. Compilation:
+Test_jsp.java will converts into .class file like bellow
+Test_jsp.java (.java file name)
+Test_jsp.class (.class file name)
+4. Configuration:
+Handover Test_jsp.class file to Servlet Container.
+5. Loading:
+Servlet container will loads Test_jsp.class file byte code.
+6. Instantiation:
+Creating object for Test_jsp class
+7. Initialization:
+Filled with initialization values and calling jspInit()
+8. Execution:
+Test_jsp will be executing by calling _jspService(-,-)
+9. Destroy:
+PIC class object will destroyed by calling jspDestroy().
+
+6.How life life cycle methods do we have in JSP?
+There are three life cycle methods in JSP.
+1. public void jspInit()
+2. public void _jspService(HttpServletRequest req, HttpServletResponse res)throws ServletException, IOException
+3. public void jspDestroy()
+
+7.Who is calling jspInit(), jspDestroy(), _jspService(-,-)?
+These methods are not directly calling by Servlet container.
+Servlet container always calls init(-), destroy() and service(-,-), these are calling JSP life cycle methods.
+
+8.Can we override jspInit(), jspDestroy() in our jsp page?
+Yes, we can. The reason is these are not given by JSP container.
+
+9.Can we override _jspService(-,-) in our jsp page?
+No. we can’t. The reason is this method by default added to our page by JSP container.
+
+10.How can we configure jsp file in web.xml file?
+<servlet>
+<servlet-name>test</servlet-name>
+<jsp-file>/Test2.jsp</jsp-file>
+</servlet>
+Test2.jsp should starts with ‘/’. It is mandatory.
+
+11.What is difference between configure jsp file in web.xml file with and without <servlet-mapping> tag?
+If we configure jsp file in web.xml file with <servlet-mapping> then servlet container will create only one pair of PIC object and its associated ServletConfig object.
+If we configure jsp file in web.xml file without <servlet-mapping> then servlet container will create two pairs of PIC object and its associated ServletConfig object.
+12.How many tags do we have in JSP?
+We have 5 types of tags in JSP.
+1. Scripting tags
+2. Directive tags.
+3. Standard action tags
+4. Custom action tags
+5. JSTL
+
+13. How many types of comments are we using in JSP?
+There are three types of comments we can use in JSP.
+1. HTML comment <!– comment text –>
+This tag is not ignored by the JSP container, this tag will be placed into Page Implementation class (PIC), handover to browser by Servlet container, but browser will ignores.
+2. JSP comment <%– comment text –%>
+This tag is ignored by the Jsp Container
+3. Java comment: If we are writing java comments outside of html comment and jsp comment these comments will be treated as html code.
+If we are writing java comments in declarative and scriptlet tag these comments not ignored by the jsp container these comments are placed into PIC in translation phase, but in compilation jsp container ignores.
+
+14.Can we use java comments in expression tag?
+No. It is not possible.
+
+15.What is a declaration tag and its usage?
+This tag is useful writing code/programming elements at class level.
+The programming elements may be blocks, constructors, variables, methods.
+The code is always added to our class outside of the _jspService(-,-).
+We can write multiple statements within the single declaration tag.
+Every statement should be ended with semicolon.
+Syntax: <%! ————– %>
+
+16.What is a scriptlet tag and its usage?
+It is useful for writing the code within the _jspService(-,-). It is useful for declaring local variables, final variables, method calling statements, doing operations (logic).
+We can write one or more statements and every statement ended with semicolon.
+Syntax: <% ————- %>
+
+17.What is expression tag and its usage?
+It is useful for writing the code within the _jspService(-,-). It is useful for printing output on browser.
+We can able to write only one statement within the expression tag, statements are not ended with semicolon.
+Ex: <%= ———— %>
+
+18.How many types of errors are we face in JSP?
+We have three types of errors in JSP
+a. Translation Errors:
+The errors which are given by the jsp container due to bad syntax of tags are called translation errors. If translation error occurs jsp container not creates .java file
+
+b. Compile Time Errors:
+If the compiler unable to understand the syntax then we will get compile time errors.
+In this time jsp container will creates .java file but not .class file.
+<% ? compilation error
+<% ! %> –> Compile time Error
+<% <% %>–> Compile time Error
+<% int a = 10 %> –> Compiler time Error
+c. Execution Error:
+If there is any problem with logic, then we will get run time error.
+In the time jsp container will creates .java and .class file but servlet container will give errors.
+<% int a = 10/0; %>
+<% int a[] = {11,22,33};
+System.out.println(a[3]);
+%>
+
+19.What is implicit object and how many implicit objects do we have in JSP?
+The objects which are created or given by the container to implement our jsp logic are called Implicit Objects.
+We have 9 implicit objects.
+1. config
+2. session
+3. application(context)
+4. pageContext
+5. out
+6. page
+7. exception
+8. request
+9. response
+
+20.Can we able to use implicit object outside of _jspService(-,-)?
+A) No.
+
+21.How to get config and context objects outside of _jspService(-,-)?
+A) By using factory methods like getServletConfig() and getServletContext() factory methods.
+
+22. Can we able create variable names like confing and application in jspInit() , jspDestroy(), _jspService()?
+We can able to create variable names like config, application, page … in jspInit() and jspDestroy(), in these methods these names are not treated as implicit object the reason is by default implicit object are not available to jspInit() and jspDestroy().
+We can’t create variable names like config, application, page … in _jspService(-,-). The on top of these name container already created implicit objects and placed into _jspService(-,-). If we are trying to create we will compile time error like duplicate variable.
+23.Can we use exception implicit object directly in jsp?
+A) No.
+
+24.How can we use exception implicit object in jsp?
+A) With the help of directive tag.
+All 8 implicit objects we can use directly except “exception” object, the reason by default jsp container unable recognize the “exception” implicit object.
+If we want to use we need declare one directive tag like bellow.
+<%@ page isErrorPage=”true” %>
+
+25.What are the usages of pageContext implicit object?
+a. Getting implicit objects.
+b. Storing/ retrieving / deleting the data from scope objects.
+c. Making communication with other .jsp file, .html file, .java file,.txt file.
+
+26.How many scope objects do we have in jsp?
+We have 4 scope objects.
+These are useful carry the information from .jsp file to another .jsp file.
+? page
+? request
+? application (context)
+? session
+In the all scope objects application scope object having highest accessibility that means we can use that scope object information from all browser as well windows also.
+Session scope object data can be accessible within the same browser but all windows.
+Request scope object data can be accessible only one window, once response handover to browser request scope object data will be destroyed.
+Page scope object data can be accessible only within the same page.
+
+Share this post
