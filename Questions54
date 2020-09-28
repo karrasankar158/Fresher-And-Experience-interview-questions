@@ -1,0 +1,163 @@
+
+CORE JAVA INTERVIEW QUESTIONS AND ANSWERS
+
+1. Q : WHAT IS DATA HIDDING ?
+ANS : Hiding of the data so that outside person can't access our data directly.
+By Using private modifier we can implement data hiding.
+Ex :
+
+class Account {
+private double balance =1000;
+}
+
+The main advantage of Data Hiding is we can achieve security.
+
+
+
+2. Q : WHAT IS DATA ABSTRACTION ?
+ANS : Hiding internal implementation details & just highlight the set of services . What we are offering is called abstraction.
+Ex :
+
+Bank ATM Machine.
+
+By using interfaces & abstract classes we can achieve abstraction.
+
+The main advantage of abstraction are :
+
+
+1. We can achieve security as no one is allowed to known our internal implementation.
+2. Without effecting outside person we can change our internal implementation. Hence Enhancement will become very easy.
+
+3.Q : WHAT IS ENCAPSULATION ?
+ANS : Encapsulating data & corresponding methods into a single module is known as encapsulation.
+
+If any java class follows Data Hiding and Abstraction such type of class is said to Encapsulated class.
+
+Encapsulation = Data Hiding + Abstarction.
+
+class Account {
+privte double balance;
+// setter & getter methods.
+//....
+}
+Hidind data behind method is central concept of Encapsulation.
+
+
+4. Q : WHAT IS INHERITANCE ?
+ANS : By Using extends keyword we can implement Inheritane (IS-A) Relationship.
+The main advantage of IS-A relationship is reusability of the code.
+
+Example :
+
+class P {
+public void m1(){
+//-------
+}
+}
+class C extends P {
+public void m2() {
+//--------
+}
+}
+class Test {
+{
+public static void main(string[] args {
+P p = new P();
+p.m1();// work fine
+p.m2(); // CompilationError : cannot find symbol . symbol : method m2()
+
+C c = new C();
+c.m1(); // work fine.
+c.m2(); // work fine.
+
+P p1 = new C();
+p1.m1(); // work fine
+p1.m2(); // CompilationError :
+
+C c1= new P(); // Incompatible types. found : P required :C
+
+5. Q : WHAT IS HAS-A RELATIONSHIP ?
+ANS : HAS-A Relationship is also known as Composition or Aggregation.
+There is no specific keyword to implement HAS-A Relationship the mostly we are using "new" keyword.
+The main advantage of HAS-A relationship is reusability.
+
+class Car {
+Engine engine = new Engine();
+}
+
+class Engine {
+//Engine specific functionality.
+}
+
+The main disadvantage of HAS-A Relationship is it increases dependency between the classes and creates maintenance problems.
+
+6. Q : WHAT IS POLYMORPHISM ?
+ANS : Same name with different form is the concept of polymorphism.
+
+Types Of Polymorphism :
+
+1. Compille/static/earlybinding :
+a. overloading
+b. method hiding
+1. Runtime/dynamic/latebinding :
+a. overriding
+7. Q : WHAT IS METHOD OVERLOADING ?
+ANS : Two methods are said to be overloaded if method names are same but arguments are different.
+class Test {
+public void m1(StringBuffer sb) {
+System.out.println("StringBuffer-arg");
+}
+public void m1(String str) {
+System.out.println("String-version");
+}
+
+public static void main(String[] args) {
+Test t = new Test();
+t.m1(new StringBuffer("java"));
+t.m1("java");
+t.m1(null);
+}
+}
+
+In overloading method resolution always takes care by compiler based on reference type.
+Hence overloading is also considered as compiletime polymorphism or static polymorphism or early binding.
+
+8. Q : WHAT IS METHOD OVERRIDING ? AND RULES FOR METHOD OVERRIDING ?
+ANS : If two methods have same name and same arguments type is known as method overriding.
+Method overriding is possible only in case of Inheritance.
+Hence overriding is also known as runtime polymorphism or dynamic polymorphism or late binding.
+
+class P {
+public object m1() {
+return null;
+}
+}
+
+class C extends P {
+public String m1(){
+return null;
+}
+}
+
+9. Q : WHAT IS THE DIFFERENCE BETWEEN METHOD OVERRIDING AND METHOD HIDING?
+ANS :
+
+METHOD OVERRIDING	METHOD HIDING
+1. Both parent and child class method should be non static.	1. Both parent and child class method shoul be static.
+2. Method resolution is always take care by JVM based on runtime object.	2. Method resolution is always takes care by compiler based on reference type.
+3. Overriding is also considered as runtime polymorphism (or) dynamic polymorphism (or) late binding.	3. Method hiding is also considered as compile time polymorphism (or) static polymorphism (or) early binding.
+9. Q : WHAT IS THE DIFFERENCE BETWEEN ArrayList l = new ArrayList(); AND List l = new ArrayList();?
+ANS :
+
+ArrayList l = new ArrayList();	List l = new ArrayList();
+1. Child c = new Child();	1. Parent p = new Child();
+2. If we know runtime object type exactly then we have to used this approach.	2. If we don't know exact runtime object type then we have to used this approach.
+3. By using child reference we can call both parent & child class methods.	3. By using parent reference we can call only method available in parent class and child specific method we can't call.
+ 
+- October 12, 2019 No comments: 
+Email This
+BlogThis!
+Share to Twitter
+Share to Facebook
+Share to Pinterest
+Show quoted text
