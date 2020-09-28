@@ -1,0 +1,256 @@
+
+21 String Programming and Coding Interview Questions With Solutions
+ 
+In this article, I am going to share 21 of the most common String based Programming and Coding interview questions from Java developer interviews. These questions require you to write code to solve the problem and they are different from traditional Java String questions like how substring method works in Java or when to use the intern() method of String in Java? Since coding and problem solving is an important part of any programming job interview, it's imperative that you know how to solve them in time and on pressure situation, which comes only after doing practice with a right set of questions. Since these questions are already tried and tested and appeared in many interviews, they will provide you the experience you need to crack your coding interview.
+
+A string is one of the most popular data structure, probably next to the array and that's why you will find at least one question from String in any programming job interview. If you don't know, String is nothing but a character array in most of the language like C. But, in Java, String is an object, which holds data in character array.
+
+This means you can solve many String based problem by assuming it as a character array. You can use all the tips and tricks you learned by solving array based coding question to also solve String e.g. reversing a String is the same as reversing an array and so on.
+
+I have also provided the links to solutions for most of the questions so that you can quickly check your answer and code. Remember, it's not just important to solve the problem but also to understand the solution and improve it gradually.
+
+In a real interview, an interviewer is as much interested in the solution as on improvement and optimization. In order to improve the solution, good knowledge of data structure is mandatory because in many cases a choice of good data structure not only make the solution simple but also fast. For example, by using a set you can quickly figure out duplicate characters of String.
+
+Also, you should be able to calculate the cost of your solution e.g. time and space complexity on Big O notation. If you haven't revise your data structure and algorithms then Data Structures and Algorithms: Deep Dive Using Java is a good course to start with before you go for the interview.
+
+ 
+
+
+
+String Programming and Coding Interview Questions
+Here are 21 most frequently asked String based questions from a Programming job interview. These questions are not based on theoretical concept e.g. Why String is Immutable in Java but rather based upon the string data structure and require a lot of coding practice to solve them in limited time.
+
+
+1) How to find the maximum occurring character in given String? (solution)
+Write an efficient Java/C/Python program to return the maximum occurring character in the input string e.g., if the input string is "Java" then the function should return 'a'.
+
+
+2) How to remove all duplicates from a given string? (solution)
+Write a program to remove all the duplicate characters from a given input String e.g. if given String is "Java" then output should be "Java". The second or further occurrence of duplicate should be removed.
+
+
+3) How to print the duplicate characters from the given String? (solution)
+Write an efficient Java/C/Python/Ruby program to return the duplicate characters from given String, for example if given String is "C++" then your program should print "+" Similarly, if input is "Java and JavaScript" then your program should print "J", "a" and "v". You can ignore case for finding duplicates.
+
+
+4) How to remove characters from the first String which are present in the second String? (solution)
+Write an efficient Java/c/Python function that takes two strings as arguments and removes the characters from the first string which are present in the second string. For example, if the first String "India is great" and second String is "in" then output should be "da s great"
+
+
+5) How to check if two strings are rotations of each other? (solution)
+Write an efficient program to test if two given String is a rotation of each other or not e.g. if given String is "XYZ" and "ZXY" then your function should return true but if the input is "XYZ" and "YXZ" then return false.
+
+
+6) How to reverse a given String? (solution)
+Write a program to reverse a String in C/Java/Python or choice of your programming language. You can write either the recursive or iterative solution. For example, if a given input is "abcd" then your function should return "dcba".
+
+
+7) How to reverse String without recursion? (solution)
+Same as the previous program but you cannot use recursion, this time, you must solve this problem in C/Java/Python using iteration or loops. If you are not familiar with recursion and iteration, you can further check the Algorithms and Data Structures - Part 1 and 2 courses on Pluralsight. One of the better course to start with fundamental techniques to solve algorithms based problems.
+
+ 
+
+
+
+
+8) How to print all permutation of a String? (solution)
+Write an efficient program to print all permutations of a given String in Java/C/Python or any programming language of your choice. For example, if given input is "123" then your program should print all 6 permutations e.g. "123", "132", "213", "231", "312" and "321".
+
+
+9) How to find the first non-repeating character in a given String? (solution)
+Write a program in any programming language you to find the first non-repeated character in a given String, for example, if given String is "Java" then first non-repeated character is "J"
+
+
+10) How to reverse the words in a given String sentence? (solution)
+Write an efficient program in Java or C++ to reverse the words in a given String sentence. For example, if the input is "Java is best" then your program should print "best is Java". There is no restriction on preserving white space.
+
+
+11) How to find the smallest substring in a given string containing all characters of another string? (solution)
+Write an efficient function in C/C++ or Java to print the smallest substring in a given String containing all characters of another String. For example, if given String is "this is a test string" and "tist", then output should be "t stri".
+
+
+12) How to check if two given String is the anagram of each other? (solution)
+Write an efficient program in Java/C/C++ to check if two String is an anagram of each other. An anagram contains are of the same length and contains the same character but in the different order for example "Army" and "Mary" is the anagram. Your program should return true if both Strings are the anagram, false otherwise
+
+
+13) How do you check if a given String is Palindrome or not? (solution)
+Write an efficient program in your favorite programming language to check if a Given a string is a palindrome, considering only alphanumeric characters and ignoring cases. For example,"121" is a palindrome, but "123" is not. Your function should return true if given String is a palindrome, false otherwise
+
+
+14) How do you convert String to integer?  (solution)
+Implement atoi() like function in C/C++/Java to convert a string to an integer. Consider all possible cases e.g. positive and negative String, the presence of + or - character etc. For example, if given input String is "123" then your program should return 123 and if a given input is "+231" then your program should return 231. I first learned about this problem on Programming Interviews Exposed: Secrets to Landing Your Next Job, one of the finest book on interviews and still its explanation is best I have read so far.
+
+ 
+String Programming Interview Questions With Solutions
+
+
+
+15) How do you convert a Roman numeral String to Integer in Java? (solution)
+Write a function in your favorite programming language to convert a given Roman numeral to equivalent String. For example, if given String is "X" then your program should print 10. Input will be within the range from 1 to 2000. You can also ignore case e.g. both "x" and "X" should return 10
+
+
+17) How do you remove a given character from String? (solution)
+Write an efficient method in Java to remove all occurrence of a given character in Java. For example, if given String is "Programming" and given character to remove is "m" then your function should return "Prograing".
+
+
+18) How do you count a number of words in String? (solution)
+Write a program to count a number of words in a given String. The words are separated by the following characters: space (‘ ‘) or newline (‘\n’) or tab (‘\t’) or a combination of these. For example, if input "Java is great" your program should print 3.
+
+
+19) How do you check if a given String contains valid parentheses? (solution)
+Given a string containing just the characters '(', ')', '{', '}', '[' and ']', write a function in Java or C++ to check if the input string is valid. The brackets must close in the correct order, "()" and "()[]{}" are all valid but "(]" and "([)]" are not
+
+
+20) How to convert Integer to Roman String? (solution)
+This is the reverse of problem 17, In this problem, you need to write a function in Java/C or C++ to convert a given integer into an equivalent Roman numeral. For example, if a given integer is 5 then your program should print "V".
+
+Here is a chart of Roman numerals for 1 to 100 for your reference:
+
+21 String Programming and Coding Interview Questions Answers
+
+
+
+21) How do you find the longest palindromic substring of a given substring? (solution)
+Given a string S, find the longest palindromic substring in S. You may assume that the maximum length of S is 1000, and there exists one unique longest palindromic substring.
+
+
+That's all about some frequently asked String Programming interview questions for preparing Programming Job interviews. The string is a very important topic so leave it at your peril. You might have seen this question before but solving them again and understanding their performance will help you a lot in doing well in programming interviews.
+
+
+Further Learning
+Data Structures and Algorithms: Deep Dive Using Java
+Algorithms and Data Structures - Part 1 and 2
+Data Structures in Java: An Interview Refresher
+Cracking the Coding Interview: 189 Programming Questions and Solutions
+
+
+Other Data Structure and Algorithms Resources you may like
+75+ Coding Problems from Interviews (questions)
+10 Free Courses to learn Data Structure and Algorithms (courses)
+10 Books to Prepare Technical Programming/Coding Job Interviews (books)
+10 Courses to Prepare for Programming Job Interviews (courses)
+100+ Data Structure and Algorithms Interview Questions (questions)
+My favorite Free Algorithms and Data Structure Courses on FreeCodeCamp (courses)
+30+ linked list interview questions with a solution (linked list)
+30+ array based interview questions for programmers (array)
+50+ Algorithm based Interview questions from HackerNoon (questions)
+5 Free Courses to learn Algorithms in depth (courses)
+10 Algorithms books every Programmer should read (books)
+Top 5 Data Structure and Algorithms Courses for Programmers (courses)
+
+Thanks for reading this article so far. If you like this article then please share with your friends and colleagues. If you have any questions or feedback then please drop a note.
+
+
+P. S. - If you are looking for a FREE course to learn Data Structure from scratch, you can also check out the Easy to Advanced Data Structures course on Udemy. A complete guide to learning everything there is to know about data structures by William Fiset, a Software engineer at Google and ACM-ICPC world finalist
+
+javin paul
+Share
+No comments:
+Post a Comment
+‹
+›
+Home
+View web version
+Interview Questions List
+
+ Home 
+ 
+ interview questions - java basic 
+ interview questions - java tough 
+ 
+ interview questions - java thread 
+ interview questions - coding 
+ 
+ interview questions - linux 
+ interview questions - web service 
+ 
+ interview questions - java advanced 
+ interview questions - software design 
+ 
+ interview questions - java inheritance 
+ interview questions - OOP 
+ 
+ interview questions - android 
+ interview questions - SQL 
+ 
+ interview questions - java tricky 
+ interview questions - REST 
+ 
+ interview questions - array 
+ interview questions - servlet jsp 
+ 
+ interview questions - EJB 
+ interview questions - java collection 
+ 
+ interview questions - design pattern 
+ interview questions - spring 
+ 
+ interview questions - hibernate 
+ interview questions - core java 
+ 
+ interview questions - arraylist 
+ interview questions - java enum 
+ 
+ interview questions - java swing 
+ interview questions - java common 
+ 
+ interview questions - support 
+ interview questions - technical 
+ 
+ interview questions - java main 
+ interview questions - hashmap 
+ 
+ interview questions - java date 
+String Tutorials
+
+ Home 
+ 
+ string - 101 guide 
+ string - contains 
+ 
+ string - check unique 
+ string - rotation 
+ 
+ string - count words 
+ string - join 
+ 
+ string - substring 
+ string - split 
+ 
+ string - palindrome 
+ string - reverse words 
+ 
+ string - byte array 
+ string - to enum 
+ 
+ string - compare 
+ string - empty 
+ 
+ string - stringbuffer 
+ string - duplicate 
+ 
+ string - immutable 
+ string - split regex 
+ 
+ string - remove whitespace 
+ string - toLowerCase 
+ 
+ string - reverse 
+Privacy
+
+Home
+ 
+Privacy Policy
+Powered by Blogger.
+×
+"Spring Boot: The Complete guide from development to deployment" 
+A 
+FREE Course for Java Programmers.
+Yes please!
+No, thanks!
+AddThis
+
+ 
+
+ 
+Show quoted text
