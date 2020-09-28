@@ -1,0 +1,59 @@
+
+
+
+
+#Letest #update #interview #questions #try #it
+#Deloite  #CGI #experience 3+
+1.what you have done in project ,can you tell me
+2.what is polymorphism ,where you used in your project.
+3.  reverse String logic
+input:MADAM  OUTPUT:MADAM
+ 
+4. String s1="Hira";
+String s2="Hira";
+ 
+How many Object will be created ,
+s1==s2 true/false, 
+s1.equals(s2)  true/false? 
+ 
+I am not overriding .equals method what will happen?
+ 
+5. Do you worked on Servlet & jsp
+6. HOW MANY TYPES OF polymorphism ?
+7. What is overriding & overloading ?
+8. Did you Worked on  junit,mockito,powermockito TestCases
+9. Tell me some Annotaion of mockito.
+10. What is AOP,What is Spring JDBC
+11. What is weaving in Aop ?
+12.What is IOC,Dependency Injection?
+13. Which Database are you used?
+14. What is Collection
+15. Write whole Hirachy of collection ?
+16., differece b/w Set & Map,ArrayList & LinkedList
+17. What is treeSet,When use treeSet
+18.Can I customized sort in HashSet?
+19. diff b/w Comarator & comaprable ,when use comarator & when use comparable?
+20. how to iterate treeset ?
+21.how to iterate list?
+22. how to iterate HashMap
+23. what is treeSet
+24.Did you use maven,Ant
+25.What is the Goal of project
+27.Feature of jdk1.7why are using jdk 7?
+28.WSDL:In How many sections in Wsdl?
+SQL
+===
+30.1.Write A query to find maximum salary of  department
+31. 2.Write A query to find maximum salary of  each department
+32.what is purge command?
+
+CGI interview questions
+1.Asking on java 9 features
+2.Spring cloud
+3.Spring 5Featuers
+4.Clientside load balancing in microservices
+5.Spring with rest integration
+6.spring integration with soap
+7.How to consume the webservice
+8.Rest template methods in spring5
+9.springboot soap webservice configuration
