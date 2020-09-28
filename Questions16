@@ -1,0 +1,26 @@
+
+
+#Letest #update #try it
+How do I crack a Java developer interview easily with 2+ years of experience?
+Get involved. Get coding.
+Hello ... I am listed down some questions which may helpful to you...
+1.What is difference between Vector and ArrayList in Java?
+2.What is difference between fail-fast and fail-safe Iterator in Java?
+3.Difference between throw and throws in Java?
+4.What is difference between checked and unchecked Exception in Java.
+5. Write Java program to reverse String in Java without using StringBuffer?
+6. What happens if you don't call wait and notify from synchronized block?
+7.Write code to solve producer consumer problem in Java.
+8.Why wait and notify is declared in Object class instead of Thread ?
+9.Why multiple inheritance is not supported in Java ?
+10.Why char array is preferred to store password than String in Java?
+11.How to create thread-safe singleton in Java using double checked locking?
+12.What happens if your Serializable class contains a member which is not serializable? How do you fix it?
+13.Can you override static method in Java? if I create same method in subclass is it compile time error?
+14.What is the difference between equals() and “==” ?
+15.What is the difference between final, finally and finalize?
+16.Explain the Struts1/Struts2/MVC application architecture?
+17.How does the version control process works?
+18.What is the difference between JAR and WAR files?
+19. What is Collection ? What is a Collections Framework ? What are the benefits of Java Collections Framework ?
+20.What is the root interface in collection hierarchy ?
