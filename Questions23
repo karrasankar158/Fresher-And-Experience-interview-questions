@@ -1,0 +1,220 @@
+
+HCL Java depth Interview Questions and Answers
+
+Question:	What is the difference between an Interface and an Abstract class?
+  Question:	What is the purpose of garbage collection in Java, and when is it used?  
+Question: 	Describe synchronization in respect to multithreading.
+Question: 	Explain different way of using thread?  
+Question: 	What are pass by reference and passby value?
+Question: 	What is HashMap and Map?
+Question: 	Difference between HashMap and HashTable?
+Question:	Difference between Vector and ArrayList?
+Question: 	Difference between Swing and Awt?
+Question: 	What is the difference between a constructor and a method?
+Question: 	What is an Iterator?
+Question: 	State the significance of public, private, protected, default modifiers both singly and in combination and state the effect of package relationships on declared items qualified by these modifiers.
+Question:	What is an abstract class?
+Question:	What is static in java?
+Question:	What is final?
+
+Q:	What is the difference between an Interface and an Abstract class?
+A:	An abstract class can have instance methods that implement a default behavior. An Interface can only declare constants and instance methods, but cannot implement default behavior and all methods are implicitly abstract. An interface has all public members and no implementation. An abstract class is a class which may have the usual flavors of class members (private, protected, etc.), but has some abstract methods.
+.
+TOP
+
+Q:	What is the purpose of garbage collection in Java, and when is it used?
+A:	The purpose of garbage collection is to identify and discard objects that are no longer needed by a program so that their resources can be reclaimed and reused. A Java object is subject to garbage collection when it becomes unreachable to the program in which it is used.
+TOP
+
+Q:	Describe synchronization in respect to multithreading.
+A:	With respect to multithreading, synchronization is the capability to control the access of multiple threads to shared resources. Without synchonization, it is possible for one thread to modify a shared variable while another thread is in the process of using or updating same shared variable. This usually leads to significant errors. 
+TOP
+
+Q:	Explain different way of using thread?
+A:	The thread could be implemented by using runnable interface or by inheriting from the Thread class. The former is more advantageous, 'cause when you are going for multiple inheritance..the only interface can help.
+TOP
+
+Q:	What are pass by reference and passby value?
+A:	Pass By Reference means the passing the address itself rather than passing the value. Passby Value means passing a copy of the value to be passed. 
+TOP
+
+Q:	What is HashMap and Map?
+A:	Map is Interface and Hashmap is class that implements that.
+TOP
+
+Q:	Difference between HashMap and HashTable?
+A:	The HashMap class is roughly equivalent to Hashtable, except that it is unsynchronized and permits nulls. (HashMap allows null values as key and value whereas Hashtable doesnt allow). HashMap does not guarantee that the order of the map will remain constant over time. HashMap is unsynchronized and Hashtable is synchronized.
+TOP
+
+Q:	Difference between Vector and ArrayList?
+A:	Vector is synchronized whereas arraylist is not.
+TOP
+
+Q:	Difference between Swing and Awt?
+A:	AWT are heavy-weight componenets. Swings are light-weight components. Hence swing works faster than AWT.
+TOP
+
+Q:	What is the difference between a constructor and a method?
+A:	A constructor is a member function of a class that is used to create objects of that class. It has the same name as the class itself, has no return type, and is invoked using the new operator.
+A method is an ordinary member function of a class. It has its own name, a return type (which may be void), and is invoked using the dot operator.
+TOP
+
+Q:	What is an Iterator?
+A:	Some of the collection classes provide traversal of their contents via a java.util.Iterator interface. This interface allows you to walk through a collection of objects, operating on each object in turn. Remember when using Iterators that they contain a snapshot of the collection at the time the Iterator was obtained; generally it is not advisable to modify the collection itself while traversing an Iterator.
+TOP
+
+Q:	State the significance of public, private, protected, default modifiers both singly and in combination and state the effect of package relationships on declared items qualified by these modifiers.
+A:	public : Public class is visible in other packages, field is visible everywhere (class must be public too)
+private : Private variables or methods may be used only by an instance of the same class that declares the variable or method, A private feature may only be accessed by the class that owns the feature.
+protected : Is available to all classes in the same package and also available to all subclasses of the class that owns the protected feature.This access is provided even to subclasses that reside in a different package from the class that owns the protected feature.
+default :What you get by default ie, without any access modifier (ie, public private or protected).It means that it is visible to all within a particular package.
+TOP
+
+Q:	What is an abstract class?
+A:	Abstract class must be extended/subclassed (to be useful). It serves as a template. A class that is abstract may not be instantiated (ie, you may not call its constructor), abstract class may contain static data. Any class with an abstract method is automatically abstract itself, and must be declared as such.
+A class may be declared abstract even if it has no abstract methods. This prevents it from being instantiated.
+TOP
+
+Q:	What is static in java?
+A:	Static means one per class, not one for each object no matter how many instance of a class might exist. This means that you can use them without creating an instance of a class.Static methods are implicitly final, because overriding is done based on the type of the object, and static methods are attached to a class, not an object. A static method in a superclass can be shadowed by another static method in a subclass, as long as the original method was not declared final. However, you can't override a static method with a nonstatic method. In other words, you can't change a static method into an instance method in a subclass.
+TOP
+
+Q:	What is final?
+A:	A final class can't be extended ie., final class may not be subclassed. A final method can't be overridden when its class is inherited. You can't change value of a final variable (is a constant).
+
+
+
+Question:	What if the main method is declared as private?
+Question:	What if the static modifier is removed from the signature of the main method? 
+Question:	What if I write static public void instead of public static void?
+Question:	What if I do not provide the String array as the argument to the method?  
+Question:	What is the first argument of the String array in main method?
+Question:	If I do not provide any arguments on the command line, then the String array of Main method will be empty or null?
+Question:	How can one prove that the array is not null but empty using one line of code?
+Question:	What environment variables do I need to set on my machine in order to be able to run Java programs?
+Question:	Can an application have multiple classes having main method?
+Question:	Can I have multiple main methods in the same class?
+Question:	Do I need to import java.lang package any time? Why ?
+Question:	Can I import same package/class twice? Will the JVM load the package twice at runtime?
+Question:	What are Checked and UnChecked Exception?
+Question:	What is Overriding?
+Question:	What are different types of inner classes?
+
+Q:	What if the main method is declared as private?
+A:	The program compiles properly but at runtime it will give "Main method not public." message.
+[ Received from Sandesh Sadhale]
+TOP
+
+Q:	What if the static modifier is removed from the signature of the main method?
+A:	Program compiles. But at runtime throws an error "NoSuchMethodError".
+[ Received from Sandesh Sadhale]
+TOP
+
+Q:	What if I write static public void instead of public static void?
+A:	Program compiles and runs properly.
+[ Received from Sandesh Sadhale]
+TOP
+
+Q:	What if I do not provide the String array as the argument to the method?
+A:	Program compiles but throws a runtime error "NoSuchMethodError".
+[ Received from Sandesh Sadhale]
+TOP
+
+Q:	What is the first argument of the String array in main method?
+A:	The String array is empty. It does not have any element. This is unlike C/C++ where the first element by default is the program name.
+[ Received from Sandesh Sadhale]
+TOP
+
+Q:	If I do not provide any arguments on the command line, then the String array of Main method will be empty or null?
+A:	It is empty. But not null.
+[ Received from Sandesh Sadhale]
+TOP
+
+Q:	How can one prove that the array is not null but empty using one line of code?
+A:	Print args.length. It will print 0. That means it is empty. But if it would have been null then it would have thrown a NullPointerException on attempting to print args.length.
+[ Received from Sandesh Sadhale]
+TOP
+
+Q:	What environment variables do I need to set on my machine in order to be able to run Java programs?
+A:	CLASSPATH and PATH are the two variables.
+[ Received from Sandesh Sadhale]
+TOP
+
+Q:	Can an application have multiple classes having main method?
+A:	Yes it is possible. While starting the application we mention the class name to be run. The JVM will look for the Main method only in the class whose name you have mentioned. Hence there is not conflict amongst the multiple classes having main method.
+[ Received from Sandesh Sadhale]
+TOP
+
+Q:	Can I have multiple main methods in the same class?
+A:	No the program fails to compile. The compiler says that the main method is already defined in the class.
+[ Received from Sandesh Sadhale]
+TOP
+
+Q:	Do I need to import java.lang package any time? Why ?
+A:	No. It is by default loaded internally by the JVM.
+[ Received from Sandesh Sadhale]
+TOP
+
+Q:	Can I import same package/class twice? Will the JVM load the package twice at runtime?
+A:	One can import the same package or same class multiple times. Neither compiler nor JVM complains abt it. And the JVM will internally load the class only once no matter how many times you import the same class.
+[ Received from Sandesh Sadhale]
+TOP
+
+Q:	What are Checked and UnChecked Exception?
+A:	A checked exception is some subclass of Exception (or Exception itself), excluding class RuntimeException and its subclasses.
+Making an exception checked forces client programmers to deal with the possibility that the exception will be thrown. eg, IOException thrown by java.io.FileInputStream's read() method·
+Unchecked exceptions are RuntimeException and any of its subclasses. Class Error and its subclasses also are unchecked. With an unchecked exception, however, the compiler doesn't force client programmers either to catch the
+exception or declare it in a throws clause. In fact, client programmers may not even know that the exception could be thrown. eg, StringIndexOutOfBoundsException thrown by String's charAt() method· Checked exceptions must be caught at compile time. Runtime exceptions do not need to be. Errors often cannot be.
+TOP
+
+Q:	What is Overriding?
+A:	When a class defines a method using the same name, return type, and arguments as a method in its superclass, the method in the class overrides the method in the superclass.
+When the method is invoked for an object of the class, it is the new definition of the method that is called, and not the method definition from superclass. Methods may be overridden to be more public, not more private.
+TOP
+
+Q:	What are different types of inner classes?
+A:	Nested top-level classes, Member classes, Local classes, Anonymous classes
+Nested top-level classes- If you declare a class within a class and specify the static modifier, the compiler treats the class just like any other top-level class.
+Any class outside the declaring class accesses the nested class with the declaring class name acting similarly to a package. eg, outer.inner. Top-level inner classes implicitly have access only to static variables.There can also be inner interfaces. All of these are of the nested top-level variety.
+
+Member classes - Member inner classes are just like other member methods and member variables and access to the member class is restricted, just like methods and variables. This means a public member class acts similarly to a nested top-level class. The primary difference between member classes and nested top-level classes is that member classes have access to the specific instance of the enclosing class.
+
+Local classes - Local classes are like local variables, specific to a block of code. Their visibility is only within the block of their declaration. In order for the class to be useful beyond the declaration block, it would need to implement a
+more publicly available interface.Because local classes are not members, the modifiers public, protected, private, and static are not usable.
+
+Anonymous classes - Anonymous inner classes extend local inner classes one level further. As anonymous classes have no name, you cannot provide a constructor.
+
+
+
+Question:	Are the imports checked for validity at compile time? e.g. will the code containing an import such as java.lang.ABCD compile?
+Question:	Does importing a package imports the subpackages as well? e.g. Does importing com.MyTest.* also import com.MyTest.UnitTests.*? 
+Question:	What is the difference between declaring a variable and defining a variable?
+Question:	What is the default value of an object reference declared as an instance variable?  
+Question:	Can a top level class be private or protected?
+Question:	What type of parameter passing does Java support?
+Question:	Primitive data types are passed by reference or pass by value?
+Question:	Objects are passed by value or by reference?
+Question:	What is serialization?
+Question:	How do I serialize an object to a file?
+Question:	Which methods of Serializable interface should I implement?
+Question:	How can I customize the seralization process? i.e. how can one have a control over the serialization process?
+Question:	What is the common usage of serialization?
+Question:	What is Externalizable interface?
+Question:	When you serialize an object, what happens to the object references included in the object?
+Question:	What one should take care of while serializing the object?
+Question:	What happens to the static fields of a class during serialization?
+
+Q:	Are the imports checked for validity at compile time? e.g. will the code containing an import such as java.lang.ABCD compile?
+A:	Yes the imports are checked for the semantic validity at compile time. The code containing above line of import will not compile. It will throw an error saying,can not resolve symbol
+symbol : class ABCD
+location: package io
+import java.io.ABCD;
+[ Received from Sandesh Sadhale]
+TOP
+
+Q:	Does importing a package imports the subpackages as well? e.g. Does importing com.MyTest.* also import com.MyTest.UnitTests.*?
+A:	No you will have to import the subpackages explicitly. Importing com.MyTest.* will import classes in the package MyTest only. It will not import any class in any of it's subpackage.
+[ Received from Sandesh Sadhale]
+TOP
+
+Q:	
