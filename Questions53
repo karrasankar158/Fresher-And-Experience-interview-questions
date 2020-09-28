@@ -1,0 +1,363 @@
+
+Advanced Java Interview Questions
+Servlets
+1.Define Java Servlet?
+Ans: A Java Servlet is a simple Java Class, which is dynamically loaded onto Web Server and therefore, enhances the functionality of the Web Server. A Java Servlet is secure and portable as it runs on the Web Server and cannot operate outside its domain.
+
+Define Servlet Container?
+Ans: Servlet Container, sometimes also known as Servlet Engine, is an integrated set of objects that provide runtime environment for java Servlet componenets. In other words, it is a system that manages Java Servlet components on top of a Web Server to handle the Web client requests.
+
+What is Servlet API?
+Ans: The Servlet API is part of the Java Servlet Specification designed by  Sun-JCP. This API is supported by all Servlet Containers. This API contains classes and Interfaces that define a standard contract between the Servlet Class and Servlet Container.
+
+Hierarch of Servlet API?
+Ans : javax.servlet.Servlet interface is root of Servlet API
+
+ 
+
+Define getParameter() method?
+Ans :  This getParameter() method is used to get the parameter values from the ServletRequest Object into Servlet Program. This method is available from javax.servlet.ServletRequest.
+
+Define getInitParameter() method?
+Ans :  This getInitParameter() method is used to get the initializaed parameter valaue from javax.servlet.ServletConfig and javax.servlet.ServletContext.
+
+Describe include() method?
+Ans: The include() method of the RequestDispatcher object includes the response of another Servlet into the calling Servlet. You can invoke this method any time from the calling Servlet while servicing request.
+
+Describe forward() method?
+Ans: The forward() method of RequestDispatcher forwards requests to the navigated resource, such as Servlet (target Servlet) and this method can be invoked by the Servlet while servicing the request when no output has been committed.
+
+Explore the methods of Buffering?
+Ans : The ServletResponse interface allows a Servlet to access and set buffering parameters.
+
+The following methods of the ServletResponse interface are used to access and set buffering informations:
+
+setBufferSize(int) : Sets the required Buffer size
+
+int getBufferSize() : Gets the buffer size of the Underlying buffer being used.
+
+flushBuffer() : Forces the content in the buffer to be written to the client.
+
+Boolean isCommited() : Returns true if the response bytes have been sent to client; Otherwise it returns false.
+
+Reset() : Clears the data in the buffer , including the status codes and headers sets, if the response is not committed.
+
+resetBuffer() : Clears the data in the buffer if the response in not Committed.
+
+ 
+
+Update Your Skills form our Experts & Enroll Now for Advanced Java Online Training
+
+Define Session Tracking?
+Ans : Session Tracking is a Mechanism used to maintain the state of a user within a series of requests across some period, i.e., the lifetime of User.
+
+The following are the mechanisms used for Session Tracking
+
+=>URL rewriting
+
+=>Hidden form fields
+
+=>Cookies
+
+=>HTTP Session
+
+Define Session?
+Ans: A Session is collection of HTTP requests over a period of time between a client and a Web Server. The lifetime of a session specifies the period of time till the session is active. When a session expires, the session is destroyed, and its resources are returned to the Servlet Engine.
+
+Describe Scopes of Web Application objects?
+Ans : Scope describes the lifetime and availability of Web application objects. The following is a brief description of the various scopes available in a Web application.
+
+Page : Starts when a request enters the service method of a Servlet and ends as a request leaves the service method.
+
+Request : Starts when a request object comes into the scope of a Web Component and ends when the request object goes out of the Web Component scope.
+
+Session : Starts when a client request enters the session and ends when the client leaves the Session.
+
+Context(or)application : Starts when a Web application is started and ends when the Web Application is destroyed.
+
+what is the difference between getSession() and getSession(Boolean) methods?
+Ans :
+
+=>When getSession(false) method is used, the Web container tries to locate and return the Session, but if the Web Container is not able to locate the session, it returns null.
+
+=>when getSesssion() or getSession(true) is used, the Web Container tries to locate the Session and returns it, but if the Web Container is not able to locate the Session, it creates new session and associates it with the client request.
+
+What is diff between <init-param> and <context-param>?
+Ans:
+
+<init-param> tag part of web.xml will initialize the parameters in ServletConfig object
+
+<context-param> tag part of web.xml will initialize the parameters in ServletContext object
+
+Types of InterServlet Communications?
+Ans:
+
+  (a)Direct servlet manipulation : In this a Servlet can gain access rights to the currently running servlets and can perform operations on each of then.
+
+(b)Servlet reuse : This is a method where one servlet uses another’s servlet capability for its own purpose.
+
+(c)Servlet collaboration : This is most widely used interservlet communication. It includes two or more servlets sharing the state data. The Servlet collaboration can be done through the system properties list, shared objects, and inheritance.
+
+Define Asynchronous Request Processing?
+Ans : Asynchronous request processing was an important feature added in Servlet 3.0. With the help of asynchronous support, Servlet 3.0 does not need to wait for a response a resource. Rather the thread can continue to process and thus in Servlet 3.0 threads are not Blocked.
+
+Describing URL Rewriting?
+Ans : URL rewriting implies adding session data to the URL path, which is then interpreted by a Web Container to associate the request with session. That is, in this mechanism, the session data required in the next request is appended to the URL path used by the client to make the next request.
+
+Describing Hidden Form Fields?
+Ans : A Hidden form field is a type of HTML form field but remains hidden in the view.
+
+<input type=”hidden” name=”uname” value =”user1”/>
+
+Describing Cookies?
+Ans : A Cookie is a file containing the information that is sent by a Web Server to a Client. Cookies are transmitted to clients through the HTTP response header from the Server. They are saved at the client side for the given domain and path. Whenever the browser requests a resource, the cookie matching the domain and path of the request URL is sent to the Web Server as a request header.
+
+How to invalidate session?
+Ans : A Session can be invalidated by explicitly calling  invalidate() method on the Session Object. The Session also be invalidated automatically if it is not accessed within a Specific time interval, i.e., timeout.
+
+JSP
+What is JSP?
+Ans: JSP is totally tag-based, which means that each piece of code in JSP is enclosed within a tag. JSP tags reduce the necessity of large amount of Java Code in JSP pages by implementing the functionality of the tags into tag implementation classes.These tags help developers build dynamic pages, improve their code by reducing Java code, separate the presentation logic from the business logic.
+
+JSP Architectures?
+Ans: JSP specifications demonstrate two approaches to build Web applications by using JSP. These approaches are known as JSP Model 1 and Model 2 architectures.
+
+JSP Model 1 Architecture:
+
+JSP Model 2 Architecture:
+
+The Major Stages of JSP Life Cycle?
+Ans:
+
+(i)Page Translation
+
+(ii)Compilation
+
+(iii)Loading and Initialization
+
+(iv)Request Handling
+
+(v)Destroing
+
+ 
+
+Update Your Skills form our Experts & Enroll Now for Advanced Java Online Training
+
+Define Scripting tags?
+Ans: JSP Scripting tags, also called as JSP Scripting elements, allow you to add a script code into the Java code of  a JSP page generated by the JSP translator.
+
+Type of Scipting tags?
+Scriptlet tag
+<%
+
+Script code(allow multiple statements)
+
+%>
+
+Declarative tags
+<%!
+
+Script Code(allow multiple statements)
+
+%>
+
+Expression tag
+<%=
+
+Script code (allow multiple statements)
+
+%>
+
+JSP implicit objects?
+Ans: JSP implicit objects are used in a JSP page to make the page dynamic .The dynamic content can be created and accessed by using Java Objects within the Scripting elements. JSP implicit objects are predefined objects that are accessible  to all JSP pages. These objects are called implicit objects because you don’t need to instantiate them. The JSP container automatically instantiates these objects while writing the script content in the scriptlet and expression tags.
+
+List of Implicit objects?
+->request
+
+->response
+
+->out
+
+->page
+
+->pageContext
+
+->application
+
+->session
+
+->config
+
+->exception
+
+Define Directive tags?
+Ans : Directive tags are used to give directions used by the JSP translator during translation stage of the JSP life cycle. These tags are used to set global values such as class declarations, methods to be implemented, output content type, and so on.
+
+9.Type of Directive Tags?
+Ans : According JSP specification, three standard directive tags are available.
+
+(a)page
+
+(b)include
+
+(c)taglib
+
+(a)page:
+
+The page directive tag holds the instructions used by the translator  during the translation stage of the JSP life cycle. These instructions affect the various properties associated with the whole JSP page.
+
+<%@page attributes %>
+
+(b)include:
+
+The include directive tage is used to merge the contents of two or more files during the translation stage of the JSP life cycle. The include directive tag adds text of the included file to the JSP page, without any processing or modification.
+
+<%@include file=”file path”%>
+
+(c)taglib:
+
+The taglib directive tag is used to declare a custom tag lib in JSP page so that the tags related to that custom tag library can be used in the same JSP page.
+
+<@taglib uri=”URI” prefix=”unique-prefix”%>
+
+10.What is JavaBean?
+Ans: JavaBeans are reusable software components that separate the business logic from the presentation logic. In general, JavaBeans are simple Java classes that follow certain specifications to develop dynamic content.
+
+11.Advantages of JavaBeans?
+
+Ans:
+
+(i)With the use of JavaBeans, users can menage presentation code and business logic separately.
+
+(ii)Using JavaBeans with JSP has made object sharing between multiple Web pages simple
+
+(iii)Using JavaBeans with JSP has simplified the process of request and response handling.
+
+12.Define Action tags?
+Ans: Actions tags are executed at execution process of JSP page, using Actions tags we can perform the actions like inserting some other page resources, forwarding the request to another page, creating or locating the JavaBean instances and setting and retrieving bean properties, in JSP pages.
+
+ 
+
+Update Your Skills form our Experts & Enroll Now for Advanced Java Online Training
+
+List of JSP Action tags?
+<jsp:include>
+
+<jsp:forward>
+
+<jsp:param>
+
+<jsp:useBean>
+
+<jsp:setProperty>
+
+<jsp:getProperty>
+
+<jsp:plugin>
+
+<jsp:params>
+
+<jsp:fallback>
+
+<jsp:attribute>
+
+<jsp:body>
+
+<jsp:element>
+
+<jsp:text>
+
+14.What is the difference between include directive tag and include Action tags?
+(i)The “include” directive tag inserts the given page and includes the content in the generated Servlet page during the translation phase of the JSP life cycle.
+
+(ii)The “include” action tag is used to include the response generated b executing the specified JSP page or Servlet. The response is included during the request processing phase, when the page is requested b the user.
+
+15.Define Custom tags?
+Ans:A Custom tag is a user-defined JSP language element. If a JSP page which contains a custom tag is translated into a servlet, then the custom tag is converted to operations on a tag handler.
+
+Features provided by the Custom tags?
+(i)The tags are customized to pass the attributes from the current page to the calling page within an application
+
+(ii)These are able to access all the objects available in a JSP page.
+
+(iii)These are used to modify the response generated by calling the attributes from the main page
+
+(iv)The Custom tags can communicate with each other.
+
+(v)The Custom tags can be nested within each other to provide complexit in a JSP page.
+
+17.List EL(Expression Language) implicit objects?
+->pageContext
+
+->pageScope
+
+->requestScope
+
+->sessionScope
+
+->applicationScope
+
+->param
+
+->paramValues
+
+->header
+
+->headerValues
+
+->cookie
+
+->initParam
+
+18.Define JSTL?
+Ans:JSTL stands for JSP Standard Tag Library , which is a collection of custom tag libraries, which provides core functionality used for JSP documents. JSTL reduces the use of Scriptlets in JSP page. The use of JSTL tags allows developers to use predefined tags instead of writing the JavaCode.
+
+19.Types of JSTL tags?
+Ans:JSTL provides four types of tags:
+
+(i)JSTL Core Tags : Used to process a JSP page in an application
+
+(ii)XML tags : Used for parsing,selecting, and transforming XML data in JSP page
+
+(iii)Format tags :Used for formatting the data used in JSP page
+
+(iv)SQL tags: Used to access the relational Database used in JSP page
+
+(v)Function tags:Used for String manipulations.
+
+JDBC
+1.define JDBC Statements?
+Ans: JDBC statements are used to execute SQL statements. JDBC API supports three types of JDBC statement objects to work with SQL statements , Which are as follows:
+
+(i)Statement – Executes normal SQL statements with no IN and OUT parameters
+
+(ii)PreparedStatement – Executes parameterized SQL statement the supports IN parameters
+
+(iii)CallableStatement – Executes parameterized SQL statement that invokes DB procedure or function and supports IN and OUT parameters
+
+2.Define Transaction?
+Ans:Transaction is a set of statements executed on a resource or resources applying ACID(Atomocity,Consistency,Isolation,Durability) properties.
+
+3.define Meta Data?
+Ans:The data holding the information about other data is known as meta data.
+
+Metadata components in JDBC
+
+(i)DatabaseMetaData
+
+(ii)ParameterMetaData
+
+(iii)ResultSetMetaData
+
+ 
+
+Update Your Skills form our Experts & Enroll Now for Advanced Java Online Training
+
+4.Define BLOB datatype?
+Ans:A BLOB is built-in data type supported by the database implementing SQL-99 standards. As the name implies, this is used to store large binary data, such as bit imagaes,audios and, multimedia clips, as the column values in a database table.
+
+5.Define ROWID Type?
+Ans:A ROWId refers to a number that provides a unique identification to each row in a table. It serves as a virtual column, Containing the address of the corresponding row. It is useful in identifying cases of duplicate records and identical rows in a database.
+
+ 
+
