@@ -1,0 +1,277 @@
+
+
+#Letest #update  #real_time
+#MICRONAUT #OAUTH2 with #SECURITY and #KEYCLOAK
+---#Micronaut OAuth2 module supports both the authorization code grant and the password credentials grant flows. In this article, you will learn how to integrate your Micronaut application with the OAuth2 authorization server like Keycloak. We will implement the password credentials grant scenario with Micronaut OAuth2.
+Before starting with Micronaut Security you should learn about the basics. Therefore, I suggest reading the article Micronaut Tutorial: Beans and scopes. After that, you may read about building REST-based applications.
+
+#INTRODUCTION TO OAUTH2 WITH MICRONAUT
+Micronaut supports authentication with OAuth 2.0 servers, including the OpenID standard. You can choose between available providers like Okta, Auth0, AWS Cognito, Keycloak, or Google. By default, Micronaut provides the login handler. You can access by calling the POST /login endpoint. In that case, the Micronaut application tries to obtain an access token from the OAuth2 provider. The only thing you need to implement by yourself is a bean responsible for mapping an access token to the user details. After that, the Micronaut application is returning a token to the caller. 
+
+#INCLUDE MICRONAUT SECURITY DEPENDENCIES
+In the first step, we need to include Micronaut modules for REST, security, and OAuth2. Since Keycloak is generating JTW tokens, we should also add the micronaut-security-jwt dependency. Of course, our application uses some other modules, but those five are required.
+
+<dependency>
+   <groupId>io.micronaut.security</groupId>
+   <artifactId>micronaut-security</artifactId>
+</dependency>
+<dependency>
+   <groupId>io.micronaut.security</groupId>
+   <artifactId>micronaut-security-oauth2</artifactId>
+</dependency>
+<dependency>
+   <groupId>io.micronaut.security</groupId>
+   <artifactId>micronaut-security-jwt</artifactId>
+</dependency>
+<dependency>
+   <groupId>io.micronaut</groupId>
+   <artifactId>micronaut-http-server-netty</artifactId>
+</dependency>
+<dependency>
+   <groupId>io.micronaut</groupId>
+   <artifactId>micronaut-http-client</artifactId>
+</dependency>
+That’s not all that we need to configure in Maven pom.xml. In the next step, we have to enable annotation processing for the Micronaut Security module.
+
+<plugin>
+   <groupId>org.apache.maven.plugins</groupId>
+   <artifactId>maven-compiler-plugin</artifactId>
+   <version>3.8.1</version>
+   <configuration>
+      <source>${java.version}</source>
+      <target>${java.version}</target>
+      <compilerArgs>
+         <arg>-parameters</arg>
+      </compilerArgs>
+      <annotationProcessorPaths>
+         <path>
+            <groupId>io.micronaut</groupId>
+            <artifactId>micronaut-inject-java</artifactId>
+            <version>${micronaut.version}</version>
+         </path>
+         <path>
+            <groupId>io.micronaut.security</groupId>
+            <artifactId>micronaut-security</artifactId>
+         </path>
+         <path>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.12</version>
+         </path>
+      </annotationProcessorPaths>
+   </configuration>
+   <executions>
+      <execution>
+         <id>test-compile</id>
+         <goals>
+            <goal>testCompile</goal>
+         </goals>
+         <configuration>
+            <compilerArgs>
+               <arg>-parameters</arg>
+            </compilerArgs>
+            <annotationProcessorPaths>
+               <path>
+                  <groupId>io.micronaut</groupId>
+                  <artifactId>micronaut-inject-java</artifactId>
+                  <version>${micronaut.version}</version>
+               </path>
+               <path>
+                  <groupId>io.micronaut.security</groupId>
+                  <artifactId>micronaut-security</artifactId>
+               </path>
+               <path>
+                  <groupId>org.projectlombok</groupId>
+                  <artifactId>lombok</artifactId>
+                  <version>1.18.12</version>
+               </path>
+            </annotationProcessorPaths>
+         </configuration>
+      </execution>
+   </executions>
+</plugin>
+
+#USING MICRONAUT OAUTH2 FOR SECURING ENDPOINTS
+Let’s discuss a typical implementation of the REST controller with Micronaut. Micronaut Security provides a set of annotations for setting permissions. We may use JSR-250 annotations. These are @PermitAll, @DenyAll, or @RolesAllowed. In addition, Micronaut provides @Secured annotation. It also allows you to limit access to controllers and their methods. For example, we may use @Secured(SecurityRule.IS_ANONYMOUS) as a replacement for @PermitAll.
+
+The controller class is very simple. I’m using two roles: admin and viever. The third endpoint is allowed for all users.
+
+@Controller("/secure")
+@Secured(SecurityRule.IS_AUTHENTICATED)
+public class SampleController {
+
+   @Get("/admin")
+   @Secured({"admin"})
+   public String admin() {
+      return "You are admin!";
+   }
+
+   @Get("/view")
+   @Secured({"viewer"})
+   public String view() {
+      return "You are viewer!";
+   }
+
+   @Get("/anonymous")
+   @Secured(SecurityRule.IS_ANONYMOUS)
+   public String anonymous() {
+      return "You are anonymous!";
+   }
+}
+RUNNING KEYCLOAK
+We are running Keycloak on a Docker container. By default, Keycloak exposes API and a web console on port 8080. However, that port number must be different than the Micronaut application port, so we are overriding it with 8888. We also need to set a username and password to the admin console.
+
+$ docker run -d --name keycloak -p
+
+#INTEGRATION BETWEEN MICRONAUT OAUTH2 AND KEYCLOAK
+In the next steps, we will use two HTTP endpoints exposed by Keycloak. First of them, token_endpoint allows you to generate new access tokens. The second endpoint introspection_endpoint is used to retrieve the active state of a token. In other words, you can use it to validate access or refresh token. The third endpoint jwks allows you to validate JWT signatures.
+
+We need to provide several configuration properties. In the first step, we are setting the login handler implementation to idtoken. We will also enable the login controller with the micronaut.security.endpoints.login.enabled property. Of course, we need to provide the client id, client secret, and token endpoint address. The property grant-type enables the password credentials grant flow. All these configuration settings are required during the login action. After login Micronaut Security is returning a cookie with JWT access token. We will use that cookie in the next requests. Micronaut uses the Keycloak JWKS endpoint to validate each token.
+
+micronaut:
+  application:
+    name: sample-micronaut-oauth2
+  security:
+    authentication: idtoken
+    endpoints:
+      login:
+        enabled: true
+    redirect:
+      login-success: /secure/anonymous
+    token:
+      jwt:
+        enabled: true
+        signatures.jwks.keycloak:
+          url: http://localhost:8888/auth/realms/master/protocol/openid-connect/certs
+    oauth2.clients.keycloak:
+      grant-type: password
+      client-id: micronaut
+      client-secret: 7dd4d516-e06d-4d81-b5e7-3a15debacebf
+      authorization:
+        url: http://localhost:8888/auth/realms/master/protocol/openid-connect/auth
+      token:
+        url: http://localhost:8888/auth/realms/master/protocol/openid-connect/token
+        auth-method: client-secret-post
+With Micronaut Security we need to provide an implementation of OauthUserDetailsMapper. It is responsible for transform from the TokenResponse into a UserDetails. Our implementation of OauthUserDetailsMapper is using the Keycloak introspect endpoint. It validates an access token and returns the information about user. We need the username and roles.
+
+@Getter
+@Setter
+public class KeycloakUser {
+   private String email;
+   private String username;
+   private List<String> roles;
+}
+I’m using the Micronaut low-level HTTP client for communication with Keycloak. It needs to send client credentials for authorization in the Authorization header. Keycloak is validating the input token. The KeycloakUserDetailsMapper returns UserDetails object, that contains username, list of roles, and token. The token should be set as the openIdToken attribute.
+
+@Named("keycloak")
+@Singleton
+@Slf4j
+public class KeycloakUserDetailsMapper implements OauthUserDetailsMapper {
+
+   @Property(name = "micronaut.security.oauth2.clients.keycloak.client-id")
+   private String clientId;
+   @Property(name = "micronaut.security.oauth2.clients.keycloak.client-secret")
+   private String clientSecret;
+
+   @Client("http://localhost:8888")
+   @Inject
+   private RxHttpClient client;
+
+   @Override
+   public Publisher<UserDetails> createUserDetails(TokenResponse tokenResponse) {
+      return Publishers.just(new UnsupportedOperationException());
+   }
+
+   @Override
+   public Publisher<AuthenticationResponse> createAuthenticationResponse(
+         TokenResponse tokenResponse, @Nullable State state) {
+      Flowable<HttpResponse<KeycloakUser>> res = client
+            .exchange(HttpRequest.POST("/auth/realms/master/protocol/openid-connect/token/introspect",
+            "token=" + tokenResponse.getAccessToken())
+            .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+            .basicAuth(clientId, clientSecret), KeycloakUser.class);
+      return res.map(user -> {
+         log.info("User: {}", user.body());
+         Map<String, Object> attrs = new HashMap<>();
+         attrs.put("openIdToken", tokenResponse.getAccessToken());
+         return new UserDetails(user.body().getUsername(), user.body().getRoles(), attrs);
+      });
+   }
+
+}
+CREATING USERS AND ROLES ON KEYCLOAK
+Our application uses two roles: viewer and admin. Therefore, we will create two test users on Keycloak. Each of them has a single role assigned. Here’s the full list of test users.
+
+micronaut-oauth2-users
+Of course, we also need to define roles. In the picture below, I highlighted the roles used by our application.
+
+Before proceeding to the tests, we need to do one thing. We have to edit the client scope responsible for displaying a list of roles. To do that go to the section “Client Scopes”, and then find the roles scope. After editing it, you should switch to the “Mappers” tab. Finally, you need to find and edit the “realm roles” entry. I highlighted it in the picture below. In the next section, I’ll show you how Micronaut OAuth2 retrieves roles from the introspection endpoint.
+
+keycloak-clientclaim
+TESTING MICRONAUT OAUTH2 PROCESS
+After starting the Micronaut application we can call the endpoint POST /login. It expects a request in a JSON format. We should send there the username and password. Our test user is test_viewer with the 123456 password. Micronaut application sends a redirect to the site configured with parameter micronaut.security.redirect.login-succcess. It also returns JWT access token in the Set-Cookie header.
+
+curl -v http://localhost:8080/login -H "Content-Type: application/json" -d "{\"username\":\"test_viewer\",\"password\": \"123456\"}"
+*   Trying ::1...
+* TCP_NODELAY set
+* Connected to localhost (::1) port 8080 (#0)
+> POST /login HTTP/1.1
+> Host: localhost:8080
+> User-Agent: curl/7.55.1
+> Accept: */*
+> Content-Type: application/json
+> Content-Length: 47
+>
+* upload completely sent off: 47 out of 47 bytes
+< HTTP/1.1 303 See Other
+< Location: /secure/anonymous
+< set-cookie: JWT=eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJBOUIweGhFckUtbk1nTmMxVUg5ZnU0ellNcFZncDRBc1dQNFgyVnk2ZnNjIn0.eyJleHAiOjE2MDA2OTE2ND
+UsImlhdCI6MTYwMDY4OTg0NSwianRpIjoiNmQzMmJkMjMtMjIwOC00NDBjLTlmZTYtNGQ4NTBlOTdmMjQ1IiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4ODg4L2F1dGgvcmVhbG1zL21hc3RlciIsIm
+F1ZCI6ImFjY291bnQiLCJzdWIiOiJmNDE4MjhmNi1kNTk3LTQxY2ItOTA4MS00NmMyZDdhNGQ3NmIiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJtaWNyb25hdXQiLCJzZXNzaW9uX3N0YXRlIjoiM2JjNz
+c0YWMtZjk3OC00MzhhLTk3NDktMDY2ZTcwMmIyMzMzIiwiYWNyIjoiMSIsInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bn
+QtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6ImVtYWlsIHByb2ZpbGUiLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwicm9sZXMiOlsidmlld2VyIiwib2ZmbGluZV9hY2Nlc3MiLCJ1bWFfYX
+V0aG9yaXphdGlvbiJdLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJ0ZXN0X3ZpZXdlciIsImVtYWlsIjoidGVzdF92aWV3ZXJAZXhhbXBsZS5jb20ifQ.bb5uiGe8jp5eaEs3ql_k_A56xBKzBaSduBbG0_s
+olj82BGQ3d8wJp0LMqPe86gj4RvOEPQD31CetGM5T2c6AluvPkBw_5Bh_5ZyD28Ueh-TvmY76yoBYF2r__zCJh8yKKN78xTx0Qp_qRM6M6T57Ke9lOE0O87CmlWR8tUSzTE4azSOksxyX_PRW2jtE8GV
+Un8SlJMyjgA5iYOhmbTsINSiMTtMEWk3ofAoYJquk6vis_ZG4_vTRYsKD1GQ-7Kk0Y7d1_l1YLhfOajgxrKMQm-QIovNS0aThgvijto4ibjHBm3HRigQAi3fbOJo9Yj8F9uXs-tdaKe6JZGGV_G0eCA;
+ Max-Age=1799; Expires=Mon, 21 Sep 2020 12:34:04 GMT; Path=/; HTTPOnly
+< Date: Mon, 21 Sep 2020 12:04:05 GMT
+< connection: keep-alive
+< transfer-encoding: chunked
+<
+* Connection #0 to host localhost left intact
+After receiving the login request Micronaut OAuth2 calls the token endpoint on Keycloak. Then, after receiving the token from Keycloak, it invokes the KeycloakUserDetailsMapper bean. The mapper calls another Keycloak endpoint – this time it is the introspect endpoint. You can verify the further steps by looking at the application logs.
+
+Once, we received the response with the access token, we can set it in the Cookie header. The token is valid for 1800 seconds. Here’s the request to the GET secure/view endpoint.
+
+curl -v http://localhost:8080/secure/view -H "Cookie: JWT=..."
+*   Trying ::1...
+* TCP_NODELAY set
+* Connected to localhost (::1) port 8080 (#0)
+> GET /secure/view HTTP/1.1
+> Host: localhost:8080
+> User-Agent: curl/7.55.1
+> Accept: */*
+> Cookie: JWT=...
+>
+< HTTP/1.1 200 OK
+< Date: Mon, 21 Sep 2020 12:25:14 GMT
+< content-type: application/json
+< content-length: 15
+< connection: keep-alive
+<
+You are viewer!* 
+We can also call the endpoint GET /secure/admin. Since, it is not allowed for the test_viewer user, you will receive the reposnse HTTP 403 Forbidden.
+
+curl -v http://localhost:8080/secure/view -H "Cookie: JWT=..."
+*   Trying ::1...
+* TCP_NODELAY set
+* Connected to localhost (::1) port 8080 (#0)
+> GET /secure/view HTTP/1.1
+> Host: localhost:8080
+> User-Agent: curl/7.55.1
+> Accept: */*
+> Cookie: JWT=...
+>
+< HTTP/1.1 403 Forbidden
+< connection: keep-alive
+< transfer-encoding: chunked
