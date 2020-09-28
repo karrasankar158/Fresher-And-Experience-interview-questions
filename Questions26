@@ -1,0 +1,101 @@
+
+Hi Team,
+
+#Today's uploaded
+#Experienced #Java #Interview #questions #asked #by #CGI
+3+ Year #experienced #java #questions #asked by #CGI.
+
+1)  Tell me about your self ?
+
+    Ans : Just describe yourself with cool & confidence.
+    
+2) What you know about our company?
+
+   Ans : Remember , it’s a very crucial question. You must do one R&D before going to interview. You should know about their product, technical stuffs they are working, market value of the company ane other important stuffs.
+
+3) What is transient variable ?
+
+   Ans : Transient variables are not serializable. It helps to avoid a variable to being serialization.
+
+4) Write the code to initialize the inner class members.
+
+Ans : Code here
+
+public class InnerClassTest {
+
+      class innerTest{
+            private int age;
+           
+            public void display(){
+                  System.out.println("Age="+age);
+            }
+      }
+      /**
+       * @param args
+       */
+      public static void main(String[] args) {
+            InnerClassTest.innerTest innerObj=new InnerClassTest().new innerTest();
+            innerObj.age=20;
+            innerObj.display();
+      }
+}
+ 5) How to retrieve the elements from the collection write the code ?
+
+Ans : Java provides certain interfaces by using that we can retrieve the elements from collection.Example – Iterator, ListIterator and Enumeration.
+
+Example :- ArrayList data retrival
+
+public class ArrayListRetrive {
+
+      /**
+       * @param args
+       */
+      public static void main(String[] args) {
+            ArrayList<String> arList=new ArrayList<String>();
+            arList.add("Java");
+            arList.add("is");
+            arList.add("Powerful!!!");
+           
+            //Retrive elements from ArrayList using Iterator
+            Iterator iTer=arList.iterator();
+            while(iTer.hasNext()){
+                  System.out.println(iTer.next());
+            }
+      }
+
+}
+6) What is static and instance variables and methods ?
+
+Ans : Static variables are per class but the instance variables are per object. All object share a single copy of static variable. In case of static method , no need of object creation for calling static method. The static method can directly call by using class name. Instance method need object for calling.
+7) What is dynamic loading and static loading of java class ?
+
+Ans : Dynamic class loading is by Class.forName() , which loads the class dynamically. Also you can use reflection for dynamic class loading. But, the static class loading is working by using ‘new’ keyword.
+
+8) What type of loading is class.forname() ?
+
+Ans : Its dynamically locate and loads the class.
+
+9) What is Hibenate 3 best benfits ?
+
+Ans : There are many benefits of hibernate. But the most benefits are below :-
+
+1.     It reduces the developer effort to writing queries.
+2.     Its easy to use with relational object which maps with java class and database relation.
+3.     Query tuning is not required and it implements separates cache which is reason for better performance.
+
+10) I have 100 tables and fields. I want to find one table name and  column names.  Write a quey .
+
+Ans :  I have used mySQL database for this below query.
+select TABLE_SCHEMA,TABLE_NAME,COLUMN_NAME from information_schema.COLUMNS where TABLE_NAME='EMPLOYEE';
+
+ 11) How to define a field name in hibernate using annotation ?
+
+          Ans:- @Column  (Its provided by java persistent  API).
+
+ 12) What is Synchronization ?
+
+          Ans:- Synchronization is a solution for concurrency issue. Java provide 'synchronized' keyword for implementing this.
+
+  13) The most commonly used classes in collectionsn ?
+
+Ans : ArrayList, LinkedList, HashTable, HashMap and ConcurrentHashMap, etc.
