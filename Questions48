@@ -1,0 +1,267 @@
+
+JavaScript Interview Questions and Answers
+1) What is JavaScript?
+Answer:
+
+JavaScript is a scripting language. It is different from Java language. It is object-based, lightweight and cross platform. It is widely used for client side validation.
+
+2) What is the difference between JavaScript and jscript?
+Answer:
+
+Netscape provided the JavaScript language. Microsoft modified the name and called it JScript to avoid the trademark issue. In another words, you can say JScript is same as JavaScript, but it is provided by Microsoft.
+
+3) How to write a hello world example of JavaScript?
+Answer:
+
+A basic example of JavaScript hello world is given below. You should place it inside the body tag of html.
+
+<script type=”text/javascript”>
+
+document.write(“JavaScript Hello World!”);
+
+</script>
+
+4) How to use external JavaScript file?
+Answer:
+
+I am assuming that js file name is samplefile.js, place the following script tag inside the head tag.
+
+<script type=”text/javascript” src=” samplefile.js”></script>
+
+5) Is JavaScript case sensitive language?
+Answer:
+
+Yes.
+
+6) What is BOM?
+Answer:
+
+BOM stands for Browser Object Model. It provides interaction with the browser. The default object of browser is window. Browser Object Model
+
+7) What is DOM? What is the use of document object?
+Answer:
+
+DOM stands for Document Object Model. A document object represents the html document. It can be accustomed to access and change the content of html of Document Object Model
+
+8) What is the use of window object?
+Answer:
+
+The window object is automatically created by the browser that represents a window of a browser.
+
+It is used to show the popup dialog box such as alert confirm dialog box, dialog box, input dialog box etc.
+
+9) What is the use of history object?
+Answer:
+
+The history object of browser is accustomed switch to history pages like back and forward from current page or another page. There are three methods of history object.
+
+history.back()
+
+history.forward()
+
+history.go(number): number may be positive for forward, negative for backward.
+
+10) How to write comment in JavaScript?
+Answer:
+
+There are two types of comments in JavaScript.
+
+Single Line Comment: It is written as // (double forward slash)
+
+Multi Line Comment: It is written as slash with asterisk symbol as /* write comment here */
+
+11) How to create function in JavaScript?
+Answer:
+
+To create function in JavaScript, syntax as follows.
+
+function function_name(){
+
+//function body
+
+}
+
+12) What are the JavaScript data types?
+Answer:
+
+There are two types of data types in JavaScript:
+
+Primitive Data Types
+Non-primitive Data Types
+13) What is the difference between == and ===?
+Answer:
+
+The == operator checks equality only whereas === checks equality and data type i.e. value must be of same type(strict in nature).
+
+14) How to write html code dynamically using JavaScript?
+Answer:
+
+The innerHTML property is employed to write the HTML code using JavaScript dynamically. Let’s see a sample example:
+
+document.getElementById(‘mylocation’).innerHTML=”<h2>This is heading using JavaScript</h2>”;
+
+15) How to write normal text code using JavaScript dynamically?
+Answer:
+
+The innerText property is empployed to write the simple text using JavaScript dynamically. Let’s see a simple Example:
+
+document.getElementById(‘mylocation’).innerText=”This is text using JavaScript”;
+
+16) How to create objects in JavaScript?
+Answer:
+
+There are three ways in which to form an object in JavaScript.
+
+    By object literal
+    By creating instance of Object
+    By Object Constructor
+Let’s see an easy code to create object using object literal.
+
+emp={id:102,name:”Rahul Kumar”,salary:50000}
+
+17) How to create array in JavaScript?
+Answer:
+
+There are three ways in which to form an array in JavaScript.
+
+    By array literal
+    By creating instance of Array
+    By using an Array constructor
+Let’s see an easy code to create array using object literal.
+
+var emp=[“Shyam”,”Vimal”,”Ratan”];
+
+18) What does the isNaN() function?
+Answer:
+
+The isNan() function returns true if the variable or given value is not a number.
+
+19) What is the output of 10+20+”30″ in JavaScript?
+Answer:
+
+3030 because 10+20 will be 30. If there is numeric value before and after +, it is treated is binary + and inside double codes it is treated as string value (arithmetic operator).
+
+20) What is the output of “10”+20+30 in JavaScript?
+Answer:
+
+Output is 102030 because after a string all the + will be treated as string concatenation operator (not binary +).
+
+21) Difference between Client side JavaScript and Server side JavaScript?
+Answer:
+
+Client side JavaScript comprises the basic language and predefined objects that are relevant to running java script in a browser. The client side JavaScript is embedded directly by within the HTML pages. This script is understood by the browser at run time.
+
+Server side JavaScript also resembles like client side javascript. It has relevant java script which is to be run in a server. The server sides JavaScript are deployed only after compilation.
+
+22) In which location cookies are stored on the hard disk?
+Answer:
+
+The storage of cookies on the hard disk depends on OS and also the browser.
+
+The Netscape navigator on Windows uses samplecookies.txt file that contains all the cookies. The path is : c:\Program Files\Netscape\Users\Username\samplecookies.txt
+
+The Internet Explorer stores the cookies on a file uname@website.txt. The path is: c:\Windows\Cookies\uname@Website.txt.
+
+23) What is the real name of JavaScript?
+Answer:
+
+Original name was Mocha, a name chosen by Marc Andreessen, founder of Netscape. In Sep 1995, the name was changed to LiveScript. In Dec 1995, after receiving a trademark license from Sun, the name JavaScript was adopted.
+
+24) What is the difference between undefined value and null value?
+Answer:
+
+Undefined value is the value that is not defined and has no keyword is known as undefined value. For Example:
+int number;//Here, number has undefined value.
+
+Null value is the value that is explicitly specified by the keyword “null” is known as null value. For Example:
+String str=null;//Here, str has a null value.
+
+24) How to set the cursor to wait in JavaScript?
+Answer:
+
+Cursor can be set  in JavaScript by using “cursor” property. The following example illustrates the usage:
+
+<script>
+
+window.document.body.style.cursor = “wait”;
+
+</script>
+
+25) What is this?
+Answer:
+
+var myArray = [[[]]];
+
+Three dimensional array.
+
+26) Are Java and JavaScript same?
+Answer:
+
+No, Java and JavaScript are the both are different languages. JavaScript is a client side scripting language with some limitations whereas Java is a robust, secured and object-oriented programming language.
+
+27) What is negative infinity?
+Answer:
+
+Negative Infinity is a number in JavaScript which can be derived by dividing negative number by 0.
+
+28) What is difference between View state and Session state?
+Answer:
+
+“View state” is restricted to a page in a session whereas “Session state” is specific to a user or browser which will be accessed across all pages in the web application.
+
+29) What are the pop up boxes available in JavaScript?
+Answer:
+
+    Alert Box
+    Confirm Box
+    Prompt Box
+30) How can we detect OS of the client machine using JavaScript?
+Answer:
+
+The navigator.appVersion string can be used to detect the operating system on the client machine.
+
+31) How to submit a form using JavaScript by clicking a link?
+Answer:
+
+Let’s see the JavaScript code to submit form on clicking the link.
+
+<form name=”myform” action=”index.php”>
+
+Search: <input type=’text’ name=’query’ />
+
+<a href=”javascript: submitform()”>Search</a>
+
+</form>
+
+<script type=”text/javascript”>
+
+function submitform()
+
+{
+
+document.myform.submit();
+
+}
+
+</script>
+
+32) Is JavaScript faster than ASP script?
+Answer:
+
+Yes, as a result of it doesn’t require web server’s support for execution.
+
+33) How to change the background color of HTML document using JavaScript?
+Answer:
+
+<script type=”text/javascript”>
+
+document.body.bgColor=”pink”;
+
+</script>
+
+34) How to handle exceptions in JavaScript?
+Answer:
+
+By the help of try/catch block, we are able to handle exceptions in JavaScript. JavaScript supports try, catch, finally and throw keywords for exception handling.
+
+
