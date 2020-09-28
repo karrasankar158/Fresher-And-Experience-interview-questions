@@ -1,0 +1,439 @@
+
+. What are the advantages of Hibernate over JDBC?
+Hibernate implicitly provides transaction management, in fact most of the queries can’t be executed outside transaction. In JDBC API, we need to write code for transaction management using commit and rollback. Read more at JDBC Transaction Management.
+JDBC API throws SQLException that is a checked exception, so we need to write a lot of try-catch block code. Most of the times it’s redundant in every JDBC call and used for transaction management. Hibernate wraps JDBC exceptions and throw JDBCException orHibernateException un-checked exception, so we don’t need to write code to handle it. Hibernate built-in transaction management removes the usage of try-catch blocks.
+Hibernate Query Language (HQL) is more object oriented and close to java programming language. For JDBC, we need to write native sql queries.
+Hibernate supports caching that is better for performance, JDBC queries are not cached hence performance is low.
+Hibernate provide option through which we can create database tables too, for JDBC tables must exist in the database.
+Hibernate configuration helps us in using JDBC like connection as well as JNDI DataSource for connection pool. This is very important feature in enterprise application and completely missing in JDBC API.
+Hibernate supports JPA annotations, so code is independent of implementation and easily replaceable with other ORM tools. JDBC code is very tightly coupled with the application.
+2. Hibernate SessionFactory is thread safe?
+Internal state of SessionFactory is immutable, so it’s thread safe. Multiple threads can access it simultaneously to get Session instances.
+3. What are the Elements of Hibernate Architecture?
+For creating the first hibernate application, we must know the elements of Hibernate architecture. They are as follows:
+SessionFactory
+The SessionFactory is a factory of session and client of ConnectionProvider. It holds second level cache (optional) of data. The org.hibernate.SessionFactory interface provides factory method to get the object of Session.
+Session
+The session object provides an interface between the application and data stored in the database. It is a short-lived object and wraps the JDBC connection. It is factory of Transaction, Query and Criteria. It holds a first-level cache (mandatory) of data. The org.hibernate.Session interface provides methods to insert, update and delete the object. It also provides factory methods for Transaction, Query and Criteria.
+Transaction
+The transaction object specifies the atomic unit of work. It is optional. The org.hibernate.Transaction interface provides methods for transaction management.
+ConnectionProvider
+It is a factory of JDBC connections. It abstracts the application from DriverManager or DataSource. It is optional.
+TransactionFactory
+It is a factory of Transaction. It is optional.
+4. In How many ways we can get the session object from the Hibernate SessionFactory?
+Hibernate SessionFactory provides three methods through which we can get Session object –getCurrentSession(), openSession() and openStatelessSession().
+1. getCurrentSession() in Hibernate
+Hibernate SessionFactory getCurrentSession() method returns the session bound to the context. But for this to work, we need to configure it in hibernate configuration file like below.
+thread
+If its not configured to thread, then we will get below exception.
+Exception in thread "main" org.hibernate.HibernateException: No CurrentSessionContext configured!
+at org.hibernate.internal.SessionFactoryImpl.getCurrentSession(SessionFactoryImpl.java
+Since this session object belongs to the hibernate context, we don’t need to close it. Once the session factory is closed, this session object gets closed. Hibernate Session objects are not thread safe, so we should not use it in multi-threaded environment.
+http://stackoverflow.com/questions/18832889/spring-transactions-and-hibernate-current-session-context-class
+2. openSession() in Hibernate
+Hibernate SessionFactory openSession() method always opens a new session. We should always close this session. We should open a new session for each request in multi-threaded environment.
+3. openStatelessSession() in Hibernate
+Hibernate SessionFactory openStatelessSession() method returns instance of StatelessSession. There is another overloaded method where we can pass java.sql.Connection object to get a stateless session object from hibernate.
+StatelessSession in Hibernate does not implement first-level cache or doesn’t interact with any second-level cache. It does not check for cascading operations. Collections are also ignored by a stateless session. Operations performed via a stateless session bypass Hibernate’s event model and interceptors. It’s more like a normal JDBC connection and doesn’t provide any benefits that come from using hibernate framework.
+5. What is the lifecycle of Hibernate Object?
+What are the states of Hibernate object?
+Transient State
+Newly created POJO object will be in the transient state. Transient object doesn’t represent any row of the database i.e. not associated with any session object. It’s plain simple java object.
+Persistent State
+Persistent object represent one row of the database and always associated with some unique hibernate session. Changes to persistent objects are tracked by hibernate and are saved into database when commit call happen.
+Detached State
+Detached objects are those who were once persistent in past, and now they are no longer persistent. To persist changes done in detached objects, you must reattach them to hibernate session.
+Removed State
+Removed objects are persistent objects that have been passed to the session’s remove() method and soon will be deleted as soon as changes held in the session will be committed to database.
+
+
+
+
+6. How Hibernate handles auto increment for primary key?
+Tell me about sequence generator in Hibernate?
+Hibernate generates the sequence in 3 different ways :
+1. IDENTITY in Hibernate
+The IDENTITY type (included in the SQL:2003 standard) is supported by:
+• Oracle 12c
+• SQL Server
+• MySQL (AUTO_INCREMENT)
+• DB2
+• HSQLDB
+The IDENTITY generator allows an integer/bigint column to be auto-incremented on demand. The increment process happens outside of the current running transaction, so a roll-back may end-up discarding already assigned values (value gaps may happen).
+The increment process is very efficient since it uses a database internal lightweight locking mechanism as opposed to the more heavyweight transactional course-grain locks.
+The only drawback is that we can’t know the newly assigned value prior to executing the INSERT statement. This restriction is hindering the “transactional write behind” flushing strategy adopted by Hibernate. For this reason, Hibernates disables the JDBC batch support for entities using the IDENTITY generator.
+2. SEQUENCE in Hibernate
+The SEQUENCE generator (defined in the SQL:2003 standard) is supported by:
+Oracle
+SQL Server 2012
+PostgreSQL
+DB2
+HSQLDB
+A SEQUENCE is a database object that generates incremental integers on each successive request. SEQUENCES are much more flexible than IDENTIFIER columns because:
+A SEQUENCE is table free and the same sequence can be assigned to multiple columns or tables
+A SEQUENCE may preallocate values to improve performance
+A SEQUENCE may define an incremental step, allowing us to benefit from a“pooled” Hilo algorithm
+A SEQUENCE doesn’t restrict Hibernate JDBC batching
+A SEQUENCE doesn’t restrict Hibernate inheritance models
+This creates a table hibernate_sequence and performs below queries after insert
+Hibernate: select next_val as id_val from hibernate_sequence for update Hibernate: update hibernate_sequence set next_val= ? where next_val=?
+hibernate_sequence has only one coloumn as next_val
+3. TABLE (SEQUENCE) in Hibernate
+There is another database independent alternative to generating sequences. One or multiple tables can be used to hold the identifier sequence counter. But it means trading write performance for database portability.
+While IDENTITY and SEQUENCES are transaction-less, using a database table mandate ACID, for synchronizing multiple concurrent id generation requests.
+@TableGenerator - informs JPA how to generate unique values for this entity's identifier. It has several parameters:
+name - identifier for the generator binding. This value must match the parameter in the @GeneratedValue annotation as described below.
+table - must match the name of the table created to store the sequence values.
+pkColumnName - the primary key column name that contains the name of the sequence we are using.
+valueColumnName - the name of the column that contains the numeric sequence value
+pkColumnValue - the value of the primary key column that identifies the sequence
+allocationSize - the amount by which this sequence should be incremented each time a new entity is created. The default value for this is fifty (50).
+@GeneratedValue - marks the field as having a generated value, either from the database or from some other ID generation strategy. This has two important parameters:
+strategy - a value from the GenerationType enumeration that declares the the way in which values will be generated. In this example GenerationType.TABLE is appropriate since we are letting the value be managed in the relational store.
+generator- must match the name of the @TableGenerator tag to provide the specifics on how the value is to be generated.
+@GeneratedValue(strategy=GenerationType.TABLE, generator="tableIdGenerator")
+ @TableGenerator(
+     name="tableIdGenerator", //mandatory
+     table="sequence_table",
+     pkColumnName = "sequence_name",
+     valueColumnName = "sequence_id",
+     pkColumnValue="stock_sequence",
+     allocationSize=1
+ )
+ @Column(name = "STOCK_ID", unique = true, nullable = false)
+ public Integer getStockId() {
+  return this.stockId;
+ }
+
+Hibernate: create table hibernate_sequences (sequence_name varchar(255) not null, next_val bigint, primary key (sequence_name))
+Hibernate: select tbl.next_val from hibernate_sequences tbl where tbl.sequence_name=? for update
+Hibernate: insert into hibernate_sequences (sequence_name, next_val) values (?,?)
+7. What is First Level Cache in Hibernate?
+first level cache associated with session object is available only till session object is live. It is available to session object only and is not accessible to any other session object in any other part of application.
+
+//Open the hibernate session
+Session session = HibernateUtil.getSessionFactory().openSession();
+session.beginTransaction();
+ 
+//fetch the department entity from database first time
+DepartmentEntity department = (DepartmentEntity) session.load(DepartmentEntity.class, new Integer(1));
+System.out.println(department.getName());
+ 
+//fetch the department entity again
+department = (DepartmentEntity) session.load(DepartmentEntity.class, new Integer(1));
+System.out.println(department.getName());
+ 
+session.getTransaction().commit();
+HibernateUtil.shutdown();
+
+Output:
+Hibernate: select department0_.ID as ID0_0_, department0_.NAME as NAME0_0_ from DEPARTMENT department0_ where department0_.ID=?
+Human Resource
+Human Resource
+As you can see that second “session.load()” statement does not execute select query again and load the department entity directly.
+8. How to Remove cache objects from first level cache in Hibernate?
+Though we can not disable the first level cache in hibernate, but we can certainly remove some of objects from it when needed. This is done using two methods :
+evict()
+clear()
+Here evict() is used to remove a particular object from cache associated with session, and clear() method is used to remove all cached objects associated with session. So they are essentially like remove one and remove all.
+9. What are Cascade Types available in Hibernate?
+The cascade types supported by the Java Persistence Architecture are as below:
+CascadeType.PERSIST : means that save() or persist() operations cascade to related entities.
+CascadeType.MERGE : means that related entities are merged into managed state when the owning entity is merged.
+CascadeType.REFRESH : does the same thing for the refresh() operation.
+CascadeType.REMOVE : removes all related entities association with this setting when the owning entity is deleted.
+CascadeType.DETACH : detaches all related entities if a “manual detach” occurs.
+CascadeType.ALL : is shorthand for all of the above cascade operations.
+10. What are Named Queries in Hibernate?
+What are advantages of Named Queries in Hibernate?
+Named queries in hibernate is a technique to group the HQL statements in single location, and lately refer them by some name whenever need to use them. It helps largely in code cleanup because these HQL statements are no longer scattered in whole code.
+
+Apart from above, below are some minor advantages of named queries:
+1. Fail fast: 
+Their syntax is checked when the session factory is created, making the application fail fast in case of an error.
+2. Reusable: 
+They can be accessed and used from several places which increase re-usability.
+
+But, you must know that named query really make code less readable and sometimes debugging becomes harder. Performance wise named queries done not make much difference, nor put any excessive cost. Please remember that result of named queries is not cached in secondary cache, only query object itself get cached.
+18. What is difference in get() and load() method in Hibernate?
+load() in Hibernate
+When you call session.load() method, it will always return a “proxy” object. Proxy means, hibernate will prepare some fake object with given identifier value in the memory without hitting the database, for example if we call session.load(Student.class,new Integer(107)); > hibernate will create one fake Student object [row] in the memory with id 107, but remaining properties of Student class will not even be initialized. It will hit the database only when we try to retrieve the other properties of Student object i mean stdName, stdCountry. If we call s2.getStdName() then hibernate will hit the database and search the row with student id 107 and retrieve the values, if object [row] not found in the database it will throws ObjectNotFoundException.,
+Example :
+System.out.println("Student is calling with load()");        
+s2 =(Student) session.load(Student.class,new Integer(107));    
+System.out.println("Student called with load()");
+System.out.println("Printing Student Name___"+s2.getStdtId());        
+System.out.println("Printing Student Name___"+s2.getStdName());
+
+
+get() in Hibernate
+When you call session.get() method, it will hit the database immediately and returns the original object.
+19. What is the difference in between save() and saveOrUpdate() in Hibernate?
+
+The main difference between save() and saveOrUpdate() method is that save() method performs an INSERT operation to store the object into the database, but INSERT will fail if the primary key is already persistent i.e. object already exists in the database. This is why, you should only call save() with an absolutely new object which doesn't have any database identifier. Calling save() with the detached object will fail. This is opposite of saveOrUpdate() method, which can do either INSERT or UPDATE SQL query depending upon whether an object exists in the database or not. The saveOrUpdate() method first executes a SELECT query to determine if it needs to do an INSERT or UPDATE operation.
+Another key difference between save() and saveOrUpdate() method is that former is used to bring a transient object to persistent state but saveOurUpdate() can bring both transient (new) and detached (existing) object into persistent state. It is often used to re-attach a detached object into Session.
+
+20. What is difference between save() and persist() in Hibernate?
+I did some mock testing to record the difference between save() and persist().
+Sounds like both these methods behaves same when dealing with Transient Entity but differ when dealing with Detached Entity.
+For the below example, take EmployeeVehicle as an Entity with PK as vehicleId which is a generated value and vehicleName as one of its properties.
+
+Example 1 : Dealing with Transient Object
+Session session = factory.openSession();
+session.beginTransaction();
+EmployeeVehicle entity = new EmployeeVehicle();
+entity.setVehicleName("Honda");
+session.save(entity);
+// session.persist(entity);
+session.getTransaction().commit();
+session.close();
+
+Result:
+select nextval ('hibernate_sequence') // This is for vehicle Id generated : 36
+insert into Employee_Vehicle ( Vehicle_Name, Vehicle_Id) values ( Honda, 36)
+Note the result is same when you get an already persisted object and save it
+EmployeeVehicle entity =  (EmployeeVehicle)session.get(EmployeeVehicle.class, 36);
+entity.setVehicleName("Toyota");
+session.save(entity);    -------> **instead of session.update(entity);**
+// session.persist(entity);
+
+Repeat the same using persist(entity) and will result the same with new Id ( say 37 , honda ) ;
+Example 2 : Dealing with Detached Object
+// Session 1 
+// Get the previously saved Vehicle Entity 
+Session session = factory.openSession();
+session.beginTransaction();
+EmployeeVehicle entity = (EmployeeVehicle)session.get(EmployeeVehicle.class, 36);
+session.close();
+
+// Session 2
+// Here in Session 2 , vehicle entity obtained in previous session is a detached object and now we will try to save / persist it 
+// (i) Using Save() to persist a detached object 
+Session session2 = factory.openSession();
+session2.beginTransaction();
+entity.setVehicleName("Toyota");
+session2.save(entity);
+session2.getTransaction().commit();
+session2.close();
+
+Result : You might be expecting the Vehicle with id : 36 obtained in previous session is updated with name as "Toyota" . But what happens is that a new entity is saved in the DB with new Id generated for and Name as "Toyota"
+select nextval ('hibernate_sequence')
+insert into Employee_Vehicle ( Vehicle_Name, Vehicle_Id) values ( Toyota, 39)
+Using persist to persist detached entity
+
+// (ii) Using Persist()  to persist a detached
+// Session 2
+// Here in Session 2 , vehicle entity obtained in previous session is a detached object and now we will try to save / persist it 
+// (i) Using Save() to persist a detached
+Session session2 = factory.openSession();
+session2.beginTransaction();
+entity.setVehicleName("Toyota");
+session2.persist(entity);
+session2.getTransaction().commit();
+session2.close();
+
+
+Result:
+Exception being thrown : detached entity passed to persist
+So, it is always better to use Persist() rather than Save() as save has to be carefully used when dealing with Transient object .
+Important Note : In the above example , the pk of vehicle entity is a generated value , so when using save() to persist a detached entity , hibernate generates a new id to persist . However if this pk is not a generated value than it is result in a exception stating key violated.
+However, persist is supported by JPA, while save is only supported by Hibernate.
+
+21. How to call stored procedure in Hibernate?
+MySQL store procedure
+Here’s a MySQL store procedure, which accept a stock code parameter and return the related stock data.
+
+CREATE PROCEDURE `GetStocks`(int_stockcode varchar(20))
+BEGIN
+   SELECT * FROM stock where stock_code = int_stockcode;
+   END $$
+
+DELIMITER ;
+
+1. Native SQL
+You can use createSQLQuery() to call a store procedure directly.
+Query query = session.createSQLQuery(
+ "CALL GetStocks(:stockCode)")
+ .addEntity(Stock.class)
+ .setParameter("stockCode", "7277");
+
+List result = query.list();
+for(int i=0; i<result.size(); i++){
+ Stock stock = (Stock)result.get(i);
+ System.out.println(stock.getStockCode());
+}
+
+2. NamedNativeQuery
+Declare your store procedure inside the @NamedNativeQueries annotation.
+//Stock.java
+...
+@NamedNativeQueries({
+ @NamedNativeQuery(
+ name = "callStockStoreProcedure",
+ query = "CALL GetStocks(:stockCode)",
+ resultClass = Stock.class
+ )
+})
+@Entity
+@Table(name = "stock")
+public class Stock implements java.io.Serializable {
+...
+Call it with getNamedQuery().
+Query query = session.getNamedQuery("callStockStoreProcedure")
+ .setParameter("stockCode", "7277");
+List result = query.list();
+for(int i=0; i<result.size(); i++){
+ Stock stock = (Stock)result.get(i);
+ System.out.println(stock.getStockCode());
+}
+22. What is ScrollableResults? When to use ScrollableResults?
+ScrollableResults is used to scroll large amount of data and ScrollMode provides different modes such as scrolling only in forward direction and sensitive/insensitive to changes in underlying data. ScrollableResults can be used to paginate large amount of data because it provides methods to change current location for row iteration. Here I will provide ScrollableResults examples using createCriteria(), createQuery() and createSQLQuery() of org.hibernate.Session.
+ScrollableResults
+org.hibernate.ScrollableResults scrolls results by the given increments. The columns of the results start from zero. Find some methods of ScrollableResults.
+scroll(int i) : Scrolls the results. i represents the number for forward or backward scrolling.
+setRowNumber(int rowNumber) : It sets the current location in ScrollableResults.
+get(int i) : Gets the object at index i in current row.
+get() : It returns the array of Object of current row.s
+afterLast() : It sets the location just after the last result.
+beforeFirst() : It sets the location just before the first result.
+What are ScrollMode available in Hibernate?
+org.hibernate.ScrollMode is an Enum which provides the different mode to fetch ScrollableResults.
+FORWARD_ONLY : It requests ScrollableResults that scrolls forward only.
+
+SCROLL_SENSITIVE : ScrollableResults that is sensitive to changes in underlying data.
+SCROLL_INSENSITIVE : Insensitive to changes in underlying data.
+
+Session session = HibernateUtil.getSessionFactory().openSession();
+ScrollableResults scResults = session.createCriteria(Student.class)
+               .scroll(ScrollMode.FORWARD_ONLY);
+while(scResults.next()) {
+      Student s = (Student)scResults.get(0);
+      System.out.println(s.getId()+", "+s.getName());
+}
+//Set the location at index 2
+System.out.println("After setting location");
+scResults.setRowNumber(1);
+while(scResults.next()) {
+      Student s = (Student)scResults.get(0);
+      System.out.println(s.getId()+", "+s.getName());
+}
+session.close();
+23. Ho to do pagination in Hibernate?
+There are three ways to do the pagination in Hibernate :
+1. Pagination with Hibernate using HQL
+The simplest and most common way to do pagination in Hibernate is using HQL:
+
+@Test
+public void givenEntitiesExist_whenRetrievingLastPage_thenCorrectSize() {
+    int pageSize = 10;
+    String countQ = "Select count (f.id) from Foo f";
+    Query countQuery = session.createQuery(countQ);
+    Long countResults = (Long) countQuery.uniqueResult();
+    int lastPageNumber = (int) (Math.ceil(countResults / pageSize));
+ 
+    Query selectQuery = session.createQuery("From Foo");
+    selectQuery.setFirstResult((lastPageNumber - 1) * pageSize);
+    selectQuery.setMaxResults(pageSize);
+    List<Foo> lastPage = selectQuery.list();
+ 
+    assertThat(lastPage, hasSize(lessThan(pageSize + 1)));
+
+}
+
+2. Pagination with Hibernate using HQL and ScrollableResults
+It is same as the ResultSet which will hold all the data into ScrollableSet. Using ScrollableResults to implement pagination has the potential to reduce database calls. This approach streams the result set as the program scrolls through it, therefore eliminating the need to repeat the query to fill each page:
+String hql = "FROM Foo f order by f.name";
+Query query = session.createQuery(hql);
+int pageSize = 10;
+ 
+ScrollableResults resultScroll = query.scroll(ScrollMode.FORWARD_ONLY);
+resultScroll.first();
+resultScroll.scroll(0);
+List<Foo> fooPage = Lists.newArrayList();
+int i = 0;
+while (pageSize > i++) {
+    fooPage.add((Foo) resultScroll.get(0));
+    if (!resultScroll.next())
+        break;
+}
+
+This method is not only time-efficient (only one database call), but it allows the user to get access to the total count of the result set without an additional query:
+resultScroll.last();
+int totalResults = resultScroll.getRowNumber() + 1;
+
+On the other hand, keep in mind that, although scrolling is quite efficient, a large window may take up a decent amount of memory.
+3. Pagination with Hibernate using Criteria API
+Finally, let’s look at a more flexible solution – using criteria:
+Criteria criteria = session.createCriteria(Foo.class);
+criteria.setFirstResult(0);
+criteria.setMaxResults(pageSize);
+List<Foo> firstPage = criteria.list();
+
+Hibernate Criteria query API makes it very simple to also get the total count – by using a Projection object:
+Criteria criteriaCount = session.createCriteria(Foo.class);
+criteriaCount.setProjection(Projections.rowCount());
+Long count = (Long) criteriaCount.uniqueResult();
+
+As you can see, using this API will result in minimally more verbose code than plain HQL, but the API is fully type safe and a lot more flexible.
+24. How to get specific columns from Hibernate?What are Projections in Hibernate?
+Projections are used to execute aggregate operations and to get single column query,with Restrictions we can access a ROW but with PROJECTIONS we can access whole COLUMN
+criteria.setProjection() – we can pass single Projection Object or ProjectionList as param to this method.
+Session session = factory.openSession();
+ 
+        System.out.println("Reading Partial Entity with One Projection object ");
+ 
+        Criteria criteria = session.createCriteria(Employee.class);
+        Projection projection = Projections.property("salary");
+        criteria.setProjection(projection);
+        List list = criteria.list(); //We will get list if we pass single Projection
+        Iterator it = list.iterator();
+ 
+        while (it.hasNext()) {
+            Integer sal = (Integer) it.next();
+            System.out.println("Employee Salary : " + sal);
+        }
+         
+        System.out.println("Reading Partial Entity with multiple Projection objects ");
+         
+        Criteria crit2 = session.createCriteria(Employee.class);
+        Projection projection1 = Projections.property("salary");
+        Projection projection2 = Projections.property("departmentId");
+        Projection projection3 = Projections.property("employeeName");
+         
+        ProjectionList pList = Projections.projectionList();
+        pList.add(projection1);
+        pList.add(projection2);
+        pList.add(projection3);
+        crit2.setProjection(pList);
+         
+        List list2 = crit2.list();
+ 
+        Iterator it2 = list2.iterator();
+ 
+        while (it2.hasNext()) {
+            Object[] obj = (Object[]) it2.next(); //We will get Object[] if we pass multiple Projection
+            System.out.println("Salary : " + obj[0]+" DeptId : "+obj[1]+" empName : "+obj[2]);
+        }
+    }
+25. What is Criteria query in Hibernate?
+The criteria query API lets you build nested, structured query expressions in Java, providing a compile-time syntax checking that is not possible with a query language like HQL or SQL.
+Criteria criteria = session.createCriteria(Employee.class);
+        Criterion criterion = Restrictions.eq("departmentId", 101);
+        Criterion criterion2 = Restrictions.gt("salary", 4000);
+        Criterion criterion3 = Restrictions.and(criterion,criterion2);
+ 
+        criteria.add(criterion3);
+         
+        List list = criteria.list();
+
+Related Interview Questions
+Hibernate Interview Questions - Part 2
+Database Interview Questions
+Java Interview Questions For Senior Full Stack Developer
+
+Share
+Labels: hibernate interview-questions
+COMMENTS
+
+ 
