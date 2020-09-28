@@ -1,0 +1,180 @@
+
+SPRING INTERVIEW QUESTIONS AND ANSWERS
+
+1.Q : WHAT IS SPRING FRAMEWORK ?
+ANS : Spring is an open source, light weight, loosely coupled, aspect oriented, dependency Injection
+based java application framework to develop various applications.
+
+
+
+2.Q : WHAT IS THE DIFFERENCE BETWEEN DEPENDENCY INJECTION AND DEPENDENCY LOOKUP ?
+ANS : DEPENDENCY LOOKUP :
+==================
+If the resources class or object is searching and getting its dependent values from other resources
+then it is called dependency lookup. Here the resources pulls the dependent values.
+The way we get JDBC connection object from JDBC connection pool is called Dependency Lookup.
+
+Dependency Injection :
+===================
+If the under lying server/container/framework assign the values to resources/class/object dynamically at runtime then it is called Dependency Injection.
+Here dependent values will be pushed to resource.
+
+JVM calling constructor automatically to assign initial values to the object when the object is created.
+
+
+
+3. Q: WHAT IS SPRING BEAN ?
+The Java class whose object is managed by spring container is called Spring Bean.
+
+4. Q : WHAT IS IOC ?
+ANS : Inversion Of Control As name specified , it inverted the control for creating the object by using new keyword to container. It is used for collaborating the objects and managing the dependencies between objects.
+
+5. Q : What is design pattern ? And How to implement Strategy Design Pattern?
+ANS : Design Pattern are set of rules which come as best solution for reoccurring problems of application development.
+
+Design Patterns are best practices for utilizing software languages , Technologies and framework effectively in application development.
+
+Example : Singleton, Factory etc.
+
+Strategy Design Pattern :
+=====================
+
+While developing multiple classes having dependency it is recommended to follow this design pattern.
+This pattern is not spring pattern . It can be used any where . Since the spring manages the dependency between classes , It is recommended to use this pattern while developing spring apps.
+
+Strategy Implementation is all about implementing 3 principles :
+
+
+1. Prefer composition over inheritance.
+2. Always code to Interfaces and never code with Implementations.
+3. Code should be open for extension and must be closed for modification
+6. Q: When should we go for Setter Injection and When should we go for Constructor Injection ?
+ANS : If bean class contains only one property or if all properties of bean class should proper participate in dependency injection , then we should go for Constructor Injection, because this injection is bit faster than Setter Injection.
+
+If bean class contains more than one property and there is no need of making all properties participating dependency injection then we need to go for Setter Injection.
+
+7. Q: What is the difference between Setter Injection and Constructor Injection ?
+Setter Injection	Constructor Injection
+Perform Injection after creating bean class object . So it is bit delayed Injection.	It perform Injection while creating bean class object , so no delayed.
+Support Cyclic dependency.	Doesn't support
+tag is required.	tag is required.
+To perform Setter Injection on n-properties in all angles n-setter methods are required.	To perform constructor Injection on n-properties in all angles n! Factorial constructors are required.
+If all properties are configured for Setter Injection then container creates bean class object using 0-param Constructor.	If any property is configured for Constructor Injection container creates bean class object using parameterized Constructor.
+8. Q : What is Singleton class and when we should create Singleton class ?
+ANS : The Java class that allow us to create only 1 object per JVM is called Singleton Java class.
+
+Take Singleton class in the following statements :
+
+
+a. If a class is not having any state (Member Variable)
+b. If a class is shareable only read only state ( final variables)
+c. If a class is having huge amount of state and performing write operations on that star is synchronized manner. (1 thread at a time )
+Instead of creating multiple objects with same data or no data create 1 object and use it for multiple times . For this takes class as Singleton Java class.
+9. Q : How many types of bean scopes in spring ?
+ANS : We can make IOC container keeping our spring bean class object in different scopes .
+Spring has 5 scopes :
+
+
+1. Singleton
+2. Prototype
+3. Seasion
+4. Request
+5. Global Session
+
+Default scope for bean is singleton.
+10. WHAT IS WIRING IN SPRING ? TYPES OF WIRING.
+ANS : Configuring beans and their dependency injection in bean configuration file is called wiring.
+Types Of Wiring :
+
+
+1. Explicit Wiring
+2. Implicit/Auto Wiring
+1. Explicit Wiring :
+==============
+Here we use '<'property'>', '<'constructor-arg'>' tags for dependency injection.
+2. Auto Wiring :
+===========
+Here the IOC container automatically detects dependents and injects them to target objects. Here no , tags are required.
+
+a. Can be used only to inject but not the simple values.
+b. If IOC container multiple dependencies to inject then ambiguity problem may raise.
+c. Kill the readability of XML file, so the bug fixing becomes very complex.
+
+There are four types of autowiring :
+
+1. byName
+2. byType
+3. constructor
+4. autodetect
+11. Q : Explain Types of Autowiring ?
+1. byName :
+==========
+Perform setter Injection.
+For this target class property name and dependent class bean I'd must match.
+Here is no possibility of ambiguity problem.
+Organisation.java
+==============
+Public class Organisation {
+private Employee emp;
+Public Organisation () {
+}
+Public Organisation (Employee emp) {
+this.emp = emp;
+}
+}
+
+public class Employee {
+private string name;
+}
+
+ApplicationContext.xml
+===================
+'<'bean id = "emp" class = "com.beans.Employee"'>'
+'<'property name ="name" value = "Kiran"/'>'
+'<'bean id = "org" class ="com.beans.Organisation" autowire="byName"'>'
+TestApp.java
+==========
+Organisation org = (Organisation) factory.getBean("org");
+
+2. byType :
+=========
+1. performs setter injection.
+2. For this target class property type and dependent class must be match or must be compatible with each other.
+3. There is a possibility of getting ambiguity problem.
+EXAMPLE :
+========
+'<'bean id ="emp" class = "com.beans.Employee"'>'
+......
+'<'/bean'>'
+'<'bean id ="org" class="com.beans.Organisation" autowire="byType"'>'
+NOTE:
+====
+If we configure Employee class 1 more time in spring bean configuration file with different bean id then we get ambiguity problem.
+
+3. constructor :
+=============
+1. Uses parameterized constructor to perform constructor injection.
+There is a possibility of getting ambiguity problem if multiple dependencies are found.But it doesn't throw exception If target class contains 0-param constructor otherwise exception will be thrown.
+
+EXAMPLE :
+========
+'<'bean id ="emp" class = "com.beans.Employee"'>'
+...........
+'<'/bean'>'
+'<'bean id ="org" class ="com.beans.Organisation" autowire ="constructor"'>'
+
+4.autodetect :
+============
+If target class contains 0-param constructor the it performs byType mode autowiring.
+If target class contains parameterized constructor then it performs constructor mode wiring.
+Removed from spring 3.0 onwards.
+EXAMPLE :
+=========
+'<'bean id ="emp" class="com.beans.Employee"'>'
+........
+'<'/bean'>' '<'bean id="org" class="com.beans.Organisation" autowire="autodetect"'>'
+
+4.autowire = "no" :
+============
+Dis
+
