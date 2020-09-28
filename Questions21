@@ -1,0 +1,284 @@
+
+Hi Team,
+#Letest #update 2020 #Hexaware #siry  #Cognizant #Cisco #NIIT  #Infosys
+#Carlon #Capgemini  #SLK #Vodafone
+ #MNC's #company #interview #questions 3+ #experience
+#Hexaware Telephonic Round interview questions 
+-------------------------------------------------------------------------
+1.What is difference between Object oriented and object based langugae.
+2.Difference between List and set.
+3.What is serialization?.
+4.Difference between serial garbage collector and parallel garbage collector.
+5.How we can write our own immutable class.
+6.What all are synchroized objects in collections.
+7.Other than string what all are immutable classes.
+8.What is autoboxing and autounboxing.
+9.What is class loader and how .class will be loaded.
+10.What are the various memory areas in JVM.
+11.Difference between composition and aggregarion.
+12.Java 1.7 features.
+13.What is package for these primitive data types and collections.
+14.What is marker interface in java and examples.
+15.Methods in object class.
+16.What are the design patterns used in ur project.
+
+#Sify Technologies Telephonic Round Interview questions
+---------------------------------------------------------------------------------
+1.Difference between throw and throws
+2.How can you write your immutable class
+3.Difference between abstrat class and interface
+4.How are you implementing abstract class and interface in ur project
+5.Difference between exception and error.
+6.Spring MVC 
+7.What is synchronized and how u are implementing the same in ur project
+8.What is map and what is concurrent hash map
+9.If 3 users are sending the request how many instances of servltes will be created?
+10.What methods you will use to return a value in JSP.
+11.2nd highest salary 
+12.How to find duplicate values in a string by using collection.
+13.Difference between comparable and comparator.
+14.What is the error you will get when you are trying to create instance of interface
+A:Cannot instantiate the type List
+
+---------------------------------------------------
+#Cognizant:
+-------------
+1.Difference between Soap and Rest.
+2.Difference between setter injection and constructor injection.
+3.What is design pattern why we need design patterns?.
+4.Caching mechanism in hibernate?.
+5.When does the cache expires in hibernate?.
+6.ORM vs JDBC
+7.What is dialect in hibernate?.
+8.Immutable classes in java.
+9.Why we need immutable classes?.
+10.Hash code and equals methods.
+11.Concurrent Hash Map.
+
+--------------------------------------------------
+#Cisco:
+-----
+1.Bean Scope in spring.
+2.Single ton and global session.
+3.Wait vs Sleep
+4.Immutable class
+5.Prototype and request.
+6.Lazy Loading in hibernate.
+7.Cascade attribute in hibernate and what are the values for cascade.
+8.
+
+----------------------------------------------------
+#NIIT
+-----
+
+1.About project
+2.Web services
+3.JDK vs JRE.
+4.Jar vs WAR
+5.Checked vs unchecked
+6.Synchronizaction in thread.
+7.Runnable or thread.
+8.Auto Boxing and unboxing.
+9.java 5 features
+Java 6 features
+Java 7 features.
+10.Design patterns
+Ex:Single ton,Front controller,MVC.
+11.How to create single ton.
+12.What is WSDL file?.
+13.Soap Vs Rest?
+14.Servlet context vs servlet config.
+15.9 implict objects.
+16.Actions in struts.
+#Programs
+1-Write a program to revrse a string without using StringAPI.
+2-Change Order of vowels in the string;(eg-"you are cool boy"="yuo era cool boy")
+3-Find Missing alfabates in the string.(eg-qwer tyu op asdf gh jl xcv nm ,missing are =ikzb)
+
+technical interview qsn-
+1-Different Between Hashmap And Concurrent Hashmap?
+2-whats are the enhancements in multithreading in 1.7v of java?
+3-what is lambda expression in java?
+4-What is Deadlock?
+5-What is work of fork/join class in java?
+6-What is "WITH" clause in SQL?
+7-Spring IOC container?
+8-Bean scopes?
+9-what are the interfaces spring impliments?
+10-difference between @path & URL?
+11-Design Pattern catagories ?
+12-what is Factory & Singleton Design Pattern& in which catagory they fallunder?
+13-How to create Factory object in hibernate?
+
+p.s- i dont remember others questions..
+--------------------------------------------
+#Mphasis:
+---------
+1.Various states of hibernate.
+------------------------------------------------------------------
+#Infosys:
+---------
+1.How do you handle Runtime Exception in JSP.
+2.What is IOC.
+3.Setter injection vs constructor injection.
+4.What is WSDL?.
+5.What is XML?.
+---------------------------------------------------------------------
+
+1.Difference between exception and error?
+2.Serialization and deserialization?
+3.how can you increase memory size in java.
+4.how can you increase heap size in java?
+A:
+-Xms<size>        set initial Java heap size
+-Xmx<size>        set maximum Java heap size
+-Xss<size>        set java thread stack size
+java -Xms16m -Xmx64m ClassName.
+5.what data base you will use trigger or index?
+6.What is singleton and where it is used?
+7.Key value pair?
+8.How can you compare two strings?
+9.Can main method be overloaded?.
+10.How many ways we can define a Thread.
+
+----------------------------------------------------------------------------
+1.What is hashing in java?
+2.What is polymorphism in java?.
+3.class Test3
+{
+   public void m1()
+   {
+      System.out.println(" I am in parent class instance method m1 ");
+    }
+   public static void m2()
+   {
+     System.out.println(" I am in parent class instance method m2");
+    }
+}
+
+class Test extends Test3
+{
+    public void m1()
+      {
+         System.out.println(" I am in child class instance method m1 ");
+      }
+    public static void m2()
+   {
+    System.out.println(" I am in child class instance method m2");
+    }
+public static void main(String [] args)
+{
+   Test3 t3=null; 
+   //t3.m1();
+    t3.m2();
+  Test3 t4= new Test();
+    t4.m1();
+     t4.m2();
+  Test3 t5= new Test3();
+    t5.m1();
+    t5.m2();
+}
+} 
+o/p:
+4.Annotations in Hibernate?
+5.What is underlying data structure of hash map?.
+6.What are the collections you use?.
+7.What is underlying data structure of arraylist?
+8.Checked vs unchecked exceptions?
+9.how do you validate the user is valid or not to your application?.
+10.What are the design patterns you used in java?.
+
+#Carlon Technologies:
+---------------------
+1)how to convert integer to string in java with example?
+2)What is polymorphism in java?
+3)What is connection pooling?.
+4)What is HQL?.
+5)What are types of exception in java?
+6)What is difference between IOC and dependency injection?
+7)What is autowiring?.
+8)What is immutable?.
+
+#Capgemini:
+-----------------
+1.What is polymorphism?
+2.class Test 
+{
+public int m1()
+{
+ System.out.println("Exception");
+ return 10;
+}
+public int m1(int x)
+{
+ System.out.println("Exception");
+ return 10;
+}
+3.What is exception and how many types of exceptions are availble?
+4.if we insert null in hash map as key and while retriving will it give any Run time error?
+
+#SLK software:
+------------------
+1.What is composition and aggregation?
+2.What is the super class of java?
+3.Internal implemenation of hashmap?
+4.What will happen if there is collision in values of map?
+5.What is static key word in java?
+6.What are JSP implict objects?
+7.Spring MVC flow
+8.How can configure spring in web.xml?
+9.What is dependency injection?
+10.How can you create your own immutable class?.
+11.Scopes of spring?
+12.Is the class needs to be singleton?.
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+1.What is difference between hashmap and concurrenthashmap?
+2.Methods present in java.lang.Object?
+3.Different types of clonning?.
+4.What is blocking Queue?.
+5.Differences between comparable and comparator?.
+6.Ways of implementing threads?.
+7.Exceutor service?.
+8.Thread Local?.
+9.What is the use of thread pool?
+10.What happens if i clone singleton object?.
+11.How can you make multi threaded as synchronized in singleton object?.
+12.What is serialization and how we can make use of transisent keyword?
+13.What will happen if i deserialize the variable which is already serialized?.
+14.Exception Hierachy?.
+15.Throw vs throw?
+16.How can you create our own customized exception?.
+17.Name some of the checked exception?.
+18.Classloaders in java?.
+19.Pattern and matcher?
+20.What is fail safe and fail fast means?
+21.What will happen if i insert duplicate keys in hashmap?.
+
+Spring:
+-------
+1.What is DI?
+2.What are  the scopes?.
+3.Difference between request and prototype?.
+4.Difference between singleton and prototype?.
+5.How can you configure multiple properties file?.
+6.What is autowiring?.
+7.What will happen if i make @autowired as false?
+8.What is application context?.
+9.What is Advice?
+10.How do you write a programm for AOP?.
+
+Webservices:
+--------------
+1.Difference between soap and rest?.
+2.How can you declare different response types in REST?.
+3.How we can implement security in webservices?.
+4.What implementations did you use for soap?
+
+#Vodafone:
+----------
+1.How can you integrate Spring and hibernate?.
+2.How hashmap works?.
+3.What is difference between get and load?.
+4.How can you implement transactions?.
