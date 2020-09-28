@@ -1,0 +1,43 @@
+
+Evolving System Interview Question(Fresher) 18.08.2020     
+First Round
+1. What is JDK,JVM,JRE
+2. What is static keyword?
+3. Is this possible to override static method ?
+4. What is static area, heap area, method area?
+5. Class Test{
+Public static void main(String[] args){
+System.out.println(10+20+"Hello");
+System.out.println("Hello"+10+20);
+}//main
+}//Class
+Output = ?
+6. What is constructor and use of constructor
+7. What is Deadlock and how to prevent with deadlock?
+8. Define DML,DCL,DDL give 2 example of each?
+9. What is Joining and its type?
+10. What is LILO in Linux( In my resume Linux is there)
+11. What is shell and type of shell
+12. How to create a directory with cmd in linux environment
+13. Delete directory command
+14. What is kernel and its work
+15. What is Normalisation and type
+16. What is Abstraction in Java. Write a code using abstraction
+Second Round 21.08.202
+1. Introduction
+2. What is OOP and advantages of OOP
+3. How to use reusability in OOP give an example?
+4. Write a program to reverse of a string without predefine method
+5. What is Shorting in Data Structure
+6. What is Shorting Algorithm and its type.Write a program of Bubble short algorithm
+7. Explain the complexity of Bubble short program?
+8. How many ways you swap two number
+9. What is space complexity and time complexity?
+10. Write a sql query to display last 10 record of the table
+11. Write a sql query to display all name in emp_name column whose having a&p in there name?
+12. Write current date in date column.
+13. How to push your code into Github?(Git in resume)
+14. How to create you a file in Linux?
+15. How to change the port number on tomcat
+16. If there is an error to lunch/open Tomcat how do you fix it?
+
