@@ -1,0 +1,707 @@
+
+What is Collection API ?
+The Collection API is a set of classes and interfaces that support operation on collections of objects. These classes and interfaces are more flexible, more powerful, and more regular than the vectors, arrays, and hashtables if effectively replaces.
+Example of classes: HashSet, HashMap, ArrayList, LinkedList, TreeSet and TreeMap.
+Example of interfaces: Collection, Set, List and Map.
+
+Is Iterator a Class or Interface? What is its use?
+Iterator is an interface which is used to step through the elements of a Collection.
+
+How to define an Abstract class?
+A class containing abstract method is called Abstract class. An Abstract class can’t be instantiated.
+
+Example of Abstract class:
+abstract class testAbstractClass {
+protected String myString;
+public String getMyString() {
+return myString;
+}
+
+ 
+
+Update Your Skills form Our Experts:  Core Java Online Training
+
+How to define an Interface in Java ?
+In Java Interface defines the methods but does not implement them. Interface can include constants. A class that implements the interfaces is bound to implement all the methods defined in Interface.
+Example of Interface:
+public interface sampleInterface {
+public void functionOne();
+
+public long CONSTANT_ONE = 1000;
+}
+If a class is located in a package, what do you need to change in the OS environment to be able to use it?
+You need to add a directory or a jar file that contains the package directories to the CLASSPATH environment variable. Let’s say a class Employee belongs to a package com.xyz.hr; and is located in the file c:\dev\com\xyz\hr\Employee.java. In this case, you’d need to add c:\dev to the variable CLASSPATH. If this class contains the method main(), you could test it from a command prompt window as follows:
+c:\>java com.xyz.hr.Employee
+
+How many methods in the Serializable interface?
+There is no method in the Serializable interface. The Serializable interface acts as a marker, telling the object serialization tools that your class is serializable.
+
+ 
+
+ 
+
+Update Your Skills form Our Experts:  Core Java Online Training
+
+How many methods in the Externalizable interface?
+There are two methods in the Externalizable interface. You have to implement these two methods in order to make your class externalizable. These two methods are readExternal() and writeExternal().
+
+ 
+
+What is the difference between Serializalble and Externalizable interface?
+When you use Serializable interface, your class is serialized automatically by default. But you can override writeObject() and readObject() two methods to control more complex object serailization process. When you use Externalizable interface, you have a complete control over your class’s serialization process.
+
+ 
+
+What is a transient variable in Java?
+A transient variable is a variable that may not be serialized. If you don’t want some field to be serialized, you can mark that field transient or static.
+
+ 
+
+Which containers use a border layout as their default layout?
+The Window, Frame and Dialog classes use a border layout as their default layout.
+
+ 
+
+How are Observer and Observable used?
+Objects that subclass the Observable class maintain a list of observers. When an Observable object is updated, it invokes the update() method of each of its observers to notify the observers that it has changed state. The Observer interface is implemented by objects that observe Observable objects.
+
+ 
+
+ 
+
+Update Your Skills form Our Experts:  Core Java Online Training
+
+What is Java?
+Java is an object-oriented programming language developed initially by James Gosling and colleagues at Sun Microsystems. The language, initially called Oak (named after the oak trees outside Gosling’s office), was intended to replace C++, although the feature set better resembles that of Objective C. Java should not be confused with JavaScript, which shares only the name and a similar C-like syntax. Sun Microsystems currently maintains and updates Java regularly.
+
+ 
+
+What does a well-written OO program look like?
+A well-written OO program exhibits recurring structures that promote abstraction, flexibility, modularity and elegance.
+
+ 
+
+Can you have virtual functions in Java?
+Yes, all functions in Java are virtual by default. This is actually a pseudo trick question because the word “virtual” is not part of the naming convention in Java (as it is in C++, C-sharp and VB.NET), so this would be a foreign concept for someone who has only coded in Java. Virtual functions or virtual methods are functions or methods that will be redefined in derived classes.
+
+ 
+
+What is more advisable to create a thread, by implementing a Runnable interface or by extending Thread class?
+Strategically speaking, threads created by implementing Runnable interface are more advisable. If you create a thread by extending a thread class, you cannot extend any other class. If you create a thread by implementing Runnable interface, you save a space for your class to extend another class now or in future.
+
+ 
+
+What is NullPointerException and how to handle it?
+When an object is not initialized, the default value is null. When the following things happen, the NullPointerException is thrown:
+
+Calling the instance method of a null object.
+Accessing or modifying the field of a null object.
+Taking the length of a null as if it were an array.
+Accessing or modifying the slots of null as if it were an array.
+Throwing null as if it were a Throwable value.
+The NullPointerException is a runtime exception.
+The best practice is to catch such exception even if it is not required by language design.
+
+ 
+
+ 
+
+Update Your Skills form Our Experts:  Core Java Online Training
+
+How could Java classes direct program messages to the system console, but error messages, say to a file?
+The class System has a variable out that represents the standard output, and the variable err that represents the standard error device. By default, they both point at the system console. This how the standard output could be re-directed:
+Stream st = new Stream(new FileOutputStream(“output.txt”)); System.setErr(st); System.setOut(st);
+
+ 
+
+Name the containers which uses Border Layout as their default layout?
+Containers which uses Border Layout as their default are: window, Frame and Dialog classes.
+
+ 
+
+What do you understand by Synchronization?
+Synchronization is a process of controlling the access of shared resources by the multiple threads in such a manner that only one thread can access one resource at a time. In non synchronized multithreaded application, it is possible for one thread to modify a shared object while another thread is in the process of using or updating the object’s value.
+Synchronization prevents such type of data corruption.
+E.g. Synchronizing a function:
+public synchronized void Method1 () {
+// Appropriate method-related code.
+}
+E.g. Synchronizing a block of code inside a function:
+public myFunction (){
+synchronized (this) {
+// Synchronized code here.
+}
+}
+
+ 
+
+What is synchronization and why is it important?
+With respect to multithreading, synchronization is the capability to control the access of multiple threads to shared resources. Without synchronization, it is possible for one thread to modify a shared object while another thread is in the process of using or updating that object’s value. This often causes dirty data and leads to significant errors.
+
+ 
+
+What are synchronized methods and synchronized statements?
+Synchronized methods are methods that are used to control access to a method or an object. A thread only executes a synchronized method after it has acquired the lock for the method’s object or class. Synchronized statements are similar to synchronized methods. A synchronized statement can only be executed after a thread has acquired the lock for the object or class referenced in the synchronized statement.
+
+ 
+
+Update Your Skills form Our Experts:  Core Java Online Training
+
+What are three ways in which a thread can enter the waiting state?
+A thread can enter the waiting state by invoking its sleep() method, by blocking on IO, by unsuccessfully attempting to acquire an object’s lock, or by invoking an object’s wait() method. It can also enter the waiting state by invoking its (deprecated) suspend() method.
+
+ 
+
+Can a lock be acquired on a class?
+Yes, a lock can be acquired on a class. This lock is acquired on the class’s Class object.
+
+ 
+
+What’s the difference between J2SDK 1.5 and J2SDK 5.0?
+There’s no difference, Sun Microsystems just re-branded this version.
+
+ 
+
+What would you use to compare two String variables – the operator == or the method equals()?
+I’d use the method equals() to compare the values of the Strings and the == to check if two variables point at the same instance of a String object.
+
+ 
+
+Update Your Skills form Our Experts:  Core Java Online Training
+
+What is thread?
+A thread is an independent path of execution in a system.
+
+ 
+
+What is multi-threading?
+Multi-threading means various threads that run in a system.
+
+ 
+
+How does multi-threading take place on a computer with a single CPU?
+The operating system’s task scheduler allocates execution time to multiple tasks. By quickly switching between executing tasks, it creates the impression that tasks execute sequentially.
+
+ 
+
+How to create a thread in a program?
+You have two ways to do so. First, making your class “extends” Thread class. Second, making your class “implements” Runnable interface. Put jobs in a run() method and call start() method to start the thread.
+
+ 
+
+Can Java object be locked down for exclusive use by a given thread?
+Yes. You can lock an object by putting it in a “synchronized” block. The locked object is inaccessible to any thread other than the one that explicitly claimed it.
+
+ 
+
+Can each Java object keep track of all the threads that want to exclusively access to it?
+Yes. Use Thread.currentThread() method to track the accessing thread.
+
+ 
+
+Does it matter in what order catch statements for FileNotFoundException and IOExceptipon are written?
+Yes, it does. The FileNoFoundException is inherited from the IOException. Exception’s subclasses have to be caught first.
+
+ 
+
+Update Your Skills form Our Experts:  Core Java Online Training
+
+What invokes a thread’s run() method?
+After a thread is started, via its start() method of the Thread class, the JVM invokes the thread’s run() method when the thread is initially executed.
+
+ 
+
+What is the purpose of the wait(), notify(), and notifyAll() methods?
+The wait(),notify(), and notifyAll() methods are used to provide an efficient way for threads to communicate each other.
+
+ 
+
+What are the high-level thread states?
+The high-level thread states are ready, running, waiting, and dead.
+
+ 
+
+What is the difference between yielding and sleeping?
+When a task invokes its yield() method, it returns to the ready state. When a task invokes its sleep() method, it returns to the waiting state.
+
+ 
+
+Update Your Skills form Our Experts:  Core Java Online Training
+
+What happens when a thread cannot acquire a lock on an object?
+If a thread attempts to execute a synchronized method or synchronized statement and is unable to acquire an object’s lock, it enters the waiting state until the lock becomes available.
+
+ 
+
+What is the difference between Process and Thread?
+A process can contain multiple threads. In most multithreading operating systems, a process gets its own memory address space; a thread doesn’t. Threads typically share the heap belonging to their parent process. For instance, a JVM runs in a single process in the host O/S. Threads in the JVM share the heap belonging to that process; that’s why several threads may access the same object. Typically, even though they share a common heap, threads have their own stack space. This is how one thread’s invocation of a method is kept separate from another’s. This is all a gross oversimplification, but it’s accurate enough at a high level. Lots of details differ between operating systems. Process vs. Thread A program vs. similar to a sequential program an run on its own vs. Cannot run on its own Unit of allocation vs. Unit of execution Have its own memory space vs. Share with others Each process has one or more threads vs. Each thread belongs to one process Expensive, need to context switch vs. Cheap, can use process memory and may not need to context switch More secure. One process cannot corrupt another process vs. Less secure. A thread can write the memory used by another thread
+
+ 
+
+Can an inner class declared inside of a method access local variables of this method?
+It’s possible if these variables are final.
+What can go wrong if you replace &emp;&emp; with &emp; in the following code:
+String a=null; if (a!=null && a.length()>10) {…}
+A single ampersand here would lead to a NullPointerException.
+
+ 
+
+What is the Vector class?
+The Vector class provides the capability to implement a growable array of objects
+
+ 
+
+What modifiers may be used with an inner class that is a member of an outer class?
+A (non-local) inner class may be declared as public, protected, private, static, final, or abstract.
+
+ 
+
+If a method is declared as protected, where may the method be accessed?
+A protected method may only be accessed by classes or interfaces of the same package or by subclasses of the class in which it is declared.
+
+ 
+
+What is an Iterator interface?
+The Iterator interface is used to step through the elements of a Collection.
+
+ 
+
+How many bits are used to represent Unicode, ASCII, UTF-16, and UTF-8 characters?
+Unicode requires 16 bits and ASCII require 7 bits. Although the ASCII character set uses only 7 bits, it is usually represented as 8 bits. UTF-8 represents characters using 8, 16, and 18 bit patterns. UTF-16 uses 16-bit and larger bit patterns.
+
+ 
+
+Update Your Skills form Our Experts:  Core Java Online Training
+
+What’s the main difference between a Vector and an ArrayList?
+Java Vector class is internally synchronized and ArrayList is not.
+
+ 
+
+What are wrapped classes?
+Wrapped classes are classes that allow primitive types to be accessed as objects.
+
+ 
+
+Does garbage collection guarantee that a program will not run out of memory?
+No, it doesn’t. It is possible for programs to use up memory resources faster than they are garbage collected. It is also possible for programs to create objects that are not subject to garbage collection.
+
+ 
+
+What is the difference between preemptive scheduling and time slicing?
+Under preemptive scheduling, the highest priority task executes until it enters the waiting or dead states or a higher priority task comes into existence. Under time slicing, a task executes for a predefined slice of time and then reenters the pool of ready tasks. The scheduler then determines which task should execute next, based on priority and other factors.
+
+ 
+
+Name Component subclasses that support painting ?
+The Canvas, Frame, Panel, and Applet classes support painting.
+
+ 
+
+What is a native method?
+A native method is a method that is implemented in a language other than Java.
+
+ 
+
+Update Your Skills form Our Experts:  Core Java Online Training
+
+How can you write a loop indefinitely?
+for(;;)–for loop; while(true)–always true, etc.
+
+ 
+
+Can an anonymous class be declared as implementing an interface and extending a class?
+An anonymous class may implement an interface or extend a superclass, but may not be declared to do both.
+
+ 
+
+What is the purpose of finalization?
+The purpose of finalization is to give an unreachable object the opportunity to perform any cleanup processing before the object is garbage collected.
+
+ 
+
+When should the method invokeLater()be used?
+This method is used to ensure that Swing components are updated through the event-dispatching thread.
+
+ 
+
+How many methods in Object class?
+This question is not asked to test your memory. It tests you how well you know Java. Ten in total.
+
+clone()
+equals() & hashcode()
+1getClass()
+finalize()
+wait() & notify()
+toString()
+ 
+
+How does Java handle integer overflows and underflows?
+It uses low order bytes of the result that can fit into the size of the type allowed by the operation.
+
+ 
+
+ 
+
+What is the numeric promotion?
+Numeric promotion is used with both unary and binary bitwise operators. This means that byte, char, and short values are converted to int values before a bitwise operator is applied.
+If a binary bitwise operator has one long operand, the other operand is converted to a long value.
+The type of the result of a bitwise operation is the type to which the operands have been promoted. For example:
+short a = 5;
+byte b = 10;
+long c = 15;
+The type of the result of (a+b) is int, not short or byte. The type of the result of (a+c) or (b+c) is long.
+
+ 
+
+Is the numeric promotion available in other platform?
+Yes. Because Java is implemented using a platform-independent virtual machine, bitwise operations always yield the same result, even when run on machines that use radically different CPUs.
+
+ 
+
+What is the difference between the Boolean & operator and the && operator?
+If an expression involving the Boolean & operator is evaluated, both operands are evaluated. Then the & operator is applied to the operand. When an expression involving the && operator is evaluated, the first operand is evaluated. If the first operand returns a value of true then the second operand is evaluated. The && operator is then applied to the first and second operands. If the first operand evaluates to false, the evaluation of the second operand is skipped.
+Operator & has no chance to skip both sides evaluation and && operator does. If asked why, give details as above.
+
+ 
+
+What is the GregorianCalendar class?
+The GregorianCalendar provides support for traditional Western calendars.
+What is the SimpleTimeZone class?
+The SimpleTimeZone class provides support for a Gregorian calendar.
+
+ 
+
+How can a subclass call a method or a constructor defined in a superclass?
+Use the following syntax: super.myMethod(); To call a constructor of the superclass, just write super(); in the first line of the subclass’s constructor.
+
+ 
+
+What is the Properties class? T
+The properties class is a subclass of Hashtable that can be read from or written to a stream. It also provides the capability to specify a set of default values to be used.
+
+ 
+
+What is the purpose of the Runtime class?
+The purpose of the Runtime class is to provide access to the Java runtime system.
+
+ 
+
+What is the purpose of the System class?
+The purpose of the System class is to provide access to system resources.
+
+ 
+
+What is the purpose of the finally clause of a try-catch-finally statement?
+The finally clause is used to provide the capability to execute code no matter whether or not an exception is thrown or caught.
+
+ 
+
+What is the Locale class?
+The Locale class is used to tailor program output to the conventions of a particular geographic, political, or cultural region.
+
+ 
+
+What is an abstract method?
+An abstract method is a method whose implementation is deferred to a subclass. Or, a method that has no implementation.
+
+ 
+
+Update Your Skills form Our Experts:  Core Java Online Training
+
+What is a static method?
+A static method is a method that belongs to the class rather than any object of the class and doesn’t apply to an object or even require that any objects of the class have been instantiated.
+
+ 
+
+What is a protected method?
+A protected method is a method that can be accessed by any method in its package and inherited by any subclass of its class.
+
+ 
+
+What is the difference between a static and a non-static inner class?
+A non-static inner class may have object instances that are associated with instances of the class’s outer class. A static inner class does not have any object instances.
+
+ 
+
+What is an object’s lock and which object’s have locks?
+An object’s lock is a mechanism that is used by multiple threads to obtain synchronized access to the object. A thread may execute a synchronized method of an object only after it has acquired the object’s lock. All objects and classes have locks. A class’s lock is acquired on the class’s Class object.
+
+ 
+
+When can an object reference be cast to an interface reference?
+An object reference can be cast to an interface reference when the object implements the referenced interface.
+
+ 
+
+What is the difference between a Window and a Frame?
+The Frame class extends Window to define a main application window that can have a menu bar.
+
+ 
+
+What is the difference between a Window and a Frame?
+Heavy weight components like Abstract Window Toolkit (AWT), depend on the local windowing toolkit. For example, java.awt.Button is a heavy weight component, when it is running on the Java platform for Unix platform, it maps to a real Motif button. In this relationship, the Motif button is called the peer to the java.awt.Button. If you create two Buttons, two peers and hence two Motif Buttons are also created. The Java platform communicates with the Motif Buttons using the Java Native Interface. For each and every content added to the application, there is an additional overhead tied to the local windowing system, which is why these components are called heavy weight.
+
+ 
+
+Update Your Skills form Our Experts:  Core Java Online Training
+
+Which package has light weight components?
+javax.Swing package. All components in Swing, except JApplet, JDialog, JFrame and JWindow are lightweight components.
+
+ 
+
+What are peerless components?
+The peerless components are called light weight components.
+
+ 
+
+What is the difference between the Font and FontMetrics classes?
+The FontMetrics class is used to define implementation-specific properties, such as ascent and descent, of a Font object.
+
+ 
+
+What is the difference between the Reader/Writer class hierarchy and the InputStream/OutputStream class hierarchy?
+The Reader/Writer class hierarchy is character-oriented, and the InputStream/OutputStream class hierarchy is byte-oriented.
+
+ 
+
+What classes of exceptions may be caught by a catch clause?
+A catch clause can catch any exception that may be assigned to the Throwable type. This includes the Error and Exception types.
+
+What is the difference between throw and throws keywords?
+
+The throw keyword denotes a statement that causes an exception to be initiated. It takes the Exception object to be thrown as argument. The exception will be caught by an immediately encompassing try-catch construction or propagated further up the calling hierarchy.
+The throws keyword is a modifier of a method that designates that exceptions may come out of the method, either by virtue of the method throwing the exception itself or because it fails to catch such exceptions that a method it calls may throw.
+ 
+
+If a class is declared without any access modifiers, where may the class be accessed?
+A class that is declared without any access modifiers is said to have package or friendly access. This means that the class can only be accessed by other classes and interfaces that are defined within the same package.
+
+ 
+
+Update Your Skills form Our Experts:  Core Java Online Training
+
+What is the Map interface?
+The Map interface replaces the JDK 1.1 Dictionary class and is used associate keys with values.
+
+ 
+
+Does a class inherit the constructors of its super class?
+A class does not inherit constructors from any of its superclasses.
+Name primitive Java types.
+The primitive types are byte, char, short, int, long, float, double, and Boolean.
+
+ 
+
+Which class should you use to obtain design information about an object?
+The Class class is used to obtain information about an object’s design.
+
+ 
+
+How can a GUI component handle its own events?
+A component can handle its own events by implementing the required event-listener interface and adding itself as its own event listener.
+
+ 
+
+How are the elements of a GridBagLayout organized?
+The elements of a GridBagLayout are organized according to a grid. However, the elements are of different sizes and may occupy more than one row or column of the grid. In addition, the rows and columns may have different sizes.
+
+ 
+
+What advantage do Java’s layout managers provide over traditional windowing systems?
+Java uses layout managers to lay out components in a consistent manner across all windowing platforms. Since Java’s layout managers aren’t tied to absolute sizing and positioning, they are able to accommodate platform-specific differences among windowing systems.
+
+ 
+
+What are the problems faced by Java programmers who don’t use layout managers?
+Without layout managers, Java programmers are faced with determining how their GUI will be displayed across multiple windowing systems and finding a common sizing and positioning that will work within the constraints imposed by each windowing system.
+
+ 
+
+What is the difference between static and non-static variables?
+A static variable is associated with the class as a whole rather than with specific instances of a class. Non-static variables take on unique values with each object instance.
+
+ 
+
+Update Your Skills form Our Experts:  Core Java Online Training
+
+What is the difference between the paint() and repaint() methods?
+The paint() method supports painting via a Graphics object. The repaint() method is used to cause paint() to be invoked by the AWT painting thread.
+
+ 
+
+ 
+
+What is the purpose of the File class?
+The File class is used to create objects that provide access to the files and directories of a local file system.
+
+ 
+
+Why would you use a synchronized block vs. synchronized method?
+Synchronized blocks place locks for shorter periods than synchronized methods.
+
+ 
+
+What restrictions are placed on method overriding?
+Overridden methods must have the same name, argument list, and return type. The overriding method may not limit the access of the method it overrides. The overriding method may not throw any exceptions that may not be thrown by the overridden method.
+
+ 
+
+What is casting?
+There are two types of casting, casting between primitive numeric types and casting between object references. Casting between numeric types is used to convert larger values, such as double values, to smaller values, such as byte values. Casting between object references is used to refer to an object by a compatible class, interface, or array type reference.
+
+ 
+
+Explain the usage of the keyword transient?
+This keyword indicates that the value of this member variable does not have to be serialized with the object. When the class will be de-serialized, this variable will be initialized with a default value of its data type (i.e. zero for integers).
+
+ 
+
+What class allows you to read objects directly from a stream?
+The ObjectInputStream class supports the reading of objects from input streams.
+
+ 
+
+How are this() and super() used with constructors?
+this() is used to invoke a constructor of the same class. super() is used to invoke a superclass constructor.
+
+ 
+
+How is it possible for two String objects with identical values not to be equal under the == operator? How are this() and super() used with constructors?
+The == operator compares two objects to determine if they are the same objects in memory. It is possible for two String objects to have the same value, but located in different areas of memory.
+
+ 
+
+Update Your Skills form Our Experts:  Core Java Online Training
+
+What are runtime exceptions?
+Runtime exceptions are those exceptions that are thrown at runtime because of either wrong input data or because of wrong business logic etc. These are not checked by the compiler at compile time.
+
+ 
+
+What is the difference between error and an exception?
+An error is an irrecoverable condition occurring at runtime. Such as OutOfMemory error. These JVM errors and you can not repair them at runtime. While exceptions are conditions that occur because of bad input etc. e.g. FileNotFoundException will be thrown if the specified file does not exist. Or a NullPointerException will take place if you try using a null reference. In most of the cases it is possible to recover from an exception (probably by giving user a feedback for entering proper values etc.).
+
+ 
+
+How to create custom exceptions?
+Your class should extend class Exception, or some more specific type thereof.
+
+ 
+
+If I want an object of my class to be thrown as an exception object, what should I do?
+The class should extend from Exception class. Or you can extend your class from some more precise exception type also.
+
+ 
+
+If my class already extends from some other class what should I do if I want an instance of my class to be thrown as an exception object?
+One can not do anything in this scenario. Because Java does not allow multiple inheritance and does not provide any exception interface as well.
+
+ 
+
+How does an exception permeate through the code?
+An unhandled exception moves up the method stack in search of a matching When an exception is thrown from a code which is wrapped in a try block followed by one or more catch blocks, a search is made for matching catch block. If a matching type is found then that block will be invoked. If a matching type is not found then the exception moves up the method stack and reaches the caller method. Same procedure is repeated if the caller method is included in a try catch block. This process continues until a catch block handling the appropriate type of exception is found. If it does not find such a block then finally the program terminates.
+
+ 
+
+What is the basic difference between the 2 approaches to exception handling.
+1. try catch block and
+2. specifying the candidate exceptions in the throws clause?
+
+ 
+
+Update Your Skills form Our Experts:  Core Java Online Training
+
+When should you use which approach?
+In the first approach as a programmer of the method, you yourself are dealing with the exception. This is fine if you are in a best position to decide should be done in case of an exception. Whereas if it is not the responsibility of the method to deal with it’s own exceptions, then do not use this approach. In this case use the second approach. In the second approach we are forcing the caller of the method to catch the exceptions, that the method is likely to throw. This is often the approach library creators use. They list the exception in the throws clause and we must catch them. You will find the same approach throughout the java libraries we use.
+
+ 
+
+Is it necessary that each try block must be followed by a catch block?
+It is not necessary that each try block must be followed by a catch block. It should be followed by either a catch block OR a finally block. And whatever exceptions are likely to be thrown should be declared in the throws clause of the method.
+
+ 
+
+If I write return at the end of the try block, will the finally block still execute?
+Yes even if you write return as the last statement in the try block and no exception occurs, the finally block will execute. The finally block will execute and then the control return.
+
+ 
+
+If I write System.exit (0); at the end of the try block, will the finally block still execute?
+No in this case the finally block will not execute because when you say System.exit (0); the control immediately goes out of the program, and thus finally never executes.
+
+ 
+
+How are Observer and Observable used?
+Objects that subclass the Observable class maintain a list of observers. When an Observable object is updated it invokes the update() method of each of its observers to notify the observers that it has changed state. The Observer interface is implemented by objects that observe Observable objects.
+
+ 
+
+What is synchronization and why is it important?
+With respect to multithreading, synchronization is the capability to control the access of multiple threads to shared resources. Without synchronization, it is possible for one thread to modify a shared object while another thread is in the process of using or updating that object’s value. This often leads to significant errors.
+
+ 
+
+How does Java handle integer overflows and underflows?
+It uses those low order bytes of the result that can fit into the size of the type allowed by the operation.
+
+ 
+
+Does garbage collection guarantee that a program will not run out of memory?
+Garbage collection does not guarantee that a program will not run out of memory. It is possible for programs to use up memory resources faster than they are garbage collected. It is also possible for programs to create objects that are not subject to garbage collection .
+
+ 
+
+Update Your Skills form Our Experts:  Core Java Online Training
+
+What is the difference between preemptive scheduling and time slicing?
+Under preemptive scheduling, the highest priority task executes until it enters the waiting or dead states or a higher priority task comes into existence. Under time slicing, a task executes for a predefined slice of time and then reenters the pool of ready tasks. The scheduler then determines which task should execute next, based on priority and other factors.
+
+ 
+
+When a thread is created and started, what is its initial state?
+A thread is in the ready state after it has been created and started.
+
+ 
+
+What is the purpose of finalization?
+The purpose of finalization is to give an unreachable object the opportunity to perform any cleanup processing before the object is garbage collected.
+
+ 
+
+What is the Locale class?
+The Locale class is used to tailor program output to the conventions of a particular geographic, political, or cultural region.
+
+ 
+
+Update Your Skills form Our Experts:  Core Java Online Training
+
+What is the difference between a while statement and a do statement?
+A while statement checks at the beginning of a loop to see whether the next loop iteration should occur. A do statement checks at the end of a loop to see whether the next iteration of a loop should occur. The do statement will always execute the body of a loop at least once.
+
+ 
+
+What is the difference between static and non-static variables?
+A static variable is associated with the class as a whole rather than with specific instances of a class. Non-static variables take on unique values with each object instance
+
+ 
+
+How are this() and super() used with constructors?
+This() is used to invoke a constructor of the same class. super() is used to invoke a superclass constructor.
+
+ 
+
+What are synchronized methods and synchronized statements?
+Synchronized methods are methods that are used to control access to an object. A thread only executes a synchronized method after it has acquired the lock for the method’s object or class. Synchronized statements are similar to synchronized methods. A synchronized statement can only be executed after a thread has acquired the lock for the object or class referenced in the synchronized statement.
+
+ 
+
+What is daemon thread and which method is used to create the daemon thread?
+Daemon thread is a low priority thread which runs intermittently in the back ground doing the garbage collection operation for the java runtime system. setDaemon method is used to create a daemon thread.
+
+ 
+
+Can applets communicate with each other?
+At this point in time applets may communicate with other applets running in the same virtual machine. If the applets are of the same class, they can communicate via shared static variables. If the applets are of different classes, then each will need a reference to the same class with static variables. In any case the basic idea is to pass the information back and forth through a static variable.
+An applet can also get references to al
