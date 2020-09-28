@@ -1,0 +1,178 @@
+
+Top PL/SQL Interview Questions
+What is PL/SQL?
+What is the basic structure of PL/SQL?
+What are the components of a PL/SQL Block?
+What are the data types a available in PL/SQL?
+Is there a limit on the size of a PL/SQL block?
+What is the difference between Anonymous blocks and sub programs?
+Can SQL group functions be used within the procedural statements?
+How is global variable declared within a nested block?
+What is the maximum length of an identifier that can be used?
+What are the different data types that can be defined in a PL/SQL block?
+What is the difference between SQL and PL/SQL?
+What are the advantages of PL/SQL?.
+What is an anonymous block and how is it executed?
+What are the mandatory keywords in a PL/SQL program block?
+What are Transaction Control statements? Can they be used within the PL/SQL block?
+How can you display data from a PL/SQL block?
+What PL/SQL supports?
+Different types of PL/SQL blocks?
+What is the structure of PL/SQL block?
+What are %TYPE and % ROWTYPE?
+What are the advantages of using %TYPE & %ROWTYPE data types?
+Difference between %TYPE and %ROWTYPE?
+What is Bind variable?
+What is Cursor?
+Explain Types of cursors?
+Explain How CURSOR FOR LOOP works?
+What are the PL/SQL Statements used in cursor processing?
+What are the cursor attributes used in PL/SQL?
+What is WHERE CURRENT OF clause?
+Can we pass parameter to a cursor what are the advantages?
+How can you find a cursor is opened or not in PL/SQL block?
+What is a cursor for loop?
+Can you pass a parameter to a cursor?
+Can you use %Rowcount as a parameter to a cursor?
+What is implicit cursor in Oracle?
+What are the Implicit Cursor Attributes?
+How is it possible to fetch a current row from a cursor without using ROWID?
+How can you check if an UPDATE statement in PL/SQL is successfully executed?
+What is the value of SQL%FOUND attribute after & before an INSERT statement executed?
+What are the different ways to determine the status of a cursor?
+What will be the value of %N0TF0UND attribute after a cursor is opened?
+Why does SQL%ISOPEN always returns the FALSE value?
+How can explicit cursors be used to fetch multiple rows?
+What is FOR UPDATE clause?
+What is Ref Cursor?
+Difference between Cursor and Ref Cursor?
+Difference between Strong and Weak Ref cursor?
+Can cursor variables be stored in PL/SQL tables? If yes how. If not why?
+What is Exception in Oracle?
+Explain the types of Exceptions?
+What are the predefined oracle exceptions?
+Explain user defined exceptions in oracle. ?
+How User defined Exceptions Are Raised?
+Explain the guidelines for Avoiding and Handling PL/SQL Errors and Exceptions?
+What is Pragma Init Exception in oracle?
+What is Raise_application_error?
+What are the return values of functions SQLCODE and SQLERRM?
+Can we define exceptions twice in same block?
+What are PL/SQL Cursor Exceptions?
+Can the PL/SQL block process more than one exception at a time?
+Is it possible to have more than one OTHERS clause?
+What causes the INVALID_CURSOR exception?
+Where will the control be transferred if an exception is raised with in block?
+What is the advantage of OTHERS exception handler?
+When is the CURSOR_ALREADY_OPEN exception raised?
+What is the advantage of having a separate exception section within a PL/SQL code?
+What happen when there is no handler for a raised exception?
+What is the difference between user-defined exceptions and Oracle-defined exceptions?
+What is the difference between RAISE and RAISE_APPLICATION_ERROR?
+What is Collection?
+Explain collection types. i.e. Index-by tables, Nested tables, Varrays?
+What is the difference between the cursor and pl/sql table?
+How we can delete the specific record and all records from the pl/sql table.
+What is the Nested table?
+What is bulk collect? Explain?
+What is the Difference between PL/SQL Table & Nested Table?
+How Bulk Binding improve performance?
+How does Bulk Binding Work with SELECT or FETCH Statement?
+Why sometime it is necessary to use LIMIT clause in Bulk Binding?
+Is there a limit on the size of a PL/SQL block?
+What is a stored procedure?
+What are advantages of Stored Procedures?
+What are the modes of parameters that can be passed to a procedure?
+What is Overloading of procedures?
+What are actual and formal parameters?
+What are the types of Notation?
+How can you use pseudo-columns in procedural statements?
+When does a subprogram need recompilation?
+Which data types can be used for parameters within a procedure?
+Can stand-alone programs be overloaded?
+Is it Procedure Return values or Not ?
+How can a parameter be initialized in a procedure?
+Can default values be assigned to IN OUT parameters in a procedure?
+Can DDL commands be used within a procedure? If so, then how?
+What is the scope of the procedure defined within a PL/SQL block?
+Which privileges are required to execute a subprogram owned by another user?
+What happens if an exception is unhandled within a procedure?
+What is the significance of AUTHID property while creating a procedure?
+How can a compiled object code be viewed?
+Can an IN parameter be assigned a value within a procedure?.
+What are default parameter passing methods?
+What is NOCOPY hint?
+What is difference between a PROCEDURE & FUNCTION?
+Explain how procedures and functions are called in a PL/SQL block?
+Can you have two functions with the same name in a PL/SQL block?
+Can you have two stored functions with the same name?
+Can you call a stored function in the constraint of a table?
+What is Over Loading and what are its restrictions?
+Can functions be over loaded?
+Can 2 functions have same name & input parameters but differ only by return data type?
+Can there be multiple RETURN statements within a function?
+Can BOOLEAN data type be used in functions that are called from SQL statements?
+When should a procedure and a function be used?
+How can the text of a procedure or function specification be viewed?
+What are the different parameter modes, which can be used in the function specification?
+Can you invoke a stored function or procedure from the Oracle Forms in the database?
+Can a function be defined without a RETURN statement?
+How can the parameter list for a function or procedure be displayed?
+What is the meaning of ORA-06575: Package or function func_test is in an invalid state?
+What are the restrictions on functions that are called within SQL statements?
+How can you debug a procedure or function for errors?
+Explain PRAGMA AUTONOMOUS_TRANSACTION?
+What is Package?
+What are the advantages of creating packages?
+List some Oracle supplied Packages?
+What are the Disadvantages of packages?
+How PL/SQL supports Polymorphism?
+What are the rules of writing package?
+Mention what PL/SQL package consists of?
+Explain the difference between a FUNCTION, PROCEDURE and PACKAGE?
+How do you make a Function and Procedure as a Private?
+How can you generate debugging output from PL/SQL?
+Can you pass parameters in packages? How?
+What is a package spec and package body? Why the separation?
+What is UTL_File package?
+How many types of functions in UTL_FILE package?
+Can we load the data from table to table through utl_file package?
+Difference b/w sql*loader and utl_file package?
+What function you are using to load the data in UTL_FILE package?
+What are the exceptions are there in utl_file?
+What is trigger in oracle?
+What are the types of triggers?
+What are triggering attributes?
+Disadvantages of trigger in oracle?
+Difference between trigger and stored procedure
+Explain Row level and statement level triggers?
+What are cascading triggers?
+What is compound triggers ?
+How many types of database triggers can be specified on a table? What are they?
+Is it possible to use TCL Statements such a ROLLBACK or COMMIT in Database Trigger?
+Write the order of precedence for validation of a column in a table?
+What are the values of :new and :old in Insert/Delete/Update Triggers ?
+What are mutating triggers?
+What are constraining triggers?
+What are schema-level triggers?
+Does a USER_OBJECTS view have an entry for a trigger?
+What are the system privileges that are required by a schema to create a trigger on a table?
+What is a database event trigger?
+How can you view the errors encountered in a trigger?
+In what condition is it good to disable a trigger?
+Does USER_TRIGGERS have entry for triggers with compilation errors?
+How can triggers be used for the table auditing
+What are INSTEAD OF triggers?
+Is it possible to pass parameters to triggers?
+Can triggers stop a DML statement from executing on a table
+Can a SELECT statement fire a trigger?
+How can the performance of a trigger be improved?
+Can a view be mutating? If yes, then how?
+What are the events on which a database trigger can be based?
+What is a mutating table?
+Do triggers have restrictions on the usage of large data types, such as LONG & LONG RAW?
+Which data dictionary views have the information on the triggers that are available in db?
+Share this post FacebookTwitterLinkedInGoogle +Email
+Register for Course !
+Learn from the Real-Time Experts
+Name*
