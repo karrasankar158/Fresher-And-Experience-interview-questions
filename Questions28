@@ -1,0 +1,81 @@
+
+Hi Team,
+#Microservices #project  #Interview #Questions #Answers #Real_Time 3-15 #years #experience
+Q #What is the role of an architect in Microservices architecture?
+Ans-An architect in microservices architecture plays the following roles:
+Decides broad strokes about the layout of the overall software system.
+Helps in deciding the zoning of the components. So, they make sure components are mutually cohesive, but not tightly coupled.
+Code with developers and learn the challenges faced in day-to-day life.
+Make recommendations for certain tools and technologies to the team developing microservices.
+Provide technical governance so that the teams in their technical development follow principles of Microservice.
+
+Q.#How does Microservice Architecture work?
+A microservice architecture has the following components:
+Clients – Different users from various devices send requests.
+Identity Providers – Authenticates user or clients identities and issues security tokens.
+API Gateway – Handles client requests.
+Static Content – Houses all the content of the system.
+Management –  Balances services on nodes and identifies failures.
+Service Discovery – A guide to find the route of communication between microservices.
+Content Delivery Networks – Distributed network of proxy servers and their data centers.
+Remote Service – Enables the remote access information that resides on a network of IT devices.
+Q.#What are the challenges you face while working Microservice Architectures?
+Developing a number of smaller microservices sounds easy, but the challenges often faced while developing them are as follows.
+
+Automate the Components: Difficult to automate because there are a number of smaller components. So for each component, we have to follow the stages of  Build, Deploy and, Monitor.
+Perceptibility: Maintaining a large number of components together becomes difficult to deploy, maintain, monitor and identify problems. It requires great perceptibility around all the components.
+Configuration Management: Maintaining the configurations for the components across the various environments becomes tough sometimes.
+Debugging: Difficult to find out each and every service for an error. It is essential to maintain centralized logging and dash
+
+Q.#What is the difference between Monolithic, SOA and Microservices Architecture?
+Monolithic Architecture is similar to a big container wherein all the software components of an application are assembled together and tightly packaged.
+A Service-Oriented Architecture is a collection of services which communicate with each other. The communication can involve either simple data passing or it could involve two or more services coordinating some activity.
+Microservice Architecture is an architectural style that structures an application as a collection of small autonomous services, modeled around a business domain.
+
+Q.What is REST/RESTful and what are its uses?
+Representational State Transfer (REST)/RESTful web services are an architectural style to help computer systems communicate over the internet. This makes microservices easier to understand and implement.
+
+Microservices can be implemented with or without RESTful APIs, but it’s always easier to build loosely coupled microservices using RESTful APIs.
+
+What do you know about Spring Boot?
+It’s a knows fact that spring has become more and more complex as new functionalities have been added. If you have to start a new spring project, then you have to add build path or add maven dependencies, configure application server, add spring configuration. So everything has to be done from scratch.
+
+Spring Boot is the solution to this problem. Using spring boot you can avoid all the boilerplate code and configurations. So basically consider yourself as if you’re baking a cake spring is like the ingredients that are required to make the cake and spring boot is the complete cake in your hand.
+
+Q.Can you give a gist about Rest and Microservices?
+REST
+Though you can implement microservices in multiple ways, REST over HTTP is a way to implement Microservices. REST is also used in other applications such as web apps, API design, and MVC applications to serve business data.
+
+Microservices
+Microservices is an architecture wherein all the components of the system are put into individual components, which can be built, deployed, and scaled individually. There are certain principles and best practices of Microservices that help in building a resilient application.
+
+In a nutshell, you can say that REST is a medium to build Microservices.
+Q.What are different types of Tests for Microservices?
+While working with microservices, testing becomes quite complex as there are multiple microservices working together. So, tests are divided into different levels.
+
+At the bottom level, we have technology-facing tests like- unit tests and performance tests. These are completely automated.
+At the middle level, we have tests for exploratory testing like the stress tests and usability tests.
+At the top level, we have acceptance tests that are few in number. These acceptance tests help stakeholders in understanding and verifying software features.
+Q.What is the use of PACT in Microservices architecture?
+PACT is an open source tool to allow testing interactions between service providers and consumers in isolation against the contract made so that the reliability of Microservices integration increases.
+
+Usage in Microservices:
+Used to implement Consumer Driven Contract in Microservices.
+Tests the consumer-driven contracts between consumer and provider of a Microservice.
+Q.What is the use of PACT in Microservices architecture?
+PACT is an open source tool to allow testing interactions between service providers and consumers in isolation against the contract made so that the reliability of Microservices integration increases.
+
+Usage in Microservices:
+Used to implement Consumer Driven Contract in Microservices.
+Tests the consumer-driven contracts between consumer and provider of a Microservice.
+Q.What is the use of Container in Microservices?
+Containers are a good way to manage microservice based application to develop and deploy them individually. You can encapsulate your microservice in a container image along with its dependencies, which then can be used to roll on-demand instances of microservice without any additional efforts required.
+
+Q.What is DRY in Microservices architecture?
+DRY stands for Don’t Repeat Yourself. It basically promotes the concept of reusing the code. This results in developing and sharing the libraries which in turn result in tight coupling.
+
+Q.What is the role of Web, RESTful APIs in Microservices?
+A microservice architecture is based on a concept wherein all its services should be able to interact with each other to build a business functionality. So, to achieve this, each microservice must have an interface. This makes the web API a very important enabler of microservices. Being based on the open networking principles of the Web, RESTful APIs provide the most logical model for building interfaces between the various components of a microservice architecture.
+
+Q. What do you understand by Semantic monitoring in Microservices architecture?
+Semantic monitoring, also known as synthetic monitoring combines automated tests with monitoring the application in order to detect business failing factors.
