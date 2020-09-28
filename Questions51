@@ -1,0 +1,68 @@
+
+HIBERNATE INTERVIEW QUESTIONS AND ANSWERS
+
+1. Q : WHAT IS HIBERNATE ?
+ANS : It is an open source, light weight, non-invasive, java based ORM Framework. To develop Object based DataBase S/w independent O-R Mapping, persistence logic in all kind of java, jee and Java Framework apps.
+
+2. Q : WHAT ARE THE MAIN FEATURES OF HIBERNATE?
+ANS :
+
+1. Hibernate gives HQL (Hibernate Query Language) as DataBase Software Independent.
+2. Hibernate supports lazy loading.
+3. Allows to develop objects based persistence logic in standalone environment and also in web application environment.
+4. Does not need the heavy weight containers , servers to execute Hibernate Code.
+5. Hibernate O-R Mapping solve the mismatches between java programming and DataBase Programming.
+6. Hibernate support both XML and annotation based O-R Mapping configuration.
+7. It supports two levels of caching to reduce network round trips between hibernate app and Database software. ( cache is a temporary memory that hold data for temporary period).
+8. Hibernate supports versioning. (Allows to keep track of how many times the object/Record is modified).
+9. Supports Timestamping feature. ( Keep track of when object/ Record is saved or modified with date and time values)
+10.Give supports to Native SQL queries to develop persistence logics.
+11.Supports object level relationship like one-to-one, one-to-many, many-to-one, many-to-many.
+12.Since Hibernate allows to develop object based database software independent persistence logic , we can change DB software in the middle of development / production environment.
+3. Q : WHAT IS HIBERNATE CONFIGURATION FILE ?
+ANS : It is the file that contains information to establish connection with database software and to provide instructions to Hibernate Framework.
+
+This file contains 3 types of details :
+
+1. Connection Properties.
+2. Hibernate Properties.
+3. Hibernate Mapping file names.
+4. Q : WHAT ARE THREE CORE CONCEPTS OF HIBERNATE FRAMEWORK?
+ANS :
+
+1. Configuration
+2. SessionFactory
+3. Session
+1. CONFIGURATION :
+When Hibernate Configuration object is created , Hibernate framework will be activated based on the jar file that ar e added to classpath or buildpath.
+This object also reads data and verifies given configuration file and mapping file enteries and stores the information as "in-memory metadata" at RAM-Level in form of Hashmap object.
+Now onwards if configuration file , mapping file information required during execution of application . It will collect from that "In-Memory metadat" (Hashmap) instead of going those physical XML files.
+Example :
+-----------
+// Activate Hibernate Framework
+Configuration cfg = new Configuration();
+//Verify and Read both configuration file ,Mapping file data and store the data as in memory metadata
+cfg = cfg.configure("/hibernate.cfg.xml");
+
+2. SESSIONFACTORY :
+It will be created based on Configuration object. This Object holds connection properties, hibernate configuration file information, mapping file information and other details so it is called heavy weight object in Hibernate programming.
+It is immutable object. i.e. once the data placed in that object it can not be modified.
+It is thread safe object because all immutable objects are thread safe objects bydefault.
+It is a factory to create hibernate Session objects.
+Example- :
+-------------
+SessionFactory factory = cfg.buildSessionfactory();
+
+3. SESSION :
+Sessionfactory object gets one connection object from its JDBC connection pool and uses that object to create Hibernate Session Object.
+This object Open Connection between Java Application and DataBase Software through Hibernate Frameworks.
+It is the base object for programmer to give persistence instructions to hibernate framework using Domain class objects.
+It is not thread safe object bydefault.
+Example :
+------------
+Session session = factory.openSession();
+5. Q : WHAT IS HIBERNATE DIALECT ?
+Ans : It is an optional property of hibernate configuration file but it is recommended property to use.
+It helps the Hibernate Framework to decide the destination DataBase Software to communicate.
+It helps hibernate framework to generate optimized SQL as required for underlying DB Software.
+
