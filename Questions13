@@ -1,0 +1,59 @@
+
+
+
+#REST #Web Services #Interview #Questions  #Answers
+Q.#What is differences between RESTful web services and SOAP web services?
+1) REST is more simple and easy to use than SOAP
+2) REST uses HTTP protocol for producing or consuming web services while SOAP uses XML.
+3) REST is lightweight as compared to SOAP and preferred choice in mobile devices and PDA’s.
+4) REST supports different format like text, JSON and XML while SOAP only support XML.
+5) REST web services call can be cached to improve performance.
+
+Q.#What are idempotent operations? Why is idempotency important?
+Idempotent operations are those HTTP methods that can be called repetitively many times without different outcomes. It would not matter if the method is called only once, or many times over. The result should be the same. Again, this only applies to the result, not the resource itself.
+Consider the following examples:
+
+a = 4; (is idempotent)
+a++; (is not idempotent)
+
+Idempotency is important in building a fault-tolerant API. Suppose a client wants to update a resource through POST. Since POST is not a idempotent method, calling it multiple times can result in wrong updates. What would happen if you sent out the POST request to the server, but you get a timeout. Is the resource actually updated? Does the timeout happened during sending the request to the server, or the response to the client? Can we safely retry again, or do we need to figure out first what has happened with the resource? By using idempotent methods, we do not have to answer this question, but we can safely resend the request until we actually get a response back from the server.
+
+HTTP Method Idempotent Safe
+OPTIONS yes yes
+GET yes yes
+HEAD yes yes
+PUT yes no
+POST no no
+DELETE yes no
+PATCH no.    No
+
+Q.Which HTTP methods does REST use?
+RestTemplate provides higher level implementation of corresponding HTTP methods such as GET, POST, PUT, DELETE, HEAD etc.
+
+Q.#What is an HttpMessageConverter?
+HttpMessageConverter is a strategy interface that specifies a converter that can convert from and to HTTP requests and responses. Internally Spring MVC uses it to convert the Http request to an object representation and back. Message converters are used to marshall and unmarshall Java Objects to and from JSON, XML, etc – over HTTP. Read More about HttpMessageConverter in Spring.
+
+Q.#What does @RequestMapping do?
+
+@RequestMapping can be applied to the controller class as well as methods. This annotation for mapping web requests onto specific handler classes and/or handler methods. Read more about @RequestMapping annotation.
+
+Q.#Is @Controller a stereotype? Is @RestController a stereotype?
+Yes.
+
+Q.#What is the difference between @Controller and @RestController?
+The key difference between a traditional Spring MVC @Controller and the RESTful web service @RestController is the way the HTTP response body is created. While the traditional MVC controller relies on the View technology, the RESTful web service controller simply returns the object and the object data is written directly to the HTTP response as JSON/XML by registered HttpMessageConverters.
+
+Q.#When do you need @ResponseBody?
+When you use the @ResponseBody annotation on a method, Spring converts the return value and writes it to the http response automatically. Each method in the Controller class must be annotated with @ResponseBody.
+
+Q.#What does @PathVariable do?
+@PathVariable is used to pass parameter along with the url, sometimes we need to pass parameters along with the url to get the data. Spring MVC provides support for customizing the URL in order to get data. To achieving this purpose @PathVariable annotation is used in Spring mvc framework.
+
+Q.#What is the HTTP status return code for a successful DELETE statement?
+Either we can return HTTP status 204 (NO CONTENT) with no response body or return HTTP status 200 (OK) along with a response body with representation of the deleted item.
+
+Q.Is REST secure? What can you do to secure it?
+REST is nothing but it architectural desgin or paradigms to design restful web service. So REST does not provide any security constraints by default but we can implement it in the RESTful web services by using security layers like transport layer security (TLS), auth token security.
+
+Q.Where do you need @EnableWebMVC?
+@EnableWebMvc- It used for enabling spring mvc behavior i.e. it is responsible for registering Spring MVC required Bean Post Processors in the application as like Jackson2JsonMessageConverter etc.
