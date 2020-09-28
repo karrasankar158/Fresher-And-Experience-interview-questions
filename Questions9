@@ -1,0 +1,79 @@
+
+Hi folks,
+#Letest #update #real_time #experience 3+
+#JIRA #Interview #Questions And #Answers
+Q.What do you mean an Issue in JIRA?
+Various organizations utilize JIRA to track various types of issues. Contingent upon how your organization is utilizing JIRA, an issue could represent a product bug, a project assignment, a helpdesk ticket, a leave request form, and so forth. 
+
+You can get to an issue in JIRA from a query result or from a dashboard gadget that gives access to issues.
+
+Q.How a service desk works in JIRA
+Your client presents a demand for your service agents through an entryway or by means of email. 
+A service desk sees the demand in their Jira Service Desk line and investigates the issue. 
+Your client and different members utilize the entry or email to talk about the demand with your service desk agent, who works in the Jira Service Desk. 
+Your specialist finishes the demand and your client is fulfilled!
+
+Q.What is scheduling an event in Jira?
+Scheduling an event is activated in order to trigger action with respect to the issue. And to perform this scheduling, one should request “Schedule issue permission” from the administrator. This provides “due date” to an issue to be scheduled for.
+
+Q.How can you track time spent on the issue?
+Issue tracking is made easy with three different colours representing three different status of an issue.
+
+Blue color - Estimated time to resolve the issue
+Orange color - Remaining time to resolve the issue
+Green color - Total time spent(Logged In) to resolve the issue.
+
+Q.What to do if you don’t want to perform bulk operations on mail notification issues.
+In the bulk operations wizard, you need to uncheck the email notification to disable.
+
+Q.How can you perform bulk operations on issues?
+Jira provides an option to execute bulk operations. Select Bulk Change option from the Tools menu, and then you can perform the transition, delete, move or edit option for all the issues in the current page.
+
+Q.What information is stored in issue change history?
+Creation and deletion of issues, deletion of comment, attachments and issue field changes are saved.
+
+Q.What is issue collector?
+A feedback form provided to collect issues or bugs in the website that are to be addressed by the customers of the website is one of the features provided by Jira. And to address bugs, users no need to have Jira registration.
+
+Q.Can we backup data in Jira Cloud?
+Yes, Jira provides backup functionality of data. But it can save backup file only once and next time when you backup, the existing data will be overwritten.
+
+Q.How many types of schemes exist in Jira?
+There are seven types of Jira Schemes
+
+Notification
+Screens
+Permissions
+Workflows
+Field configurations
+Issue types
+Custom fields
+
+Q.What are schemes in Jira?
+Schemas define a set of values that can be used as Jira project configurations. One set of schema can be used for one or more project configurations.
+
+Q.What information is not recorded into the cloned issue from the original one?
+Comments, time tracking and history of the issue are not carried to the cloned issue.
+
+Q.Explain Working with workflows in JIRA?
+A JIRA workflow is an arrangement of statuses and transitions that an issue travels through amid its lifecycle and normally speaks to forms inside your organization. There are pre-defined built-in workflows that can't be altered; in any case, you can duplicate and utilize these built-in workflows to make your own.
+
+Q.Define Workflow designer in JIRA
+The JIRA workflow designer is a graphical tool that enables you to see the design layout of your workflow and to make and alter a workflow's procedure and transitions. 
+
+With the workflow designer, you can do: 
+
+Oversee status and advances: include, snap and drag, or select to alter properties (Workflow properties) to rename, or erase (from the workflow yet not JIRA). 
+Include a worldwide transition that permits each different status in the work process to change to the chose status. Select Allow all statuses to transition to this one in the properties board for the transition. 
+Change the screen that a progress employments. See Working in the content mode for points of interest. 
+Configure advanced transition choices, for example, triggers, conditions, validators, and post functions. See the Advanced work process setup page.
+
+Q.How define JIRA Component?
+Components are sub-segments of a project. They are utilized to assemble issues inside an undertaking into littler parts. 
+
+Dealing with a project's components
+
+Sign in to JIRA as a project admin. 
+
+Choose Settings > Projects > and tap the name of a project. The Project Summary page will appear. 
+Choose Components in the left menu. The Components page is shown, demonstrating a rundown of Components and every Component's information.
