@@ -1,0 +1,261 @@
+
+Hibernate - Interview Questions and Answers - Quick Reference
+Q1.  What is Hibernate ?
+
+Ans. Hibernate is a Java ORM Framework.
+
+Q2.  What are the advantages of Hibernate ?
+
+Ans. 
+
+1. No need to know SQL, RDBMS, and DB Schema.
+2. Underlying Database can be changed without much effort by changing SQL dialect and DB connection.
+3. Improved Performance by means of Caching.
+
+Q3.  Difference between first level and second level cache in hibernate ?
+
+Ans. 
+
+1. First level cache is enabled by default whereas Second level cache needs to be enabled explicitly.
+
+2. First level Cache came with Hibernate 1.0 whereas Second level cache came with Hibernate 3.0.
+
+3. First level Cache is Session specific whereas Second level cache is shared by sessions that is why First level cache is considered local and second level cache is considered global.
+
+Q4.  What are the the methods to clear cache in Hibernate ?
+
+Ans. Evict() and clear(). Evist is used to clear a particular object from the cache whereas clear clears the complete local cache.
+
+Q5.  What are different types of second level cache ?
+
+Ans. 
+
+1. EHCache ( Easy Hibernate )
+2. OSCache  ( Open Symphony )
+3. Swarm Cache ( JBoss )
+4. Tree Cache ( JBoss )
+
+Q6.  Can we disable first level cache ? What should one do if we don't want an object to be cached ?
+
+Ans. No, We can either call evict after the object retrieval or can use separate sessions.  
+
+Q7.  How to configure second level cache in Hibernate ?
+
+Ans. 
+
+1. Configure Provider class in Hibernate configuration file.
+
+2. Add Cache usage tag ( read-only or read-write ) in mapping files ( hbm ).
+
+3. Create an XML file called ehcache.xml and place in classpath which contains time settings and update settings, behavior of cache , lifetime and idletime of Pojos, how many objects are allowed.
+
+Q8.  What are the different types of inheritance in Hibernate ?
+
+Ans. Table Per Class , Table per Sub Class , Table per Concrete Class
+
+Q9.  What is the purpose of dialect configured in Hibernate configuration file ?
+
+Ans. It tells the framework which SQL variant to generate. 
+
+Q10.  Please specify in what sequence the objects of following classes will be created ?
+
+Session , SessionFactory, Query , Configuration
+
+Ans. Configuration -> SessionFactory -> Session -> Query
+
+Q11.  What are different types of associations in Hibernate ?
+
+Ans. There are 4 types of associations in Hibernate
+
+One to One
+One to Many
+Many to One
+Many to Many
+
+Q12.  What are the configuration files in Hibernate ?
+
+Ans. hibernate.cfg.xml ( Main Configuration File ) 
+
+and *.hbm.xml files ( Mapping Files )
+
+Q13.  What are the contents of Hibernate configuration file ( hibernate.cfg.xml ) ?
+
+Ans. 
+
+HBM Files ( Mapping )
+DB Connection ( DB Connection String , User Name , Password , Pool Size )
+SQL Dialect ( SQL variant to be generated )
+Show SQL ( Show / No show SQL on Console )
+Auto Commit ( True / False )
+
+Q14.  What are the Core Interfaces of Hibernate Framework ? 
+
+Ans. 
+
+Configuration
+SessionFactory
+Session
+Transaction
+Query and Citeria
+
+Q15.  What are collection types in Hibernate ?
+
+Ans. Bag, Set , List , Array, Map
+
+Q16.  Difference between load and get ?
+
+Ans. If id doesn't exist in the DB load throws an exception whereas get returns null in that case.
+
+get makes the call to DB immediately whereas load makes the call to proxy.
+
+Q17.  What is lazy fetching in Hibernate ?
+
+Ans. Lazy fetching is the technique of not loading the child objects when parent objects are loaded. By default Hibernate does not load child objects. One can specify whether to load them or not while doing the association.
+
+Q18.  Different types of Hibernate Instance States ?
+
+Ans. 
+
+Transient - In this state, an instance is not associated with any persistence context
+Persistent - In this state, an instance is associated with a persistence context
+Detached - This is a state for an instance which was previously associated with a persistence context an has been currently closed dissociated
+
+Q19.  Which class elements are not persisted ?
+
+Ans. Static and Transient.
+
+Q20.  Name few Hibernate annotations ?
+
+Ans. 
+
+@Entity
+@Table
+@Id 
+@Column
+@Temporal
+@Basic
+@Enumerated
+@Access
+@Embeddable
+@Lob
+@AttributeOverride
+@Embedded
+@GeneratedValue
+@ElementCollection
+@JoinTable
+@JoinColumn
+@CollectionId
+@GenericGenerator
+@OneToOne
+@OneToMany
+@ManyToOne
+@ManyToMany
+@NotFound
+
+Q21.  What entries we make in the hibernate config file if we are not using hbm files but Annotations ?
+
+Ans. We configure Entity classes having annotated mappings.
+
+Q22.  How many SessionFactory and Session objects are usually created ?
+
+Ans. Single SessionFactory object and multiple session objects for opening different session. Hibernate creates new Session object per thread.
+
+Q23.  What is the way to rollback transaction if something goes wrong using hibernate API ? 
+
+Ans. We can have the code calling Hibernate API within try block and can have transaction.rollback within Catch.
+
+Q24.  What is the use of hbm2ddl Configuration in Hibernate ?
+
+Ans. This configuration specifies if hibernate should creates the Schema / Table on its own if the respective table is not found. 
+
+"update" doesn't create the table if it's not found whereas configuration set as "create" creates the schema automatically.
+
+Q25.  What is the difference between these 2 annotations ?
+
+@Entity
+
+@Entity ( name="EMPLOYEES" )
+
+
+Ans. The first annotation will try to map the Class with the Table as of same name as Class whereas the second annotation will specify the Entity name as "EMPLOYEES" and hence will try to map with Table Name "EMPLOYEES". 
+
+Q26.  "What is the difference between these 2 annotations ?
+
+@Entity ( name ="EMPLOYEES")
+
+@Entity 
+@Table ( name=""EMPLOYEES"" )
+
+@Entity ( name="EMP")
+@Table ( name="EMPLPYEES" )
+
+
+
+Ans. First Annotation will set the Entity name as EMPLOYEES and hence will try to map with the same Table name. 
+
+The second annotation will make the Entity mapped to table EMPLOYEES irrespective of the Entity Name ( which is class name in this case ).
+
+Third Annotations will set the different names for Enitity and Table and will explicitly map them.
+
+Q27.  What are the different ID generating strategies using @GeneratedValue annotation ?
+
+Ans. Auto , Identity , Sequence and Table.
+
+Q28.  How to do Eager loading in Hibernate ?
+
+Ans. Using 
+
+lazy = false in hibernate config file 
+
+or
+
+@Basic(fetch=FetchType.EAGER) at the mapping
+
+Q29.  What is Lazy Initialization in Hibernate ?
+
+Ans. It's a feature to lazily initialize dependencies , relationship and associations from the Database. Any related references marked as @OneToMany or @ManyToMany are loaded lazily i.e when they are accessed and not when the parent is loaded.
+
+Q30.  What are the ways to avoid LazyInitializationException ?
+
+Ans. 1. Set lazy=false in the hibernate config file.
+
+2. Set @Basic(fetch=FetchType.EAGER) at the mapping.
+
+3. Make sure that we are accessing the dependent objects before closing the session.
+
+4. Using Fetch Join in HQL.
+
+Q31.  What is cascade ?
+
+Ans. Instead of Saving Parent as well as Child Entities individually , Hibernate provides the option to persist / delete the related entities when the Parent is persisted.
+
+Q32.  What are the different Cascade types ?
+
+Ans. Detach, Merge , Persist , Remove , Refresh
+
+Q33.  Which type of associated Entities are Eagerly loaded by Default ?
+
+Ans. OneToOne
+
+Q34.  After which Hibernate version , related Entities are initialized lazily ?
+
+Ans. After Hibernate 3.0
+
+Q35.  Can we declare Entity class as final ?
+
+Ans. Yes but as Hibernate creates the Proxy Classes inherited from the Entity Classes to communicate with Database for lazy initialization. Declaring entity classes as final will prohibit communication with database lazily and hence will be a performance hit.
+
+Q36.  What are the restrictions for the entity classes ?
+
+Ans. 1. Entity classes should have default constructor.
+
+2. Entity classes should be declared non final.
+
+3. All elements to be persisted should be declared private and should have public getters and setters in the Java Bean style.
+
+4. All classes should have an ID that maps to Primary Key for the table.
+
+
+
+
+
