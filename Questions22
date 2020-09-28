@@ -1,0 +1,196 @@
+
+:	What is serialization?
+A:	Serialization is a mechanism by which you can save the state of an object by converting it to a byte stream.
+[ Received from Sandesh Sadhale]
+TOP
+
+Q:	How do I serialize an object to a file?
+A:	The class whose instances are to be serialized should implement an interface Serializable. Then you pass the instance to the ObjectOutputStream which is connected to a fileoutputstream. This will save the object to a file.
+[ Received from Sandesh Sadhale]
+TOP
+
+Q:	Which methods of Serializable interface should I implement?
+A:	The serializable interface is an empty interface, it does not contain any methods. So we do not implement any methods.
+[ Received from Sandesh Sadhale]
+TOP
+
+Q:	How can I customize the seralization process? i.e. how can one have a control over the serialization process?
+A:	Yes it is possible to have control over serialization process. The class should implement Externalizable interface. This interface contains two methods namely readExternal and writeExternal. You should implement these methods and write the logic for customizing the serialization process.
+[ Received from Sandesh Sadhale]
+TOP
+
+Q:	What is the common usage of serialization?
+A:	Whenever an object is to be sent over the network, objects need to be serialized. Moreover if the state of an object is to be saved, objects need to be serilazed.
+[ Received from Sandesh Sadhale]
+TOP
+
+Q:	What is Externalizable interface?
+A:	Externalizable is an interface which contains two methods readExternal and writeExternal. These methods give you a control over the serialization mechanism. Thus if your class implements this interface, you can customize the serialization process by implementing these methods.
+[ Received from Sandesh Sadhale]
+TOP
+
+Q:	When you serialize an object, what happens to the object references included in the object?
+A:	The serialization mechanism generates an object graph for serialization. Thus it determines whether the included object references are serializable or not. This is a recursive process. Thus when an object is serialized, all the included objects are also serialized alongwith the original obect.
+[ Received from Sandesh Sadhale]
+TOP
+
+Q:	What one should take care of while serializing the object?
+A:	One should make sure that all the included objects are also serializable. If any of the objects is not serializable then it throws a NotSerializableException.
+[ Received from Sandesh Sadhale]
+TOP
+
+Q:	What happens to the static fields of a class during serialization?
+A:	There are three exceptions in which serialization doesnot necessarily read and write to the stream. These are
+1. Serialization ignores static fields, because they are not part of ay particular state state.
+2. Base class fields are only hendled if the base class itself is serializable.
+3. Transient fields.
+[ Received from Sandesh Sadhale Modified after P.John David comments.]
+TOP
+
+
+
+Question:	Does Java provide any construct to find out the size of an object?
+Question:	Give a simplest way to find out the time a method takes for execution without using any profiling tool? 
+Question:	What are wrapper classes?
+Question:	Why do we need wrapper classes?  
+Question:	What are checked exceptions?
+Question:	What are runtime exceptions?
+Question:	What is the difference between error and an exception??
+Question:	How to create custom exceptions?
+Question:	If I want an object of my class to be thrown as an exception object, what should I do?
+Question:	If my class already extends from some other class what should I do if I want an instance of my class to be thrown as an exception object?
+Question:	How does an exception permeate through the code?
+Question:	What are the different ways to handle exceptions?
+Question:	What is the basic difference between the 2 approaches to exception handling...1> try catch block and 2> specifying the candidate exceptions in the throws clause?
+When should you use which approach?
+Question:	Is it necessary that each try block must be followed by a catch block?
+Question:	If I write return at the end of the try block, will the finally block still execute?
+Question:	If I write System.exit (0); at the end of the try block, will the finally block still execute?
+
+Q:	Does Java provide any construct to find out the size of an object?
+A:	No there is not sizeof operator in Java. So there is not direct way to determine the size of an object directly in Java.
+[ Received from Sandesh Sadhale]
+TOP
+
+Q:	Give a simplest way to find out the time a method takes for execution without using any profiling tool?
+A:	Read the system time just before the method is invoked and immediately after method returns. Take the time difference, which will give you the time taken by a method for execution.To put it in code...
+long start = System.currentTimeMillis ();
+method ();
+long end = System.currentTimeMillis ();
+System.out.println ("Time taken for execution is " + (end - start));
+Remember that if the time taken for execution is too small, it might show that it is taking zero milliseconds for execution. Try it on a method which is big enough, in the sense the one which is doing considerable amout of processing.
+[ Received from Sandesh Sadhale]
+TOP
+
+Q:	What are wrapper classes?
+A:	Java provides specialized classes corresponding to each of the primitive data types. These are called wrapper classes. They are e.g. Integer, Character, Double etc.
+[ Received from Sandesh Sadhale]
+TOP
+
+Q:	Why do we need wrapper classes?
+A:	It is sometimes easier to deal with primitives as objects. Moreover most of the collection classes store objects and not primitive data types. And also the wrapper classes provide many utility methods also. Because of these resons we need wrapper classes. And since we create instances of these classes we can store them in any of the collection classes and pass them around as a collection. Also we can pass them around as method parameters where a method expects an object.
+[ Received from Sandesh Sadhale]
+TOP
+
+Q:	What are checked exceptions?
+A:	Checked exception are those which the Java compiler forces you to catch. e.g. IOException are checked Exceptions.
+[ Received from Sandesh Sadhale]
+TOP
+
+Q:	What are runtime exceptions?
+A:	Runtime exceptions are those exceptions that are thrown at runtime because of either wrong input data or because of wrong business logic etc. These are not checked by the compiler at compile time.
+[ Received from Sandesh Sadhale]
+TOP
+
+Q:	What is the difference between error and an exception?
+A:	An error is an irrecoverable condition occurring at runtime. Such as OutOfMemory error. These JVM errors and you can not repair them at runtime. While exceptions are conditions that occur because of bad input etc. e.g. FileNotFoundException will be thrown if the specified file does not exist. Or a NullPointerException will take place if you try using a null reference. In most of the cases it is possible to recover from an exception (probably by giving user a feedback for entering proper values etc.).
+[ Received from Sandesh Sadhale]
+TOP
+
+Q:	How to create custom exceptions?
+A:	Your class should extend class Exception, or some more specific type thereof.
+[ Received from Sandesh Sadhale]
+TOP
+
+Q:	If I want an object of my class to be thrown as an exception object, what should I do?
+A:	The class should extend from Exception class. Or you can extend your class from some more precise exception type also.
+[ Received from Sandesh Sadhale]
+TOP
+
+Q:	If my class already extends from some other class what should I do if I want an instance of my class to be thrown as an exception object?
+A:	One can not do anytihng in this scenarion. Because Java does not allow multiple inheritance and does not provide any exception interface as well.
+[ Received from Sandesh Sadhale]
+TOP
+
+Q:	How does an exception permeate through the code?
+A:	An unhandled exception moves up the method stack in search of a matching When an exception is thrown from a code which is wrapped in a try block followed by one or more catch blocks, a search is made for matching catch block. If a matching type is found then that block will be invoked. If a matching type is not found then the exception moves up the method stack and reaches the caller method. Same procedure is repeated if the caller method is included in a try catch block. This process continues until a catch block handling the appropriate type of exception is found. If it does not find such a block then finally the program terminates.
+[ Received from Sandesh Sadhale]
+TOP
+
+Q:	What are the different ways to handle exceptions?
+A:	There are two ways to handle exceptions,
+1. By wrapping the desired code in a try block followed by a catch block to catch the exceptions. and
+2. List the desired exceptions in the throws clause of the method and let the caller of the method hadle those exceptions.
+[ Received from Sandesh Sadhale]
+TOP
+
+Q:	What is the basic difference between the 2 approaches to exception handling.
+1> try catch block and
+2> specifying the candidate exceptions in the throws clause?
+When should you use which approach?
+A:	In the first approach as a programmer of the method, you urself are dealing with the exception. This is fine if you are in a best position to decide should be done in case of an exception. Whereas if it is not the responsibility of the method to deal with it's own exceptions, then do not use this approach. In this case use the second approach. In the second approach we are forcing the caller of the method to catch the exceptions, that the method is likely to throw. This is often the approach library creators use. They list the exception in the throws clause and we must catch them. You will find the same approach throughout the java libraries we use.
+[ Received from Sandesh Sadhale]
+TOP
+
+Q:	Is it necessary that each try block must be followed by a catch block?
+A:	It is not necessary that each try block must be followed by a catch block. It should be followed by either a catch block OR a finally block. And whatever exceptions are likely to be thrown should be declared in the throws clause of the method.
+[ Received from Sandesh Sadhale]
+TOP
+
+Q:	If I write return at the end of the try block, will the finally block still execute?
+A:	Yes even if you write return as the last statement in the try block and no exception occurs, the finally block will execute. The finally block will execute and then the control return.
+[ Received from Sandesh Sadhale]
+TOP
+
+Q:	If I write System.exit (0); at the end of the try block, will the finally block still execute?
+A:	No in this case the finally block will not execute because when you say System.exit (0); the control immediately goes out of the program, and thus finally never executes.
+[ Received from Sandesh Sadhale]
+TOP
+
+
+
+Question:	How are Observer and Observable used?
+Question:	What is synchronization and why is it important? 
+Question:	How does Java handle integer overflows and underflows?
+Question:	Does garbage collection guarantee that a program will not run out of
+memory?  
+Question:	What is the difference between preemptive scheduling and time slicing?
+Question:	When a thread is created and started, what is its initial state?
+Question:	What is the purpose of finalization?
+Question:	What is the Locale class?
+Question:	What is the difference between a while statement and a do statement?
+Question:	What is the difference between static and non-static variables?
+Question:	How are this() and super() used with constructors?
+Question:	What are synchronized methods and synchronized statements?
+Question:	What is daemon thread and which method is used to create the daemon thread?
+Question:	Can applets communicate with each other?
+Question:	What are the steps in the JDBC connection?
+Question:	How does a try statement determine which catch clause should be used to handle an exception?
+
+Q:	How are Observer and Observable used?
+A:	Objects that subclass the Observable class maintain a list of observers. When an Observable object is updated it invokes the update() method of each of its observers to notify the observers that it has changed state. The Observer interface is implemented by objects that observe Observable objects.
+[Received from Venkateswara Manam]
+TOP
+
+Q:	What is synchronization and why is it important?
+A:	With respect to multithreading, synchronization is the capability to control
+the access of multiple threads to shared resources. Without synchronization, it is possible for one thread to modify a shared object while another thread is in the process of using or updating that object's value. This often leads to significant errors.
+[ Received from Venkateswara Manam]
+TOP
+
+Q:	How does Java handle integer overflows and underflows?
+A:	It uses those low order bytes of the result that can fit into the size of the type allowed by the operation.
+[ Received from Venkateswara Manam]
+TOP
+
+Q:	
