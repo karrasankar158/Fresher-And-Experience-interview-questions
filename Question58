@@ -1,0 +1,22 @@
+Hi Team,
+#Letest update #Real_Time 2020
+#Microservices #Interview #Questions #Answers 3+
+1.What are microservices and why would someone want to look at implementing it.
+2.How to stop a Spring Boot based microservices at startup if it can not connect to the Config server during bootstrap
+3.How will you develop microservices using Java?
+4.How to partition a large application into microservices architecture?
+5.When should one consider microservice kind of architecture?
+6.How would you test microservice based architecture?
+7.How big a single microservice should be?
+8.How frequent a microservice be released into production?
+9.How to maintain ACID in microservice architecture?
+10.How do microservices communicate with each other?
+11.What should be preferred communication style in microservices: synchronous or asynchronous?
+What is the difference between Orchestration and Choreography in microservices context?
+13.What is service discovery? And how is it helpful?
+14.Explain how can you scale a microservice based system?
+15.What are the benefits of using microservices architecture?
+16.What are the challenges in microservices?
+17.What is polyglot persistence? Can this idea be used in monolithic applications as well?
+18.Why Microservices are better than Monoliths?
+19.How to convert the large application into microservices architecture?
