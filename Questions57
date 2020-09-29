@@ -1,0 +1,148 @@
+Hi Team,
+#Letest #News #Real_update 2020
+#Amdocs #interview #questions #answers 3+ #experience
+1..How can u achive Abstraction With Real Time Example(Project) ?
+ans: As per my project what we people are developed that will be hidden from user so 
+for them it abstraction otherwise explain Hari sir Bank Atm example
+
+2..In your Project Where u are using oops concept..?
+ans: Ya we implement all the concept in our project and Encapsulation we used in Business Object or Model class
+Inheritance and Polymorphisim we implement in Dao and Service Layer to make it loosly coupled
+
+3.Encapsulation u are using in ur project in which layer. ?
+ans: Ya we are using In Model layer (BO,DTO,FORM)
+
+4.To override all the method from super which keyword we have to use.and why
+ ans: implements keyword coz class+interface== always implements
+
+5.Why abstract class achive less abstraction why not interface.?
+ans: Cause Abstract class contain boh concrete and abstract method but it's not mandatory that
+My subclass always override supperclass method so there is no guarentee to achive 
+fully abstraction
+
+6.Write 5 classes which u r develope in your project with fully qualified name ?
+
+Just mention  as below
+1.MODULE_NAME_DAO---------com.productOwnersortname.module.layer
+2.MODULE_NAME_SERVICE
+3.MODULE_NAME_CONTROLLER
+4.MODULE_NAME_BO
+5.MODULE_NAME_DTO
+6.MODULE_NAME_MAPPER
+.MODULE_NAME_UTIL
+
+8.What are the exception u face in ur project development and how u resolve them explain ?
+ans:
+1.NullPointerException:-Resolve by Remote Debugging 
+2.DataAccessException:-Enter the Column name properly this exception from DAO
+3.ClassCastException:-Mentain Typecast or Generics properly
+
+9.Why u are using Spring-jdbc why not hibernate ?
+ans:Coz my project is Intranet Application and it handles huge amount of data for
+persist and retrive thats why we are using Spring-Jdbc
+
+10.Which security u are using..?
+ans:Simple Authentication by using Spring
+11.Level of log(Which one u use in your project)
+ans: DEBUG,ERROR,WARN
+
+11.Interface & abstract class ?
+
+ans:Interface is a special type of class through which we can achive fully abstraction
+runtime polymorphisim and multiple inheritance which makes our code completely loose coupled
+but in abstract class also we can achive abstraction and R.P but partially..coz it
+contains both abstract method as well as concret method but in abstract class u can't get
+multiple inheritance
+
+Second-Round(CoreJava+Spring)
+===========================
+1.What is abstraction 
+ans:Hide the implementation Provide only Functionality is called abstraction
+2.How to create own immutable class write code
+public class MyImmutable {
+
+ int no;
+
+ public MyImmutable(int no) {
+ super();
+ this.no = no;
+ }
+
+ public MyImmutable modify(int no) {
+ if (this.no == no) {
+ return this;
+ } else {
+ return new MyImmutable(no);
+ }
+ }
+}
+
+3.What is singletone ,In your project did u use singletone ,Where write code ?
+ans:Singleton is object creation design pattern by which we can instantiate only one instance
+per one class per one jvm.
+   In my project i didn't use coz we are using Spring so every bean scope is singleton
+   so we no need to make explicitly singleton.
+   
+4.Why List allow duplicate why not Set with internal ?
+
+ans: Coz List internally follw Array Concept so no there is no restriction in
+ array to allow duplicate but in case of Set it internally follow Map which object u add in
+ set it will be placed as key in That internal Map so duplicate not allowed in Set
+ Just explain the flow of Map ok if he ask more.....
+ 
+5.What is Dependency Injection ?
+
+ans:Dependency Injection is a process of inject dependency in Dependant class
+automatically we no need create object and no need to map with object .it internally
+follow Strategy design pattern
+
+6.Which type of Injection u are using in ur project and why..
+ans: We are using both setter and constructor injection both coz some fields we need to compolsory
+inject and some fields are optional for our project 
+
+7.What is autoware,Type explain with sample code
+ans:Autowire is auto enable dependency Inject
+it is 3 type:1)byName 2)byType 3)Constructor
+
+8.Which version Spring u used.. ?
+ ans:4.x
+9.What are the annotation u are using in ur project ?
+ans:-@Componet,@Service,@Controller,@Autowire,@Transactional,@Scope,@ControllerAdvice,@ExceptionHandler
+@RequestParm,@PathVariable,@ModelAttribute,@PropertyResource
+10.Write Spring-transaction configuration
+ans:
+ <aop:config>
+ <aop:pointcut expression="execution(* com.dt.service.ManageEmployeeService.*(..))" id="manageEmpPct"/>
+ <aop:advisor advice-ref="manageEmployeeTxAdvice" pointcut-ref="manageEmpPct"/>
+ </aop:config>
+ 
+ <tx:advice id="manageEmployeeTxAdvice">
+ <tx:attributes>
+ <tx:method name="new*" read-only="false" propagation="REQUIRED" />
+ <tx:method name="*" read-only="true" propagation="REQUIRED"/>
+ </tx:attributes>
+ </tx:advice>
+ 
+11.Spring-Transaction annotation details with attribute why ?
+ans: @Transactional(read-only="false",Isolation="Read-Commit",Propagation="Required")
+
+12.@Qualifier annotation use with example ?
+ans:@Qualifier annotation used to avoid ambiguity error 
+ex:
+ <bean id="a1" class="A">
+ <bean id="a2" class="A">
+ here class is same but id is different so here my IOC Container confuse due to same class
+ found multiple time so here bean id u want mention in @Qualifier("a1") then
+ IOc will instantiate that bean only
+ 
+13.@RequestParm and @ModelAttribute where we have to use..
+ans:If from form page or from UI page u want to get more 2 to 3 element then use @RequestParm
+ex:just assume from login page how many element u will get 2 username and pwd use @RequestParm
+if incoming data will be more then bind them in one object by using @ModelAttribute
+ex:Suppose u book a ticket then lot of data u have to pass as input
+like movieName,Time,Location,Nearest hall...etc then choose @ModelAttribute
+
+14.What is ur daily activity in ur working environment
+ ans:Sensiourly working in service and dao based on user story
+ code testing and write junit test case and test it 2 to 3 times
+ participate in daily-Scrum
