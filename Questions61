@@ -1,0 +1,96 @@
+Hi Team,
+#Letest #update #real_time 3+ #experience 2020
+#Spring boot #with #Rest #interview #questions #answers
+#Q.How do you write a JSON REST service in spring boot?
+Any Spring @RestController in a Spring Boot application should render JSON response by default as long as Jackson2 is on the classpath.
+#Q.How do you Write an XML REST service in spring boot?
+If you have the Jackson XML extension (Jackson-dataformat-XML) on the classpath, it will be used to render XML responses.
+#Q.How to do unit testing and integration testing in spring application. 
+@jdbcTest- can be used for a typical jdbc test when a test focuses only jdbc based companents.
+@JSon Test - it is used when a test focues only on json serialisation.
+@restclint test- it used to test Rest Clint.
+@web MVC Test -used for spring MVC tests with configuration relevant to only MVC tests.
+@Spring boot test annotation help in writing integration tests
+We can inject the dependencies in test class use @Autowired annotaation.
+@configuratiin class or explicit @Test configaration classes
+#Q.How to execute Spring Batch jobs on startup?
+Spring Batch auto-configuration is enabled by adding @EnableBatchProcessing (from Spring Batch) somewhere in your context. By default, it executes all Jobs in the application context on startup.
+#Q.How spring boot handle the error in the application?
+Spring Boot provides  error mapping by default that handles all errors in a sensible way, and it is registered as a ‘global’ error page in the servlet container.
+#Q.How to exclude auto restart for static files?
+By default changing resources in /META-INF/maven, /META-INF/resources, /resources, /static, /public or /templates will not trigger a restart.
+But If you want to customize these exclusions you can use the spring.devtools.restart.exclude property.
+If you want to keep those defaults and add additional exclusions, use the spring.devtools.restart.additional-exclude property instead.
+Q.How do you add Add a Servlet, Filter or Listener to an application?
+There are two ways to add Servlet, Filter, ServletContextListener and the other listeners supported by the Servlet spec to your application. You can either provide Spring beans for them or enable scanning for Servlet components.
+Q.How do you Enable HTTP response compression in spring boot?
+HTTP response compression is supported by Jetty, Tomcat, and Undertow. It can be enabled by adding server.compression.enabled=true in application.properties.
+Q.What is the default Multipart File Uploads size in spring boot?
+By default, Spring Boot configures Spring MVC with a maximum file of 1MB per file and a maximum of 10MB of file data in a single request.
+Q.How do you Configure Log4j for logging?
+Spring Boot supports Log4j 2 for logging configuration if it is on the classpath. If you are using the starters for assembling dependencies that means you have to exclude Log back and then include log4j 2 instead.
+Q..How do you configure Configure Logback for logging?
+If you put a logback.xml in the root of your classpath it will be picked up from there.
+Q.Does spring boot need Logging? What is the default one?
+Spring Boot has no mandatory logging dependency, except for the Commons Logging API.
+Q.What is LiveReload?
+The spring-boot-dev-tools module includes an embedded LiveReload server that can be used to trigger a browser refresh when a resource is changed. Live Reload browser extensions are freely available for Chrome, Firefox, and Safari from livereload.com.
+Q.How do you Switch off the Spring Boot security configuration?
+If you define a @Configuration with @EnableWebSecurity anywhere in your application. It will switch off the default web app security settings in Spring Boot.
+Q.What is Hot swapping in spring boot?
+Reloading the changes without restarting the server is called hot swapping, Modern IDEs (Eclipse, IDEA, etc.) all support hot swapping of byte-code,  so if you make a change that doesn’t affect the class or method signatures it should reload cleanly with no side effects.
+Q.How to Create a deployable war file in spring boot?
+Step 1: Extend SpringBootServletInitializer and override its configure method.
+Step 2: Change packing type war in pom.xml or  build.gradle.
+Step 3: Mark the embedded servlet container dependency as provided.
+Q.How do you customize Favicon in spring boot web application?
+Spring Boot looks for a favicon icon in the configured static content locations and the root of the classpath (in that order). If such a file is present, it is automatically used as the favicon.
+Q.How to write custom log configuration in spring boot?
+You can force Spring Boot to use a particular logging system using the “org.springframework.boot.logging.LoggingSystem” system property. The value should be the fully-qualified class name of a logging system implementation. You can also disable Spring Boot’s logging configuration entirely by using a value of none.
+Q.What are the advantages of spring Externalized Configuration?
+Externalize your configuration to work with the same application code in different environments. You can use properties files, YAML files, environment variables, and command-line arguments to externalize configuration.
+Q.What are the different ways to load YAML file in Spring boot?
+YAML PropertiesFactoryBean will load YAML as Properties.
+YAML MapFactoryBean will load YAML as a Map.
+Q.What are the advantages of YAML file than Properties file?
+YAML is a superset of JSON, and as such is a very convenient format for specifying hierarchical configuration data. Spring Application class will automatically support YAML as an alternative to properties whenever you have the SnakeYAML library on your classpath.
+Q.How to start the spring boot application in debug mode?
+Java -jar my project-0.0.1-SNAPSHOT.jar –debug
+Q.How to disable specific auto-configuration in spring boot?
+You can use exclude property as shown below to disable specific auto-configuration.
+
+@EnableAutoConfiguration(exclude={DataSourceAutoConfiguration.class})
+Q.How do you Change tomcat or jetty HTTP port?
+You can change the Tomcat HTTP port by changing default HTTP property in the application.properties file.
+Q.What is the use of @SpringBootApplication annotation?
+The @SpringBootApplication annotation is equivalent to using @Configuration, @EnableAutoConfiguration, and @ComponentScan with their default attributes.
+Since many spring Boot developers have their main class annotated with @Configuration, @EnableAutoConfiguration, and @ComponentScan, spring boot provides you a new annotation @SpringBootApplication as a replacement.
+Q.How do you change JDK version in spring boot?
+Java 1.6 as the default compiler level.
+You can overwrite it by adding Java.version property tag as shown below
+
+<properties>
+    <java.version>1.8</java.version>
+</properties>
+Q.How do you run and stop spring boot executable jar?
+Open cmd or shell window and use java -jar as shown below
+$ java -jar my project-0.0.1-SNAPSHOT.jar
+To stop use ctrl+C
+Q.How to create an executable jar using spring boot?
+Add this below plugin to
+
+pom.xml
+
+<build>
+    <plugins>
+        <plugin>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-maven-plugin</artifactId>
+        </plugin>
+    </plugins>
+</build>
+Q.What is the use of @EnableAutoConfiguration annotation?
+This annotation tells Spring Boot to “guess” how you will want to configure Spring, based on the jar dependencies and starters that you have added.
+Spring loads a default set of configuration based on dependencies added in pom.xml or Gradle.build.
+Q.How do you customize Favicon in spring boot web application?
+Spring Boot looks for a favicon.ico in the configured static content locations and the root of the classpath (in that order). If such file is present, it is automatically used as the favicon of the application.
