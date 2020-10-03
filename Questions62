@@ -1,0 +1,159 @@
+Hi folks,
+#Letest #update #real_time 3+ #experience
+#Spring #Rest #Interview #Questions #answers
+Q.How do you handle FileUpload using Spring MVC?
+ @RequestMapping(method = RequestMethod.POST)
+
+     public String fileUploaded(Model model, @Validated File file,
+
+             BindingResult result) {
+  String returnVal = "successFile";
+
+  if (result.hasErrors()) {
+
+   returnVal = "file";
+
+  } else {           
+
+   MultipartFile multipartFile = file.getFile();
+
+  }
+
+  return returnVal;
+
+ }
+
+Q.How do you forward a request to another page using Spring MVC?
+@RequestMapping("/myController/test")
+
+public String myMethod(@RequestParam("reqParam") String reqParamValue) {
+
+ return "forward:/someOtherUrl?reqParam="+reqParamValue; 
+
+ //forward request to another controller with the param and value
+
+}
+or
+
+@RequestMapping("/myController/test")
+
+public String myMethod(@RequestParam("reqParam") String reqParamValue,
+
+HttpServletRequest request) {
+
+request.setAttribute("reqParam", reqParamValue);
+
+return "forward:/someOtherUrl"; 
+
+}
+
+Q.How do you redirect a page using Spring MVC?
+Prefix in a view name lets you perform a redirect. The UrlBasedViewResolver and its subclasses recognize this as an instruction that a redirect is needed. The rest of the view name is the redirect URL.
+The net effect is the same as if the controller had returned a RedirectView, but now the controller itself can operate in terms of logical view names.
+A logical view name such as redirect:/myapp/some/resource, redirects relative to the current Servlet context, while a name such as a redirect: http://myhost.com/some/arbitrary/ path redirects to an absolute URL.
+  @RequestMapping(value = "/redirect", method = RequestMethod.GET)
+
+        public String redirect() {
+
+            return "redirect:finalPage";
+
+        }
+
+    @RequestMapping(value = "/finalPage", method = RequestMethod.GET)
+
+        public String finalPage() {
+
+            return "final";
+
+        }
+
+Q.How do you handle the exception in Spring MVC?
+In Spring MVC, unexpected exceptions might be thrown during execution of its controllers. Spring provides two approaches for handling these exceptions:
+Using XML configuration: this is similar to exception handling in Servlet/JSP, by declaring a SimpleMappingExceptionResolverbean in Spring’s application context file and map exception types with view names. This approach applies to all controllers in the application.
+Using the exception handler method: Spring provides the @ExceptionHandler annotation type which is used to annotate a method to handle exceptions raised by the controller’s methods. This approach applies to only the controller in which the handler method is declared.
+Q.. How do you handle container errors in spring MVC?
+For access to errors from validation and data binding for a command object (@ModelAttribute argument) or errors from the validation of a @RequestBody else @RequestPart arguments, You must declare an Errors or BindingResult argument immediately after the validated method argument.
+
+Q.. What is @ResponseBody annotation?
+Annotation that indicates a method return value should be bound to the web response body. Supported for annotated handler methods.
+As of version 4.0, this annotation can also be added on the type level in which case it is inherited and does not need to be added on the method level.
+Q..Use of @RequestParam, @RequestHeader, @PathVariable, @MatrixVariable, and @CookieValue?
+@RequestParam
+
+Annotation which indicates that a method parameter should be bound to a web request parameter.Supported for annotated handler methods in Spring MVC and Spring WebFlux as follows:
+In Spring MVC, “request parameters” map to query parameters, form data, and parts in multipart requests. This is because the Servlet API combines query parameters and form data into a single map called “parameters”, and that includes automatic parsing of the request body.
+In Spring WebFlux, “request parameters” map to query parameters only. To work with all 3, query, form data, and multipart data, you can use data binding to a command object annotated with ModelAttribute.
+If the method parameter type is Map and a request parameter name is specified, then the request parameter value is converted to a Map assuming an appropriate conversion strategy is available.
+If the method parameter is Map<String, String> or MultiValueMap<String, String> and a parameter name is not specified, then the map parameter is populated with all request parameter names and values.
+@PathVariable
+
+Annotation which indicates that a method parameter should be bound to a URI template variable. Supported for RequestMapping annotated handler methods.
+If the method parameter is Map<String, String> then the map is populated with all path variable names and values.
+@MatrixVariable
+
+Annotation which indicates that a method parameter should be bound to a name-value pair within a path segment. Supported for RequestMapping annotated handler methods.
+If the method parameter type is Map and a matrix variable name is specified, then the matrix variable value is converted to a Map assuming an appropriate conversion strategy is available.
+If the method parameter is Map<String, String> or MultiValueMap<String, String> and a variable name is not specified, then the map is populated with all matrix variable names and values.
+@CookieValue
+
+Annotation which indicates that a method parameter should be bound to an HTTP cookie.
+The method parameter may be declared as type Cookie or as a cookie value type (String, int, etc.).
+20.Use of @RequestBody?
+Annotation that indicates a method return value should be bound to the web response body. Supported for annotated handler methods.
+
+Q.Use of @InitBinder?
+The value in @InitBinder is the names of command/form attributes and/or request parameters that this init-binder method is supposed to apply to. The default is to apply to all command/form attributes and all request parameters processed by the annotated handler class. Specifying model attribute names or request parameter names here restricts the init-binder method to those specific attributes/parameters, with different init-binder methods typically applying to different groups of attributes or parameters.
+
+Q.How do you declare request and response Media Types in spring MVC?
+@RequestMapping(method=RequestMethod.GET, value="/fooBar")
+
+public ResponseEntity<String> fooBar2() {
+
+    String json = "jsonResponse";
+
+    HttpHeaders responseHeaders = new HttpHeaders();
+
+    responseHeaders.setContentType(MediaType.APPLICATION_JSON);
+
+    return new ResponseEntity<String>(json, responseHeaders, HttpStatus.CREATED);
+
+}
+
+Q.restController annotation, which marks the class as a controller where every method returns a domain object instead of a view. It’s shorthand for @Controller and @ResponseBody rolled together.
+
+Q.Use of @Controller annotation?
+This annotation serves as a specialization of @Component, allowing for implementation classes to be autodetected through classpath scanning. It is typically used in combination with annotated handler methods based on the RequestMapping annotation.
+
+Q.Use of @RequestMapping annotation?
+Annotation for mapping web requests onto methods in request handling classes with flexible method signatures.
+Both Spring MVC and Spring WebFlux support this annotation through a RequestMappingHandlerMapping and RequestMappingHandlerAdapter in their respective modules and package structure. For the exact list of supported handler method arguments and return types in each, please use the reference documentation links below:
+Spring MVC Method Arguments and Return Values, Spring WebFlux Method Arguments and Return Values
+@RequestMapping(value = “/something”, headers = “content-type=text/*”)
+10.Difference between @RequestMapping vs @GetMapping?
+RequestMapping can be used at class level:
+This annotation can be used both at the class and at the method level. In most cases, at the method level applications will prefer to use one of the HTTP method specific variants @GetMapping, @PostMapping, @PutMapping, @DeleteMapping, or @PatchMapping.
+
+while GetMapping only applies to the method:
+Annotation for mapping HTTP GET requests onto specific handler methods.
+
+Q.Use of @ComponentScan(“”) annotation?
+Configures component scanning directives for use with @Configuration classes.
+Provides support parallel with Spring XML’s <context:component-scan> element.
+Either basePackageClasses() or basePackages() (or its alias value()) may be specified to define specific packages to scan.
+If specific packages are not defined, scanning will occur from the package of the class that declares this annotation.
+
+Q. What is the use of AbstractAnnotationConfigDispatcherServletInitializer?
+WebApplicationInitializer to register a DispatcherServlet and use Java-based Spring configuration.
+
+Here some Implementations are required to implement:
+
+getRootConfigClasses() — for “root” application context (non-web infrastructure) configuration.
+getServletConfigClasses() — for DispatcherServlet application context (Spring MVC infrastructure) configuration.
+If an application context hierarchy is not required, applications may return all configuration via getRootConfigClasses() and return null from getServletConfigClasses().
+Q. What is the use of AbstractDispatcherServletInitializer?
+Base class for WebApplicationInitializer implementations that register a DispatcherServlet in the servlet context. Most applications should consider extending the Spring Java config subclass Abstract Annotation Config Dispatcher Servlet Initializer.
+
+Q.Explain the role of DispatcherServlet in spring MVC?
+DispatcherServlet acts as a front controller for Spring based web applications. It provides a mechanism for request processing where actual work is performed by configurable, delegate components. It is inherited from javax.servlet.http.HttpServlet, it is typically configured in the web.xml file.
+A web application can define any number of DispatcherServlet instances. Each servlet will operate in its own namespace, loading its own application context with mappings, handlers, etc. Only the root application context as loaded by ContextLoaderListener, if any, will be shared. In most cases, applications have only single DispatcherServlet with the context-root URL(/), that is, all requests coming to that domain will be handled by it.
+By Spring configuration classes, DispatcherServlet discovers the delegate components it needs for request mapping, view resolution, exception handling, etc.
