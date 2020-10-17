@@ -1,0 +1,1337 @@
+Q #1) Write a Java Program to reverse a string without using String inbuilt function.
+
+Answer: Here, we are initializing a string variable str and are making use of the string builder class.
+
+The object of the string builder class str2 will be further used to append the value stored in the string variable str.
+Thereafter, we are using the inbuilt function of string builder (reverse()) and storing the new reversed string in str2.
+
+Finally, we are printing str2.
+
+1
+public class FinalReverseWithoutUsingStringMethods {
+2
+ 
+3
+          public static void main(String[] args) {
+4
+                   // TODO Auto-generated method stub
+5
+                   String str = "Automation";
+6
+                   StringBuilder str2 = new StringBuilder();
+7
+                   str2.append(str);
+8
+                   str2 = str2.reverse();     // used string builder to reverse
+9
+                   System.out.println(str2);
+10
+          }
+11
+ 
+12
+}
+Output:
+
+noitamotuA
+
+Q #2) Write a Java Program to reverse a string without using String inbuilt function reverse().
+
+Answer: 
+
+Method 1:
+
+There are several ways with which you can reverse your string if you are allowed to use the other string inbuilt functions.
+
+In this method, we are initializing a string variable called str with the value of your given string. Then, we are converting that string into character array with toCharArray() function. Thereafter, we are using for loop to iterate between each character in reverse order and printing each character.
+
+1
+public class FinalReverseWithoutUsingInbuiltFunction {
+2
+    public static void main(String[] args) {
+3
+        String str = "Saket Saurav";
+4
+        char chars[] = str.toCharArray();  // converted to character array and printed in reverse order
+5
+        for(int i= chars.length-1; i>=0; i--) {
+6
+            System.out.print(chars[i]);
+7
+        }
+8
+    }
+9
+}
+Output:
+
+varuaS tekaS
+
+Method 2:
+
+This is another method in which you are declaring your string variable str and then using Scanner class to declare an object with predefined standard input object.
+
+This program will accept the string value through the command line (when executed).
+
+We have used nextLine() which will read the input with the spaces between the words of a string. Thereafter, we have used a split() method to split the string into its substrings(no delimiter given here). Finally, we have printed the string in reverse order using for loop.
+
+1
+import java.util.Scanner;
+2
+ 
+3
+public class ReverseSplit {
+4
+ 
+5
+    public static void main(String[] args) {
+6
+        // TODO Auto-generated method stub
+7
+        String str;
+8
+        Scanner in = new Scanner(System.in);
+9
+        System.out.println("Enter your String");
+10
+        str = in.nextLine();
+11
+        String[] token = str.split("");    //used split method to print in reverse order
+12
+        for(int i=token.length-1; i>=0; i--)
+13
+        {
+14
+            System.out.print(token[i] + "");
+15
+        }
+16
+         
+17
+    }
+18
+ 
+19
+}
+Output:
+
+Enter your String
+Softwaretestinghelp
+plehgnitseterawtfoS
+
+Method 3:
+
+This is almost like method 2, but here we did not use the split() method. We have used the scanner class and nextLine() for reading the input string. Then, we have declared an integer length which has the length of the input string.
+
+Thereafter, we have printed the string in the reverse order using for loop. However, we have used charAt(index) method which will return the character at any specific index. After each iteration, the character will be concatenated to reverse the string variable.
+
+Finally, we have printed the reverse string variable.
+
+1
+import java.util.Scanner;
+2
+ 
+3
+public class Reverse {
+4
+ 
+5
+    public static void main(String[] args) {
+6
+        // TODO Auto-generated method stub
+7
+        String original, reverse = "";
+8
+        System.out.println("Enter the string to be reversed");
+9
+        Scanner in = new Scanner(System.in);
+10
+        original = in.nextLine();
+11
+        int length = original.length();
+12
+        for(int i=length-1; i>=0; i--) {
+13
+            reverse = reverse + original.charAt(i);   //used inbuilt method charAt() to reverse the string
+14
+        }
+15
+        System.out.println(reverse);
+16
+    }
+17
+ 
+18
+}
+Output:
+
+Enter the string to be reversed
+automation testing
+gnitset noitamotua
+
+Q #3) Write a Java Program to swap two numbers with using the third variable.
+
+Answer: In this Example, we have made use of the Scanner class to declare an object with a predefined standard input object. This program will accept the values of x and y through the command line (when executed).
+
+We have used nextInt() which will input the value of an integer variable ‘x' and ‘y' from the user. A temp variable is also declared.
+
+Now, the logic of the program goes like this – we are assigning temp or third variable with the value of x, and then we are assigning x with the value of y and again we are assigning y with the value of temp. So, after the first complete iteration, the temp will have a value of x, x will have a value of y and y will have a value of temp (which is x).
+
+1
+import java.util.Scanner;
+2
+ 
+3
+public class SwapTwoNumbers {
+4
+ 
+5
+    public static void main(String[] args) {
+6
+        // TODO Auto-generated method stub
+7
+        int x, y, temp;
+8
+        System.out.println("Enter x and y");
+9
+        Scanner in = new Scanner(System.in);
+10
+        x = in.nextInt();
+11
+        y = in.nextInt();
+12
+        System.out.println("Before Swapping" + x + y);
+13
+        temp = x;
+14
+        x = y;
+15
+        y = temp;
+16
+        System.out.println("After Swapping" + x + y);
+17
+         
+18
+    }
+19
+ 
+20
+}
+Output:
+
+Enter x and y
+45
+98
+Before Swapping4598
+After Swapping9845
+
+Q #4) Write a Java Program to swap two numbers without using the third variable.
+
+Answer: Rest all things will be the same as the above program. Only the logic will change. Here, we are assigning x with the value x + y which means x will have a sum of both x and y.
+
+Then, we are assigning y with the value x – y which means we are subtracting the value of y from the sum of (x + y). Till here, x still has the sum of both x and y. But y has the value of x.
+
+Finally, in the third step, we are assigning x with the value x – y which means we are subtracting y (which has the value of x) from the total (x + y). This will assign x with the value of y and vice versa.
+
+1
+import java.util.Scanner;
+2
+  
+3
+class SwapTwoNumberWithoutThirdVariable
+4
+{
+5
+   public static void main(String args[])
+6
+   {
+7
+      int x, y;
+8
+      System.out.println("Enter x and y");
+9
+      Scanner in = new Scanner(System.in);
+10
+  
+11
+      x = in.nextInt();
+12
+      y = in.nextInt();
+13
+  
+14
+      System.out.println("Before Swapping\nx = "+x+"\ny = "+y);
+15
+  
+16
+      x = x + y;
+17
+      y = x - y;
+18
+      x = x - y;
+19
+  
+20
+      System.out.println("After Swapping without third variable\nx = "+x+"\ny = "+y);
+21
+   }
+22
+}
+Output:
+
+Enter x and y
+45
+98
+Before Swapping
+x = 45
+y = 98
+After Swapping without a third variable
+x = 98
+y = 45
+
+Q #5) Write a Java Program to count the number of words in a string using HashMap.
+
+Answer:  This is a collection class program where we have used HashMap for storing the string.
+
+First of all, we have declared our string variable called str. Then we have used split() function delimited by single space so that we can split multiple words in a string.
+
+Thereafter, we have declared HashMap and iterated using for loop. Inside for loop, we have an if else statement
+in which wherever at a particular position, the map contains a key, we set the counter at that position and add the object to the map.
+
+Each time, the counter is incremented by 1. Else, the counter is set to 1.
+
+Finally, we are printing the HashMap.
+
+Note: The same program can be used to count the number of characters in a string. All you need to do is to remove one space (remove space delimited in split method) in String[] split = str.split(“”);
+
+1
+import java.util.HashMap;
+2
+ 
+3
+public class FinalCountWords {
+4
+ 
+5
+    public static void main(String[] args) {
+6
+        // TODO Auto-generated method stub
+7
+        String str = "This this is is done by Saket Saket";
+8
+        String[] split = str.split(" ");
+9
+        HashMap<String,Integer> map = new HashMap<String,Integer>();
+10
+        for (int i=0; i<split.length-1; i++) {
+11
+            if (map.containsKey(split[i])) {
+12
+                int count = map.get(split[i]);
+13
+                map.put(split[i], count+1);
+14
+            }
+15
+            else {
+16
+                map.put(split[i], 1);
+17
+            }
+18
+        }
+19
+        System.out.println(map);
+20
+    }
+21
+ 
+22
+}
+Output:
+
+{Saket=1, by=1, this=1, This=1, is=2, done=1}
+
+Q #6) Write a Java Program to iterate HashMap using While and advance for loop.
+
+Answer: Here we have inserted three elements in HashMap using put() function.
+
+The size of the map can get using size() method. Thereafter, we have used While loop for iterating through the map which contains one key-value pair for each element. Keys and Values can be retrieved through getKey() and getValue().
+
+Likewise, we have used advanced for loop where we have “me2” object for the HashMap.
+
+1
+import java.util.HashMap;
+2
+import java.util.Iterator;
+3
+import java.util.Map;
+4
+ 
+5
+public class HashMapIteration {
+6
+ 
+7
+    public static void main(String[] args) {
+8
+        // TODO Auto-generated method stub
+9
+        HashMap<Integer,String> map = new HashMap<Integer,String>();
+10
+        map.put(2, "Saket");
+11
+        map.put(25, "Saurav");
+12
+        map.put(12, "HashMap");
+13
+        System.out.println(map.size());
+14
+        System.out.println("While Loop:");
+15
+        Iterator itr = map.entrySet().iterator();
+16
+        while(itr.hasNext()) {
+17
+            Map.Entry me = (Map.Entry) itr.next();
+18
+            System.out.println("Key is " + me.getKey() + " Value is " + me.getValue());
+19
+        }
+20
+        System.out.println("For Loop:");
+21
+        for(Map.Entry me2: map.entrySet()) {
+22
+            System.out.println("Key is: " + me2.getKey() + " Value is: " + me2.getValue());
+23
+        }
+24
+    }
+25
+ 
+26
+}
+Output:
+
+3
+While Loop:
+Key is 2 Value is Saket
+Key is 25 Value is Saurav
+Key is 12 Value is HashMap
+For Loop:
+Key is: 2 Value is: Saket
+Key is: 25 Value is: Saurav
+Key is: 12 Value is: HashMap
+
+Q #7) Write a Java Program to find whether a number is prime or not.
+
+Answer:  Here, we have declared two integers temp and num and used Scanner class with nextInt(as we have integer only).
+
+One boolean variable isPrime is set to true. Thereafter, we have used for loop starting from 2, less than half of the number are entered and incremented by 1 for each iteration. Temp will have remainder for every iteration. If the remainder is 0, then isPrime will be set to False.
+
+Based on isPrime value, we are coming to the conclusion that whether our number is prime or not.
+
+1
+import java.util.Scanner;
+2
+ 
+3
+public class Prime {
+4
+ 
+5
+    public static void main(String[] args) {
+6
+        // TODO Auto-generated method stub
+7
+        int temp, num;
+8
+        boolean isPrime = true;
+9
+        Scanner in = new Scanner(System.in);
+10
+        num = in.nextInt();
+11
+        in.close();
+12
+        for (int i = 2; i<= num/2; i++) {
+13
+            temp = num%i;
+14
+            if (temp == 0) {
+15
+                isPrime = false;
+16
+                break;
+17
+            }
+18
+        }
+19
+        if(isPrime)
+20
+            System.out.println(num + "number is prime");
+21
+            else
+22
+                System.out.println(num + "number is not a prime");
+23
+             
+24
+         
+25
+    }
+26
+ 
+27
+}
+Output:
+
+445
+445number is not a prime
+
+Q #8) Write a Java Program to find whether a string or number is palindrome or not.
+
+Answer:  You can use any of the reverse string program explained above to check whether the number or string
+is palindrome or not.
+
+What you need to do is to include one if-else statement. If the original string is equal to a reversed string then the number is a palindrome, otherwise not.
+
+1
+import java.util.Scanner;
+2
+ 
+3
+public class Palindrome {
+4
+    public static void main (String[] args) {
+5
+        String original, reverse = "";
+6
+        Scanner in = new Scanner(System.in);
+7
+        int length;
+8
+        System.out.println("Enter the number or String");
+9
+        original = in.nextLine();
+10
+        length = original.length();
+11
+        for (int i =length -1; i>=0; i--) {
+12
+            reverse = reverse + original.charAt(i);
+13
+        }
+14
+        System.out.println("reverse is:" +reverse);
+15
+         
+16
+        if(original.equals(reverse))
+17
+            System.out.println("The number is palindrome");
+18
+        else
+19
+            System.out.println("The number is not a palindrome");
+20
+         
+21
+    }
+22
+}
+Output:
+
+For String-
+
+Enter the number or String
+vijay
+reverse is:yajiv
+The number is not a palindrome
+
+For Number-
+
+Enter the number or String
+99
+reverse is:99
+The number is palindrome
+
+Q #9) Write a Java Program for Fibonacci series.
+
+Answer: Fibonacci series is a series of numbers where after the initial two numbers, every occurring number is the sum of two preceding numbers.
+
+For Example 0,1,1,2,3,5,8,13,21………
+
+In this program, we have used Scanner class again with nextInt (discussed above). Initially, we are entering (through command line) the number of times the Fibonacci has to iterate. We have declared integer num and initialized a,b with zero and c with one. Then, we have used for loop to iterate.
+
+The logic goes like a is set with the value of b which is 0, then b is set with the value of c which is 1. Then, c is set with the sum of both a and b.
+
+1
+import java.util.Scanner;
+2
+ 
+3
+public class Fibonacci {
+4
+    public static void main(String[] args) {
+5
+        int num, a = 0,b=0, c =1;
+6
+        Scanner in = new Scanner(System.in);
+7
+        System.out.println("Enter the number of times");
+8
+        num = in.nextInt();
+9
+        System.out.println("Fibonacci Series of the number is:");
+10
+        for (int i=0; i<=num; i++) {
+11
+            a = b;
+12
+            b = c;
+13
+            c = a+b;
+14
+            System.out.println(a + "");    //if you want to print on the same line, use print()
+15
+        }      
+16
+    }
+17
+}
+Output:
+Enter the number of times
+9
+Fibonacci Series of the number is:
+0
+1
+1
+2
+3
+5
+8
+13
+21
+34
+
+Q #10) Write a Java Program to iterate ArrayList using for-loop, while-loop, and advance for-loop.
+
+Answer:  In this program, we have inserted three elements and printed the size of the ArrayList.
+
+Then, we have used While Loop with an iterator. Whenever the iterator has (next) element, it will display that element until we reach the end of the list. So it will iterate three times.
+
+Likewise, we have done for Advanced For Loop where we have created an object called obj for the ArrayList called list. Then printed the object.
+
+Thereafter, we have put the condition of For Loop where the iterator i is set to 0 index, then it is incremented by 1 until the ArrayList limit or size is reached. Finally, we have printed each element using a get(index) method for each iteration of For Loop.
+
+1
+import java.util.*;
+2
+ 
+3
+public class arrayList {
+4
+    public static void main(String[] args) {
+5
+        ArrayList list = new ArrayList();
+6
+        list.add("20");
+7
+        list.add("30");
+8
+        list.add("40");
+9
+        System.out.println(list.size());
+10
+        System.out.println("While Loop:");
+11
+        Iterator itr = list.iterator();
+12
+        while(itr.hasNext()) {
+13
+            System.out.println(itr.next());
+14
+        }
+15
+        System.out.println("Advanced For Loop:");
+16
+        for(Object obj : list) {
+17
+            System.out.println(obj);
+18
+    }
+19
+        System.out.println("For Loop:");
+20
+        for(int i=0; i<list.size(); i++) {
+21
+            System.out.println(list.get(i));
+22
+        }
+23
+}
+24
+}
+Output:
+
+3
+While Loop:
+20
+30
+40
+Advanced For Loop:
+20
+30
+40
+For Loop:
+20
+30
+40
+
+Q #11) Write a Java Program to demonstrate explicit wait condition check.
+
+Answer: There are two main types of wait – implicit and explicit. (We are not considering Fluent wait in this program)
+
+Implicit wait is those waits which are executed irrespective of any condition. In the below program, you can see that it is for Google Chrome and we have used some inbuilt methods to set the property, maximizing window, URL navigation, and web element locating.
+
+1
+WebDriverWait wait = new WebDriverWait(driver, 20);
+2
+WebElement element2 = wait.until(ExpectedConditions.visibilityOfElementLocated(By.partialLinkText("Software testing - Wikipedia")));
+3
+element2.click();
+In the above piece of code, you can see that we have created an object wait for WebDriverWait and then we have searched for WebElement called element2.
+
+The condition is set in such a way that webdriver will have to wait until we see the link “Software testing – Wikipedia” on a web page. It won't execute if it does not find this link. If it does, then it will do a mouse click on that link.
+
+1
+package Codes;
+2
+import java.util.concurrent.TimeUnit;
+3
+import org.openqa.selenium.By;
+4
+import org.openqa.selenium.WebDriver;
+5
+import org.openqa.selenium.WebElement;
+6
+import org.openqa.selenium.chrome.ChromeDriver;
+7
+import org.openqa.selenium.chrome.ChromeOptions;
+8
+import org.openqa.selenium.support.ui.ExpectedConditions;
+9
+import org.openqa.selenium.support.ui.WebDriverWait;
+10
+ 
+11
+public class explicitWaitConditionCheck {
+12
+ 
+13
+           public static void main(String[] args) {
+14
+                    // TODO Auto-generated method stub
+15
+                    System.setProperty("webdriver.chrome.driver", "C:\\webdriver\\chromedriver.exe");
+16
+                   ChromeOptions options = new ChromeOptions();
+17
+                   options.addArguments("--disable-arguments");
+18
+                   WebDriver driver = new ChromeDriver();
+19
+                   driver.manage().window().maximize();
+20
+                   driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+21
+                   driver.navigate().to("https://www.google.com");
+22
+                   WebElement element = driver.findElement(By.name("q"));
+23
+                    element.sendKeys("Testing");
+24
+                    element.submit();
+25
+                    WebDriverWait wait = new WebDriverWait(driver, 20);
+26
+ 
+27
+                     WebElement element2 = wait.until(ExpectedConditions.visibilityOfElementLocated(By.partialLinkText("Software testing - Wikipedia")));
+28
+element2.click();
+29
+}}
+Q #12) Write a Java Program to demonstrate Scroll up/ Scroll down.
+
+Answer:  All the lines of codes are easily relatable as we have discussed in our previous example.
+
+However, in this program, we have included our JavascriptExecutor js which will do the scrolling. If you see the last line of the code, we have passed window.scrollBy(arg1,arg2).
+
+If we want to scroll up then pass some value in arg1 if you want to scroll down then pass some value in arg2.
+
+1
+package Codes;
+2
+ 
+3
+import java.util.concurrent.TimeUnit;
+4
+ 
+5
+import org.openqa.selenium.By;
+6
+import org.openqa.selenium.JavascriptExecutor;
+7
+import org.openqa.selenium.Keys;
+8
+import org.openqa.selenium.WebDriver;
+9
+import org.openqa.selenium.WebElement;
+10
+import org.openqa.selenium.chrome.ChromeDriver;
+11
+ 
+12
+public class ScrollDown {
+13
+ 
+14
+          public static void main(String[] args) {
+15
+                   // TODO Auto-generated method stub
+16
+                   System.setProperty("webdriver.chrome.driver", "C:\\webdriver\\chromedriver.exe");
+17
+                   WebDriver driver = new ChromeDriver();
+18
+                   JavascriptExecutor js = (JavascriptExecutor) driver;
+19
+                   driver.manage().window().maximize();
+20
+                   driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+21
+                   driver.get("https://www.google.com");
+22
+                   WebElement element = driver.findElement(By.name("q"));
+23
+                   element.sendKeys("SoftwareTestingHelp");
+24
+                   element.sendKeys(Keys.ENTER);
+25
+                    js.executeScript("window.scrollBy(0,1000)");
+26
+ 
+27
+}
+28
+ 
+29
+}
+Q #13) Write a Java Program to open all links of gmail.com.
+
+Answer:  It is a typical example of advanced for loop which we have seen in our previous programs.
+
+Once you have opened a website such as Gmail using get() or navigate().to(), you can use a tagName locator to find the tag name of a website which will return all the tags.
+
+We have advanced for loop where we have created a new WebElement link2 for a link(which already has located
+all the tags), then we have got all the links through getAttribute(“href”) and got all the texts through getText().
+
+1
+package Codes;
+2
+ 
+3
+import java.util.concurrent.TimeUnit;
+4
+ 
+5
+import org.openqa.selenium.By;
+6
+import org.openqa.selenium.WebDriver;
+7
+import org.openqa.selenium.WebElement;
+8
+import org.openqa.selenium.chrome.ChromeDriver;
+9
+ 
+10
+public class openAllLinks {
+11
+ 
+12
+        public static void main(String[] args) {
+13
+        // TODO Auto-generated method stub
+14
+        System.setProperty("webdriver.chrome.drive", "C:\\webdriver\\chromedriver.exe");
+15
+        WebDriver driver = new ChromeDriver();
+16
+        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+17
+        driver.manage().window().maximize();
+18
+        driver.get("https://www.gmail.com/");
+19
+        java.util.List<WebElement> link = driver.findElements(By.tagName("a"));
+20
+       System.out.println(link.size());
+21
+ 
+22
+       for (WebElement link2: link) {
+23
+ 
+24
+       //print the links i.e. http://google.com or https://www.gmail.com
+25
+      System.out.println(link2.getAttribute("href"));
+26
+ 
+27
+      //print the links text
+28
+     System.out.println(link2.getText());
+29
+}
+30
+}
+31
+}
+Output:
+
+Starting ChromeDriver 2.38.551601 (edb21f07fc70e9027c746edd3201443e011a61ed) on port 16163
+Only local connections are allowed.
+4
+https://support.google.com/chrome/answer/6130773?hl=en-GB
+Learn more
+https://support.google.com/accounts?hl=en-GB
+Help
+https://accounts.google.com/TOS?loc=IN&hl=en-GB&privacy=true
+Privacy
+https://accounts.google.com/TOS?loc=IN&hl=en-GB
+Terms
+
+Q #14) Write a Selenium code to switch to the previous tab.
+
+Answer:  We have demonstrated the use of the Robot class. We see this as an important third party because we can achieve the different navigation within a browser and its tabs if you know the shortcut keys.
+
+For example, if you have three tabs open in your chrome and you want to go to the middle tab, then you have to press control + 2 from your keyboard. The same thing can be achieved through the code as well.
+
+Observe the following code (just after we see the instantiation of Robot class). we have used Robot class object called a robot with two inbuilt methods keyPress(KeyEvenet.VK_*) and keyRelease(KeyEvenet.VK_*).
+
+1
+package Codes;
+2
+ 
+3
+import java.awt.AWTException;
+4
+import java.awt.Robot;
+5
+import java.awt.event.KeyEvent;
+6
+import java.util.concurrent.TimeUnit;
+7
+import org.openqa.selenium.By;
+8
+import org.openqa.selenium.Keys;
+9
+import org.openqa.selenium.WebDriver;
+10
+import org.openqa.selenium.WebElement;
+11
+import org.openqa.selenium.chrome.ChromeDriver;
+12
+public class PreviousTab {
+13
+          public static void main(String[] args) throws AWTException {
+14
+               // TODO Auto-generated method stub
+15
+              System.setProperty("webdriver.chrome.driver", "C:\\webdriver\\chromedriver.exe");
+16
+             WebDriver driver = new ChromeDriver();
+17
+             driver.manage().window().maximize();
+18
+             driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+19
+             driver.get("https://www.google.com");
+20
+             WebElement element1 = driver.findElement(By.name("q"));
+21
+             element1.sendKeys("software testing help");
+22
+             element1.sendKeys(Keys.ENTER);
+23
+             String a = Keys.chord(Keys.CONTROL,Keys.RETURN);
+24
+             driver.findElement(By.partialLinkText("Software Testing Help - A Must Visit Software Testing Portal")).sendKeys(a);
+25
+             Robot robot = new Robot(); // instantiated robot class
+26
+             robot.keyPress(KeyEvent.VK_CONTROL); // with robot class you can easily achieve anything if you know the shortcut keys
+27
+             robot.keyPress(KeyEvent.VK_2); // here, we have just pressed ctrl+2
+28
+             robot.keyRelease(KeyEvent.VK_CONTROL); // once we press and release ctrl+2, it will go to the second tab.
+29
+             robot.keyRelease(KeyEvent.VK_2); //if you again want to go back to first tab press and release vk_1
+30
+             }
+31
+}
+Q #15) Write a Java Program to find the duplicate characters in a string.
+
+Answer: In this program, we have created a string variable str and initialized an integer count with zero.
+
+Then, we have created a character array to convert our string variable to the character. With the help of for loop, we are performing a comparison between different character at different indexes.
+
+If two character of consecutive index matches, then it will print that character and the counter will be incremented by 1 after each iteration.
+
+1
+public class DuplicateCharacters {
+2
+          
+3
+          public static void main(String[] args) {
+4
+                   // TODO Auto-generated method stub
+5
+                  String str = new String("Sakkett");
+6
+                  int count = 0;
+7
+                  char[] chars = str.toCharArray();
+8
+                  System.out.println("Duplicate characters are:");
+9
+                  for (int i=0; i<str.length();i++) {
+10
+                              for(int j=i+1; j<str.length();j++) {
+11
+                                         if (chars[i] == chars[j]) {
+12
+                                                    System.out.println(chars[j]);
+13
+                                                    count++;
+14
+                                                    break;
+15
+                                          }
+16
+                               }
+17
+                   }
+18
+           }
+19
+ 
+20
+}
+Output:
+
+Duplicate characters are:
+k
+t
+
+Q #16) Write a Java Program to find the second highest number in an array.
+
+Answer:  In this program, we have initialized an array with 10 random elements out of which we are going to
+find the second highest number. Here, we have two integers- the largest and second largest. Both set to the first
+index of the element. Then, we have printed all the elements using for loop.
+
+Now the logic is when the element at the 0th index is greater than the largest, then assign arr[0] to largest
+and secondLargest to largest. Again, if the element at the 0th index is greater than the secondLargest, then
+assign secondLargest to arr[0].
+
+This will be repeated for each iteration and ultimately after comparing or completing iterations up to array length will give you the secondLargest element.
+
+1
+public class SecondHighestNumberInArray {
+2
+public static void main(String[] args)
+3
+    {
+4
+        int arr[] = { 14, 46, 47, 94, 94, 52, 86, 36, 94, 89 };
+5
+        int largest = arr[0];
+6
+        int secondLargest = arr[0];
+7
+        System.out.println("The given array is:");
+8
+        for (int i = 0; i < arr.length; i++)
+9
+        {
+10
+            System.out.print(arr[i] + "\t");
+11
+        }
+12
+        for (int i = 0; i < arr.length; i++)
+13
+        {
+14
+            if (arr[i] > largest)
+15
+            {
+16
+                secondLargest = largest;
+17
+                largest = arr[i];
+18
+            }
+19
+            else if (arr[i] > secondLargest && arr[i] != largest)
+20
+            {
+21
+                secondLargest = arr[i];
+22
+            }
+23
+        }
+24
+        System.out.println("\nSecond largest number is:" + secondLargest);
+25
+    }
+26
+}
+Output:
+
+The given array is:
+14 46 47 45 92 52 48 36 66 85
+Second largest number is:85
+
+Q #17) Write a Java Program to check Armstrong number.
+
+Answer:  First of all we need to understand what Armstrong Number is. Armstrong number is the number
+which is the sum of the cubes of all its unit, tens and hundred digits for three digit number.
+
+153 = 1*1*1 + 5*5*5 + 3*3*3 = 1 + 125 + 27 = 153
+
+If you have a four digit number lets say
+
+1634 = 1*1*1*1 + 6*6*6*6 + 3*3*3*3 + 4*4*4*4 = 1 + 1296 + 81 + 256 = 1634
+
+Now, in this program, we have a temp and integers declared. We have initialized c with value 0. Then, we need to
+assign the integer value which we are going to check for Armstrong (in our case, let us say 153). Then we have assigned our temp variable with that number which we are going to check.
+
+Thereafter, we have used while conditional check where the remainder is assigned to a and the number is divided by 10 and assigned to n. Now, our c variable which was set to zero initially is assigned with c+(a*a*a). Suppose we have to evaluate a four-digit number then c should be assigned with c + (a*a*a*a).
+
+Lastly, we have put an if-else statement for conditional checking where we have compared the value contained in c against temp(which has the actual number stored at this point). If it matches, then the number is Armstrong otherwise not.
+
+1
+class Armstrong{ 
+2
+ public static void main(String[] args)  { 
+3
+   int c=0,a,temp; 
+4
+   int n=153;//It is the number to check Armstrong 
+5
+   temp=n; 
+6
+   while(n>0) 
+7
+   { 
+8
+   a=n%10; 
+9
+   n=n/10; 
+10
+    c=c+(a*a*a); 
+11
+    } 
+12
+    if(temp==c) 
+13
+    System.out.println("armstrong number");  
+14
+    else 
+15
+        System.out.println("Not armstrong number");  
+16
+   } 
+17
+}
+Output:
+armstrong number
+
+Q #18) Write a Java Program to remove all white spaces from a string with using replace().
+
+Answer:  This is a simple program where we have our string variable str1.
+
+Another string variable str2 is initialized with the replaceAll option which is an inbuilt method to remove n number of whitespaces. Ultimately, we have printed str2 which has no whitespaces.
+
+1
+class RemoveWhiteSpaces
+2
+{
+3
+    public static void main(String[] args)
+4
+    {
+5
+        String str1 = "Saket Saurav        is a QualityAna    list";
+6
+  
+7
+        //1. Using replaceAll() Method
+8
+  
+9
+        String str2 = str1.replaceAll("\\s", "");
+10
+  
+11
+        System.out.println(str2);
+12
+  
+13
+           }
+14
+}
+15
+}
+Output:
+
+SaketSauravisaQualityAnalist
+
+Q #19) Write a Java Program to remove all white spaces from a string without using replace().
+
+Answer: This is another approach to removing all white spaces. Again, we have one string variable str1 with some
+value. Then, we have converted that string into a character array using toCharArray().
+
+Then, we have one StringBuffer object sb which will be used to append the value stored at chars[i] index after we have included for loop and one if condition.
+
+If the condition is set such that then the element at i index of the character array should not be equal to space or tab. Finally, we have printed our StringBuffer object sb.
+
+1
+class RemoveWhiteSpaces
+2
+{
+3
+    public static void main(String[] args)
+4
+    {
+5
+        String str1 = "Saket Saurav        is an Autom ation Engi ne      er";
+6
+  
+7
+        char[] chars = str1.toCharArray();
+8
+  
+9
+        StringBuffer sb = new StringBuffer();
+10
+  
+11
+        for (int i = 0; i < chars.length; i++)
+12
+        {
+13
+            if( (chars[i] != ' ') && (chars[i] != '\t') )
+14
+            {
+15
+                sb.append(chars[i]);
+16
+            }
+17
+        }
+18
+        System.out.println(sb);           //Output : CoreJavajspservletsjdbcstrutshibernatespring
+19
+    }
+20
+}
+Output:
+
+SaketSauravisanAutomationEngineer
+
+Q #20) Write a Java Program to read an excel.
+
+Answer: These types of programs are generally used in Selenium framework. We have added detailed comments for every step to make the program more understandable.
+
+The logic starts after we have loaded the sheet in which the data is stored. We are trying to import email and password. For this, we are retrieving the cell using getRow() and getCell() method. Let's say we have email and passwords at the 1st and 2nd cell.
+
+Then we are setting the type of cell to string. Thereafter we are carrying out a normal web element locator operation (By.id) where we have passed unique locator values such as “email” and “password” which will identify these elements.
+
+Finally, we are sending keys using element.sendKeys where cell.getStringCellValue() is the key. This will return you the value stored at cell number 1 and 2 respectively.
+
+view sourceprint?
+1
+@Test
+2
+ public void ReadData() throws IOException
+3
+ {
+4
+     // Import excel sheet from a webdriver directory which is inside c drive.
+5
+     //DataSource is the name of the excel
+6
+     File src=new File("C:\\webdriver\\DataSource.xls");
+7
+      
+8
+     //This step is for loading the file. We have used FileInputStream as
+9
+     //we are reading the excel. In case you want to write into the file,
+10
+     //you need to use FileOutputStream. The path of the file is passed as an argument to FileInputStream
+11
+     FileInputStream finput = new FileInputStream(src);
+12
+      
+13
+     //This step is to load the workbook of the excel which is done by global HSSFWorkbook in which we have
+14
+     //passed finput as an argument.
+15
+    workbook = new HSSFWorkbook(finput);
+16
+      
+17
+     //This step is to load the sheet in which data is stored.
+18
+     sheet= workbook.getSheetAt(0);
+19
+      
+20
+     for(int i=1; i<=sheet.getLastRowNum(); i++)
+21
+     {
+22
+         // Import data for Email.
+23
+         cell = sheet.getRow(i).getCell(1);
+24
+         cell.setCellType(Cell.CELL_TYPE_STRING);
+25
+         driver.findElement(By.id("email")).sendKeys(cell.getStringCellValue());
+26
+          
+27
+         // Import data for the password.
+28
+         cell = sheet.getRow(i).getCell(2);
+29
+         cell.setCellType(Cell.CELL_TYPE_STRING);
+30
+         driver.findElement(By.id("password")).sendKeys(cell.getStringCellValue());
+31
+                 
+32
+        }
+33
+  }
