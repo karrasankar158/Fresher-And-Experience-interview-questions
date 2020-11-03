@@ -1,0 +1,46 @@
+Hi Team,
+#interview #ask
+#Try it
+Q.Write a program to return array of integer which matches the pattern from the dictionary.
+Note 1: dictionary and pattern words are dynamic
+Note 2: Do not use regex pattern in your solution
+**************************************************
+Test Case 1
+**************************************************
+Enter the number of words
+5
+Enter the length of each words
+3
+Please Enter 5 words for dictionary
+cat
+mat
+sat
+man
+fan
+Please enter number for pattern words
+4
+Please Enter 4 pattern words
+?at
+ma?
+?a?
+?an
+Expected output: [3, 2, 5, 2]
+**************************************************
+Test Case 2
+**************************************************
+Enter the number of words
+4
+Enter the length of each words
+4
+Please Enter 5 words for dictionary
+tata
+bata
+tall
+mall
+Please enter number for pattern words
+3
+Please Enter 4 pattern words
+?a?a
+??ll
+t???
+Expected output: [2, 2, 2]
