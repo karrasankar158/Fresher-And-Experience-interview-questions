@@ -1,0 +1,158 @@
+Hi Team,
+#Letest #update  #Hyderabad  #Bangalore #Pune #Delhi #Chennai  #ask 2020
+#Interview #questions #answers 3 + #experience
+#Below #Drive #link #download
+1.Explain your project architecture?
+2.Explain spring MVC flow?
+3.List out all the annotations in spring?
+4.what are all the annotations you used in your project on restful services?
+5.What is the use of cascade and inverse in Hibernate?
+6.what is first level cache and second level cache in hibernate?
+7.what is diff b/w ArrayList and LinkedList?
+8.can you explain the internal flow of HashMap?
+9.what is the diff b/w HashMap and Hashtable?
+10.Diff b/w Array and ArrayList?
+11.Diff b/w ArrayList and Vector?
+12.In your project where you used cuncurrent hashmap?
+13.What is java annoying?
+14.Diff b/w callable interface and future interface in concurrent package?
+15.What is class loaders?
+16.How can you take List into Map?
+17.How can you take Map into List?
+18.when you will get ClassNotFoundException and NoClassDefFoundError?
+19.How you implement exception handling in your project?
+20.where you implement multi-threading in your project?
+21.what are all the design patterens you observed in spring?
+22.which design patters you used in your project?
+
+23.what are all the critial situations you come across in your project?
+
+24.why wait() placed in object class ? why not it is placed in Thread class?
+
+25.what is use of intern() in spring?
+
+26.what is diff b/w String str="xyz"; and String str2= new String("xyz");
+
+27.Expalin about java architectue?
+
+28.Explain about jvm architecture?
+
+29.Data base queries?
+
+30.I have a company table in remote database. by using rest
+
+i need to get the table data and print into a file?
+
+31.how to read book pages on online library by using bookid or author id(by using restful services)?
+
+32.I have a table in remote database, how to update the data in that table using rest?
+
+33.Diff b/w rest and web(soap)?
+
+34.Agile methodolgy?
+
+35.How to create web-services project and spring project using mavan?
+
+36.what is diff b/w throw and throws?
+
+37.can you tell me java8 features?
+
+38.what are all the contents in wsdl?
+
+39.Refer regular expressions?
+
+40.can i add elements to list , if it is defined as final
+
+ex:final List<String> list= new ArrayList<>();?
+
+41.if you pass duplicate key to map what will happen?
+
+42.Diff b/w abstract class and interface?
+
+43.Diff b/w comparator and comparable?
+
+44.How to compare two database tables(clue: comparator, compare(),
+
+you have to compare database objects.)?
+
+45.How to set timeout for the browser?(clue: restful client api.)?
+
+46.what workflow you used in your project?
+
+47.why java? why not c & c++?
+
+48.In written test they are asking sorting programs(bubblesort,quicksort,...)?
+
+49.what is time complexity? if you are going to implement sorting by
+
+your own which sorting you prefer? and why?
+
+50.what is the use of volatile and synchronized?
+
+51.what is serialization? have you implement serialization in your project?
+
+52.programs on io streams?
+
+53.why we are using @qualifier?
+
+54.Diff b/w BeanFactory and ApplicationContext?
+
+55.Explain about IOC container?
+
+56.programs on string manipulations?(they are expecting solve by using regular expressions).
+
+57.How you are implemented polymorphism in your project?
+
+58.How you iterate map having key and list<values>?
+
+59.Diff b/w Iterator and ListIterator and Enumarator?
+
+60.what are all the collections are supporting ListIterator?
+
+61.How to make non-synchronized map and list as synchronized(by using collection method)?
+
+62.what is diff b/w collection and collections?
+
+63.write the junit test case for the below senario..
+
+-->read array of elements into list<>.
+
+64.what are all the modifiers we can use inside method?(ans: only final)
+
+65.what is diff b/w spring-jdbc and hibernate?
+
+66.what are all the drawbacks of jdbc over hibernate?
+
+67.what are all the problems with inheritance?
+
+68.what is the use of hibernate session?
+
+69.They given one query in sql and they are asking corresponding criteria api query?
+
+70.why we are using @transient in hibernate?
+
+71.what are all the inputs we are giving to SessionFactory?
+
+72.what we are writing in hibernate-mapping file?
+
+73.what we are writing in hibernate-configuration file?
+
+74.senario: in jsp page with 2 buttons, one for addbook and another is for
+
+showListOfBooks(by using spring and hibernate)?
+
+75.what is use of @ComponentScan?
+
+76.what is use of dispatcher servlet?
+
+77.what are all the pre-processings tasks done by DispatcherServlet?
+
+78.How to render excel and pdf view to the enduser(using poi and itext api's)?
+
+79.How to validate valid username and password in spring?for validating
+
+can i directly interact with dao without service?
+
+80.By defalut servlet container will handle multi-threaded applications ,
+
+then why you are implementing multi-threading in your application
