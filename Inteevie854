@@ -1,0 +1,243 @@
+Hi Team,
+#Letest #update  #experience 3+
+#Harman #interview #questions #answers 2020
+Core Java
+=========
+1-> input String Array ["abc","tkd","bca","fgd","cab","dfg","aabc"]
+    write a method to print output like below
+    ["abc","bca","cab"]
+    ["tkd"]
+    ["fgd","dfg"]
+    ["aabc"]
+    
+    In the above output you can see each array contains the word which has exact same letters and also same no of letter. i.e "abc" can become "bca"
+
+2-> Hash TreeSet works. Can we add different type of object to TreeSet(i.e Integer,String,Float)
+
+3-> Association, Aggregation and Composition
+
+4->   class A{}
+      class B extends{}
+      
+      what will happen for below code
+      1-> B b = new A();
+      2-> B b = (B) new A();
+      
+5->   int a[] = new int[]{3,4,5,6,7}
+      
+      what will happen for below code
+      for(int i=0;i<a.length;i++){
+        sysout(a[i])
+        break;
+        sysout(a[i])
+      }
+      
+      what will happen for below code
+      for(int i=0;i<a.length;i++){
+        sysout(a[i])
+        continue;
+      }
+6-> input array [5,6,4,7,2,5]
+    output [6,7,7,-1,5,-1]
+    
+    for each element we have to find next higher no of current number
+    suppose for i=0 i.e 5 the next higher number is 6
+    for i=3 i.e 7 there is no next higher number so -1
+    for i=5 i.e 5 there is no next higher number so -1
+    
+    (try to mimize the time complexity. Do it in O(n) or O(n logn))
+7->What is Functional interface and whta is lambda expression.
+
+8-> Can you write the interface of Predicate whatever is given by Java.
+
+9->input array [1,3,4,7,8,9,10] and 2
+
+    output-> find the no of pairs whosedifference is "2" like 3-1=2
+    10-8=2
+    9-7= 2
+    
+    so the output is 3(no of pairs that has difference of 2) if there is no pairs return -1
+    (try to minimize the time complexity)
+    
+10->Can you explain the different parts of JVM memory. And how the memory managements works in JVM.
+
+11-> How Garbage Collection works in java
+
+12-> How to monitor your JVM and findout DeadLock in application and findout if there is any memory leak.
+
+13-> Input a map with <Integer, String>
+      1 -> Tarun
+      2 -> Abhisek
+      3 -> Rakesh
+      4 -> Tarun
+      5 -> Rakesh
+      
+      remove the duplicate values from map and print the kay,value in sorted order of values like 2-> Abhisek, 3->Rakesh, 1->Tarun
+14-> given a array of data. Use Stream, filter the data,collect the data to map
+
+15-> How many ways we can create Thread. What will happen if we call run() directly. Ho to make thread Deamon
+
+16-> What is WeakHashMap. Give me a scenario where we can use it
+
+17-> Which Collection you wiil use to Design a dictionary.
+
+18-> How to a make a Immutable class
+
+19-> You have a class "Demo" where you have overriden hasCode() and equals() method. where hasCode() returns 1 every time and equals() return false every time.
+    Set<Demo> a= new HashSet<>();
+    for(int i=0;i<100;i++ ){
+      a.add(new Demo());
+    }
+
+    What will be output of a.size();
+
+20-> How HashMap Works. Difference between CuncurrentHashMap  and HashMap
+
+21- How to write a wrapper class
+
+22-> where all we can wrtie syncrinized keyword
+
+Spring Boot with Spring Cloud
+=============================
+
+1-> How Sprint Boot internally works. What process it follows.
+
+2-> What is the differences between Spring MVC and Spring Boot
+
+3-> What is the purpose of Microservice
+
+4-> what is Eureka Server. How it works. How you make a Eureka Server
+
+5-> What is Zoul. How it works. What is the benifit.
+
+5-> What is Ribbon. What is the benifit of it
+
+6-> How to interact two microservice. What is the best way to do.
+
+7-> What will happen if we make a Controller class as Scope Prototype
+
+8-> If you are using Feign Client to inter communicate between two microservice. How you handle Exception in Feign. How you write Custom Error Decoder
+
+9-> How to make you configurations Centralised. How to Encrypt some of your properties.
+
+10-> What is the use Spring Actuator. what are the endpoints it exposed. what are response parameter for endpoint (/health)
+
+11-> How You make your application High Available in case of Microservice.
+
+12-> What are the log monitoring tools you are using in Production. And how do you find a perticular error.
+
+13-> Which type of Authentication and Authorization you are using in you application.
+
+14-> How OAuth2 works. What are different components of OAuth2
+
+15-> What is AuthorizationServer and ResourceServer and difference.
+
+16-> How Spring Transaction works. What the Isolation and Propagation Levels
+
+17-> Do you know how Proxy Design Pattern works in Spring. Can you tell for which scenarios Proxy Pattern is implimented in spring.
+
+18-> Bean A should be crated before Bean B. How to do
+
+19-> How to solve circular Dependency
+
+20-> Different type of @Autowire
+
+21-> what is cron job. How to write Cron expressions.
+
+Rest
+=====
+
+1-> Why to use Rest Service.
+
+2-> What are differet types of Rest Methods
+
+3-> Which all methods are Idompotent
+
+4-> What is different between post,put,patch
+
+5-> Write a Rest EndPoint using proper conventions
+
+6-> How to write a enpoint for file Upload
+
+Docker
+=====
+
+1-> What is Docker
+
+2-> How it helps in microservice architecture.
+
+3-> How you are using docker with spring boot application
+
+NoSql
+=====
+
+1-> What is NoSQL
+
+2-> How it is different that SQL
+
+3-> What is CAP Theorem
+
+4-> How many types of NoSQL DB are ther
+
+5-> What type of NoSQL DB is mongo and cassnadra
+
+6-> How Sharding works in Mongo
+
+8-> what is Replica-Set in Mongo. And how it works
+
+9-> What is Redis
+
+10-> Why you are using Redis in Your Application
+
+11-> How Mongo DB stores its data.
+
+12-> What is aggregation in Mongo
+
+Design Patterns
+=============
+1-> Which type of Design pattern you used
+
+2- write Singleton Design
+
+2-> What is Observable Design Patter
+
+3-> Differnce Between Factory and Abstract Factory
+
+4-> Design A Connection Pool 
+
+Others
+======
+1->Full Project Architecture
+
+2-> Angular Js
+    @Component
+    @Injectable
+    what is observable.
+    How to handle events
+    How modularization works in Angular
+    What is two way binding.
+    Why Angular Team rewriting there Library frequently
+    
+    
+SQL
+===
+
+1-> 3rd Highest Salary
+
+2-> Inner Join
+3-> Two tables are ther Flipkart and Amazon.
+
+    Flipkart
+    
+    product_id|price
+    1         | 123
+    2         | 345
+    
+    
+    Amozon
+    
+    product_id|price
+    2         |45
+    1         |1222
+    
+    In Both table product id are same. Write a query to print product_id and minimum price of both table
