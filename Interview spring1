@@ -1,0 +1,175 @@
+Hi Team,
+#Letest #update #real_time 
+#Spring Boot on #Kubernetes with #Buildpacks and #Skaffold
+---#In this article, you will learn how to run the Spring Boot application on Kubernetes using Buildpacks and Skaffold. Since version 2.3 Spring Boot supports Buildpacks. The main goal of Buildpack is to detect how to transform a source code into a runnable image. Once we created an image we may run it on Kubernetes. Fortunately, we may use Skaffold to automate a whole process starting from a source code and ending on a Kubernetes deployment. Skaffold supports builds with Cloud Native Buildpacks, that require only a local Docker daemon.
+
+In order to deploy Spring Boot on Kubernetes, we may also use Skaffold with Jib Maven Plugin. Jib is a tool from Google that builds optimized images without a Docker daemon.To look at how to integrate it with Skaffold in a Kubernetes deployment process.
+
+#Step 1. Build a Docker image with Spring Boot and Buildpacks
+We don’t have to change anything in the build process to create a Docker image of a Spring Boot application. Of course, we need to declare spring-boot-maven-plugin in Maven pom.xml as always.
+
+<build>
+   <plugins>
+      <plugin>
+         <groupId>org.springframework.boot</groupId>
+         <artifactId>spring-boot-maven-plugin</artifactId>
+         <executions>
+            <execution>
+               <goals>
+                  <goal>build-info</goal>
+               </goals>
+            </execution>
+         </executions>
+      </plugin>
+   </plugins>
+</build>
+Since Spring Boot 2.3+ includes buildpack support directly for Maven, you may just type a single command to build a Docker image. So, let’s run the following command.
+
+$ mvn package spring-boot:build-image
+By default, Spring Boot uses Paketo Java buildpack to create Docker images. The name of a builder image is paketobuildpacks/builder:base. We can verify in the build logs visible below.
+
+spring-boot-buildpacks-build-image
+To clarify, this step is not required to deploy our application on Kubernetes. I just wanted to demonstrate how to use Cloud Native Buildpacks with Spring Boot. However, we should remember the name of a builder image. We will use the same builder in Step 3.
+
+#Step 2. Create Spring Boot application
+I use the latest stable version of Spring Boot. For Step 1, we need at least version 2.3. For the next steps, it is not required. Moreover, we will use JDK 11 for compilation.
+
+<parent>
+   <groupId>org.springframework.boot</groupId>
+   <artifactId>spring-boot-starter-parent</artifactId>
+   <version>2.4.1</version>
+</parent>
+
+<groupId>pl.piomin.samples</groupId>
+<artifactId>sample-spring-boot-on-kubernetes</artifactId>
+<version>1.0-SNAPSHOT</version>
+
+<properties>
+   <java.version>11</java.version>
+</properties>
+We will create a simple web application that exposes a REST API and connects to the Mongo database. Therefore, we need to include the following dependencies.
+
+<dependency>
+   <groupId>org.springframework.boot</groupId>
+   <artifactId>spring-boot-starter-web</artifactId>
+</dependency>
+<dependency>
+   <groupId>org.springframework.boot</groupId>
+   <artifactId>spring-boot-starter-data-mongodb</artifactId>
+</dependency>
+Here’s a controller class. It implements methods for adding, updating, deleting, and searching data. There are multiple find methods available.
+
+@RestController
+@RequestMapping("/persons")
+public class PersonController {
+
+   private PersonRepository repository;
+
+   PersonController(PersonRepository repository) {
+      this.repository = repository;
+   }
+
+   @PostMapping
+   public Person add(@RequestBody Person person) {
+      return repository.save(person);
+   }
+
+   @PutMapping
+   public Person update(@RequestBody Person person) {
+      return repository.save(person);
+   }
+
+   @DeleteMapping("/{id}")
+   public void delete(@PathVariable("id") String id) {
+      repository.deleteById(id);
+   }
+
+   @GetMapping
+   public Iterable<Person> findAll() {
+      return repository.findAll();
+   }
+
+   @GetMapping("/{id}")
+   public Optional<Person> findById(@PathVariable("id") String id) {
+      return repository.findById(id);
+   }
+
+   @GetMapping("/first-name/{firstName}/last-name/{lastName}")
+   public Set<Person> findByFirstNameAndLastName(@PathVariable("firstName") String firstName,
+         @PathVariable("lastName") String lastName) {
+      return repository.findByFirstNameAndLastName(firstName, lastName);
+   }
+
+   @GetMapping("/age-greater-than/{age}")
+   public Set<Person> findByAgeGreaterThan(@PathVariable("age") int age) {
+      return repository.findByAgeGreaterThan(age);
+   }
+
+   @GetMapping("/age/{age}")
+   public Set<Person> findByAge(@PathVariable("age") int age) {
+      return repository.findByAge(age);
+   }
+
+}
+Step 3. Configure Skaffold
+Firstly, we need to create a Skaffold configuration file in the project root directory. To do that we may execute the following command.
+
+$ skaffold init --XXenableBuildpacksInit
+At least we need to set the name of builder in the buildpacks section. Let’s configure the same builder as used by Spring Boot – paketobuildpacks/builder:base. We will also override a default location of Kubernetes manifests. Skaffold will detect two YAML manifests k8s/mongodb-deployment.yaml and k8s/deployment.yaml instead of a whole k8s directory.
+
+apiVersion: skaffold/v2beta5
+kind: Config
+metadata:
+  name: sample-spring-boot-on-kubernetes
+build:
+  artifacts:
+    - image: piomin/sample-spring-boot-on-kubernetes
+      buildpacks:
+        builder: paketobuildpacks/builder:base
+  tagPolicy:
+    gitCommit: {}
+deploy:
+  kubectl:
+    manifests:
+      - k8s/mongodb-deployment.yaml
+      - k8s/deployment.yaml
+Step 4. Deploy on Kubernetes
+Finally, we may proceed to the last step – deployment. The deployment manifest is visible below. Since, our application connects with the Mongo database, we inject its address and login credentials using ConfigMap and Secret references.
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sample-spring-boot-on-kubernetes-deployment
+spec:
+  selector:
+    matchLabels:
+      app: sample-spring-boot-on-kubernetes
+  template:
+    metadata:
+      labels:
+        app: sample-spring-boot-on-kubernetes
+    spec:
+      containers:
+      - name: sample-spring-boot-on-kubernetes
+        image: piomin/sample-spring-boot-on-kubernetes
+        ports:
+        - containerPort: 8080
+        env:
+          - name: MONGO_DATABASE
+            valueFrom:
+              configMapKeyRef:
+                name: mongodb
+                key: database-name
+          - name: MONGO_USERNAME
+            valueFrom:
+              secretKeyRef:
+                name: mongodb
+                key: database-user
+          - name: MONGO_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: mongodb
+                key: database-password
+Let’s deploy our Spring Boot application using the following command. With port-forward option enabled we will be able to test HTTP endpoints using local port 8080.
+
+$ skaffold dev --port-forward
