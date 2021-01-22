@@ -22,3 +22,14 @@ it is also called as IS-A Relationship
 using extends keyword we can implement IS-A Relationship
 advantage is re usability  
 java not supported multiple inheritance for to avoid ambiguity problems 
+
+HAS-A RELATIONSHIP:
+1. also called as composition or aggregation 
+2. mostly implemented by using new Operator
+3. advantages of HAS-A relationship is Re usability
+
+Polymorphism in java:
+Same name with different forms is the concept of Polymorphism 
+Compile time: Overloading 
+Runtime        : Overriding
+flexibility   
