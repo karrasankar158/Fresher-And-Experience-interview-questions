@@ -1,0 +1,24 @@
+Tell me About Your Self?
+A) My name is Sankar. I live in Andhra Pradesh I have done B.tech in Computer Science i am trained in Java Technologies In my Family my Father is carpenter my mother is housewife
+i have two young brothers both are doing studies....
+
+Data Hiding:
+To avoid outside person cannot access our internal data Directly.
+by using private modified we can implement data hiding.
+
+Abstraction in Java:
+1. Hiding Internal implementation
+2. must abstract class as abstract keyword.
+3.cannot possible to instantiate (Object creation is not possible)
+4. we can allowed to write both abstract and concrete methods(concrete methods nothing but method with body).
+
+Encapsulation In Java:
+Binding of Data and Corresponding methods into a single Unit is called as Encapsulation.
+Encapsulation=Data Hiding+Abstraction.
+
+Inheritance(IS-A Relation):
+Acquiring Properties from Parent to Child is called as Inheritance.
+it is also called as IS-A Relationship 
+using extends keyword we can implement IS-A Relationship
+advantage is re usability  
+java not supported multiple inheritance for to avoid ambiguity problems 
