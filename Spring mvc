@@ -1,0 +1,38 @@
+@RequestParam:
+read the form data
+
+Model: request data provided to the view page
+m.addAttribute("hi"mes);
+
+FrontController: FrontController is a design pattern.
+DispatcherServlet is build in frontController. 
+Controllers all activities.
+implemented on MVC2 architecture.
+one per web application.
+acts as single entry or single exit.
+it traps all requests applies common system services like logging,security delegate all requests to handlel classes 
+takes results as Model passes to view components to browser
+
+Spring MVC Flow:
+Request-DS-HM-beanId to DS-DS get Handler object-DS calls Handler method-DS gets LVN+model data keeps in model attribute-
+DS gives LVN to ViewResolver-ViewResolver gives View Object to DS-DS calls render()on View Object-PVC-DS-response to Browser.
+ 
+ViewResolver:
+logical view name 
+prefix
+suffix
+
+HandlerMapping:
+map incoming requests to urls to controller.
+Interceptors:
+pre/post logics like filters.
+
+RequestMapping:
+getmapping+postmappping
+
+Double Posting Problem:
+Duplicate Form Submission
+Submitting post mode request for multiple times either by pressing back button and submit or using refresh button
+example: payment gateway.
+
+
