@@ -1,0 +1,10 @@
+Hi Team,
+#Project round ask this question answer
+Q.What is Type generic in Java? Did you used as part of your project if yes. Where and its purpose
+--Type generic is used for type safety. I have used Generics in Collection classes as well as in Future<POffersComparable> and in comparators.
+
+Q.where you implement multi-threading in your project?
+---
+I use multithreading mostly in web applications - Typically in the DAO layer, the database (JDBC or Hibernate/ORM) code loads all records that were requested by the user, page size irrelevant. If the user wants 50,000 rows then so be it - but that takes a while to retrieve and on which to work.
+
+So, I would usually have another object that is implemented Runnable or extend Thread (but usually implementing Runnable) do the loading and it would have a variable with public getter (and maybe setter). If implementing Runnable as I usually do, I’d probably also extend Observable and whenever a new record was added to the variable (list/ map /set / whatever), it would notify observers and when X rows were accumulated, the servlet will return to the front end Javascript with the results. Subsequently when the user clicks “Next Page” or to click on another page altogerther, those parameters would be passed back to the servlet and from the collection of rows available, that subset would be retrieved from the larger set and returned (probably in JSON format). By that time though, usually the entire recordset would have been loaded and available to pull from then and one wouldn’t have to wait for the database code to load and create objects for each row up until where the page started. When the operation was done then, the thread would stop - the object still exists with the collection inside but the thread was no longer doing its thing so you can retrieve the collection or continue using it out of the object.
