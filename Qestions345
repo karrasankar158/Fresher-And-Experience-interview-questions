@@ -1,0 +1,204 @@
+Hi Team,
+#Latest #updates #Real_time 
+#New #Developer #Friendly #Features #After #Java 8
+-----#In this article, I’m going to describe the most significant and developer-friendly features of Java since the 8th version. Why such an idea? You can find many articles with a list of new features per each Java version on the Web. However, there is a lack of articles that give you a brief summary of the most important changes since the 8th version. Ok, but why the 8th version? Surprisingly, it is still the most commonly used version of Java. And all this even though we are on the eve of the Java 16 release. Of course, Java 8 has introduced a solid pack of changes including Lambda Expressions. After that there was no similar release with such a huge set of key features. Nevertheless, you will find some interesting new features since Java 8.
+
+#Switch Expression (JDK 12)
+With the Switch expression, you can define multiple case labels and return values using an arrow. This feature is available since JDK 12. It makes the Switch expression really more accessible.
+
+    public String newMultiSwitch(int day) {
+        return switch (day) {
+            case 1, 2, 3, 4, 5 -> "workday";
+            case 6, 7 -> "weekend";
+            default -> "invalid";
+        };
+    }
+With Java below 12 the same example is pretty more complex.
+
+    public String oldMultiSwitch(int day) {
+        switch (day) {
+            case 1:
+            case 2:
+            case 3:
+            case 4:
+            case 5:
+                return "workday";
+            case 6:
+            case 7:
+                return "weekend";
+            default:
+                return "invalid";
+        }
+    }
+
+#Sealed Classes (JDK 15)
+With the Sealed Classes feature you can restrict the use of a superclass. With a new keyword sealed you may define which other classes or interfaces may extend or implement the current class.
+
+public abstract sealed class Pet permits Cat, Dog {}
+A permitted subclass must define a modifier. If you don’t want to allow any other extensions you need to use the final keyword.
+
+public final class Cat extends Pet {}
+On the other hand, you may open the class for extensions. In that case, you should use the non-sealed modifier.
+
+public non-sealed class Dog extends Pet {}
+Of course, the declaration visible below is not allowed.
+
+public final class Tiger extends Pet {}
+
+#Text Blocks (JDK 13)
+A text block is a multi-line string literal that avoids using escape sequences and automatically formats the string in a predictable way. It also gives the developer control over the format of the string. Since Java 13, Text Blocks are available as a preview feature. They are starting with three double-quote marks ("""). Let’s see how easily we can create and format a JSON message.
+
+    public String getNewPrettyPrintJson() {
+        return """
+               {
+                    "firstName": "Piotr",
+                    "lastName": "Mińkowski"
+               }
+               """;
+    }
+The same JSON string before Java 13 is pretty more complicated to create.
+
+    public String getOldPrettyPrintJson() {
+        return "{\n" +
+               "     \"firstName\": \"Piotr\",\n" +
+               "     \"lastName\": \"Mińkowski\"\n" +
+               "}";
+    }
+
+#New Optional Methods (JDK 9/ JDK 10)
+There are several useful methods for Optional since Java 9 and Java 10. The two most interesting of them are orElseThrow and ifPresentOrElse. With the orElseThrow method you throw NoSuchElementException if no value is present. Otherwise, it returns a value.
+
+public Person getPersonById(Long id) {
+ Optional<Person> personOpt = repository.findById(id);
+ return personOpt.orElseThrow();
+}
+Thanks to that, you can avoid using if statement with isPresent method.
+
+public Person getPersonByIdOldWay(Long id) {
+ Optional<Person> personOpt = repository.findById(id);
+ if (personOpt.isPresent())
+ return personOpt.get();
+ else
+ throw new NoSuchElementException();
+}
+The second interesting method is ifPresentOrElse. If a value is present, it performs the given action with the value. Otherwise it performs the given empty-based action.
+
+public void printPersonById(Long id) {
+ Optional<Person> personOpt = repository.findById(id);
+ personOpt.ifPresentOrElse(
+ System.out::println,
+ () -> System.out.println("Person not found")
+ );
+}
+With Java 8 we can use if-else directly with the isPresent method.
+
+public void printPersonByIdOldWay(Long id) {
+ Optional<Person> personOpt = repository.findById(id);
+ if (personOpt.isPresent())
+ System.out.println(personOpt.get());
+ else
+ System.out.println("Person not found");
+}
+
+#Collection Factory Methods (JDK 9)
+With a new feature of Java 9 called Collection Factory Methods, you can easily create immutable collections with predefined data. You just need to use the of method on the particular collection type.
+
+List<String> fruits = List.of("apple", "banana", "orange");
+Map<Integer, String> numbers = Map.of(1, "one", 2,"two", 3, "three");
+Before Java 9 you might use Collections, but it is definitely a more complex way.
+
+public List<String> fruits() {
+ List<String> fruitsTmp = new ArrayList<>();
+ fruitsTmp.add("apple");
+ fruitsTmp.add("banana");
+ fruitsTmp.add("orange");
+ return Collections.unmodifiableList(fruitsTmp);
+}
+
+public Map<Integer, String> numbers() {
+ Map<Integer, String> numbersTmp = new HashMap<>();
+ numbersTmp.put(1, "one");
+ numbersTmp.put(2, "two");
+ numbersTmp.put(3, "three");
+ return Collections.unmodifiableMap(numbersTmp);
+}
+Also, just to create ArrayList from a table of objects you could use Arrays.asList(...) method.
+
+public List<String> fruitsFromArray() {
+ String[] fruitsArray = {"apple", "banana", "orange"};
+ return Arrays.asList(fruitsArray);
+}
+
+#Records (JDK 14)
+With Records, you can define immutable, data-only classes (getters only). It automatically creates toString, equals, and hashCode methods. In fact, you just need to define fields as shown below.
+
+public record Person(String name, int age) {}
+The class with similar functionality as record contains fields, constructor, getters and implementation of toString, equals, and hashCode methods.
+
+public class PersonOld {
+
+    private final String name;
+    private final int age;
+
+    public PersonOld(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        PersonOld personOld = (PersonOld) o;
+        return age == personOld.age && name.equals(personOld.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, age);
+    }
+
+    @Override
+    public String toString() {
+        return "PersonOld{" +
+                "name='" + name + '\'' +
+                ", age=" + age +
+                '}';
+    }
+
+}
+
+#Private Methods in Interfaces (JDK 9)
+Since Java 8, you can have public default methods inside the interface. But only since Java 9, you will be able to take full advantage of this feature thanks to private methods in interfaces.
+
+public interface ExampleInterface {
+
+    private void printMsg(String methodName) {
+        System.out.println("Calling interface");
+        System.out.println("Interface method: " + methodName);
+    }
+
+    default void method1() {
+        printMsg("method1");
+    }
+
+    default void method2() {
+        printMsg("method2");
+    }
+}
+
+#Local Variable Type Inference (JDK 10 / JDK 11)
+Since Java 10 you can declare a local variable without its type. You just need to define the var keyword instead of a type. Since Java 11 you can also use it with lambda expressions as shown below.
+
+public String sumOfString() {
+ BiFunction<String, String, String> func = (var x, var y) -> x + y;
+ return func.apply("abc", "efg");
+}
