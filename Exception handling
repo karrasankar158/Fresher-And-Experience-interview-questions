@@ -1,0 +1,34 @@
+30 Java Exception Handling Interview Questions And Answers
+========================================
+1) What is an exception?
+2) How the exceptions are handled in java? OR Explain exception handling mechanism in java?
+3) What is the difference between error and exception in java?
+4) Can we keep other statements in between try, catch and finally blocks?
+5) Can we write only try block without catch and finally blocks?
+6) There are three statements in a try block – statement1, statement2 and statement3. After that there is a catch block to catch the exceptions occurred in the try block. Assume that exception has occurred in statement2. Does statement3 get executed or not?
+7) What is unreachable catch block error?
+8) Explain the hierarchy of exceptions in java?
+9) What are run time exceptions in java. Give example?
+10) What is OutOfMemoryError in java?
+11) what are checked and unchecked exceptions in java?
+12) What is the difference between ClassNotFoundException and NoClassDefFoundError in java?
+13) Can we keep the statements after finally block If the control is returning from the finally block itself?
+14) Does finally block get executed If either try or catch blocks are returning the control?
+15) Can we throw an exception manually? If yes, how?
+16) What is Re-throwing an exception in java?
+17) What is the use of throws keyword in java?
+18) Why it is always recommended that clean up operations like closing the DB resources to keep inside a finally block?
+19) What is the difference between final, finally and finalize in java?
+20) How do you create customized exceptions in java?
+21) What is ClassCastException in java?
+22) What is the difference between throw, throws and throwable in java?
+23) What is StackOverflowError in java?
+24) Can we override a super class method which is throwing an unchecked exception with checked exception in the sub class?
+25) What are chained exceptions in java?
+26) Which class is the super class for all types of errors and exceptions in java?
+27) What are the legal combinations of try, catch and finally blocks?
+28) What is the use of printStackTrace() method?
+29) Give some examples to checked exceptions?
+30) Give some examples to unchecked exceptions?
+
+See the answers at 
