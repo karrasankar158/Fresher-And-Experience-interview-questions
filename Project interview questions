@@ -1,0 +1,323 @@
+Hi Team,
+#project #round #Questions #answers  #experience  3+
+Q.#what are day to day activities in your office.
+Ans- 1. Our office official timeings : 9:00AM to 6:00pm.
+         2. We will reach office @  9 or 9:00 AM.
+         3. First will check the client email. So we came to know that what work                we  need  to do.
+         4. Attending the scrum call or onshore status call @ 10:00AM
+             This will around 10:00AM to 10:30 AM
+             I will clarify if any doubts in call.
+         5. Will we go for coffee break  10:00 AM to 10:45 AM.
+         6. I will start project work and continue until 1 or 1:30 PM
+         7. Will go for Lunch 1 hours 1:30 PM to 2:30 PM.
+
+Q.#How you are implemented polymorphism in your project?
+Normally we are developing our application interface base approach for example service and 
+serviceImpl so my controller need to inject serviceImpl to get business functionality so in this case in 
+controller class we are injection service bean by taking service interface reference as below .
+public interface BankService {
+public void doTransaction();
+}
+@Service
+public class BankServiceImpl implements BankService{
+@Override
+public void doTransaction() {
+// LOGIC
+}
+}
+@Controller
+public class BankController {
+@Autowired(required = true)
+private BankService service;
+}
+Here internally IOC container instantiate my service bean as below approach
+BankService service=new BankServiceImpl();//Runtime polymorphism
+
+Q#What is serialization? Have you implement serialization in your project?
+Serialization is a process where we can change state of object to the file over the network or simply we 
+can transfer our object from one layer to another layer, that’s why java provides streaming API.
+In my project I used in pojo class means my pojo class should be implements from Serializable interface 
+because that business object will be transfer over the network, that’s why it’s recommended to implements BO object from Serializable interface.
+
+Q.#How to create web-services project and spring project using maven?
+Simply we have to create one maven project like maven-archetype-webapp then add the 
+dependency from local repository if available else download from central repository in 
+pom.xml.
+Add spring dependency along with JAX-WS implementation class dependency in pom.xml
+
+Q.#What are all the critical situations you come across in your project?
+Q.#Why wait () placed in object class? Why not it is placed in Thread class?
+Answer: 
+ Very simple reason behind it actually wait () method is used to wait the thread of 
+execution and it used for inter thread communication to avoid data inconsistency, so first 
+reason is wait () and notify () method are not specific for single object it can be apply, second 
+reason is if it will present in thread class then one thread have to know the status of another 
+thread 
+Example: Suppose I have 4 thread th1 ,th2 , th3, th4 and th4 so in inter thread communication 
+lock will be applied on Object by thread so which thread apply lock that only known to object 
+.simply locking mechanism no way related to thread its related to Object.
+
+Q.Which design patters you used in your project?
+Answer:
+ In my project I used Modularization design Pattern, Facade Design Pattern, Service locator Design pattern.
+
+Q.#Where you implement multi-threading in your project?
+Answer:
+ As a 3 year experience developer I didn’t get a chance to work on Multithreading 
+environment .these part is developed by our senior team members. But I have aware on 
+multithreading and I know how to work.
+
+Q..how you implement exception handling in your project?
+Answer:
+Normally we are developing Spring based application so in Spring to handle exception multiple 
+predefined class is there .so simply in my project we are throwing custom exception from 
+service layer and when my controller call service it will catch that exception by using Spring 
+Aop , We have to create a class which should be annoted as @ControllerAdvice and we have to 
+take one method whose return type is Model And View and method should be annoted as 
+@ExceptionHandler so in this method we have to write the logic for map the exception. And
+return the same view which is return by controller class at the time of exception raise. And wehave to return some user understandable message by view page.
+Note: Both return logical view should be same
+
+Q.In your project where you used ConcurrentHashMap?
+Answer:
+ As per my project business requirement I didn’t use ConcurrentHashMap that’s why I 
+don’t have hands on experience on it but I know where we have to use.
+Suppose I have one requirement where multiple thread want to access/modify under laying DS 
+of map means one thread try to insert element in key and value pair and another thread try to 
+modify some element at same times then in this situation better to prefer ConcurrentHashMap 
+instead of HashMap cause ConcurrentHashMap apply lock on specific entry not in complete 
+map object.
+NOTE: Normally to avoid ConcurrentModificationException ConcurrentHashMap introduced in JDK 1.5
+
+Q.List out all annotation of rest used in your projects?
+Answer: In my project I am using these below annotations 
+1. @ApplicationPath
+2. @Path
+3. @Consumes
+4. @Produces
+5. @POST
+6. @GET
+7. @PUT
+8. @DELETE
+9. @FormParm
+10. @PathParm etc…
+
+Q.How can we take list into map?
+Example: public Map<List<String>, List<Double>> getData() {
+Map<List<String>, List<Double>> dataMap = new HashMap<>();
+List<String> l1Key = new ArrayList<>();
+l1Key.add("Basant");
+l1Key.add("Babul");
+List<String> l2Key = new ArrayList<>();
+l2Key.add("Manoj");
+l2Key.add("Amit");
+l2Key.add("Saroj");
+List<Double> l1Value = new ArrayList<>();
+l1Value.add(50.000);
+
+l1Value.add(40.000);
+List<Double> l2Value = new ArrayList<>();
+l2Value.add(90.000);
+l2Value.add(60.000);
+l2Value.add(30.000);
+dataMap.put(l1Key, l1Value);
+dataMap.put(l2Key, l2Value);
+return dataMap;
+}
+Q.#How can we take Map into List?
+Example: 
+public List<Map<String, Integer>> setData() {
+List<Map<String, Integer>> listMap = new ArrayList<>();
+Map<String, Integer> map = new HashMap<>();
+map.put("A", 34);
+map.put("D", 90);
+map.put("B", 12);
+map.put("C", 91);
+listMap.add(map);
+return listMap;
+}
+
+Q.I have a table in remote database, how to update the data in that table using 
+rest?
+Simple write the update logic in DAO and call this from controller class but in controller class u have to 
+mention the annotation @PUT for update through network. Code try as per above 2 example only logic 
+will be changed but not approach.
+
+Q.How to set timeout for the browser? (Clue: restful client API)?
+Client client = ClientBuilder.newClient();
+ client.property(ClientProperties.CONNECT_TIMEOUT, 1000);
+ client.property(ClientProperties.READ_TIMEOUT, 1000);
+Q. In written test they are asking sorting programs (bubble sort, quicksort)
+Bubble-Sort:
+package com.core.all.interview.programmes;
+public class SortArrayByBubbleSort {
+public static void sort(int input[]) {
+int temp = 0;
+for (int i = 0; i <= input.length - 1; i++) {
+for (int j = i + 1; j <= input.length - 1; j++) {
+if (input[i] > input[j]) {
+temp = input[i];
+input[i] = input[j];
+input[j] = temp;
+}
+}
+System.out.println(input[i]);
+}
+}
+public static void main(String[] args) {
+int[] i = new int[] { 12, 44, 23, 43, 21, 8, 0, 6, 45, 44, 58, 17
+};
+
+sort(i);
+}
+}
+Quicksort:
+package com.core.all.interview.programmes;
+import java.util.Arrays;
+public class SortArrayByQuickSort {
+public static void quickSort(int[] arr, int low, int high) {
+if (arr == null || arr.length == 0)
+return;
+if (low >= high)
+return;
+int middle = low + (high - low) / 2;
+int pivot = arr[middle];
+// make left < pivot and right > pivot
+int i = low, j = high;
+while (i <= j) {
+while (arr[i] < pivot) {
+i++;
+}
+while (arr[j] > pivot) {
+j--;
+}
+if (i <= j) {
+int temp = arr[i];
+arr[i] = arr[j];
+arr[j] = temp;
+i++;
+j--;
+}
+}
+// recursively sort two sub parts
+if (low < j)
+quickSort(arr, low, j);
+if (high > i)
+quickSort(arr, i, high);
+
+}
+public static void main(String[] args) {
+int[] i = new int[] { 12, 44, 23, 43, 21, 8, 0, 6, 45, 44, 58, 17 
+};
+quickSort(i, 0, i.length - 1);
+System.out.println(Arrays.toString(i));
+}
+}
+
+Q.How to create a Spring Boot Project?
+Answer: While facing Spring Boot Interview Questions and Answers, a candidate might be asked to create a simple Spring Boot project, which can be easily accomplished following below guideline or one may create a Spring Boot project following the guidelines provided on https://start.spring.io/
+
+Spring Boot Project
+Folder Structure:
+
+Folder Structure
+The main method is the heart of the Spring boot application to run the application.
+
+@SpringBootApplication:
+
+The @SpringBootApplication annotation is the same as using @EnableAutoConfiguration, @Configuration, and @ComponentScan with default attributes.
+@Target(ElementType.TYPE)
+@Retention(RetentionPolicy.RUNTIME)
+@Documented
+@Inherited
+@SpringBootConfiguration
+@EnableAutoConfiguration
+@ComponentScan(excludeFilters = {
+@Filter(type = FilterType.CUSTOM, classes = TypeExcludeFilter.class),
+@Filter(type = FilterType.CUSTOM, classes = AutoConfigurationExcludeFilter.class) })
+public @interface SpringBootApplication {
+}
+
+Q.How to project  integrate the Swagger2?
+Answer: Below is a sample for integration of Swagger2 with docket:
+
+@Configuration
+@EnableSwagger2
+public class SwaggerConfig {
+@Bean
+public Docket api() {
+return new Docket(DocumentationType.SWAGGER_2)
+.select()
+.apis(RequestHandlerSelectors.any())
+.paths(PathSelectors.any())
+.build();
+}
+}
+
+@EnableSwagger2 annotation is used to enable Swagger 2.
+
+Once Docket bean is specified, select method returns an ApiSelectorBuilder instance. This instance is used to determine how to control the exposed endpoints.
+
+RequestHandlerSelectors and PathSelectors are used to configure predicates for of RequestHandler selection. Lastly, any() method will facilitate the documentation using Swagger.
+
+Above configuration can be used to integrate Swagger2 with a Spring Boot Application.
+
+Q.What are the challenges faced while using Microservices?
+
+Microservices always rely on each other. Therefore, they need to communicate with each other.
+As it is distributed system, it is a heavily involved model.
+If you are using Microservice architecture, you need to ready for operations overhead.
+You need skilled professionals to support heterogeneously distributed microservices.
+
+Q.How Do You Override A Spring Boot Project’s Default Properties?
+This can be done by specifying the properties in application.properties.
+For example – In Spring MVC applications, you have to specify the suffix and prefix. This can be done by entering the properties mentioned below in application.properties.
+
+For suffix – spring.mvc.view.suffix: .jsp
+For prefix – spring.mvc.view.prefix: /WEB-INF/
+
+Q.Role Of Actuator In Spring Boot
+It is one of the most important features, which helps you to access the current state of an application that is running in production environment. There are multiple metrics which can be used to check the current state. They also provide endpoints of restful web services which can be simply used to check the different metrics.
+
+Q.How Is Spring Security Implemented In A Spring Boot Application?
+Minimal configuration is needed for implementation. All you need to do is, add spring-boot-starter-security starter in the file pom.xml. You will also need to create a Spring config class that will override the required method while extending the WebSecurityConfigurerAdapter to achieve security in the application. Here is an example code for the same:
+
+package com.gkatzioura.security.securityendpoints.config;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+@Configuration
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http.authorizeRequests()
+            .antMatchers("/welcome").permitAll()
+            .anyRequest().authenticated()
+            .and()
+            .formLogin()
+            .permitAll()
+            .and()
+            .logout()
+            .permitAll();
+    }
+}
+
+package com.gkatzioura.security.securityendpoints.config;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+@Configuration
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http.authorizeRequests()
+            .antMatchers("/welcome").permitAll()
+            .anyRequest().authenticated()
+            .and()
+            .formLogin()
+            .permitAll()
+            .and()
+            .logout()
+            .permitAll();
+    }
+}
