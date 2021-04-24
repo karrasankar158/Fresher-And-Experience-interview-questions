@@ -1,0 +1,102 @@
+Hi Team,
+#Try it 3+ #years #experience
+#SIMENS #INTERVIEW #QUESTIONS  
+#FIRST ROUND:  #SECOND ROUND (40 min +) #THIRD ROUND (#Asked #max #Question #from #Resume)
+Written Test (with pen and paper) 5 questions 30 min duration 
+1.Given a List of N number a1, a2, a3........an, you have to find smallest number from the List that is repeated in the List exactly K number of times.
+
+Input Format
+
+First Line of Input Contain Single Value N, Size of List
+Second Line of Input Contain N Space Separated Integers
+Third Line of Input Contain Single Value K
+
+Output Format
+
+Smallest Integer Value That is Repeated Exactly K Number of Time
+
+Constraints
+
+0 < N < 100001
+0 <= K < 100001
+0 <= ai< 100001
+NOTE
+There Will Be At least One Variable Which Is Repeated K Times
+
+2. Class A has to keep generating random numbers and it has to notify class B when it generates a composite number. Class B has to print the number whenever it receives a notification. (Provide code for same)
+
+3. The program has to search for a word in a data structure of multimillion entries what libraries/mechanism within java you recommend to minimize the time of search
+
+4.Given a List of Distinct N number a1, a2, a3........an.
+Find The Position Of Number K In The Given List.
+
+Input Format
+
+First Line Take Input Value of N
+
+Second Line Take Input N Space Separated Integer Value
+Third Line Take Input Value of K
+Output Format
+Position of K in the Given List
+
+Constraints
+
+0 < N < 100001
+0 <ai< 1010
+0 < K < 1010
+NOTE:
+Array Indexing Starts From 0
+
+SAMPLE INPUT 
+5
+1 2 3 4 5
+4
+SAMPLE OUTPUT 
+3
+Time Limit:    1.0 sec(s) for each input file.
+
+5. Complete the merge String function .It has 2 parameters:
+1. A String a.
+2. A String b.
+Your function must merge string a and b and then return a single merged string. A merge operation between 2 string describe below 
+Append alternating character from a and b , respectively, to some new String, merged string 
+Once all of the characters in one of the strings have been merged, append the remaining characters in the other string to merged string 
+Use only one single iteration to merge string 
+         Sample input: s1=ab s2=zsd   output: azbsd
+
+#SECOND ROUND (40 min +)
+Project Description with end to end only the part which u worked
+What are the main oop principles and where u used in your project and why 
+Which java version u familiar just give a brief on it about the new features 
+What are the new features introduced as part of Java 9
+Will java stream API will give better performance as compare with java 7 approach can you proof it? (She gave laptop configure with jdk 9)
+What are the method presents in Object class, why 3 wait () overloaded method what is the purpose of it.
+Did you aware on Concurrent API? what are the new DS introduced in concurrent API just give a brief and purpose 
+Did you aware on Executor Framework if yes what is the difference between execute() and submit() method 
+What is Type generic in Java? Did you used as part of your project if yes. Where and its purpose
+How you exposing your rest services? write snippet of code (she gave a scenario) I have a requirement based on product name it will give me price just one input and one op
+What is difference between @pathVariable and @RequestParm when we should choose which one (she asked it based on my previous question code)
+Did you worked in Spring Security if yes which approach u used xml or configure if configure then why 3 overloaded method provided in SpringSecurityConfigureAdapter what is the purpose of each one (As I said Configure approach that’s why this question asked)
+I want to stop some process before off my server how can I achieve this 
+What is the difference between Soap web services and rest web services , in which case we should go for which one 
+Did you aware on WSDL? if yes what are the components of WSDL and its purpose 
+Which part you worked Provider or consumer? Can you write WSDL?
+They gave small scenario to explain WSDL structure for overloaded method                                                public Device getDeviceInfo(int deviceId);
+Public Device getDeviceInfo (String deviceName)
+
+#THIRD ROUND (Asked max Question from Resume)
+Sort intro about you not project and technology all
+What is Data Modeling? He Gave one Scenario  and tell me to approach data modeling for same
+What is NoSQL? Why people are using it .is there any performance improvement?
+What is Aerospike did u used it? 
+What are the all spring modules you work just give me comparison whether that think can’t you achieve in simple J2EE?
+Give a Real world example of Spring Transaction which we all are using our daily life
+How can I configure Data source in such a manner that I it will not tightly coupled with my DB. assume today am using Oracle in future I want to move MySQL so that time it should not impact to my business.
+Where you used Set and List in your project just tell me the exact scenario , after my explanation He  asked suppose am fetching bunch of Employee records from Table and I want to store them in Set is this right approach or not just give point to point answer 
+What is Jhipster what is the purpose it, did you ever used it?
+How you are deploying your micro services 
+ Why JSON why not XML? where we can integrate both XML and JSON from UI 
+What are the Repositories in spring boot and how we will write if I have sample Entity Price give a sample.
+If in spring boot application.properties is there then why we need application.yml
+Why spring boot why not spring .give point to point answer 
+Assume I have an interface ECurrency with getCurrencyInfo (Locale locale) and I have multiple concert implementation I have like INCurrencyFactory, USCurrencyFactory like this I injected both in my services .but I want to inject both as a single instance how can I approach to this use case.
