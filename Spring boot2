@@ -1,0 +1,1175 @@
+Hi Team,
+#Today's uploaded #Real_Time
+#Spring #Boot #Rest #web services #using #Swagger and #Orika
+#Getting Started with Swagger
+When creating a REST API, good documentation is instrumental.
+Moreover, every change in the API should be simultaneously described in the reference documentation.
+#What is swagger
+Swagger is a specification for documenting REST API. As an application developer and write web services using your favorite framework.
+Swagger scans the code and exposes the documentation on some URL.
+Any client can consume this URL (which comes as XML or JSON documents) and learn how to use your REST web services.
+Client now knows which HTTP methods to call on which URL, which input documents to send, which status code to expect, etc.
+Swagger is a specification and supports a wide range of frameworks.
+#Installation
+In order to use Swagger to a web Spring application you need to add the dependencies to the Springfox and Swagger libraries in the pom.xml file
+
+#pom.xml
+<!-- Swagger2 dependency -->
+ <dependency>
+ <groupId>io.springfox</groupId>
+ <artifactId>springfox-swagger2</artifactId>
+ <version>2.5.0</version>
+ <scope>compile</scope>
+ </dependency>
+ 
+ <dependency>
+ <groupId>io.springfox</groupId>
+ <artifactId>springfox-swagger-ui</artifactId>
+ <version>2.5.0</version>
+ <scope>compile</scope>
+ </dependency> 
+
+#configure swagger 2 in the Project
+To enable support for swagger specification 2.0 use the @EnableSwagger2 annotation
+To document the service we use a Docket. This is changed to be more inline with the fact that expressing the contents of the documentation is agnostic of the format the documentation is rendered.
+#src/main/java/com/intellitech/springlabs/SwaggerConfig.java
+#SwaggerConfig.java
+
+package com.intellitech.springlabs;
+ 
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import com.google.common.base.Predicate;
+ 
+import static com.google.common.base.Predicates.or;
+import static springfox.documentation.builders.PathSelectors.regex;
+import springfox.documentation.builders.ApiInfoBuilder;
+import springfox.documentation.builders.RequestHandlerSelectors;
+import springfox.documentation.service.ApiInfo;
+import springfox.documentation.spi.DocumentationType;
+import springfox.documentation.spring.web.plugins.Docket;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
+ 
+@EnableSwagger2
+@Configuration
+public class SwaggerConfig {
+ 
+ @Bean
+ public Docket api() {
+ return new Docket(DocumentationType.SWAGGER_2)
+ .useDefaultResponseMessages(false)
+ .select()
+ .apis(RequestHandlerSelectors.any())
+ .apis(RequestHandlerSelectors.basePackage("com.intellitech.springlabs.controller"))
+ .paths(paths()).build()
+ .apiInfo(apiInfo());
+ }
+ 
+ private ApiInfo apiInfo() {
+ return new ApiInfoBuilder()
+ .title("SPRING LABS")
+ .description("Created by IntelliTech")
+ .version("1.0")
+ .termsOfServiceUrl("http://intellitech.pro/")
+ .build();
+ }
+ 
+ @SuppressWarnings("unchecked")
+ private Predicate paths() {
+ return or(
+ regex("/users.*"),
+ regex("/role.*"),
+ regex("/login.*"));
+ }
+}
+
+In all controller we need to use Swagger annotations to document the API.
+#src/main/java/com/intellitech/springlabs/controller
+#UserController.java
+
+package com.intellitech.springlabs.controller;
+ 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+ 
+import com.intellitech.springlabs.model.User;
+import com.intellitech.springlabs.service.UserService;
+import com.intellitech.springlabs.util.CustomError;
+ 
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+ 
+@RestController
+@RequestMapping("/users")
+public class UserController {
+ 
+ @Autowired
+ private UserService userService;
+ 
+ @ApiOperation(value="Get user by id")
+ @RequestMapping(value="/{userId}",method=RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE)
+ @ApiResponses(value = { @ApiResponse(code = 200, message = "Success", response = User.class),
+ @ApiResponse(code = 403, message = Constants.FORBIDDEN),
+ @ApiResponse(code = 422, message = Constants.USER_NOT_FOUND),
+ @ApiResponse(code = 417, message = Constants.EXCEPTION_FAILED) })
+ public ResponseEntity<?> getUserById(@PathVariable("userId") Long userId){
+ try {
+ User user = userService.findById(userId);
+ return new ResponseEntity<User>(user, HttpStatus.OK);
+ 
+ } catch (ObjectNotFoundException onfe) {
+ onfe.printStackTrace();
+ CustomError error = new CustomError("User with id = " + userId + " is not found");
+ return new ResponseEntity<CustomError>(error, HttpStatus.UNPROCESSABLE_ENTITY);
+ 
+ } catch (Exception e) {
+ e.printStackTrace();
+ CustomError error = new CustomError("An error has occurred");
+ return new ResponseEntity<CustomError>(error, HttpStatus.EXPECTATION_FAILED);
+ }
+ 
+}
+
+The CustomError is a class used to return error message in the response
+#src/main/java/com/intellitech /springlabs/util/CustomError.java
+#CustomError.java
+package com.intellitech.springlabs.util;
+ 
+public class CustomError {
+ 
+ private String errorMessage;
+ 
+ public CustomError(String errorMessage) {
+ this.errorMessage = errorMessage;
+ }
+ 
+ public String getErrorMessage() {
+ return errorMessage;
+ }
+}
+
+Getting Started With Orika
+Development of enterprise software often require creation of APIs for each application components. On implementation phase this involves mapping between API models on different layers of components (e.g. mapping persistence model to domain model to DTO). Such mapping often prone to boiler plate code, consuming development efforts and time.
+
+The good solution is that serveral alternatives exist for object-to-object mapping with Orika. Although this project is quite new (since 2012), it has a very stable code base, offers all relevant features and is very easy to understand.
+
+#Installation de orika
+#pom.xml
+
+#Configure Orika with the spring framework
+Define the source and target beans.
+Source bean
+src/main/java/com/intellitech/springlabs/model/User.java
+User.java
+th the spring framework
+Define the source and target beans.
+Source bean
+src/main/java/com/intellitech/springlabs/model/User.java
+
+User.javaJava
+
+package com.intellitech.springlabs.model;
+
+import java.io.Serializable;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "user", schema = "public")
+public class User implements Serializable {
+
+ private static final long serialVersionUID = 1L;
+
+ @Id
+ @GeneratedValue(strategy = GenerationType.AUTO)
+ @Column(name = "id")
+ private Long id;
+
+ @Column(name = "first_name", length = 75)
+ private String firstName;
+
+ @Column(name = "last_name", length = 80)
+ private String lastName;
+
+ @Column(name = "username", length = 65)
+ private String username;
+
+ @Column(name = "password", length = 64)
+ private String password;
+
+ @Column(name = "email", unique = true, length = 115)
+ private String email;
+
+ @OneToOne(fetch = FetchType.EAGER)
+ @JoinColumn(name = "role_id")
+ private Role role;
+
+ public User() {
+
+ }
+
+ public Long getId() {
+ return id;
+ }
+
+ public void setId(Long id) {
+ this.id = id;
+ }
+
+ public String getFirstName() {
+ return firstName;
+ }
+
+ public void setFirstName(String firstName) {
+ this.firstName = firstName;
+ }
+
+ public String getLastName() {
+ return lastName;
+ }
+
+ public void setLastName(String lastName) {
+ this.lastName = lastName;
+ }
+
+ public String getUsername() {
+ return username;
+ }
+
+ public void setUsername(String username) {
+ this.username = username;
+ }
+
+ public String getPassword() {
+ return password;
+ }
+
+ public void setPassword(String password) {
+ this.password = password;
+ }
+
+ public Role getRole() {
+ return role;
+ }
+
+ public void setRole(Role role) {
+ this.role = role;
+ }
+
+ public String getEmail() {
+ return email;
+ }
+
+ public void setEmail(String email) {
+ this.email = email;
+ }
+
+}
+
+package com.intellitech.springlabs.model;
+ 
+import java.io.Serializable;
+ 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+ 
+@Entity
+@Table(name = "user", schema = "public")
+public class User implements Serializable {
+ 
+ private static final long serialVersionUID = 1L;
+ 
+ @Id
+ @GeneratedValue(strategy = GenerationType.AUTO)
+ @Column(name = "id")
+ private Long id;
+ 
+ @Column(name = "first_name", length = 75)
+ private String firstName;
+ 
+ @Column(name = "last_name", length = 80)
+ private String lastName;
+ 
+ @Column(name = "username", length = 65)
+ private String username;
+ 
+ @Column(name = "password", length = 64)
+ private String password;
+ 
+ @Column(name = "email", unique = true, length = 115)
+ private String email;
+ 
+ @OneToOne(fetch = FetchType.EAGER)
+ @JoinColumn(name = "role_id")
+ private Role role;
+ 
+ public User() {
+ 
+ }
+ 
+ public Long getId() {
+ return id;
+ }
+ 
+ public void setId(Long id) {
+ this.id = id;
+ }
+ 
+ public String getFirstName() {
+ return firstName;
+ }
+ 
+ public void setFirstName(String firstName) {
+ this.firstName = firstName;
+ }
+ 
+ public String getLastName() {
+ return lastName;
+ }
+ 
+ public void setLastName(String lastName) {
+ this.lastName = lastName;
+ }
+ 
+ public String getUsername() {
+ return username;
+ }
+ 
+ public void setUsername(String username) {
+ this.username = username;
+ }
+ 
+ public String getPassword() {
+ return password;
+ }
+ 
+ public void setPassword(String password) {
+ this.password = password;
+ }
+ 
+ public Role getRole() {
+ return role;
+ }
+ 
+ public void setRole(Role role) {
+ this.role = role;
+ }
+ 
+ public String getEmail() {
+ return email;
+ }
+ 
+ public void setEmail(String email) {
+ this.email = email;
+ }
+ 
+}
+
+#src/main/java/com/intellitech/springlabs/model/Device.java
+Device.java
+
+package com.intellitech.springlabs.model;
+ 
+import java.io.Serializable;
+ 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+ 
+import com.intellitech.springlabs.enumeration.Status;
+ 
+@Entity
+@Table(name = "device", schema = "public")
+public class Device implements Serializable {
+ 
+ private static final long serialVersionUID = 1L;
+ 
+ @Id
+ @GeneratedValue(strategy = GenerationType.AUTO)
+ @Column(name = "id")
+ private Long id;
+ 
+ @Column(name = "name", length = 65)
+ private String name;
+ 
+ @Column(name = "unique_id", length = 30)
+ private String uniqueId;
+ 
+ @Enumerated(EnumType.STRING)
+ @Column(name = "status")
+ private Status status;
+ 
+ @Column(name = "phone_number", length = 65)
+ private String phoneNumber;
+ 
+ @OneToOne(fetch = FetchType.EAGER)
+ @JoinColumn(name = "user_id")
+ private User user;
+ 
+ public Device() {
+ 
+ }
+ 
+ public Long getId() {
+ return id;
+ }
+ 
+ public void setId(Long id) {
+ this.id = id;
+ }
+ 
+ public String getName() {
+ return name;
+ }
+ 
+ public void setName(String name) {
+ this.name = name;
+ }
+ 
+ public String getUniqueId() {
+ return uniqueId;
+ }
+ 
+ public void setUniqueId(String uniqueId) {
+ this.uniqueId = uniqueId;
+ }
+ 
+ public Status getStatus() {
+ return status;
+ }
+ 
+ public void setStatus(Status status) {
+ this.status = status;
+ }
+ 
+ public String getPhoneNumber() {
+ return phoneNumber;
+ }
+ 
+ public void setPhoneNumber(String phoneNumber) {
+ this.phoneNumber = phoneNumber;
+ }
+ 
+ public User getUser() {
+ return user;
+ }
+ 
+ public void setUser(User user) {
+ this.user = user;
+ }
+}
+src/main/java/com/intellitech/springlabs/model/Role.java
+Role.java
+package com.intellitech.springlabs.model;
+ 
+import java.io.Serializable;
+ 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+ 
+@Entity
+@Table(name = "role", schema = "public")
+public class Role implements Serializable {
+ 
+ private static final long serialVersionUID = 1L;
+ 
+ @Id
+ @GeneratedValue(strategy = GenerationType.AUTO)
+ @Column(name = "id")
+ private Integer id;
+ 
+ @Column(name = "role_name", length = 65)
+ private String roleName;
+ 
+ public Role() {
+ 
+ }
+ 
+ public Integer getId() {
+ return id;
+ }
+ 
+ public void setId(Integer id) {
+ this.id = id;
+ }
+ 
+ public String getRoleName() {
+ return roleName;
+ }
+ 
+ public void setRoleName(String roleName) {
+ this.roleName = roleName;
+ }
+ 
+}
+
+Target Bean
+src/main/java/com/intellitech/springlabs/model/UserDto.java
+UserDto.java
+ this.id = id;
+ }
+ 
+ public String getRoleName() {
+ return roleName;
+ }
+ 
+ public void setRoleName(String roleName) {
+ this.roleName = roleName;
+ }
+ 
+}
+Target Bean
+src/main/java/com/intellitech/springlabs/model/dto/UserDto.java
+
+UserDto.javaJava
+
+package com.intellitech.springlabs.model.dto;
+
+import java.io.Serializable;
+
+public class UserDto implements Serializable{
+
+ private static final long serialVersionUID = 1L;
+ private Long id;
+ private String firstName;
+ private String lastName;
+ private String username;
+ private String password;
+ private String email;
+ private RoleDto roleDto;
+
+ public Long getId() {
+ return id;
+ }
+
+ public void setId(Long id) {
+ this.id = id;
+ }
+
+ public String getFirstName() {
+ return firstName;
+ }
+
+ public void setFirstName(String firstName) {
+ this.firstName = firstName;
+ }
+
+ public String getLastName() {
+ return lastName;
+ }
+
+ public void setLastName(String lastName) {
+ this.lastName = lastName;
+ }
+
+ public String getUsername() {
+ return username;
+ }
+
+ public void setUsername(String username) {
+ this.username = username;
+ }
+
+ public String getPassword() {
+ return password;
+ }
+
+ public void setPassword(String password) {
+ this.password = password;
+ }
+
+ public String getEmail() {
+ return email;
+ }
+
+ public void setEmail(String email) {
+ this.email = email;
+ }
+
+ public RoleDto getRoleDto() {
+ return roleDto;
+ }
+
+ public void setRoleDto(RoleDto roleDto) {
+ this.roleDto = roleDto;
+ }
+
+src/main/java/com/intellitech/springlabs/model/dto
+DeviceDto.java
+package com.intellitech.springlabs.model.dto;
+ 
+import java.io.Serializable;
+ 
+public class UserDto implements Serializable{
+ 
+ private static final long serialVersionUID = 1L;
+ private Long id;
+ private String firstName;
+ private String lastName;
+ private String username;
+ private String password;
+ private String email;
+ private RoleDto roleDto;
+ 
+ public Long getId() {
+ return id;
+ }
+ 
+ public void setId(Long id) {
+ this.id = id;
+ }
+ 
+ public String getFirstName() {
+ return firstName;
+ }
+ 
+ public void setFirstName(String firstName) {
+ this.firstName = firstName;
+ }
+ 
+ public String getLastName() {
+ return lastName;
+ }
+ 
+ public void setLastName(String lastName) {
+ this.lastName = lastName;
+ }
+ 
+ public String getUsername() {
+ return username;
+ }
+ 
+ public void setUsername(String username) {
+ this.username = username;
+ }
+ 
+ public String getPassword() {
+ return password;
+ }
+ 
+ public void setPassword(String password) {
+ this.password = password;
+ }
+ 
+ public String getEmail() {
+ return email;
+ }
+ 
+ public void setEmail(String email) {
+ this.email = email;
+ }
+ 
+ public RoleDto getRoleDto() {
+ return roleDto;
+ }
+ 
+ public void setRoleDto(RoleDto roleDto) {
+ this.roleDto = roleDto;
+ }
+ 
+}
+
+src/main/java/com/intellitech/springlabs/model/dto/RoleDto.java
+
+package com.intellitech.springlabs.model.dto;
+ 
+import java.io.Serializable;
+ 
+public class RoleDto implements Serializable {
+ 
+ private static final long serialVersionUID = 1L;
+ private Integer id;
+ private String roleName;
+ 
+ public Integer getId() {
+ return id;
+ }
+ 
+ public void setId(Integer id) {
+ this.id = id;
+ }
+ 
+ public String getRoleName() {
+ return roleName;
+ }
+ 
+ public void setRoleName(String roleName) {
+ this.roleName = roleName;
+ }
+ 
+}
+The basic cornerstone of the Orika mapping framework is the MapperFactory class. This is the class which you will use to configure any mappings, and obtain the MapperFacade which performs the actual mapping work.
+src/main/java/com/intellitech/springlabs/model.map/UserMapper.java
+UserMapper.java
+package com.intellitech.springlabs.model.mapper;
+ 
+import org.springframework.stereotype.Component;
+ 
+import com.intellitech.springlabs.model.User;
+import com.intellitech.springlabs.model.dto.UserDto;
+ 
+import ma.glasnost.orika.MapperFactory;
+import ma.glasnost.orika.impl.ConfigurableMapper;
+ 
+@Component
+public class UserMapper extends ConfigurableMapper{
+ 
+protected void configure(MapperFactory factory) {
+ 
+     factory.classMap(User.class, UserDto.class)
+       .field("id", "id")
+       .field("firstName", "firstName")
+       .field("lastName", "lastName")
+       .field("username", "username")
+       .field("firstName", "firstName")
+       .field("password", "password")
+       .field("email", "email")
+       .field("role", "roleDto")
+       .byDefault()
+       .register();      
+ }
+}
+
+src/main/java/com/intellitech/springlabs/model.map/RoleMapper.java
+RoleMapper.java
+
+package com.intellitech.springlabs.model.mapper;
+ 
+import org.springframework.stereotype.Component;
+ 
+import com.intellitech.springlabs.model.Role;
+import com.intellitech.springlabs.model.dto.RoleDto;
+ 
+import ma.glasnost.orika.MapperFactory;
+import ma.glasnost.orika.impl.ConfigurableMapper;
+ 
+@Component
+public class RoleMapper extends ConfigurableMapper{
+ 
+ protected void configure(MapperFactory factory) {
+ 
+     factory.classMap(Role.class, RoleDto.class)
+       .field("id", "id")
+       .field("roleName", "roleName")
+       .byDefault()
+       .register();      
+ }
+}
+src/main/java/com/intellitech/springlabs/model.map/DeviceMapper.java
+DeviceMapper.java
+package com.intellitech.springlabs.model.mapper;
+ 
+import org.springframework.stereotype.Component;
+ 
+import com.intellitech.springlabs.model.Device;
+import com.intellitech.springlabs.model.dto.DeviceDto;
+ 
+import ma.glasnost.orika.MapperFactory;
+import ma.glasnost.orika.impl.ConfigurableMapper;
+ 
+@Component
+public class DeviceMapper extends ConfigurableMapper{
+ 
+ protected void configure(MapperFactory factory) {
+     factory.classMap(Device.class, DeviceDto.class)
+       .field("id", "id")
+       .field("name", "name")
+       .field("uniqueId", "uniqueId")
+       .field("status", "status")
+       .field("phoneNumber", "phoneNumber")
+       .field("user", "userDto")
+       .field("user.role", "userDto.roleDto")
+       .byDefault()
+       .register();  
+   }
+}
+
+src/main/java/com/intellitech/springlabs/repository/DeviceRepository.java
+DeviceRepository.java
+package com.intellitech.springlabs.repository;
+ 
+import org.springframework.data.jpa.repository.JpaRepository;
+ 
+import com.intellitech.springlabs.model.Device;
+ 
+public interface DeviceRepository extends JpaRepository {
+ 
+ Device findByUniqueId(String uniqueId);
+}
+Service Layer
+Now let´s create UserService,DeviceService and RoleService layer(interface and implementation). We will inject the UserRepository,DeviceRepository and RoleRepository into our services implementation.
+src/main/java/com/intellitech/springlabs/service/UserService.java
+UserService.java
+package com.intellitech.springlabs.service;
+ 
+import com.intellitech.springlabs.model.dto.UserDto;
+ 
+import javassist.tools.rmi.ObjectNotFoundException;
+ 
+public interface UserService {
+ 
+  UserDto findByUsernameOrEmail(String usernameOrEmail);
+  UserDto findById(Long id) throws ObjectNotFoundException;
+  UserDto findByEmail(String email) throws ObjectNotFoundException;
+    UserDto save(UserDto userDto);
+         
+}
+
+src/main/java/com/intellitech/springlabs/service/DeviceService.java
+DeviceService.java
+
+package com.intellitech.springlabs.service;
+ 
+import com.intellitech.springlabs.model.dto.DeviceDto;
+ 
+import javassist.tools.rmi.ObjectNotFoundException;
+ 
+public interface DeviceService {
+ 
+  DeviceDto saveDevice(DeviceDto device);
+  void deleteDevice(DeviceDto device);
+  void deleteDevice(Long deviceId) throws IllegalArgumentException;
+  DeviceDto updateDevice(DeviceDto device);
+  DeviceDto findById(Long deviceId) throws ObjectNotFoundException;
+  DeviceDto findByUniqueId(String uniqueId)throws ObjectNotFoundException;
+   List findByUserId(Long userId) throws ObjectNotFoundException;
+}
+
+src/main/java/com/intellitech/springlabs/service/RoleService.java
+RoleService.java
+
+package com.intellitech.springlabs.service;
+ 
+import java.util.List;
+ 
+import com.intellitech.springlabs.model.dto.RoleDto;
+ 
+import javassist.tools.rmi.ObjectNotFoundException;
+ 
+public interface RoleService {
+ 
+  List findAll() throws ObjectNotFoundException;
+}
+src/main/java/com/intellitech/springlabs/service/UserServiceImpl.java
+UserServiceImpl
+package com.intellitech.springlabs.service.impl;
+ 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+ 
+import com.intellitech.springlabs.model.User;
+import com.intellitech.springlabs.model.dto.UserDto;
+import com.intellitech.springlabs.model.mapper.UserMapper;
+import com.intellitech.springlabs.repository.UserRepository;
+import com.intellitech.springlabs.service.UserService;
+ 
+import javassist.tools.rmi.ObjectNotFoundException;
+ 
+@Service("userService")
+@Transactional
+public class UserServiceImpl implements UserService {
+ 
+ @Autowired
+ private UserRepository userRepository;
+ 
+ @Autowired
+ private UserMapper userMapper;
+ 
+ @Override
+ @Transactional(readOnly = true)
+ public UserDto findByUsernameOrEmail(String username) {
+ try {
+ User user = userRepository.findByUsernameOrEmail(username);
+ return userMapper.map(user, UserDto.class);
+ } catch (Exception e) {
+ throw e;
+ }
+ 
+ }
+ 
+ @Override
+ @Transactional(readOnly = true)
+ public UserDto findById(Long id) throws ObjectNotFoundException {
+ 
+ User user = userRepository.findOne(id);
+ if (user == null) {
+ throw new ObjectNotFoundException("User not found");
+ }
+ return userMapper.map(user, UserDto.class);
+ 
+ }
+ 
+ @Override
+ @Transactional(readOnly = true)
+ public UserDto findByEmail(String email) throws ObjectNotFoundException {
+ 
+ User user = userRepository.findByEmail(email);
+ if (user == null) {
+ throw new ObjectNotFoundException("User not found");
+ }
+ return userMapper.map(user, UserDto.class);
+ 
+ }
+ 
+        @Override
+ public UserDto save(UserDto userDto) {
+ 
+ if (userDto != null) {
+ User user = userMapper.map(userDto, User.class);
+ User userSaved = userRepository.save(user);
+ if (userSaved != null) {
+ return userMapper.map(userSaved, UserDto.class);
+ }
+ }
+ return null;
+ }
+ 
+}
+src/main/java/com/intellitech/springlabs/util/MapperUtil.java
+package com.intellitech.springlabs.util;
+ 
+import java.util.ArrayList;
+import java.util.List;
+ 
+import ma.glasnost.orika.MapperFacade;
+ 
+public class MapperUtil {
+ 
+ public static  List<u> map(final MapperFacade mapper, final List source, final Class<u> destType) {
+ 
+ if (mapper == null || source == null) {
+ return null;
+ }
+ List<u> dest = new ArrayList<u>();
+ dest = mapper.mapAsList(source, destType);
+ return dest;
+ }
+}
+ 
+</u></u></u></u>
+
+src/main/java/com/intellitech/springlabs/controller
+package com.intellitech.springlabs.controller;
+ 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+ 
+import com.intellitech.springlabs.model.dto.UserDto;
+import com.intellitech.springlabs.model.request.UpdateUserProfileRequest;
+import com.intellitech.springlabs.service.UserService;
+import com.intellitech.springlabs.util.Constants;
+import com.intellitech.springlabs.util.CurrentSession;
+import com.intellitech.springlabs.util.CustomError;
+ 
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+import javassist.tools.rmi.ObjectNotFoundException;
+ 
+@RestController
+@RequestMapping("/users")
+public class UserController {
+ 
+ @Autowired
+ private UserService userService;
+ 
+ @Autowired
+ private CurrentSession currentSession;
+ 
+ @ApiOperation(value = "Get current user")
+ @RequestMapping(value = "getCurrentUser", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+ @ApiResponses(value = { 
+ @ApiResponse(code = 200, message = Constants.SUCCESS, response = UserDto.class),
+ @ApiResponse(code = 422, message = Constants.USER_NOT_FOUND),
+ @ApiResponse(code = 417, message = Constants.EXCEPTION_FAILED) })
+ public ResponseEntity<?> getCurrentUser() {
+ 
+ try {
+ UserDto userDto = userService.findById(currentSession.getSpringLabsUser().getUserDto().getId());
+ return new ResponseEntity<UserDto>(userDto, HttpStatus.OK);
+ 
+ } catch (ObjectNotFoundException onfe) {
+ onfe.printStackTrace();
+ CustomError error = new CustomError("User not found");
+ return new ResponseEntity<CustomError>(error, HttpStatus.UNPROCESSABLE_ENTITY);
+ 
+ } catch (Exception e) {
+ e.printStackTrace();
+ CustomError error = new CustomError("An error has occurred");
+ return new ResponseEntity<CustomError>(error, HttpStatus.EXPECTATION_FAILED);
+ }
+ 
+ }
+ 
+ @ApiOperation(value = "Update user profile")
+ @RequestMapping(value = "updateUserProfile", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+ @ApiResponses(value = { 
+ @ApiResponse(code = 200, message = Constants.SUCCESS, response = UserDto.class),
+ @ApiResponse(code = 422, message = Constants.USER_NOT_FOUND),
+ @ApiResponse(code = 204, message = Constants.USER_PROFILE_NOT_UPDATED),
+ @ApiResponse(code = 417, message = Constants.EXCEPTION_FAILED) })
+ public ResponseEntity<?> updateUserProfile(@RequestBody UpdateUserProfileRequest request) {
+ try {
+ UserDto userDto = userService.findById(currentSession.getSpringLabsUser().getUserDto().getId());
+ userDto.setFirstName(request.getFirstName());
+ userDto.setLastName(request.getLastName());
+ userDto.setUsername(request.getUsername());
+ userDto.setEmail(request.getEmail());
+ UserDto userSaved = userService.save(userDto);
+ if (userSaved != null) {
+ return new ResponseEntity<UserDto>(userDto, HttpStatus.OK);
+ }
+ CustomError error = new CustomError("Cannot update user");
+ return new ResponseEntity<CustomError>(error, HttpStatus.NO_CONTENT);
+ 
+ } catch (ObjectNotFoundException onfe) {
+ onfe.printStackTrace();
+ CustomError error = new CustomError("User not found");
+ return new ResponseEntity<CustomError>(error, HttpStatus.UNPROCESSABLE_ENTITY);
+ }
+ 
+ catch (Exception e) {
+ e.printStackTrace();
+ CustomError error = new CustomError("An error has occurred");
+ return new ResponseEntity<CustomError>(error, HttpStatus.EXPECTATION_FAILED);
+ }
+ }
+ 
+}
+
+src/main/java/com/intellitech/springlabs/controller
+
+package com.intellitech.springlabs.controller;
+ 
+import java.util.ArrayList;
+import java.util.List;
+ 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+ 
+import com.intellitech.springlabs.model.request.AuthenticationRequest;
+import com.intellitech.springlabs.model.response.UserTransfer;
+import com.intellitech.springlabs.util.Constants;
+import com.intellitech.springlabs.util.TokenUtil;
+ 
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+ 
+@RestController
+@RequestMapping("/login")
+public class LoginController {
+ 
+ @Autowired
+ private AuthenticationManager authenticationManager;
+ 
+ @Autowired
+ @Qualifier("customUserDetailsService")
+ private UserDetailsService customUserDetailsService;
+ 
+ @RequestMapping(value = "/authenticate", method = { RequestMethod.POST })
+ @ApiOperation(value = "authenticate")
+ @ApiResponses(value = { 
+ @ApiResponse(code = 200, message = Constants.SUCCESS, response = UserTransfer.class),
+ @ApiResponse(code = 403, message = Constants.FORBIDDEN),
+ @ApiResponse(code = 204, message = Constants.NOT_FOUND),
+ @ApiResponse(code = 417, message = Constants.EXCEPTION_FAILED) })
+ public ResponseEntity<UserTransfer> authenticate(@RequestBody AuthenticationRequest authenticationRequest) {
+ try {
+ String username = authenticationRequest.getUsername();
+ String password = authenticationRequest.getPassword();
+ 
+ UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(username, password);
+ Authentication authentication = this.authenticationManager.authenticate(token);
+ SecurityContextHolder.getContext().setAuthentication(authentication);
+ UserDetails userDetails = this.customUserDetailsService.loadUserByUsername(username);
+ 
+ List<String> roles = new ArrayList<>();
+ 
+ for (GrantedAuthority authority : userDetails.getAuthorities()) {
+ roles.add(authority.toString());
+ }
+ return new ResponseEntity<UserTransfer>(new UserTransfer(userDetails.getUsername(), roles,
+ TokenUtil.createToken(userDetails), HttpStatus.OK), HttpStatus.OK);
+ } catch (BadCredentialsException bce) {
+ return new ResponseEntity<UserTransfer>(new UserTransfer(), HttpStatus.NO_CONTENT);
+ 
+ } catch (Exception e) {
+ return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
+ }
+ 
+ }
+ 
+}
+Run the application
+First you need to create a database with name springlabs and run the script in PostgreSQL database :
+
+scriptInsert.sqlPgSQL
+
+INSERT INTO public.role (id, role_name) VALUES (1, 'ROLE_ADMIN');
+INSERT INTO public.role (id, role_name) VALUES (2, 'ROLE_USER');
+INSERT INTO public.user (id, first_name, last_name, email, password, username, role_id) VALUES (1, 'Nizar', 'Ellouze','nizarellouze@gmail.com', '$2a$10$bpNMKeaQXKpJ4JVxOHWvu.tZdmCLT9nKcZreJ/ELfCgmTCyhC7GPy', 'admin', 1);
+INSERT INTO public.user (id, first_name, last_name, email, password, username, role_id) VALUES (2, 'Omar', 'Kessemtini','kessemtini.omar@gmail.com',  '$2a$10$TA.UfUqLa8uDeGkt95FfLeq7T5Y5vpDpzAtvJrHSLzLliY/PARXUq', 'user', 2
+INSERT INTO public.role (id, role_name) VALUES (1, 'ROLE_ADMIN');
+INSERT INTO public.role (id, role_name) VALUES (2, 'ROLE_USER');
+INSERT INTO public.user (id, first_name, last_name, email, password, username, role_id) VALUES (1, 'Nizar', 'Ellouze','nizarellouze@gmail.com', '$2a$10$bpNMKeaQXKpJ4JVxOHWvu.tZdmCLT9nKcZreJ/ELfCgmTCyhC7GPy', 'admin', 1);
+INSERT INTO public.user (id, first_name
+
+Open terminal and run mvn spring-boot:run and visit localhost:8080 and authenticate with one of the two users:
+USER1: username=user, password=user
+USER2: username=admin, password=admin
