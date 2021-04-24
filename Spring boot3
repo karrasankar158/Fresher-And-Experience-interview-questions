@@ -1,0 +1,393 @@
+Hi guys,
+#Spring #Security #Authentication #Using #Token #Real_Time
+#Authentication using token
+In this section we are going to enable authentication token-based in spring #MVC by following these steps.
+1-The user sends his credentials (username and password) to the server.
+2-The server authenticates the credentials and generates a token.
+3-The server stores the previously generated token in some storage along with the user identifier and an expiration date.
+4-The server sends the generated token to the user.
+5-The server, in each request, extracts the token from the incoming request. With the token, the server looks up the user details to perform authentication and authorization:
+*If the token is valid, the server accepts the request.
+*If the token is invalid, the server refuses the request.
+
+#Generate the token
+A token can be opaque which reveals no details other than the value itself (like a random string) or can be self-contained (like MD5 or SHA algorithme).
+src/main/java/com/intellitech /springlabs/util/TokenUtil.java
+
+TokenUtil.javaJava
+
+package com.intellitech.springlabs.util;
+ 
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.codec.Hex;
+ 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+ 
+public class TokenUtil {
+ 
+ public static final String MAGIC_KEY = "IntelliTech";
+ 
+ public static String createToken(UserDetails userDetails) {
+ long expires = System.currentTimeMillis() + 1000L * 60 * 60;
+ return userDetails.getUsername() + ":" + expires + ":" + computeSignature(userDetails, expires);
+ }
+ 
+ public static String computeSignature(UserDetails userDetails, long expires) {
+ StringBuilder signatureBuilder = new StringBuilder();
+ signatureBuilder.append(userDetails.getUsername()).append(":");
+ signatureBuilder.append(expires).append(":");
+ signatureBuilder.append(userDetails.getPassword()).append(":");
+ signatureBuilder.append(TokenUtil.MAGIC_KEY);
+ 
+ MessageDigest digest;
+ try {
+ digest = MessageDigest.getInstance("MD5");
+ } catch (NoSuchAlgorithmException e) {
+ throw new IllegalStateException("No MD5 algorithm available!");
+ }
+ return new String(Hex.encode(digest.digest(signatureBuilder.toString().getBytes())));
+ }
+ 
+ public static String getUserNameFromToken(String authToken) {
+ if (authToken == null) {
+ return null;
+ }
+ String[] parts = authToken.split(":");
+ return parts[0];
+ }
+ 
+ public static boolean validateToken(String authToken, UserDetails userDetails) {
+ String[] parts = authToken.split(":");
+ long expires = Long.parseLong(parts[1]);
+ String signature = parts[2];
+ String signatureToMatch = computeSignature(userDetails, expires);
+ return expires >= System.currentTimeMillis() && signature.equals(signatureToMatch);
+ }
+}
+
+src/main/java/com/intellitech /springlabs/util/AuthTokenFilter.java
+AuthTokenFilter.java
+
+ package com.intellitech.springlabs.util;
+ 
+import java.io.IOException;
+ 
+import javax.servlet.FilterChain;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
+ 
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.util.StringUtils;
+import org.springframework.web.filter.GenericFilterBean;
+ 
+public class AuthTokenFilter extends GenericFilterBean {
+ 
+ private UserDetailsService customUserDetailsService;
+ private String authTokenHeaderName = "x-auth-token";
+ 
+ public AuthTokenFilter(UserDetailsService userDetailsService) {
+ this.customUserDetailsService = userDetailsService;
+ }
+ 
+ @Override
+ public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain)
+ throws IOException, ServletException {
+ try {
+ HttpServletRequest httpServletRequest = (HttpServletRequest) servletRequest;
+ String authToken = httpServletRequest.getHeader(authTokenHeaderName);
+ 
+ if (StringUtils.hasText(authToken)) {
+ String username = TokenUtil.getUserNameFromToken(authToken);
+ 
+ UserDetails userDetails = customUserDetailsService.loadUserByUsername(username);
+ 
+ if (TokenUtil.validateToken(authToken, userDetails)) {
+ UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(userDetails,
+ userDetails.getPassword(), userDetails.getAuthorities());
+ SecurityContextHolder.getContext().setAuthentication(token);
+ }
+ }
+ 
+ filterChain.doFilter(servletRequest, servletResponse);
+ } catch (Exception ex) {
+ throw new RuntimeException(ex);
+ }
+ }
+}
+
+src/main/java/com/intellitech /springlabs/util/SecurityConfig.java
+SecurityConfig.java
+
+ package com.intellitech.springlabs;
+ 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.SecurityConfigurer;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.DefaultSecurityFilterChain;
+ 
+@Configuration
+@EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
+ 
+ @Autowired
+ @Qualifier("customUserDetailsService")
+ private UserDetailsService customUserDetailsService;
+ 
+ @Override
+ protected void configure(HttpSecurity http) throws Exception {
+ String [] methodSecured={"/users/*","/swagger-ui.html"};
+ 
+      http.csrf().disable()
+ .authorizeRequests().antMatchers("/","/login/authenticate").permitAll()
+ .antMatchers(methodSecured).authenticated()
+ .and().formLogin().loginPage("/login").defaultSuccessUrl("/swagger-ui.html").failureUrl("/login?error=true").permitAll()
+ .and().logout().deleteCookies("JSESSIONID").logoutUrl("/logout").logoutSuccessUrl("/login"); 
+      
+      SecurityConfigurer securityConfigurerAdapter =
+  new AuthTokenConfig(customUserDetailsService);
+  http.apply(securityConfigurerAdapter);
+ }
+
+@Override
+ protected void configure(HttpSecurity http) throws Exception {
+ String [] methodSecured={"/users/*","/swagger-ui.html"};
+ 
+      http.csrf().disable()
+ .authorizeRequests().antMatchers("/","/login/authenticate").permitAll()
+ .antMatchers(methodSecured).authenticated()
+ .and().formLogin().loginPage("/login").defaultSuccessUrl("/swagger-ui.html").failureUrl("/login?error=true").permitAll()
+ .and().logout().deleteCookies("JSESSIONID").logoutUrl("/logout").logoutSuccessUrl("/login"); 
+      
+      SecurityConfigurer securityConfigurerAdapter =
+  new AuthTokenConfig(customUserDetailsService);
+  http.apply(securityConfigurerAdapter);
+ }
+ 
+ @Override
+ protected void configure(AuthenticationManagerBuilder authManagerBuilder) throws Exception {
+ authManagerBuilder.userDetailsService(customUserDetailsService).passwordEncoder(bCryptPasswordEncoder());
+ }
+ 
+ @Bean
+    public BCryptPasswordEncoder bCryptPasswordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+ 
+ @Bean
+ @Override
+ public AuthenticationManager authenticationManagerBean() throws Exception {
+ return super.authenticationManagerBean();
+ }
+}
+
+#Service for authentication
+src/main/java/com/intellitech /springlabs/controller/LoginController.java
+LoginController.java
+
+package com.intellitech.springlabs.controller;
+ 
+import java.util.ArrayList;
+import java.util.List;
+ 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+ 
+import com.intellitech.springlabs.model.request.AuthenticationRequest;
+import com.intellitech.springlabs.model.response.UserTransfer;
+import com.intellitech.springlabs.util.TokenUtil;
+ 
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+ 
+@RestController
+@RequestMapping("/login")
+public class LoginController {
+ 
+ @Autowired
+ private AuthenticationManager authenticationManager;
+ 
+ @Autowired
+ @Qualifier("customUserDetailsService")
+ private UserDetailsService customUserDetailsService;
+ 
+ @RequestMapping(value = "/authenticate", method = { RequestMethod.POST })
+ @ApiOperation(value = "authenticate")
+ @ApiResponses(value = { @ApiResponse(code = 200, message = "Success", response = UserTransfer.class),
+     @ApiResponse(code = 403, message = Constants.FORBIDDEN),
+     @ApiResponse(code = 422, message = Constants.USER_NOT_FOUND),
+     @ApiResponse(code = 417, message = Constants.EXCEPTION_FAILED) })
+ public ResponseEntity<UserTransfer> authenticate(@RequestBody AuthenticationRequest authenticationRequest) {
+ try {
+ String username = authenticationRequest.getUsername();
+ String password = authenticationRequest.getPassword();
+ 
+ UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(username, password);
+ Authentication authentication = this.authenticationManager.authenticate(token);
+ SecurityContextHolder.getContext().setAuthentication(authentication);
+ UserDetails userDetails = this.customUserDetailsService.loadUserByUsername(username);
+ 
+ List<String> roles = new ArrayList();
+ 
+ for (GrantedAuthority authority : userDetails.getAuthorities()) {
+ roles.add(authority.toString());
+ }
+ 
+ return new ResponseEntity<UserTransfer>(new UserTransfer(userDetails.getUsername(), roles,
+ TokenUtil.createToken(userDetails), HttpStatus.OK), HttpStatus.OK);
+ 
+ } catch (BadCredentialsException bce) {
+ return new ResponseEntity<UserTransfer>(new UserTransfer(), HttpStatus.UNPROCESSABLE_ENTITY);
+ 
+ } catch (Exception e) {
+ return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
+ }
+ 
+ }
+ 
+}
+
+src/main/java/com/intellitech /springlabs/util/Constants.java
+Constants.java
+package com.intellitech.springlabs.util;
+ 
+public class Constants {
+ 
+ public final static String SUCCESS = "Success";
+ public final static String UNIQUE_ID_ALREADY_EXIST = "Unique id already exist";
+ public final static String USER_NOT_FOUND = "User not found";
+ public final static String DEVICE_NOT_FOUND = "User not found";
+ public final static String INTERNAL_SERVER_ERROR = "Internal server error";
+ public final static String EXCEPTION_FAILED = "Exception failed";
+ public final static String NOT_FOUND = "Not Found";
+ public final static String FORBIDDEN = "Forbidden";
+ public final static String USER_PROFILE_NOT_UPDATED = "User profile not updated";
+ 
+}
+src/main/java/com/intellitech /springlabs/model/response/UserTransfer.java
+
+package com.intellitech.springlabs.model.response;
+ 
+import java.util.Collections;
+import java.util.List;
+ 
+import org.springframework.http.HttpStatus;
+ 
+public class UserTransfer {
+ 
+ private String username;
+ private List<String> roles;
+ private String token;
+ private HttpStatus status;
+ 
+ public UserTransfer(String username, List<String> roles, String token, HttpStatus status) {
+ this.roles = roles;
+ this.token = token;
+ this.username = username;
+ this.status = status;
+ }
+ 
+ public UserTransfer() {
+ this.token = "";
+ this.username = "";
+ this.roles = Collections.emptyList();
+ this.status = HttpStatus.NOT_FOUND;
+ }
+ 
+ public List<String> getRoles() {
+ return this.roles;
+ }
+ 
+ public String getToken() {
+ return this.token;
+ }
+ 
+ public String getUsername() {
+ return this.username;
+ }
+ 
+ public HttpStatus getStatus() {
+ return this.status;
+ }
+ 
+}
+By default, the tomcat webserver will reject any request that didn’t originate from localhost.
+CORS is a browser feature that protects against cross-site scripting in JavaScript and the web would be a much more dangerous place without it. As always, security comes at a price and in this case that price is that web services that interact with an API on another domain or IP need to allow cross site access in their response headers or just about every modern browser won’t let the response through.
+src/main/java/com/intellitech /springlabs/SimpleCORSFilter.java
+SimpleCORSFilter.java
+
+package com.intellitech.springlabs;
+ 
+import java.io.IOException;
+ 
+import javax.servlet.Filter;
+import javax.servlet.FilterChain;
+import javax.servlet.FilterConfig;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+ 
+import org.springframework.stereotype.Component;
+ 
+@Component
+public class SimpleCORSFilter implements Filter {
+ 
+ @Override
+ public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain)
+ throws IOException, ServletException {
+ 
+ HttpServletRequest request = (HttpServletRequest) req;
+ HttpServletResponse response = (HttpServletResponse) res;
+ response.setHeader("Access-Control-Allow-Origin", "*");
+ response.setHeader("Access-Control-Allow-Credentials", "true");
+ response.setHeader("Access-Control-Allow-Methods", "POST, GET, PUT, OPTIONS, DELETE");
+ response.setHeader("Access-Control-Max-Age", "3600");
+ response.setHeader("Access-Control-Allow-Headers",
+ "x-auth-token, Content-Type, Accept, X-Requested-With, remember-me");
+ chain.doFilter(req, res);
+ }
+ 
+ @Override
+ public void destroy() {
+ 
+ }
+ 
+ @Override
+ public void init(FilterConfig filterConfig) throws ServletException {
+ 
+ }
+ 
+}
