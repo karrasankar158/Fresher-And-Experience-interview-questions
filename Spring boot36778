@@ -1,0 +1,329 @@
+Hi folks,
+#Latest #updates  #Real_time
+#GraphQL with #Spring Boot and #Netflix DGS
+1. #Dependencies for Spring Boot and Netflix GraphQL
+Let’s start with dependencies. We need to include Spring Web, Spring Data JPA, and the com.database:h2 artifact for running an in-memory database with our application. Of course, we also have to include Netflix DGS Spring Boot Starter. Here’s a list of required dependencies in Maven pom.xml.
+
+<dependency>
+   <groupId>org.springframework.boot</groupId>
+   <artifactId>spring-boot-starter-web</artifactId>
+</dependency>
+<dependency>
+   <groupId>org.springframework.boot</groupId>
+   <artifactId>spring-boot-starter-data-jpa</artifactId>
+</dependency>
+<dependency>
+   <groupId>com.h2database</groupId>
+   <artifactId>h2</artifactId>
+   <scope>runtime</scope>
+</dependency>
+<dependency>
+   <groupId>org.projectlombok</groupId>
+   <artifactId>lombok</artifactId>
+</dependency>
+<dependency>
+   <groupId>com.netflix.graphql.dgs</groupId>
+   <artifactId>graphql-dgs-spring-boot-starter</artifactId>
+   <version>${netflix-dgs.spring.version}</version>
+</dependency>
+2. GraphQL schemas
+Before we start implementation, we need to create GraphQL schemas with objects, queries, and mutations. A schema may be defined in multiple graphqls files, but all of them have to be placed inside the /src/main/resources/schemas directory. Thanks to that, the Netflix DGS library detects and loads them automatically.
+
+GraphQL schema for each entity is located in the separated file. Let’s take a look at the department.graphqls file. There is the QueryResolver with two find methods and the MutationResolver with a single method for adding new departments. We also have an input object for mutation and a standard type definition for queries.
+
+type QueryResolver {
+   departments: [Department]
+   department(id: ID!): Department!
+}
+
+type MutationResolver {
+   newDepartment(department: DepartmentInput!): Department
+}
+
+input DepartmentInput {
+   name: String!
+   organizationId: Int
+}
+
+type Department {
+   id: ID!
+   name: String!
+   organization: Organization
+   employees: [Employee]
+}
+Then we may take a look at the organization.graphqls file. It is a little bit more complicated than the previous schema. As you see I’m using the keyword extend on QueryResolver and MutationResolver. That’s because we have several files with GraphQL schemas.
+
+extend type QueryResolver {
+  organizations: [Organization]
+  organization(id: ID!): Organization!
+}
+
+extend type MutationResolver {
+  newOrganization(organization: OrganizationInput!): Organization
+}
+
+input OrganizationInput {
+  name: String!
+}
+
+type Organization {
+  id: ID!
+  name: String!
+  employees: [Employee]
+  departments: [Department]
+}
+Finally, the schema for the Employee entity. In contrast to the previous schemas, it has objects responsible for filtering like EmployeeFilter. We also need to define the schema object with mutation and query.
+
+extend type QueryResolver {
+  employees: [Employee]
+  employeesWithFilter(filter: EmployeeFilter): [Employee]
+  employee(id: ID!): Employee!
+}
+
+extend type MutationResolver {
+  newEmployee(employee: EmployeeInput!): Employee
+}
+
+input EmployeeInput {
+  firstName: String!
+  lastName: String!
+  position: String!
+  salary: Int
+  age: Int
+  organizationId: Int!
+  departmentId: Int!
+}
+
+type Employee {
+  id: ID!
+  firstName: String!
+  lastName: String!
+  position: String!
+  salary: Int
+  age: Int
+  department: Department
+  organization: Organization
+}
+
+input EmployeeFilter {
+  salary: FilterField
+  age: FilterField
+  position: FilterField
+}
+
+input FilterField {
+  operator: String!
+  value: String!
+}
+
+schema {
+  query: QueryResolver
+  mutation: MutationResolver
+}
+3. Domain Model for GraphQL and Hibernate
+We could have generated Java source code using previously defined GraphQL schemas. However, I prefer to use Lombok annotations, so I will do it manually. Here’s the Employee entity corresponding to the Employee object defined in GraphQL schema.
+
+@Entity
+@Data
+@NoArgsConstructor
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+public class Employee {
+   @Id
+   @GeneratedValue
+   @EqualsAndHashCode.Include
+   private Integer id;
+   private String firstName;
+   private String lastName;
+   private String position;
+   private int salary;
+   private int age;
+   @ManyToOne(fetch = FetchType.LAZY)
+   private Department department;
+   @ManyToOne(fetch = FetchType.LAZY)
+   private Organization organization;
+}
+Also, let’s take a look at the Department entity.
+
+@Entity
+@Data
+@NoArgsConstructor
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+public class Department {
+   @Id
+   @GeneratedValue
+   @EqualsAndHashCode.Include
+   private Integer id;
+   private String name;
+   @OneToMany(mappedBy = "department")
+   private Set<Employee> employees;
+   @ManyToOne(fetch = FetchType.LAZY)
+   private Organization organization;
+}
+The input objects are much simpler. Just to compare, here’s the DepartmentInput class.
+
+@Data
+@NoArgsConstructor
+public class DepartmentInput {
+   private String name;
+   private Integer organizationId;
+}
+4. Using Netflix DGS with Spring Boot
+Netflix DGS provides annotation-based support for Spring Boot. Let’s analyze the most interesting features using the example implementation of a query resolver. The EmployeeFetcher is responsible for defining queries related to the Employee object. We should annotate such a class with @DgsComponent (1). We may create our custom context definition to pass data between different methods or even different query resolvers (2). Then, we have to annotate every query method with @DgsData (3). The fields parentType and fields should match the names declared in GraphQL schemas. We defined three queries in the employee.graphqls file, so we have three methods inside EmployeeFetcher. After fetching all employees, we may save them in our custom context object (4), and then reuse them in other methods or resolvers (5).
+
+The last query method findWithFilter performs advanced filtering based on the dynamic list of fields passed in the input (6). To pass an input parameter we should annotate the method argument with @InputArgument.
+
+@DgsComponent // (1)
+public class EmployeeFetcher {
+
+   private EmployeeRepository repository;
+   private EmployeeContextBuilder contextBuilder; // (2)
+
+   public EmployeeFetcher(EmployeeRepository repository, 
+         EmployeeContextBuilder contextBuilder) {
+      this.repository = repository;
+      this.contextBuilder = contextBuilder;
+    }
+
+   @DgsData(parentType = "QueryResolver", field = "employees") // (3)
+   public List<Employee> findAll() {
+      List<Employee> employees = (List<Employee>) repository.findAll();
+      contextBuilder.withEmployees(employees).build(); // (4)
+      return employees;
+   }
+
+   @DgsData(parentType = "QueryResolver", field = "employee") 
+   public Employee findById(@InputArgument("id") Integer id, 
+               DataFetchingEnvironment dfe) {
+      EmployeeContext employeeContext = DgsContext.getCustomContext(dfe); // (5)
+      List<Employee> employees = employeeContext.getEmployees();
+      Optional<Employee> employeeOpt = employees.stream()
+         .filter(employee -> employee.getId().equals(id)).findFirst();
+      return employeeOpt.orElseGet(() -> 
+         repository.findById(id)
+            .orElseThrow(DgsEntityNotFoundException::new));
+   }
+
+   @DgsData(parentType = "QueryResolver", field = "employeesWithFilter")
+   public Iterable<Employee> findWithFilter(@InputArgument("filter") EmployeeFilter filter) { // (6)
+      Specification<Employee> spec = null;
+      if (filter.getSalary() != null)
+         spec = bySalary(filter.getSalary());
+      if (filter.getAge() != null)
+         spec = (spec == null ? byAge(filter.getAge()) : spec.and(byAge(filter.getAge())));
+      if (filter.getPosition() != null)
+         spec = (spec == null ? byPosition(filter.getPosition()) :
+                spec.and(byPosition(filter.getPosition())));
+     if (spec != null)  
+        return repository.findAll(spec);
+     else
+        return repository.findAll();
+   }
+
+   private Specification<Employee> bySalary(FilterField filterField) {
+      return (root, query, builder) -> 
+         filterField.generateCriteria(builder, root.get("salary"));
+   }
+
+   private Specification<Employee> byAge(FilterField filterField) {
+      return (root, query, builder) -> 
+         filterField.generateCriteria(builder, root.get("age"));
+   }
+
+   private Specification<Employee> byPosition(FilterField filterField) {
+      return (root, query, builder) -> 
+         filterField.generateCriteria(builder, root.get("position"));
+   }
+}
+Then, we may switch to the DepartmentFetcher class. It shows the example of relationship fetching. We use DataFetchingEnvironment to detect if the input query contains a relationship field (1). In our case, it may be employees or organization. If any of those fields is defined we add the relation to the JOIN statement (2). We implement the same approach for both findById (3) and findAll methods. However, the findById method also uses data stored in the custom context represented by the EmployeeContext bean (4). If the method findAll in EmployeeFetcher has already been invoked, we can fetch employees assigned to the particular department from the context instead of including the relation to the JOIN statement (5).
+
+@DgsComponent
+public class DepartmentFetcher {
+
+   private DepartmentRepository repository;
+
+   DepartmentFetcher(DepartmentRepository repository) {
+      this.repository = repository;
+   }
+
+   @DgsData(parentType = "QueryResolver", field = "departments")
+   public Iterable<Department> findAll(DataFetchingEnvironment environment) {
+      DataFetchingFieldSelectionSet s = environment.getSelectionSet(); // (1)
+      List<Specification<Department>> specifications = new ArrayList<>();
+      if (s.contains("employees") && !s.contains("organization")) // (2)
+         return repository.findAll(fetchEmployees());
+      else if (!s.contains("employees") && s.contains("organization"))
+         return repository.findAll(fetchOrganization());
+      else if (s.contains("employees") && s.contains("organization"))
+         return repository.findAll(fetchEmployees().and(fetchOrganization()));
+      else
+         return repository.findAll();
+   }
+
+   @DgsData(parentType = "QueryResolver", field = "department")
+   public Department findById(@InputArgument("id") Integer id, 
+               DataFetchingEnvironment environment) { // (3)
+      Specification<Department> spec = byId(id);
+      DataFetchingFieldSelectionSet selectionSet = environment.getSelectionSet();
+      EmployeeContext employeeContext = DgsContext.getCustomContext(environment); // (4)
+      Set<Employee> employees = null;
+      if (selectionSet.contains("employees")) {
+         if (employeeContext.getEmployees().size() == 0) // (5)
+            spec = spec.and(fetchEmployees());
+         else
+            employees = employeeContext.getEmployees().stream()
+               .filter(emp -> emp.getDepartment().getId().equals(id))
+               .collect(Collectors.toSet());
+      }
+      if (selectionSet.contains("organization"))
+         spec = spec.and(fetchOrganization());
+      Department department = repository
+         .findOne(spec).orElseThrow(DgsEntityNotFoundException::new);
+      if (employees != null)
+         department.setEmployees(employees);
+      return department;
+   }
+
+   private Specification<Department> fetchOrganization() {
+      return (root, query, builder) -> {
+         Fetch<Department, Organization> f = root.fetch("organization", JoinType.LEFT);
+         Join<Department, Organization> join = (Join<Department, Organization>) f;
+         return join.getOn();
+      };
+   }
+
+   private Specification<Department> fetchEmployees() {
+      return (root, query, builder) -> {
+         Fetch<Department, Employee> f = root.fetch("employees", JoinType.LEFT);
+         Join<Department, Employee> join = (Join<Department, Employee>) f;
+         return join.getOn();
+      };
+   }
+
+   private Specification<Department> byId(Integer id) {
+      return (root, query, builder) -> builder.equal(root.get("id"), id);
+   }
+}
+In comparison to the data fetchers implementation of mutation handlers is rather simple. We just need to define a single method for adding new entities. Here’s the implementation of DepartmentMutation.
+
+@DgsComponent
+public class DepartmentMutation {
+
+   private DepartmentRepository departmentRepository;
+   private OrganizationRepository organizationRepository;
+
+   DepartmentMutation(DepartmentRepository departmentRepository, 
+               OrganizationRepository organizationRepository) {
+      this.departmentRepository = departmentRepository;
+      this.organizationRepository = organizationRepository;
+   }
+
+   @DgsData(parentType = "MutationResolver", field = "newDepartment")
+   public Department newDepartment(DepartmentInput input) {
+      Organization organization = organizationRepository
+         .findById(departmentInput.getOrganizationId())
+         .orElseThrow();
+      return departmentRepository
+         .save(new Department(null, input.getName(), null, organization));
+   }
+
+}
