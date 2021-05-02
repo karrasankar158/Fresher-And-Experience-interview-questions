@@ -1,0 +1,230 @@
+Hi Team,
+#Letest #update #real_time
+#Spring Boot on #Knative
+---#Install Knative on Kubernetes
+Of course, before we start Spring Boot development we need to install Knative on Kubernetes. We can do it using the kubectl CLI or an operator. You can find the detailed installation instruction here. I decided to try it on OpenShift. It is obviously the fastest way. I could do it with one click using the OpenShift Serverless Operator. No matter which type of installation you choose, the further steps will apply everywhere.
+
+Using Knative CLI
+This step is optional. You can deploy and manage applications on Knative with CLI. To download CLI do to the site https://knative.dev/docs/install/install-kn/. Then you can deploy the application using the Docker image.
+
+$ kn service create sample-spring-boot-on-kubernetes \
+   --image piomin/sample-spring-boot-on-kubernetes:latest
+We can also verify a list of running services with the following command.
+
+$ kn service list
+For more advanced deployments it will be more suitable to use the YAML manifest. We will start the build from the source code build with Skaffold and Jib. Firstly, let’s take a brief look at our Spring Boot application.
+
+Spring Boot application for Knative
+As I mentioned before, we are going to create a typical Spring Boot REST-based application that connects to a Mongo database. The database is deployed on Kubernetes. Our model class uses the person collection in MongoDB. Let’s take a look at it.
+
+@Document(collection = "person")
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+public class Person {
+
+   @Id
+   private String id;
+   private String firstName;
+   private String lastName;
+   private int age;
+   private Gender gender;
+}
+We use Spring Data MongoDB to integrate our application with the database. In order to simplify this integration we take advantage of its “repositories” feature.
+
+public interface PersonRepository extends CrudRepository<Person, String> {
+   Set<Person> findByFirstNameAndLastName(String firstName, String lastName);
+   Set<Person> findByAge(int age);
+   Set<Person> findByAgeGreaterThan(int age);
+}
+Our application exposes several REST endpoints for adding, searching and updating data. Here’s the controller class implementation.
+
+@RestController
+@RequestMapping("/persons")
+public class PersonController {
+
+   private PersonRepository repository;
+   private PersonService service;
+
+   PersonController(PersonRepository repository, PersonService service) {
+      this.repository = repository;
+      this.service = service;
+   }
+
+   @PostMapping
+   public Person add(@RequestBody Person person) {
+      return repository.save(person);
+   }
+
+   @PutMapping
+   public Person update(@RequestBody Person person) {
+      return repository.save(person);
+   }
+
+   @DeleteMapping("/{id}")
+   public void delete(@PathVariable("id") String id) {
+      repository.deleteById(id);
+   }
+
+   @GetMapping
+   public Iterable<Person> findAll() {
+      return repository.findAll();
+   }
+
+   @GetMapping("/{id}")
+   public Optional<Person> findById(@PathVariable("id") String id) {
+      return repository.findById(id);
+   }
+
+   @GetMapping("/first-name/{firstName}/last-name/{lastName}")
+   public Set<Person> findByFirstNameAndLastName(@PathVariable("firstName") String firstName,
+ @PathVariable("lastName") String lastName) {
+      return repository.findByFirstNameAndLastName(firstName, lastName);
+   }
+
+   @GetMapping("/age-greater-than/{age}")
+   public Set<Person> findByAgeGreaterThan(@PathVariable("age") int age) {
+      return repository.findByAgeGreaterThan(age);
+   }
+
+   @GetMapping("/age/{age}")
+   public Set<Person> findByAge(@PathVariable("age") int age) {
+      return repository.findByAge(age);
+   }
+
+}
+We inject database connection settings and credentials using environment variables. Our application exposes endpoints for liveness and readiness health checks. The readiness endpoint verifies a connection with the Mongo database. Of course, we use the built-in feature from Spring Boot Actuator for that.
+
+spring:
+  application:
+    name: sample-spring-boot-on-kubernetes
+  data:
+    mongodb:
+      uri: mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@mongodb/${MONGO_DATABASE}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint.health:
+      show-details: always
+      group:
+        readiness:
+          include: mongo
+      probes:
+        enabled: true
+Defining Knative Service in YAML
+Firstly, we need to define a YAML manifest with a Knative service definition. It sets an autoscaling strategy using the Knative Pod Autoscaler (KPA). In order to do that we have to add annotation autoscaling.knative.dev/target with the number of simultaneous requests that can be processed by each instance of the application. By default, it is 100. We decrease that limit to 20 requests. Of course, we need to set liveness and readiness probes for the container. Also, we refer to the Secret and ConfigMap to inject MongoDB settings.
+
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: sample-spring-boot-on-kubernetes
+spec:
+  template:
+    metadata:
+      annotations:
+        autoscaling.knative.dev/target: "20"
+    spec:
+      containers:
+        - image: piomin/sample-spring-boot-on-kubernetes
+          livenessProbe:
+            httpGet:
+              path: /actuator/health/liveness
+          readinessProbe:
+            httpGet:
+              path: /actuator/health/readiness
+          env:
+            - name: MONGO_DATABASE
+              valueFrom:
+                secretKeyRef:
+                  name: mongodb
+                  key: database-name
+            - name: MONGO_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: mongodb
+                  key: database-user
+            - name: MONGO_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mongodb
+                  key: database-password
+Configure Skaffold and Jib for Knative deployment
+We will use Skaffold to automate the deployment of our application on Knative. Skaffold is a command-line tool that allows running the application on Kubernetes using a single command. You may read more about it in the article Local Java Development on Kubernetes. It may be easily integrated with the Jib Maven plugin. We just need to set jib as a default option in the build section of the Skaffold configuration. We can also define a list of YAML scripts executed during the deploy phase. The skaffold.yaml file should be placed in the project root directory. Here’s a current Skaffold configuration. As you see, it runs the script with the Knative Service definition.
+
+apiVersion: skaffold/v2beta5
+kind: Config
+metadata:
+  name: sample-spring-boot-on-kubernetes
+build:
+  artifacts:
+    - image: piomin/sample-spring-boot-on-kubernetes
+      jib:
+        args:
+          - -Pjib
+  tagPolicy:
+    gitCommit: {}
+deploy:
+  kubectl:
+    manifests:
+      - k8s/mongodb-deployment.yaml
+      - k8s/knative-service.yaml
+Skaffold activates the jib profile during the build. Within this profile, we will place a jib-maven-plugin. Jib is useful for building images in dockerless mode.
+
+<profile>
+   <id>jib</id>
+   <activation>
+      <activeByDefault>false</activeByDefault>
+   </activation>
+   <build>
+      <plugins>
+         <plugin>
+            <groupId>com.google.cloud.tools</groupId>
+            <artifactId>jib-maven-plugin</artifactId>
+            <version>2.8.0</version>
+         </plugin>
+      </plugins>
+   </build>
+</profile>
+Finally, all we need to do is to run the following command. It builds our application, creates and pushes a Docker image, and run it on Knative using knative-service.yaml.
+
+$ skaffold run
+Verify Spring Boot deployment on Knative
+Now, we can verify our deployment on Knative. To do that let’s execute the command kn service list as shown below. We have a single Knative Service with the name sample-spring-boot-on-kubernetes.
+
+spring-boot-knative-services
+Then, let’s imagine we deploy three versions (revisions) of our application. To do that let’s just provide some changes in the source and redeploy our service using skaffold run. It creates new revisions of our Knative Service. However, the whole traffic is forwarded to the latest revision (with -vlskg suffix).
+
+spring-boot-knative-revisions
+With Knative we can easily split traffic between multiple revisions of the single service. To do that we need to add a traffic section in the Knative Service YAML configuration. We define a percent of the whole traffic per a single revision as shown below.
+
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: sample-spring-boot-on-kubernetes
+  spec:
+    template:
+      ...
+    traffic:
+      - latestRevision: true
+        percent: 60
+        revisionName: sample-spring-boot-on-kubernetes-vlskg
+      - latestRevision: false
+        percent: 20
+        revisionName: sample-spring-boot-on-kubernetes-t9zrd
+      - latestRevision: false
+        percent: 20
+        revisionName: sample-spring-boot-on-kubernetes-9xhbw
+Let’s take a look at the graphical representation of our current architecture. 60% of traffic is forwarded to the latest revision, while both previous revisions receive 20% of traffic.
+
+Autoscaling and scale to zero
+By default, Knative supports autoscaling. We may choose between two types of targets: concurrency and requests-per-second (RPS). The default target is concurrency. As you probably remember, I have overridden this default value to 20 with the autoscaling.knative.dev/target annotation. So, our goal now is to verify autoscaling. To do that we need to send many simultaneous requests to the application. Of course, the incoming traffic is distributed across three different revisions of Knative Service.
+
+Fortunately, we may easily simulate a large traffic with the siege tool. We will call the GET /persons endpoint that returns all available persons. We are sending 150 concurrent requests with the command visible below.
+
+$ siege http://sample-spring-boot-on-kubernetes-pminkows-serverless.apps.cluster-7260.7260.sandbox1734.opentlc.com/persons \
+   -i -v -r 1000  -c 150 --no-parser
+Under the hood, Knative still creates a Deployment and scales down or scales up the number of running pods. So, if you have three revisions of a single Service, there are three different deployments created. Finally, I have 10 running pods for the latest deployment that receives 60% of traffic.
