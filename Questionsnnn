@@ -1,0 +1,854 @@
+######## FAQs ###############
+I am “xxxxxx”
+Working as a Software Engineer with TekBiz Soft Solutions Private Limted at Mindspace, Hyderabad
+I have 3+ Years of experience in Web Application Development and support using
+Java/JEE Technologies, with Spring, Hibernate and Web Services.
+I have worked in different domain like Travel and Banking domain.
+I have developed two projects that is PointBank – Migration Projects
+For this projects I have used latest technologies like Spring Boot, AngularJS, Spring Batch with Hibernate Integration
+ 
+Core Java
+= = = = =
+1. What is overloading and overriding?
+​🡪The process of defining more than one method with the same name with different parameters in a class is called method overloading
+🡪The process of defining a method in a supper and sub class with same signature (with same parameter and with same name) is called method overriding.
+what is the difference between  class variables and instance variables?
+Class variable means global variable which is used in class level(anywhere in the class)
+Instance variable means method level .
+what is the difference between static binding and data binding?
+1) Static binding in Java occurs during Compile time while Dynamic binding occurs during Runtime.
+
+2) private, final and static methods and variables uses static binding and bonded by compiler while virtual methods are bonded during runtime based upon runtime object.
+
+3) Static binding uses Type(Class in Java) information for binding while Dynamic binding uses Object to resolve binding.
+
+3) Overloaded methods are bonded using static binding while overridden methods are bonded using dynamic binding at runtime.
+
+Difference between interface and abstract?
+​Abstract and interface both are used to achieve abstraction where we can declare the abstract methods. Abstract class and interface both can’t be instantiated.
+Abstract:-
+● Abstract class means partially implemented class, which is having one or n number of abstract methods and non abstract methods
+● Abstract can have abstract and non-abstract methods.
+● Abstract class doesn’t support multiple inheritance
+● Abstract class can have final, non-final and static , non-static variables
+● Abstract class can provide the implementation of inheritance
+● The abstract keyword is used to declare abstract class
+Interface:-
+● Interface means fully implemented class, which is having only abstract methods(it can have default and static methods )
+● Interface having only abstract methods
+● Interface supports multiple inheritance.
+● Interface has only static and final variables
+● Interface can not provide the implementation of abstract class
+● The interface keyword is used to declare interface
+ 
+Difference between StringBuilder and StringBuffer
+StringBuffer:
+● StringBuffer is synchronized, it is a thread safe because of multi threaded object or long lived object
+StringBuilder:-
+● StringBuilder is non-synchronized, it is non thread safe because of single threaded object or short lived object
+Write an example for an immutable class:
+public final class Contacts {
+ 
+    private final String name;
+    private final String mobile;
+ 
+    public Contacts(String name, String mobile) {
+        this.name = name;
+        this.mobile = mobile;
+    }
+  
+    public String getName(){
+        return name;
+    }
+  
+    public String getMobile(){
+        return mobile;
+    }
+}
+
+What is synchronized in java:-
+Synchronization in java is the capability to control the access of multiple threads to any shared resource. Where we want to allow only one thread to access the shared resource.
+what is the difference between abstraction and encapsulation?
+Abstraction:-
+​The process of hiding the internal implementation logic and only highlighting the set of service what we are offering is called as an abstraction
+​The main advantage of an abstraction is to provide the security.
+Encapsulation:-
+​The process of grouping all the data members and their respective behaviors as a single unit is called as encapsulation. The main advantage of encapsulation is security. In java all the classes and packages by default follows encapsulation mechanism.
+Encapsulation is the implementation of abstraction.
+what is the OOPS?
+In object oriented programming is a technique (OR) is a concept (OR) it is a methodology. But it is not a technology.[java
+is a technology]
+​An oop’s is providing the suggestions to create real world objects into the software applications
+what is Class?
+​Class is a plan (OR) template (OR) a method. Class is used to collect data members and their respective behaviors as a single unit
+​Data members of a class is called as variables/ properties.
+​Behaviors  of class is called as methods /actions /member methods.
+What is exception
+
+Dictionary Meaning: Exception is an abnormal condition.
+
+In java, exception is an event that disrupts the normal flow of the program. It is an object which is thrown at runtime.
+
+ 
+What is exception handling
+
+Exception Handling is a mechanism to handle runtime errors such as ClassNotFound, IO, SQL, Remote etc.
+
+ 
+What is constructor?
+Constructor is a special java member used to create an object and also used to provide an initialization to the properties of an object.
+What is the difference between throw and throws keyword?
+Difference between Throw and Throws Keyword:-
+​
+Throw
+Throws
+1)
+Java throw keyword is used to explicitly throw an exception.
+Java throws keyword is used to declare an exception.
+2)
+Checked exception cannot be propagated using throw only.
+Checked exception can be propagated with throws.
+3)
+Throw is used in method level.
+Throws is used in class level.
+4)
+Throw is used within the method.
+Throws is used with the method signature.
+5)
+You cannot throw multiple exceptions.
+You can declare multiple exceptions e.g.
+public void method()throws IOException,SQLException.
+Eg:-
+void m()throws ArithmeticException{  
+
+throw new ArithmeticException("sorry");  
+
+}  
+
+ 
+What is checked and unchecked exception?
+Difference between Checked and Unchecked Exceptions:-
+​Checked exceptions are recognized by compiler in the exception hierarchy except “Runtime Exception & all its sub classes –error and all its   sub classes”, remaining all the exceptions are “Checked Exception”
+It is recognized by compile time and runtime
+Eg:- ClassNotFoundException, IOException, Interpreted Exception etc..,
+​Unchecked exceptions are not recognized by the compiler. In the exception hierarchy, the   runtime exceptions and all its sub classes, error and all its sub classes are called as unchecked exceptions
+It is recognized by runtime only
+Note:- whether it is checked or unchecked exception always occurs at runtime only.
+ 
+How to create custom exceptions?
+public class AgentNotFoundException extends Exception {
+    public AgentNotFoundException(String message) {
+       super(message);
+   }
+}
+ 
+public class AgentManager {
+    public Agent find(String agentID) throws AgentNotFoundException {
+       if (studentID.equals("123456")) {
+           return new Agent();
+       } else {
+           throw new AgentNotFoundException(
+               "Could not find agent with ID " + agentID);
+       }
+   }
+}
+public class AgentTest {
+   public static void main(String[] args) {
+       AgentManager manager = new AgentManager();
+        try {
+        h   Agent Agent = manager.find("0000001");
+       } catch (AgentNotFoundException ex) {
+           System.err.print(ex);
+       }
+   }
+}
+AgentNotFoundException: Could not find student with ID 0000001
+ 
+What are the Exceptions you are handled in your project?
+ 
+ 
+How you are handled  the exceptions in the realtime?
+Based on above example we can explain
+What is the difference between final, finally, and finalize?
+Final:
+● Final is a keyword
+● Final is used to apply restrictions on class, methods and variable
+● Final class cannot inherited
+● Final method can’t overridden
+● Final variable can’t be changed
+Finally:-
+● Finally is a block
+● Finally block is executed always
+Finalize:-
+● Finalize is a method
+● Finalize is used to perform clean up processing just before object is garbage collected.
+What is volatile?
+​Volatile is a keyword .
+Difference between volatile and transient?
+​
+Difference between compile time and runtime polymorphism?
+Compile Time:-
+● It is also known as static binding, early binding and overloading
+● It is achieved by function and operator overloading
+● It provides fast execution because known early at compile time.
+Runtime :-
+● It is also known as dynamic binding, late binding and overriding
+● It is achieved by virtual function and pointers
+● It provides slow execution as compare to early binding because it is known at runtime.
+ 
+Collections:-
+= = = = =  =
+Difference between comparator and comparable?
+Comparable:-
+● Comparable provide single sorting sequence, means we can sort the collection on the basis of single element such as id or name or price etc.,
+● Comparable affects the original class i.e., actual class is modified
+● To sort the elements we can use the method is compareTo() method
+● Collections.sort(List);{java.lang package}
+Comparator:- ​
+● Comparator provides multiple sorting sequence, means we can sort the collection on the basis of multiple elements such as id, name and price etc.,
+● Comparator doesn’t affect the original class i.e., actual class is not modified.
+● To sort the elements we can use the method is compare() method.
+● Collections.sort(List, Comparator);{java.util package}
+Difference between equals and hashcode?
+​HashCode is the unique identification of an object generating by JVM based on the original base address.
+​HashCode is a 32-bit  positive random integer number.
+​To get the JVM generated HashCode of an object we can use object class hashCode() method (OR) System class identityHashCode() method  
+Object Class :-
+​Public native int hashCode();
+System Class:-
+​public static native int identityHashCode(object obj);
+Difference between hashmap and hash table?
+Hashmap:-
+● HashMap is a class given in 1.2
+● hashMap is non Synchronized
+● it is not thread safe because of single thread
+● hashmap allows one null key and multiple null values
+● hasmap is faster than hash table
+● to synchronize the hashmap we can call the method as collections.synchronizedMap(hashMap);
+● HashMap inherits AbstractMap class
+● HashMap is traversed by Iterator, means hashmap is get through iterator
+● Iterator in hashmap is fail-fast.
+HashTable:-
+● hashTable is legacy class.
+● hashTable is synchronized.
+● It is thread safe because multi threaded object
+● hashTable doesn’t allows any null key or values
+● hashTable is slower than HashMap
+● hashTable is internally synchronized and can’t be unsynchronized
+● hashTable inherits from Dictionary class
+● HashTable is traversed by enumerator and iterator, means hashtable data getting through enumerator and iterator.
+● Enumerator in hashTable is not fail-fast.
+how to retrieve the data from hashmap and as key and value?
+Map<String, List<String>>map=newHashMap<String, List<String>>();
+for (Map.Entry<String, List<String>> entry : map.entrySet()) {
+           String key = entry.getKey();
+           List<String> values = entry.getValue();
+System.out.println("Key = " + key);
+System.out.println("Values = " + values + "n");
+       }
+ 
+Difference between List and HashMap:-
+ 
+ 
+ 
+ 
+Identify duplicates in a list in java:-
+public Set<Integer> findDuplicates(List<Integer> listContainingDuplicates)
+{
+ final Set<Integer> setToReturn = new HashSet();
+ final Set<Integer> set1 = new HashSet();
+ 
+ for (Integer yourInt : listContainingDuplicates)
+ {
+  if (!set1.add(yourInt))
+  {
+   setToReturn.add(yourInt);
+  }
+ }
+ return setToReturn;
+}
+ 
+What is the map in collection?
+​​Map is not a child interface of collection. Map interface is also acting as a root interface in collection framework. Map is used to represent the data in key and value format.
+​In map each key and value pair is called as one entity
+​In map duplicate keys are not allows but duplicate values are allows
+what is the difference between array list and linked list?
+Arraylist:
+​​It is an resizable array
+​​Faster in accessing the data
+​​Slower in insertion and deletion of the data
+Linked List:-
+​​Double linked list
+​​Slower in accessing the data
+​​Faster in insertion and deletion of the data
+Generics in java?
+It is a special feature of java to deal with type safe objects
+Advantage of java generics
+● Type-safe: we can hold only a single type of objects in generics. It doesn’t allow to store other objects.
+● Type casting is not required: there is no need to typecast the object.
+● Compile time checking : it is checked at compile time so problem will not occur at runtime. The good programming strategy says it is far better to handle the problem at compile time than runtime.
+ 
+ 
+How to identify the duplicates in list?
+How to remove duplicates in HashMap?
+Write code for Lambda Expression?
+Write code for forEach method?
+Write code for forEach loop?
+ 
+Java Features:
+= = = = = = =
+Java 8:-
+● Lambda expression
+Public Employee getEmployee(int empNo){
+String sql=”select empno, name, sal from employee where salary>=?”;
+Return jdbcTemplate.query(sql, (ResultSet rs)->{
+Employee emp=null;
+If(rs.next()){
+Emp=new Employee();
+sEmp.setEmpNo(rs.getInt(1));
+Emp.setEmpName(rs.getString(2));
+Emp.setSalary(rs.getSalary(3));
+}
+Return emp;
+}, empNo);
+}
+● forEach method
+List<Employee> list=employeeDAO.getAllEmployees();
+For(Employee emp:list){
+Sysout(emp.getEmpNo()+”  “+emp.getEmpName()+”  “+emp.getSalary());
+}
+@TwoExample
+List<Map<String, Object> list=employeeDAO.getAllEmployees();
+For(Map<String, Object> map: list){
+Set<String> keys=map.keySet();
+For(String key:keys){
+Object value=map.get(key);
+Sysout(key+“  ==”+value);
+}
+Sysout(“= = = = = = “);
+}
+Java 7:
+● String in switch statement
+● Binary literals
+● The try with recourses
+● Catching multiple exceptions
+● Underscore in numeric literals
+Java 6:
+● Premain method (instrumentation)
+Java 5:
+● For each loop
+● Variable arguments
+● Static import
+● Auto boxing and unboxing
+● Enum
+● Covariant return type
+● Annotation
+● Generics
+ 
+Adv Java:-
+= = = = =
+Difference between servlet and JSP?
+Servlet:
+● Servlets are java programs that are already compiled which also creates dynamic web content
+● Servlets run faster compared to JSP
+● Its little much code to write
+● In mvc servlet act as a controller
+●  
+JSP:-
+● JSP is a webpage scripting language that can generate dynamic content
+● JSP runs slow compared to servlets because it will convert JSP code into servlet code  
+● It’s easier code in JSP than in java servlet
+● In mvc JSP act as a view
+● The advantages of JSP programming over servlets is that we can build custom tags which can directly call java beans
+● We can achieve functionality if JSP at client side by running javascript at client side.
+JSP life cycle?
+⮚ Translation of JSP page
+⮚ Compilation of JSP page
+⮚ Class ;loading(class file is loaded by the class loader)
+⮚ Instantiation (object of the generated servlet is created)
+⮚ Initialization(JSPinit() method is invoked by the container)
+⮚ Request processing (-JSPService() method is invoked by the container)
+⮚ Destroy (JSPDestroy() method in invoked by the container)
+o JSP page is translated into servlet by the help of JSP translator.
+o The JSP translator is a part of web server that is responsible to translate the JSP page into servlet and gets converted into the .class files.
+o Moreover all the processes that happens in servlet is performed on JSP late like initialization, committing response to the browser and destroy.
+What is JDBC?
+​Jdbc is an api . it is used to communicate from java application to data base .
+how many types of drivers in jdbc and what are they?
+1. JDBC-ODBC bridge driver
+2. Native-API driver (partially java driver)
+3. Network Protocol driver (fully java driver)
+4. Thin driver (fully java driver)
+ 
+explain servlet life cycle?
+The web container maintains the life cycle of a servlet instance. Let's see the life cycle of the servlet:
+
+1. Servlet class is loaded.
+2. Servlet instance is created.
+3. init method is invoked.
+4. service method is invoked.
+5. destroy method is invoked.
+
+As displayed in the above diagram, there are three states of a servlet: new, ready and end. The servlet is in new state if servlet instance is created. After invoking the init() method, Servlet comes in the ready state. In the ready state, servlet performs all the tasks. When the web container invokes the destroy() method, it shifts to the end state.
+
+ 
+What are the problems you are getting in the projects, which is resolved successfully. how you are resolve it? explain with detail?
+After logout -> press back buttorn-> then again active the session ->
+Solution:-
+​After login success redirect the request with a new url to another controller. For this we can use redirect view.
+And in JSP page we need write the session related code :-
+<%
+Response.setHeader(“cache-control”, “no-cache”);
+Response.setHeader(“cache-control”, “no-store”);
+Response.setDateHeader(“Expires”, 0);
+Response.setHeader(“Pragma”, “no-cache”);
+If(session==null || Session.getAttribute(“agented”)==null){
+Response.setHeader(“Location”, “Login”);
+Response.setStatus(301);
+}
+%>
+How to get the list of data in a JSP page?
+   <table>
+       <c:forEach items="${userList}" var="user">
+           <tr>
+               <td>${user.userName}</user>
+           </tr>
+       </c:forEach>
+   </table>
+ 
+(OR)
+<c:forEach var="user" items="${listUsers.rows}">
+    <c:out value="${user.name}" />
+    <c:out value="${user.email}" />
+    <c:out value="${user.profession}" />
+</c:forEach>
+ 
+WebService:
+= = = = = = =
+Difference between soap and rest
+SOAP is a protocol.​​​​​REST is an architectural style.
+SOAP stands for Simple Object Access Protocol.​REST stands for Representational State Transfer.
+SOAP can't use REST because it is a protocol.​​REST can use SOAP web services because it is a concept and can use any protocol like HTTP, SOAP.
+SOAP uses services interfaces to expose the business logic. REST uses URI to expose business logic.
+JAX-WS is the java API for SOAP web services.​JAX-RS is the java API for RESTful web services.
+SOAP defines standards to be strictly followed.​REST does not define too much standards like SOAP.
+SOAP requires more bandwidth and resource than REST.   ​REST requires less bandwidth and resource than SOAP.
+SOAP defines its own security.​​​RESTful web services inherits security measures from the underlying transport.
+SOAP permits XML data format only.​​REST permits different data format such as Plain text, HTML, XML, JSON etc.
+SOAP is less preferred than REST.​​REST more preferred than SOAP.
+ 
+How to provide security for Restfull web services?
+ 
+SpringCore:-
+= = = = = =
+Types of Framework?
+​There are two types of framework.
+1. Invasive Framework like Struts 1.X
+2. Non-Invasive framework like Struts 2.x, Spring and Hibernate
+Invasive framework means it always forced the developers to implement pre-defined classes or interfaces given by framework.
+Non – invasive framework means it doesn’t forced the developers to extend / implements the predefined classes/ interfaces given by the freamework
+The non – invasive framework are very light weight framework.
+What is Java Bean?
+● Java bean is used to store the data and send across the network.
+● The java bean class contain private data members, public setters and getter methods default constructor and implements serializable interface
+What is Spring?
+● Spring is a non-invasive framework.
+● It is a light weight and open source framework.
+● Spring is an application framework used to develop any kind java application like stand alone application and enterprise application
+● It is used develop any kind of logics in the project.
+ 
+What is Spring Core Module?
+● Spring core module is a basic module and base module for all other modules of spring framework
+● It is used to develop standalone applications and  implements business logics
+● It provides dependency injection concept to support for dependency injection
+● It provides ioc container (Bean factory container)
+What is Dependency injection and why?
+● The process of injecting or posting or passing dependencies into dependent object is called as dependency injection.
+● The dependency injections are performing by spring ioc container by executing setter methods or constructor
+● Container supplying the dependencies into dependent objects via injection
+● Why:-
+● Instead of storing the object into the class type it is recommended to store in “interface” type
+● Instead of creating an object with new operator and constructor it is recommended to create with factory methods.
+● When we are using factory methods and interface then the application will get loose coupling and reusability
+​
+What is IOC Container?
+● IOC stands for inversion of control. IOC is a design principles or design pattern is used to inject the dependencies into dependent object
+● IOC is an external entity
+● IOC is two type
+o Dependency lookup(EJB Lookup concept)
+o Dependency Injection(Spring )
+● The dependency lookup is an old technique using by EJB
+● The dependency injection is new technique using by spring.
+● The spring ioc container are designed or created by using IOC principles
+● Hence spring container are called IOC container
+● There are two containers in spring
+o Bean factory container
+o Application context
+ 
+Difference between file system and class path resource
+FileSystemResource:-
+● We need to pass the complete path of the application
+● If project is changing then we need to modify the code in client application
+ClassPathResource:-
+● No need to provide complete path just proving class path environment
+● No need to modify the class path if we are changing the workspace location.
+o It is always recomeneded to use “Classpath Resource” instead of “FileSystemResource”.
+What is Connection Pooling?
+● A connection pool is a group of logical database connections associated with a physical database coneection.
+● The connection pool contain already open logical connection. So when ever we are getting the connection from connection pool.
+● It is not taking more time and this connection is a logical connection, the database vendor will not charge any amount for the logical connections.
+● Connection pooling mechanisam will decrease the request processing cost and improve the performance.
+What is DataSource?
+● Data source is an interface in javax.sql packages it implementation is given by third party vendors / db vendors/ server vendors/ framework vendors.
+● Data source object is acting as a mediator between java program and connection pool.
+● The data source object is used to get the connection form connection pool and also send back the connection to connection pool.
+● Data source interface  contain many no of implementation classes given by third party vendor
+● The apache vendor providing the implementation as  “org.apache.commons.dbcp.BasicDataSource”
+● The spring framework vendor is providing implementation class as “org.springframework.jdbc.datasource.DriverManagerDataSource”        
+● All the data source implementation classes contain the following variables
+o DriverClassName
+o Url
+o username
+o password  
+ 
+ 
+ 
+ 
+ 
+SpringMVC:-
+= = = = =  =
+scope of spring bean classes?(Default : Singleton)
+Singleton, prototype, session, request, global-session.
+what is the Dispatcher Servlet, how it work, where we define it?
+Front controller is a typical design pattern in the web applications development. In this case, a single servlet receives all requests and transfers them to all other components of the application. The task of the DispatcherServlet is send request to the specific Spring MVC controller.
+What is a Viewresolver?
+ViewResolver is an interface to be implemented by objects that can resolve views by name. There are plenty of ways using which you can resolve view names. These ways are supported by various in-built implementations of this interface. Most commonly used implementation is InternalResourceViewResolver class.
+what is handler mapping?
+When no handler mapping is explicitly specified in configuration, BeanNameUrlHandlerMapping is created and used by default. From the article you linked: "By default the DispatcherServlet uses the BeanNameUrlHandlerMapping to map the incoming request. The BeanNameUrlHandlerMapping uses the bean name as the URL pattern
+what is dependency injection ?
+injecting dependencies into a dependent is called dependency injection.
+● Dependency Injection (DI) is a software design pattern that implements inversion of control for resolving dependencies.
+● An injection is the passing of a dependency to a dependent object that would use it.
+● DI is a process whereby objects define their dependencies. The other objects they work with—only through constructor arguments or arguments to a factory method or property—are set on the object instance after it is constructed or returned from a factory method.
+● The container then injects those dependencies, and it creates the bean. This process is named Inversion of Control (IoC) (the bean itself controls the instantiation or location of its dependencies by using direct construction classes or a Service Locator).
+● DI refers to the process of supplying an external dependency to a software component.
+Dependency Injection Performed Two Ways
+
+1. Constructor-Based Dependency Injection
+2. Setter-Based Dependency Injection
+ 
+How to get the data from .properties file?
+Using annotation with property place holder bean:-
+​@Value(“${KEY}”)
+​Private String value;
+(OR)
+@value(“${property.key}”) String propertyValue;
+Code:-
+XML:-
+<bean id=”mailProperties” class=”org.springframework.beans.factory.config.PropertyPlaceHolderConfigurer”>
+<property name=”location” value=”classpath:mail.properties”/>
+<property name=”ignorUnresolverPlaceHolder” value=”true”/>
+</beans>
+Annotation with java config style:-
+ 
+What is autowired annotations? if we are not used the autowired annotation what happened?
+ 
+What is property place holder?
+ 
+How to configure bean in spring configuration file? Write the code?
+ 
+Can you write code to collection variable declaration in dao class?
+ 
+What is the use of Singleton in Spring MVC? Why it is default scope?
+ 
+ 
+ 
+Difference between Autowired and Qualifier:-
+ 
+ 
+ 
+ 
+Spring MVC 3.2 Execution Flow
+ 
+Step 1: First request will be received by DispatcherServlet
+Step 2: DispatcherServlet will take the help of HandlerMapping and get
+to know the Controller class name associated with the given request
+Step 3: So request transfer to the Controller, and then controller will process
+the request by executing appropriate methods and returns ModeAndView object (contains Model data and View name) back to the DispatcherServlet
+Step 4: Now DispatcherServlet send the model object to the ViewResolver to get the actual view page
+Step 5: Finally DispatcherServlet will pass the Model object to the View page to display the result
+ 
+ 
+SpringBoot:-
+= = = = = =
+What is spring boot?
+​Spring Boot is not a framework, it is a way to create any kind of application with minimal or zero configurations.
+It is an approach to develop spring based applications with less configurations.
+Spring boot on top of spring framework .
+It is reduce the development time and increasing productivity.
+It is very useful for creating new applications with spring boot.
+It is not recommended to convert old spring projects into boot application .
+The framework takes an opinionated approach to configuration, freeing developers from the need to define boilerplate configuration.
+ 
+Spring Scheduling :-
+​Scheduling jobs are used to execute same logic automatically without use interaction based on date and time configurations
+Hibernate:-
+= = = = = =
+2. what is the difference between first level cache and second level cache in hibernate?
+🡪first level cache is associated with session and the second level cache is associated with SessionFactory. By default session is enabled.
+States of hibernate?
+Persistent Object has three life cycle states:-
+1. Transient State: The Object not associated with session, that object is an transient state(Before starting session or before saving the object into the DB). Example every entity class is in transient state. In this state object is non-transactional and not synchronized with record.
+2. Persistent State:  The Object associated with session, that object is an persistent state(after starting session or getting object from DB). In this state object is transactional and synchronized with database record.
+3. Detached State: The object is not associated with session but present in data base, that object is an Detached state(After session closing and object is stored in the DB).
+Difference between Session and SessionFactroy?
+​Session:-
+● Session is an interface  and SessionImpl is an implemented class
+● Session is related to First level cache
+● Session is single threaded object
+● Session is not thread safe object, short lived object
+● It has the methods to perform persistence operations
+● It is a factory for Transaction object.
+​SessionFactory:-
+● SessionFactory is an interface and SessionFactoryImpl is an implemented class
+● SessionFactory is related to second level cache and it is an heavy weighted object that has to be create once per application.
+● SessionFactory is not a singleton
+● Session factory is an long live multi threaded object
+● Session factory is thread safe object
+● SessionFactory is an ImmutableObject.
+● For multiple sessions we can use single session factory object
+● If we want to work multiple database than we need to create multiple session factory objects , it means one session factory object is associated with one Data base.
+o We can work with multiple sessions in one session factory object.
+Why SessionFactory is an heavyweight?
+​Session factory encapsulates session object, connections, hibernate properties caching and mappings.
+How to invoke procedures in Hibernate?
+1. To invoke Stored procedure in hibernate directly we can call following method with native sql
+​Session.createSQLQuery(“🡨Procedure---Name-🡪”);
+2. NameNativeQuery in annotation and call with getNamedQuery() method
+3. Sql-query in xml mapping file and call with getNamedQuery() method.
+Something about criteria?
+● Criteria api is provides to build queries dynamically at runtime without direct string manipulations.
+● Criteria is an alternative way to write a query without using hql
+● We can execute select statement by using criteria, we can not executeUpdate, delete statements using criteria.
+Difference between Get and load methods in hibernate?
+Get:-
+● It always hit the database and return the real object.
+● An object that represents the database row , not proxy, if no row found , it returns null.
+● It doesn’t supports lazy loading
+Load:-
+● It always returns a proxy object without hitting the database.
+● In hibernate proxy is not a real object but working like a real object
+● If no row is found then it will throws an objectNotFoundException.
+● This method is supporting lazy loading
+Difference between save and persist methods in hibernate?
+Save():-
+● The return type of save method is serializable object
+● This method is used for inserting the record into DB
+● It will return identifier value
+Persist():-
+● The return type of persist method is void.
+● This method is used for inserting the record into DB
+Do you know what is generators in hibernate, explain with detail?
+Generators:-
+● It is used to generate identifier value for persistence object, while saving the object into the database.
+● In this we have few generators are there like IncrementGenerator, Assigned IdentityGenerator, SequenceGenerator, SequenceHiLoGenerator, ForeignGenerator and etc..,
+● If we want to implement our own generator then we can work with take any java class and implement IdentifierGenerator and  override generate() method .
+● In this method our own business login based on the our requirement.
+Tools:-
+What is JIRA?
+🡪JIRA is a bug tracking tool developed by Australian company Atlassian. It is used for bug tracking, issue tracking and project management. The name JIRA is actually inherited from Japanese word “Gojira” which means “Godzilla”.
+🡪The basic use of this tool is to track issues, and bugs related to your software and mobile apps. It is also used for project management. The JIRA dashboard consists of many useful functions and features which make handling of issue easy.
+what is  Maven?
+​🡪 MAVEN is a application build tool and project management tool, it gives common directory structure for applications
+What is maven?
+How to configure server local repository in maven pom.xml?
+What is plugins in maven?
+Can you write a code to configure location of the repository for maven?
+ 
+ 
+ 
+SQL:-
+= = =
+ 
+joins in SQL?
+A JOIN clause is used to combine rows from two or more tables, based on a related column between them.
+
+Here are the different types of the JOINs in SQL:
+
+● (INNER) JOIN: Returns records that have matching values in both tables
+● LEFT (OUTER) JOIN: Return all records from the left table, and the matched records from the right table
+● RIGHT (OUTER) JOIN: Return all records from the right table, and the matched records from the left table
+● FULL (OUTER) JOIN: Return all records when there is a match in either left or right table
+      
+
+ 
+write  a query to get 3rd highest salaried employee?
+SELECT name, salary
+FROM Employee e1
+WHERE 3-1 = (SELECT COUNT(DISTINCT salary) FROM Employee e2
+WHERE e2.salary > e1.salary)
+ 
+JSON:-
+= = = =
+What is json?
+o JSON stands for JavaScript Object Notation.
+o JSON is lightweight data-interchange format.
+o JSON is easy to read and write than XML.
+o JSON is language independent.
+o JSON supports array, object, string, number and values.
+ 
+ 
+ 
+Angular JS:-
+= = = = = = = =
+What is AngularJS?
+● Angular js is a open source structural framework from google to develop dynamic web applications
+● Angular js is completely java script based framework client side programming
+● It implements the MVC design pattern to develop the application
+● Generally the MVC design pattern used by server side technology but angular js provides a facility to use this MVC pattern in client side programming
+● Angular js is not a library.
+● Angular js provides its own runtime environment, compile process at client side.
+How MVC design pattern is implemented in Angular JS:-
+● MVC is a design pattern
+● MVC can be used in any technology.
+● Angular JS is also uses MVC design pattern to implement client side programming
+● In MVC based applications development process is split into three modules
+o Model
+o View
+o Controller
+AngularJs Modules:-
+Model:-
+● Model is responsible for data storage
+● It will be implemented by using Java Script, Variables , Arrays , Objects and Array of Objects
+● These data will be stored to view to display
+View:-
+● View is responsible for data presentation
+● It can be implemented by using “html, css and AngularJS”directives(eg: ng-repeat)
+● Views are bind with controller to get the data(ng-controller)
+Controller:-
+● Controller  is responsible for data processing
+● It act as  mediator between view and model
+● Controller will communicate with model to get the data
+● Controller will transfer the data to view
+Features or advantages of AngularJS:-
+Data Binding:-
+● Data binding is primary feature of AngularJS
+● Data Binding can be implemented in 2 different ways
+o One way data binding
+o Two way data binding
+● In data binding model variables, objects are bind with views
+● First time in client side frameworks, AngularJS introduced this data binding concept
+● These features will reduce lot of client side code
+Structural Programming :-
+● AngularJS is structural framework
+● It uses MVC structure to implement the application development
+● AngularJS is client side MVC
+● Due to this structure, we can devide application development into multiple modules
+o Model – View - Controller
+● So , that we can reduce the complexity of the application development
+Highly Testing:-
+● AngularJs application are more comfortable top perform unit testing
+● Unit testing is a process of testing the required portion of the application
+● Due to MVC structure, we can easily test required module in the application
+TDD Support(Test Driven Development):-
+● It is the latest development process in which testers will provides the guidelines to developers
+● According to their guidelines developers will modify / update the application development
+● It is possible because of MVC structure at any point of time MVC based applications are morte comfortable to update
+● AngularJS applications are MVC so that it will be more comfortable TDD Environment
+Parallel Development :-
+● In Angular JS applications, multiple programmers works parallel on controllers, model and views
+● We are creating in separate files to implement each one (views as *.html, controller as *.js)
+● This feature makes your application development more faster
+● If you write view context and controller code is same file, only one programmer can work at a time.
+HTML as Template :-
+● Angular JS uses existing html tags as template for views preparation
+● Angular JS provides couple of directives to implement   these templates
+● At the time of execution AngularJS framework executes these templates to generate actual content for view
+Routing support for SPA(Single Page Application)
+● SPA is used to develop the application single  page
+● In this applications only first time page will loaded from server
+● Remaining all requests are processed at client side without loading the whole page
+● AngularJS provides special features to support routing in SPA
+● Routing concept of AngularJS organizing multiple routes for multiple requests with Single page
+Client Side State Management:-
+● One of the challenging task in SPA is state management
+● AngularJS supports required options to manage the state between multiple requests of SPA
+● One of primary intention of Angular JS development is to support SPA  development
+Dependency Injection
+● AngularJS Applications are strongly supports Dependency Injection
+● It means developing the  independent code and organize the development objects based on the requirement
+● Instead of depending on fixed set of objects /values , we can make application modules are independent
+● Dependency Injection is concept is involved in several concepts of AngularJS
+o Eg:- creating modules, creating controllers, etc..,
+Powered by Google:-
+● Google maintained and support the Angular JS framework
+● It organizes the Angular JS by group of Google team in order to address all technical issues
+● Google is one of the testable and world famous it organization
+● From  2012 onwards, officially Angular JS is supported by Google
+● Note:- Angular JS was initially developed by Miscko Hevery( He is Google employee, he is author for several web related frameworks)
+Execution Process of AJS:-
+● Browser will load the html document
+● AJS framework will load at the time of loading framework, it will create a global object called “Angular”
+● Angular object will compile and execute the AJS related elements
+● AJS framework generates dynamic content based on the diurectives that we involved.
+AnularJS Directives:-
+● In Angular JS application development will split into model, view and controller
+● Views are developed by using html tags and AngularJS directives.
+● Angular JS uses html as template and generate the dynamic content  at runtime
+● Directives plays very important role to generate dynamic content
+What is directive in Angular JS
+● Directives are used as html attributes
+● Directive can extend the behavior of html tags
+● Every view in Angular JS is depend on the directives
+● Eg:-Ng-app, ng-model, ng-init, ng-controller, ng-show, ng-repeat, ng-view, ng-hide, ng-if, ng-switch, etc..,
+● Directives are prefix with “ng-”
+● According to HTML, these user defined attributes are prefix with “data-“
+● Eg:- data-ng-model, data-ng-app etc..,
+ 
+
+ 
+ 
+ 
+ 
+ 
+Practice Purpose for the project:
+● Report generation
+● Generation report download in pdf with showing pagination concept
+● Spring mvc jms integration with active mq
+● Spring security with login and registration form using angularjs
+● Spring rest applications
+● Ajax call using angular js
+ 
+ 
+1. Difference between rest and ajax
+2. What are the interfaces in hibernate
+3. Difference between tomcat and jboss
+4. Difference between application context container and bean factory container
+5. Difference types of  method in http
+6. Can we use put instead of get
+7. How to read the flat files in spring batch
+8. What is advice in spring aop
+9. What spring aop
+10. What spring modules
+11. What is the difference between iterate method and list iterate method
+12. What is autowiring and it types
+13. What is static and static method
+14. Where static variable in jvm
+15. What is transient
+16. What is volatile
+17. What is jax-rs?
+18. What is jax – ws?
+19. What is oops
+20. What is difference bet wenn checked and unchecked exceptions
+21. What is the finalize()
+22. What is final
+23. What is diffenence between statement and prepared statement
+24. What is dispatcher servlet
+25. Have you know any design patterns
+26. Why spring framework
+27. What is hibernate
+ 
+28. What purpose we are using hibernate
+29. What is transaction management in rest
+30. How to call stored procedures in hibernate
+31. How to call stored procedures in jdbc
