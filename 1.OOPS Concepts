@@ -4,7 +4,7 @@ experience in java based on developing standalone and web applications) In my Fa
 i have two young brothers both are doing studies....
 
 Data Hiding:
-To avoid outside person cannot access our internal data Directly.
+To avoid outside class cannot access our internal data Directly.
 by using private modified we can implement data hiding.
 
 Abstraction in Java:
