@@ -12,6 +12,8 @@ Abstraction in Java:
 2. must abstract class as abstract keyword.
 3.cannot possible to instantiate (Object creation is not possible)
 4. we can allowed to write both abstract and concrete methods(concrete methods nothing but method with body).
+5.it has one zero parameter constructor.
+6.allowed to declare both static and instance variables.
 
 Encapsulation In Java:
 Binding of Data and Corresponding methods into a single Unit is called as Encapsulation.
