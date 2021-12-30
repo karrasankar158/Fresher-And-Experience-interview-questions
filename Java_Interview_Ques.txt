@@ -1,0 +1,231 @@
+1. Exception handling in overriding.
+2. String and string pool related question.
+3. how to create immutable class .
+4. how to implement abstarction and encapsulation in java.
+5. how to make calss member is available for all object and should not modify.
+6. when we have to use abstract calss and interface .
+7. JVM erchitecture.
+8. Can programmer generate the serialVersionUID ?
+9. what is externalization in java ? what are all methods need to override .
+10. How many ways we can create object in java ?
+11. serialization in inheritance concept .
+12. what is the impact of static/ final keyword with transient keyword.
+13. generics concept .
+14. String and String buffer class defference
+15. difference between run() and call()
+16. Comparable vs Comparator in Java
+17. Blocking Queue internal implementation.
+18. Hashmap internal implemetation.
+19. what is starvation and live lock.
+20. cyclic barrier and countDown latch.
+21. difference between aggriagtion [weak] and composition [strong].
+22. how many ways we can break singleton design pattern? and how to overcome.
+23. difference between Spring MVC and servlet.
+24. difference between init and static block 
+25. Why wait and notify is declared in Object class instead of Thread class?
+26. What do the expression 1.0 / 0.0 will return? will it throw Exception? any compile time error?
+27. Where actually object will get created in heap memory ?
+28. how to iterate the hashmap ?
+29. Tempalte design pattern.
+30. Optional java.
+31. factory design pattern - abstract factory design pattern.
+32. Method reference in java 
+33. How to improve the DB performanace or Query performance
+34. How Equal method works internally.
+35. how to find the lowest common ancestor of a binary search tree - IVY 
+36. JDBCtemplate in spring framework.- IVY 
+37. BeanFactory and ApplicationContext - IVY 
+38. Difference between put and post method. - IVY 
+39. What is caching in java  - Attra 
+40. how to find the most repeating word in 10gb file - Zen & art 
+41. HashMap will have Interger as key and string as value. how to sort the map with value.Zen & art 
+42. Employee class object is immutable,adding employee class object into the list and it should not be modified. Zen & Art 
+43. Write SQL query where manger salary is less than the employee salary - Zen & Art 
+44. How connection pool works in java.
+45. What is rehashing in java.
+46. Diffrence between comparator and comparable interface:
+47. Functional interface in java1.8 how its helpful compare java7
+48. What is lamda expression in java .
+49. Built functional interfaces in java.
+50. Producer interfaces , consumer interfaces.
+51. Stream api in java1.8 .
+52. Difference between stack and Heap memory 
+53. types of class loader in JVM 
+54. Difference between classDefNtFoundError & classNotfoundexception 
+55. how to resolve the diamond problem in java 1.8.
+56. how to identify the memory leakage. 
+57. difference between blocking queue and priority queue.
+58. Concurrent collections 
+59. what is heap data structure 
+60. internal implemenatation of priority queue.
+61. equal and hashcode contract
+62. how can we avoid deadlock
+63. Which algorithm used in garbage collections.
+64. what all design pattern involved in spring framework.
+65.  difference between get() and load() in hibernate
+66. difference between persist() and save()
+67. what is criterian in hibernate
+68. difference between primary and secondary level cache
+69. can we use string to store password , if yes/No why
+70. static and non static method synchonization in multithreading.
+71. how to create custom exception in java.
+72 - Diff between Map and flatMap
+73- How one micrservice communicate with another microservice.
+74- Compare the max product of the numbers of array.
+75- diff between peek , poll and remove method.
+76- Advantage of spring boot.
+77 - Multiple stereo type spring boot analotations.
+78 - what is monolythic architecture.
+79 - Advantage of micro service over monolithic architecture.
+80- how two micro services are communicating to each other.
+81 - how will rollback one microservice when failure happens with one microservice(communaction b/w two micro services)
+82 - Actuator
+83 - Trasaction handling (spring JPA)
+84 - JPA internal working over hibernate (specially for hibernate redundant code like session factory)
+85 - Stack , queue and tree data structure working.
+86 - Future object in terms of callable value.
+87 - race condition.
+88 - Semaphore in multithreading.
+89 - diff between delete truncate and remove
+90 -  <parent> tag in pom.xml of spring boot
+91 - dependency management
+92- Role of starters in pom.
+
+===================================================
+
+Few related to prodcution scenerio challenge as part of current project.
+
+===============================================================
+
+Fisrt Round: 
+======================================================
+1. what is difference between factory & abstarct factory Design pattern.
+2. what is Optional interface
+3. what is method reference.
+4. what is stream API 
+5. Predicate interface 
+6. Singleton design pattern.
+7. what is concurrenct hasmap and hashmap 
+8. seriliazations in java & uses
+9. how to parse Json.
+10.Tempalte design pattern.
+11. what is changes in hashmap in java 1.8.
+12. what is json and uses
+13. difference between Lock and Synchronization
+14. difference stack and heap memery.
+15. what is the difference b/w parallel and serial garbage collector
+16. what is functional interface. does it have static and default methods.
+
+
+1. program -  write program  - if input is GOD , it should generate the different word with combination different character - GOD ,GDO,ODG,OGD,DOG,DGO
+2. program - Given unsorted array . search the element in array using Binary search.
+3. program - call GC() every 5 min.
+
+second round :
+======================================
+1. program :write program add elements into the list without usig the java API.
+2. program :parse the XMl without using Java API.
+3. write test case for a method - weather it working as expected or not.
+
+
+Third Round Orcale: 
+==========================================
+ 
+1.  program &  algorithms  
+
+i/p : 4 
+o/p 1+3,2+2,1+1+1+1,4
+
+2. Program & algorithms which algorithm is going to resolve the issue.
+
+i/p  : ABC  
+permutation of the word : ABC,ACB,..
+
+3  Program & algorithms :
+                          a
+                       b      c
+                    d    f   g   h 
+
+if input is g , a, it should return grand parent of g ,a  
+if input is g,h  it shoud return common grand parent of g,h means C 
+
+
+4. identify  circle in  linked list 
+
+1->2->3->4-  |
+      ^_ 5 <-
+
+5. check below list are equal or not 
+list1 - 1->2->3->4->5
+list2 - 1 ->2->3->4->5
+6. Back tracking algorithms.
+7. What is the use of functional programming & Lamda expression.
+8. what is the use of consumer interface.
+
+Fourth Round Orcale: 
+==========================================
+
+Design an online movie ticket booking application .
+
+1. User will enter his city name , it will display a list of cinema halls.
+On each cinema there will be a list of halls/screens/movies .Each cinema contains multiple screens .
+User will select movie , date, time and seats and he will book his ticket.User can cancel his tickets .Seats prices are dynamic on each date .No two users have the same seats on the same movie which is on the same data and time .User can made payment through Card , netbanking ,Coupon  .
+
+Design Schema design and component design and how you manager orders.
+
+
+2. SQL queries like based on scenario using joins. later how to optimize the query.
+
+3. Sort the array list by using stream API in java1.8
+
+
+======================================================================================
+
+
+Programming Questions : Attra
+
+1. String[] s = 100,200,300,400
+
+k= 2;
+maximum possible consecutive sum for k elements :
+
+2. Array  : { 3, 1,2,3,5,8,9 }  remove the duplicates and shift duplicated elements to last : 1,2,3,5,8,9,3
+
+3. Find the first non repatable character -  Exanple : total   o/p :o
+
+4. 14. For following daily stock prices(for 10 days) : 
+
+   80, 70, 90, 110, 80, 100, 120, 110, 100, 110, find max profit.
+
+Conditions:
+1. You can buy/sell multiple times.
+2. If you bought one share, you can buy again only if you sell it.
+3. Buying and selling can be done only once per day.
+
+5. String s = bbccddssrrtte  can we create polindrome string or not.
+
+6. i/p  a[1,2,3,4,5,6]   shift all even number to right side of an array  o/p  a[1,3,5,2,4,6]
+
+7. Find the super Digit  of number n = 148 , k= 3,  then p = 148148148  --> super digigt is 3  
+   recusrion of sum of all digits of p , when sum reached sigle that would be the super digit .
+
+8. Convert  roman number to integer.
+
+9 Return max sum of consecutive elements in integer array having both +ve and -Ve numbers.
+
+10. write program - input for the function is binary matrix , if u you encounter 1 in the rows/column , entire row and column elements chnage to 1's
+
+11. implement Queue using stack data structure .
+
+12. Array having binary numbers which has thousands of elements , shift all 0's to left side of the array and shift all 1's to right side of the array.
+
+13. find the inresection of two linked list.
+
+14. implement linked list in java .
+
+
+
+
+
+
+
