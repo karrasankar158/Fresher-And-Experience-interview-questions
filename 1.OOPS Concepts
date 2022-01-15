@@ -3,6 +3,9 @@ A) My name is Sankar. I live in Andhra Pradesh I have done B.tech in Computer Sc
 experience in java based web and mobile applications development. In my Family my Father is carpenter my mother is housewife
 i have two young brothers both are doing studies....
 
+class: class is a blue print of an object it has properties, methods, blocks, etc...
+object: object is a instance of a class(copy).
+
 Data Hiding:
 To avoid outside class cannot access our internal data Directly.
 by using private modifier we can implement data hiding.
