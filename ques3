@@ -1,0 +1,55 @@
+Hi Team,
+#Letest #update #real_time 3+ #experience 2021
+#Restful #interview #questions #answers
+Q.What does the annotation @PathVariable do?
+@PathVariable annotation is used for passing the parameter with the URL that is required to get the data. Spring MVC provides support for URL customization for data retrieval using @PathVariable annotation.
+Q.What is the use of @RequestMapping?
+The annotation is used for mapping requests to specific handler classes or methods.
+In spring, all the incoming web request routing is handled by Dispatcher Servlet. When it gets the request, it determines which controller is meant for processing the request by means of request handlers. The Dispatcher Servlet scans all the classes annotated with @Controller. The process of routing requests depends on @RequestMapping annotations that are declared inside the controller classes and their methods.
+Q.What do you understand by request method designator annotations?
+They are the runtime annotations in the JAX-RS library that are applied to Java methods. They correspond to the HTTP request methods that the clients want to make. They are @GET, @POST, @PUT, @DELETE, @HEAD.
+Usage Example:
+import javax.ws.rs.Path;
+/**
+* InterviewBitService is a root resource class that is exposed at 'resource_service' path
+*/
+@Path('resource_service')
+public class InterviewBitService {
+    @GET
+    public String getRESTQuestions() {
+        // some operations
+    } 
+}
+Q.How does HTTP Basic Authentication work?
+While implementing Basic Authentication as part of APIs, the user must provide the username and password which is then concatenated by the browser in the form of “username: password” and then perform base64 encoding on it. The encoded value is then sent as the value for the “Authorization” header on every HTTP request from the browser. Since the credentials are only encoded, it is advised to use this form when requests are sent over HTTPS as they are not secure and can be intercepted by anyone if secure protocols are not used.
+Q.How can you test RESTful Web Services?
+RESTful web services can be tested using various tools like Postman, Swagger, etc. Postman provides a lot of features like sending requests to endpoints and show the response which can be converted to JSON or XML and also provides features to inspect request parameters like headers, query parameters, and also the response headers. Swagger also provides similar features like Postman and it provides the facility of documentation of the endpoints too. We can also use tools like Jmeter for performance and load testing of APIs.
+Q.Can we implement transport layer security (TLS) in REST?
+Yes, we can. TLS does the task of encrypting the communication between the REST client and the server and provides the means to authenticate the server to the client. It is used for secure communication as it is the successor of the Secure Socket Layer (SSL). HTTPS works well with both TLS and SSL thereby making it effective while implementing RESTful web services. One point to mention here is, the REST inherits the property of the protocol it implements. So security measures are dependent on the protocol REST implements.
+Q.What are HTTP Status codes?
+These are the standard codes that refer to the predefined status of the task at the server. Following are the status codes formats available:
+1xx - represents informational responses
+2xx - represents successful responses
+3xx - represents redirects
+4xx - represents client errors
+5xx - represents server errors
+Most commonly used status codes are:
+200 - success/OK
+201 - CREATED - used in POST or PUT methods.
+304 - NOT MODIFIED - used in conditional GET requests to reduce the bandwidth use of the network. Here, the body of the response sent should be empty.
+400 - BAD REQUEST - This can be due to validation errors or missing input data.
+401 - FORBIDDEN - sent when the user does not have access (or is forbidden) to the resource.
+404 - NOT FOUND - Resource method is not available.
+500 - INTERNAL SERVER ERROR - server threw some exceptions while running the method.
+502 - BAD GATEWAY - Server was not able to get the response from another upstream server.
+Q.What are the differences between the annotations @Controller and @RestController?
+@Controller-----
+1.Mostly used traditional Spring MVC service. 
+2.It is mostly used in Spring MVC service where model data needs to rendered using view.
+3.If response values need to be converted through HttpMessageConverters and sent via response object, extra annotation @ResponseBody needs to be used on the class or the method handlers.
+4.@Controller provides control and flexibility over how the response needs to be sent.
+-----@RestController
+1.Represents RESTful web service in Spring.
+2.It is used in case of RESTful web service that returns object values bound to response body.
+3.The default behavior of the @RestController needs to be written on the response body because it is the combination of @Controller and @ResponseBody.
+4.@RestController annotation has no such flexibility and writes all the results to the response body.
