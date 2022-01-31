@@ -1,0 +1,46 @@
+1. Did Your project include microservices
+2. what is the difference between monolithic and microservice architecture.
+3. you are aware of HTTP status code.
+4. Suppose you are getting 400 status code what is that state.
+5. what is put and post you understand by
+6. what is the updation like Java8 to Java11(new features).
+7. what was enhancement and do you aware of Java8
+8. Can we have generic functional interface.
+9. Are you aware of functionality of containers, kubernates, dockers
+10. In spring what did you exactly used
+11. Are you aware of mvc
+12. What is @RequestBody have you used these annotations
+13. what annotation did you used in your projects.
+14. what is the use of @path variable, @controller, @component, @repository, @service
+15. this and super can you use both in a constructor.
+16. do you know what object clonning is
+----------------------------------
+1.what you use whether is it monolithic or microservice architecture.
+2.How we are validating through API.
+3.how we are validating data which we are getting through API
+4.Through rest we are creating new client. client have data like name, id, mobile no. On mobile number we are proving some text so how you validate it.
+5.If end point required 20 field then how how will be validate this.
+6.How will be authenticate the user.
+7.what if there is only one point so from there how to validate the user.
+8.Are you aware of aspect oriented programming(AOP).
+9.Why we use actuator and how can we use for maintaining the things.
+10.what database you worked on. Any specific reason to choose mysql.
+11.what is CI/CD, quality and management tool. which CI/CD tool you are working ON currently.
+12.how will you manage resourses in multithreaded environment.
+13.can you give some concreate example with programming.
+14.if we are trying to extend a interface more than one class what will happen.
+15.for example a particular end point restricted for a particular role. how to restrict that one. 
+-----------------------------
+1.what is interface in java
+2.can u relate interfaces to any collection classes.
+3.Have you heard about functional interfaces & why is it used
+4. have worked on database part. why we use hybernate instead of JDBC.
+5.Disadvantages of hybernate.
+6.HTTP methods in rest api
+7.why we need different HTTP method
+8. Is there any specific case where we use get Method
+9.you worked on different design patterns can you differentiate these design pattern
+10. what is most challenging part you faced in your last 2 years & you overcome that
+11.Can you  tell me real time example 
+12. How do you stay updated with latest technology
+13. do you have any expectation regarding technology.
