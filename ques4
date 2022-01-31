@@ -1,0 +1,66 @@
+Hi Team,
+#Letest #update real_time 3+ #experience
+#Spring boot interview questions answers 2021
+Q.What does the @SpringBootApplication annotation do internally?
+The @SpringBootApplication annotation is equivalent to using @Configuration, @EnableAutoConfiguration, and @ComponentScan with their default attributes. Spring Boot enables the developer to use a single annotation instead of using multiple. But, as we know, Spring provided loosely coupled features that we can use for each annotation as per our project needs.
+QHow does Spring Boot works?
+Spring Boot automatically configures your application based on the dependencies you have added to the project by using annotation. The entry point of the spring boot application is the class that contains @SpringBootApplication annotation and the main method.
+Spring Boot automatically scans all the components included in the project by using @ComponentScan annotation.
+Q.What is the purpose of using @ComponentScan in the class files?
+Spring Boot application scans all the beans and package declarations when the application initializes. You need to add the @ComponentScan annotation for your class file to scan your components added to your project.
+Q.How does a spring boot application get started?
+Just like any other Java program, a Spring Boot application must have a main method. This method serves as an entry point, which invokes the SpringApplication#run method to bootstrap the application.
+@SpringBootApplication 
+public class MyApplication { 
+       public static void main(String[] args) {    
+             SpringApplication.run(MyApplication.class);        
+               // other statements     
+       } 
+}
+Q.What is Spring Boot CLI and what are its benefits?
+Spring Boot CLI is a command-line interface that allows you to create a spring-based java application using Groovy.
+Example: You don’t need to create getter and setter method or access modifier, return statement. If you use the JDBC template, it automatically loads for you.
+Q.What Are the Basic Annotations that Spring Boot Offers?
+The primary annotations that Spring Boot offers reside in its org.springframework.boot.autoconfigure and its sub-packages. Here are a couple of basic ones:
+@EnableAutoConfiguration – to make Spring Boot look for auto-configuration beans on its classpath and automatically apply them.
+@SpringBootApplication – used to denote the main class of a Boot Application. This annotation combines @Configuration, @EnableAutoConfiguration, and @ComponentScan annotations with their default attributes.
+Q.What is Spring Boot dependency management?
+Spring Boot dependency management is used to manage dependencies and configuration automatically without you specifying the version for any of that dependencies.
+Q.How to disable a specific auto-configuration class?
+You can use exclude attribute of @EnableAutoConfiguration if you want auto-configuration not to apply to any specific class.
+//use of exclude
+@EnableAutoConfiguration(exclude={className}
+Q.Explain @RestController annotation in Sprint boot?
+It is a combination of @Controller and @ResponseBody, used for creating a restful controller. It converts the response to JSON or XML. It ensures that data returned by each method will be written straight into the response body instead of returning a template.
+Q.What is the difference between @RestController and @Controller in Spring Boot?
+@Controller Map of the model object to view or template and make it human readable but @RestController simply returns the object and object data is directly written in HTTP response as JSON or XML.
+Q.What is the difference between RequestMapping and GetMapping?
+RequestMapping can be used with GET, POST, PUT, and many other request methods using the method attribute on the annotation. Whereas getMapping is only an extension of RequestMapping which helps you to improve on clarity on request.
+Q.What is the use of Profiles in spring boot?
+While developing the application we deal with multiple environments such as dev, QA, Prod, and each environment requires a different configuration. For eg., we might be using an embedded H2 database for dev but for prod, we might have proprietary Oracle or DB2. Even if DBMS is the same across the environment, the URLs will be different.
+To make this easy and clean, Spring has the provision of Profiles to keep the separate configuration of environments.
+Q.Where do we define properties in the Spring Boot application?
+You can define both application and Spring boot-related properties into a file called application.properties. You can create this file manually or use Spring Initializer to create this file. You don’t need to do any special configuration to instruct Spring Boot to load this file, If it exists in classpath then spring boot automatically loads it and configure itself and the application code accordingly.
+Q.How to enable debugging log in the spring boot application?
+Debugging logs can be enabled in three ways -
+We can start the application with --debug switch.
+We can set the logging.level.root=debug property in application.property file.
+We can set the logging level of the root logger to debug in the supplied logging configuration file.
+Q How to check the environment properties in your Spring boot application?
+Spring Boot actuator “/env” returns the list of all the environment properties of running the spring boot application.
+Q.How to get the list of all the beans in your Spring boot application?
+Spring Boot actuator “/Beans” is used to get the list of all the spring beans in your application.
+What are the actuator-provided endpoints used for monitoring the Spring boot application?
+Actuators provide below pre-defined endpoints to monitor our application -
+Health
+Info
+Beans
+Mappings
+Configprops
+Httptrace
+Heapdump
+Threaddump
+Shutdown
+Q.How does Spring Boot works?
+Spring Boot automatically configures your application based on the dependencies you have added to the project by using annotation. The entry point of the spring boot application is the class that contains @SpringBootApplication annotation and the main method.
+Spring Boot automatically scans all the components included in the project by using @ComponentScan annotation.
