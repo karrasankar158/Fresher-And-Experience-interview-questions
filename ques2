@@ -1,0 +1,82 @@
+Q.What are the types and common ways to use lambda expressions?
+A lambda expression does not have any specific type by itself. A lambda expression receives type once it is assigned to a functional interface. That same lambda expression can be assigned to different functional interface types and can have a different type.
+For eg consider expression s -> s.isEmpty() :
+Predicate<String> stringPredicate = s -> s.isEmpty(); 
+Predicate<List> listPredicate = s -> s.isEmpty();
+Function<String, Boolean> func = s -> s.isEmpty();
+Consumer<String> stringConsumer = s -> s.isEmpty();
+Common ways to use the expression
+Assignment to a functional Interface —> Predicate<String> stringPredicate = s -> s.isEmpty();
+Can be passed as a parameter that has a functional type —> stream.filter(s -> s.isEmpty())
+Returning it from a function —> return s -> s.isEmpty()
+Casting it to a functional type —> (Predicate<String>) s -> s.isEmpty()
+Q.What is the lambda expression in Java and How does a lambda expression relate to a functional interface?
+Lambda expression is a type of function without a name. It may or may not have results and parameters. It is known as an anonymous function as it does not have type information by itself. It is executed on-demand. It is beneficial in iterating, filtering, and extracting data from a collection.
+As lambda expressions are similar to anonymous functions, they can only be applied to the single abstract method of Functional Interface. It will infer the return type, type, and several arguments from the signature of the abstract method of functional interface.
+Q.In Java 8, what is Method Reference?
+Method reference is a compact way of referring to a method of functional interface. It is used to refer to a method without invoking it. :: (double colon) is used for describing the method reference. The syntax is class::methodName
+For e.g.: 
+Integer::parseInt(str) \\ method reference
+str -> Integer.ParseInt(str); \\ equivalent lambda
+Q.What are the features of a lambda expression?
+Below are the two significant features of the methods that are defined as the lambda expressions: 
+Lambda expressions can be passed as a parameter to another method. 
+Lambda expressions can be standalone without belonging to any class.
+Q.What is the basic structure/syntax of a lambda expression?
+FunctionalInterface fi = (String name) -> { 
+System.out.println("Hello "+name); 
+return "Hello "+name; 
+}
+Lambda expression can be divided into three distinct parts as below:
+1. List of Arguments/Params:
+(String name) 
+A list of params is passed in () round brackets. It can have zero or more params. Declaring the type of parameter is optional and can be inferred for the context. 
+2. Arrow Token:
+-> 
+Arrow token is known as the lambda arrow operator. It is used to separate the parameters from the body, or it points the list of arguments to the body. 3. Expression/Body:
+{ 
+System.out.println("Hello "+name); 
+return "Hello "+name; 
+}
+A body can have expressions or statements. {} curly braces are only required when there is more than one line. In one statement, the return type is the same as the return type of the statement. In other cases, the return type is either inferred by the return keyword or void if nothing is returned.
+Q.What does the String::ValueOf expression mean?
+It is a static method reference to method Valueof() of class String. It will return the string representation of the argument passed.
+Q.What is an Optional class?
+Optional is a container type which may or may not contain value i.e. zero(null) or one(not-null) value. It is part of java.util package. There are pre-defined methods like isPresent(), which returns true if the value is present or else false and the method get(), which will return the value if it is present.
+static Optional<String> changeCase(String word) {
+if (name != null && word.startsWith("A")) {
+   return Optional.of(word.toUpperCase());
+  }
+else {
+return Optional.ofNullable(word); // someString can be null
+}
+}
+Q.What are Java 8 streams?
+A stream is an abstraction to express data processing queries in a declarative way. 
+A Stream, which represents a sequence of data objects & series of operations on that data is a data pipeline that is not related to Java I/O Streams does not hold any data permanently.
+The key interface is java.util.stream.Stream<T>. It accepts Functional Interfaces so that lambdas can be passed. Streams support a fluent interface or chaining. 
+Q.What is the feature of the new Date and Time API in Java 8?
+Immutable classes and Thread-safe 
+Timezone support
+Fluent methods for object creation and arithmetic
+Addresses I18N issue for earlier APIs
+Influenced by popular joda-time package
+All packages are based on the ISO-8601 calendar system
+Q.What is the use of JJS in Java 8?
+As part of Java 8, JJS is a command-line tool that helps to execute the JavaScript code in the console. Below is the example of CLI commands:
+JAVA>jjs
+jjs> print("Hello, Java 8 - I am the new JJS!")
+Hello, Java 8 - I am the new JJS!
+jjs> quit()
+>>
+Q.What is the default method, and why is it required?
+A method in the interface that has a predefined body is known as the default method. It uses the keyword default. default methods were introduced in Java 8 to have 'Backward Compatibility in case JDK modifies any interfaces. In case a new abstract method is added to the interface, all classes implementing the interface will break and will have to implement the new method. With default methods, there will not be any impact on the interface implementing classes. default methods can be overridden if needed in the implementation. Also, it does not qualify as synchronized or final.
+@FunctionalInterface // Annotation is optional 
+public interface Foo() { 
+// Default Method - Optional can be 0 or more 
+public default String HelloWorld() { 
+return "Hello World"; 
+} 
+// Single Abstract Method 
+public void bar(); 
+}
