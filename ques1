@@ -1,0 +1,164 @@
+Hi Team,
+#Letest #update #real_time
+#Data #Structure #Interview #Questions #Answers
+Q.Explain the scenarios where you can use linked lists and arrays.
+Ans- Following are the scenarios where we use linked list over array:
+When we do not know the exact number of elements beforehand.
+When we know that there would be large number of add or remove operations.
+Less number of random access operations.
+When we want to insert items anywhere in the middle of the list, such as when implementing a priority queue, linked list is more suitable.
+Below are the cases where we use arrays over the linked list:
+When we need to index or randomly access elements more frequently.
+When we know the number of elements in the array beforehand in order to allocate the right amount of memory.
+When we need speed while iterating over the elements in the sequence.
+When memory is a concern:
+Due to the nature of arrays and linked list, it is safe to say that filled arrays use less memory than linked lists.
+Each element in the array indicates just the data whereas each linked list node represents the data as well as one or more pointers or references to the other elements in the linked list.
+To summarize, requirements of space, time, and ease of implementation are considered while deciding which data structure has to be used over what.
+Q.What is a doubly-linked list (DLL)? What are its applications.
+Ans- This is a complex type of a linked list wherein a node has two references:
+One that connects to the next node in the sequence
+Another that connects to the previous node.
+This structure allows traversal of the data elements in both directions (left to right and vice versa).
+Applications of DLL are:
+A music playlist with next song and previous song navigation options.
+The browser cache with BACK-FORWARD visited pages
+The undo and redo functionality on platforms such as word, paint etc, where you can reverse the node to get to the previous page.
+Q.How to implement a queue using stack?
+Ans- A queue can be implemented using two stacks. Let q be the queue andstack1 and stack2 be the 2 stacks for implementing q. We know that stack supports push, pop, peek operations and using these operations, we need to emulate the operations of queue - enqueue and dequeue. Hence, queue q can be implemented in two methods (Both the methods use auxillary space complexity of O(n)):
+By making enqueue operation costly:
+Here, the oldest element is always at the top of stack1 which ensures dequeue operation to occur in O(1) time complexity.
+To place element at top of stack1, stack2 is used.
+Pseudocode:
+Enqueue: Here time complexity will be O(n)
+enqueue(q, data):
+  While stack1 is not empty:
+      Push everything from stack1 to stack2.
+      Push data to stack1
+      Push everything back to stack1.
+Dequeue: Here time complexity will be O(1)
+deQueue(q):
+  If stack1 is empty then error
+  else
+      Pop an item from stack1 and return it
+By making dequeue operation costly:
+Here, for enqueue operation, the new element is pushed at the top of stack1. Here, the enqueue operation time complexity is O(1).
+In dequeue, if stack2 is empty, all elements from stack1 are moved to stack2 and top of stack2 is the result. Basically, reversing the list by pushing to a stack and returning the first enqueued element. This operation of pushing all elements to new stack takes O(n) complexity.
+Pseudocode:
+Enqueue: Time complexity: O(1)
+enqueue(q, data):
+    Push data to stack1
+Dequeue: Time complexity: O(n)
+dequeue(q):
+    If both stacks are empty then raise error.
+    If stack2 is empty:
+         While stack1 is not empty:
+             push everything from stack1 to stack2.
+    Pop the element from stack2 and return it
+Q.How do you implement stack using queues?
+Ans- A stack can be implemented using two queues. We know that a queue supports enqueue and dequeue operations. Using these operations, we need to develop push, pop operations.
+Let stack be ‘s’ and queues used to implement be ‘q1’ and ‘q2’. Then, stack ‘s’ can be implemented in two ways:
+By making push operation costly:
+This method ensures that newly entered element is always at the front of ‘q1’, so that pop operation just dequeues from ‘q1’.
+‘q2’ is used as auxillary queue to put every new element at front of ‘q1’ while ensuring pop happens in O(1) complexity.
+Pseudocode:
+Push element to stack s : Here push takes O(n) time complexity.
+push(s, data):
+    Enqueue data to q2
+    Dequeue elements one by one from q1 and enqueue to q2.
+    Swap the names of q1 and q2
+Pop element from stack s: Takes O(1) time complexity.
+pop(s):
+    dequeue from q1 and return it.
+Q.What is the requirement for an object to be used as key or value in HashMap?
+Ans- The key or value object that gets used in hashmap must implement equals() and hashcode() method.
+The hash code is used when inserting the key object into the map and equals method is used when trying to retrieve a value from the map.
+18. How does HashMap handle collisions in Java?
+The java.util.HashMap class in Java uses the approach of chaining to handle collisions. In chaining, if the new values with same key are attempted to be pushed, then these values are stored in a linked list stored in bucket of the key as a chain along with the existing value.
+In the worst case scenario, it can happen that all key might have the same hashcode, which will result in the hash table turning into a linked list. In this case, searching a value will take O(n) complexity as opposed to O(1) time due to the nature of the linked list. Hence, care has to be taken while selecting hashing algorithm.
+Q.What is the time complexity of basic operations get() and put() in HashMap class?
+Ans- The time complexity is O(1) assuming that the hash function used in hash map distributes elements uniformly among the buckets.
+Q.Which data structures are used for implementing LRU cache?
+Ans- LRU cache or Least Recently Used cache allows quick identification of an element that hasn’t been put to use for the longest time by organizing items in order of use. In order to achieve this, two data structures are used:
+Queue – This is implemented using a doubly-linked list. The maximum size of the queue is determined by the cache size, i.e by the total number of available frames. The least recently used pages will be near the front end of the queue whereas the most recently used pages will be towards the rear end of the queue.
+Hashmap – Hashmap stores the page number as the key along with the address of the corresponding queue node as the value.
+Q.Can we store a duplicate key in HashMap?
+Ans- No, duplicate keys cannot be inserted in HashMap. If you try to insert any entry with an existing key, then the old value would be overridden with the new value. Doing this will not change the size of HashMap.
+This is why the keySet() method returns all keys as a SET in Java since it doesn't allow duplicates.
+Q.Write a recursive function to calculate the height of a binary tree in Java.
+Consider that every node of a tree represents a class called Node as given below:
+  public class Node{
+      int data;
+      Node left;
+      Node right;
+  }
+Then the height of the binary tree can be found as follows:
+      int heightOfBinaryTree(Node node)  
+      { 
+          if (node == null) 
+              return 0; // If node is null then height is 0 for that node.
+          else 
+          { 
+              // compute the height of each subtree
+              int leftHeight = heightOfBinaryTree(node.left); 
+              int rightHeight = heightOfBinaryTree(node.right); 
+              //use the larger among the left and right height and plus 1 (for the root)
+              return Math.max(leftHeight, rightHeight) + 1; 
+          } 
+}
+Q.Write Java code to count number of nodes in a binary tree.
+int countNodes(Node root)
+{
+    int count =  1;             //Root itself should be counted
+    if (root ==null)
+        return 0;
+    else
+    {
+        count += count(root.left);
+        count += count(root.right);
+        return count;
+    }
+Q.Given an m x n 2D grid map of '1’s which represents land and '0’s that represents water, return the number of islands (surrounded by water and formed by connecting adjacent lands in 2 directions - vertically or horizontally). Assume that the boundary cases - which is all four edges of the grid are surrounded by water.
+Constraints are:
+m == grid.length
+n == grid[i].length
+1 <= m, n <= 300
+grid[i][j] can only be ‘0’ or ‘1’.
+Example:
+Input: grid = [
+[“1” , “1” , “1” , “0” , “0”],
+[“1” , “1” , “0” , “0” , “0”],
+[“0” , “0” , “1” , “0” , “1”],
+[“0” , “0” , “0” , “1” , “1”]
+]
+Output: 3
+Solution:
+class InterviewBit {
+    public int numberOfIslands(char[][] grid) {
+        if(grid==null || grid.length==0||grid[0].length==0)
+            return 0;
+        int m = grid.length;
+        int n = grid[0].length;
+        int count=0;
+        for(int i=0; i<m; i++){
+            for(int j=0; j<n; j++){
+                if(grid[i][j]=='1'){
+                    count++;
+                    mergeIslands(grid, i, j);
+                }
+            }
+        }
+        return count;
+    }
+    public void mergeIslands(char[][] grid, int i, int j){
+        int m=grid.length;
+        int n=grid[0].length;
+        if(i<0||i>=m||j<0||j>=n||grid[i][j]!='1')
+            return;
+        grid[i][j]='X';
+        mergeIslands(grid, i-1, j);
+        mergeIslands(grid, i+1, j);
+        mergeIslands(grid, i, j-1);
+        mergeIslands(grid, i, j+1);
+    }
+}
