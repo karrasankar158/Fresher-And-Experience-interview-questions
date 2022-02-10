@@ -1,0 +1,208 @@
+Hi Team,
+#Letest #project #related #interview #questions #answers 2 + #experience  2022
+Q.What are the collections you have used in project?
+Sol : In our project, we have used List and Map
+Map : To invoke the stored procedure using spring JDBC. Here executes() method will expect argument
+input and output as map.
+Can you write snippet code how you implement in the project?
+How to insert and retrieve the values in Map?
+How HashMap internally will work?
+List : From the enroll DB we will get the list mobile numbers and card details .
+To handle this, we are using List.
+--> How List is internally will work?
+-->Can you write our own ArrayList?How it is ?
+-->Can you write List snippet code how you have used in project?
+Q.What is the day-to-day activities in your office?
+• Our office official timings: 9:00 AM to 6:00 PM
+• We will reach office @ 9 or 9:30 AM.
+• First will check the client emails .So we came to know that what work we need to do.
+• Attending the scrum call or onshore status call @10:00 AM This will be around 10:00 AM to 10:30
+AM
+• I will get clarify if any doubts in call.
+• Will go for tea break 10:15 AM to 10 :45 AM
+• I will start project work and continue until 1 or 1:30 PM
+• Will go for lunch 1 hour 1:30 PM to 2:30 PM
+• Start work from 2:30 PM to 4:30 PM .
+• Tea break 15 mins
+• Start work from 4:45 PM to 6 :30 PM or 7:00 PM
+• Before leave office sent status mail to onshore team.
+Q.Can you explain your project scenario?and write the snippet code?
+Sol : In our project to build the response we are writing 2 methods with same name one is for to build
+success response another one to build the failure response.
+Public class ProdudctResponseBuilder{
+public ProductServiceResp buildServiceResp(final ProductDaoResp
+serviceResp) {
+final ProductServiceResp resp = new ProductServiceResp();
+//logic return resp;
+}
+public ProductServiceResp buildServiceResp (String respCode,String 
+respMsg) {final ProductServiceResp resp = new ProductServiceResp();
+//logic return resp.
+}
+}
+Q.If already junit is there why you should use Mockito?
+Sol:
+• If our application will not have any backends then we can use only Junit is enough.So not required
+mockito and powermockito.
+• If our application needs to communicate with backend then using junit we cannot test all the
+scenarios. So that Code coverage will be less.
+• To improve the code coverage we should use Mockito
+• If already Mockito is there why you should use PowerMockito?
+Sol: Actually in our project we have used initially Mockito only.
+• We have written some of the test cases using mockito to mock the external/back end systems.
+• In some of the scenarios mockito is unable to mock an object because of this issue we are unable
+to test the all the scenarios. We did Google to resolve these issue then we came to know that
+PowerMockito can resolve these issue. So we have implemented powermockito in our project.
+Q.What are the exceptions you have faced during project development? and deployment?
+Sol:
+During development we have faced exceptions like NullPointerException,
+ClassNotFoundException,BeanInstanceCreationException,IllegalArgumentException.
+During deployment we have faced exceptions like OutofMemory error,Heap dumps (temporary) file : These files will be created by remote os
+day to day these files size will be increased. In dev server we will delete the heap dumps by login into
+putty using dev server ipaddress, username,pwd
+$temp>rm -rf *
+More applications deployed in remote server:
+The applications size more than remote server size then we will try delete the unused application by
+getting permission from owner of the application
+If the issue is still not resolved then raise the incident to network team they will be fix the issue.
+Q. Is it possible to handle the exception without try and catch?
+Sol: yes, we can do
+@ExceptionHanlder will be configured in @ControllerAdvice class.
+@ControllerAdvice
+public class CardPaymentsControllerAdvice{
+@ExceptionHandler(value= ServicReqInvalidException.class)
+@ResponseBody
+Public CardPaymentServiceResp handleReqInvalidException(ServicReqInvalidException exe){
+//prepare the error response
+}
+}
+Q.Can you write snippet code how to write custom exception?
+Public class ReqInvalidException extends Exception { Private String errorCode;
+Private String errorMsg;
+Public ReqInvalidException (String errorCode,String errorMsg){
+this.errorCode= errorCode;
+this.errorMsg =errorMsg;
+}
+//getters
+}
+Exception VS RuntimeException :
+Exception: It is checked exception, which are enabled at compile time Runtime Exception: It is unchecked
+exception, which are enabled at runtime.
+Note: either checked or unchecked exceptions will be raised at runtime only
+Q.Can you explain how you have handled exceptions in your project and write the snippet code?
+Sol: Generally to implement exceptions in our we should use custom exceptions or use defined
+exceptions. According to client requirement
+We have categorized custom exceptions into different kind of exceptions
+RequestInvalidException
+BusinessException
+SystemException
+UnknownErrorException
+Q.What are the Linux commands you have used in your project?
+Sol: To communicate with remote servers ( Dev or test or prod ) which are deployed on Linux servers
+then we should use linux commands using putty.
+ls
+cd
+pwd
+chmod -Rf 7777 filename
+rm -Rf 777 filename
+tail -f catalina.out
+./startup.sh
+8 ./shutdown.sh
+Clear
+Cat filename
+Q.How to deploy the application ?
+• We have developed the code and commit the code into GIT.
+• Build all the maven modules into Jenkins.
+• Jenkins will checkout the code from GIT and generates jars, war and deploys the application into
+dev and test environment based on configuration in Jenkins we will choose dev or test servers.Note: We will not deploy the application into production environment as we don’t have access for
+prod servers
+• For production deployment shares the Jenkins URL to release management team. They will follow
+with network team to deploy the application into prod servers.
+• Once deployment is done .Release Manager will inform to us. So that we will start the testing the application (validate the changes).
+Q.How many environments for your projects?
+Sol: 1. Dev (E1) 2. Test (E2 or UAT) 3. Production
+Q.Q)How to identify the issue?
+The production support team will raise an incident and assign to dev team.
+Seviority:There are different types of seviorities like Sev1(P1), Sev2(P2), Sev3(P3)
+Sev 1 --- Immediately Bridge opened . Everyone related to project will be joined and resolve the issue
+within one hour.
+Scenarios: Application is not working or not started db
+Sev2 --
+we should accept the IMR with in 15 mins Need to resolve the issue in 2 days and
+Do the changes in local and moved to dev and test environments.If it is working fine then only move the
+changes to production.
+Scenario: Application is working but for sometimes success and for sometimes getting 500 errors Sev 3 IMR: Fix this issue. Move the changes to live in next 1 month
+Q.What are the problems or risks you have faced in your project ?Can you explain them?
+Sol :
+Problem1 : Spring scopes prototype is override by singleton
+In my project we have used spring ioc for instantiating the beans. Starting we have implemented xml file
+configuration as per architect suggestion we have moved to java config. While migrating we have forgot
+remove the entries in xml file.
+<beans>
+<context:component-scan basepackage="com.barclys"/>
+<bean id="balancetask" class="BalanceTask"/>
+<bean id="transactiontaks" class="TransactionTask"/>
+</beans>
+Java Config :
+We have implemented parallel calls in my project, unfortunately we didn’t close the threads beacuse of
+this issue in production servers will be down for every week, after more analysis we identify that issue
+with thread are not closed properly.
+Q)Can you explain how it works SSL?
+Validate certificate 2. Establish the Secure Connection
+3. Transactions will be in secure (encrypted format)
+Application Level:
+Authentication is is used validate the credentials and Authorized to access the particular resource or not
+Authentication Steps :
+→Using BASE64 algorithm username and pwd will be encoded and send this in request header as below
+Authorization: Basic YTEEESWE#$%^&==
+Q.6.How you have implemented security in your project?
+Sol :
+Case 1: Yes. We have implemented security in our project.
+SSL
+Application Level
+But i didn’t get the chance to work on this. My senior developer has implemented this. I know the
+theoretical process how the security work .
+(OR)
+Case 2: Yes. We have implemented security in our project.
+SSL
+Application Level
+SSL: To implement this SSL we need JKS file and Password Client has provided these details.
+We will share these details to network team; they will be configured JKS file at server level.
+We will share public key to the entire consumer. They will be configuring at their appserver level. So that
+for every interaction between client and server will be transferred in encryption form.
+Q.5.What are the roles and responsibilities in your Project?
+Sol:
+For ❤ yrexp:
+My Role is Developer and my responsibilities are involved in develop the web service using rest and
+writing test cases using junit,mockito,powemockito and also involved in supporting to testing team to fix
+the bugs.
+For >= 3 yrs.
+My Role is Sr.Developer and my responsibilities are understanding project requirement by attending
+client calls from onshore, involved in develop the web service using rest and writing test cases using
+junit,mockito,powemockito and also helping team if they will struck anywhere and involved in supporting to testing team to fix the bugs.
+Q.Can you write the snippet code ?
+@Test
+Public void testCardNumber_Invalid_Scenario(){
+---
+Assert.assertEquals(--,--);
+}
+Q.23. What is polymorphism? Where have you used in the project?
+Sol: Single task may perform many operations.
+static (method overloading ) 2. dynamic ( method overriding )
+In our project we have used method overloading, writing 2 or more methods in a class. The method name
+isthe same but arguments are different.
+Q.What is encapsulation?where you have used in project?
+Sol : Encapsulation : Data hiding + Abstraction
+Data hiding : By declaring all the member variables as private in a class .
+Abstraction : Hide the implemenation details .
+public class Account{
+private int amount;
+public void setAmount(String amount){ if( amount > 100 ){
+this.amount = amount;
+}
+}
+In our project, we have used to create the beans like DTO, VO. These beans we have applied Encapsulation.
+Q.How do you perform the code coverage?
+Sol: We have Cobertura and JACOCO plugins and Configure these plugins in pom.xml
+And we ran mvn cobertura:cobertua command to get the cobertura report.
+>mvn clean test // for JACOCO
