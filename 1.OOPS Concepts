@@ -70,7 +70,8 @@ Inheritance(IS-A Relation):
 Acquiring Properties from Parent to Child is called as Inheritance.
 it is also called as IS-A Relationship 
 using extends keyword we can implement IS-A Relationship
-advantage is re usability  
+advantage is re usability.
+Types: 1. Single, 2. MultiLevel, 3. Hierarchical. 
 java not supported multiple inheritance for to avoid ambiguity problems 
 
 HAS-A RELATIONSHIP:
