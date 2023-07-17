@@ -24,6 +24,7 @@ suffix
 
 HandlerMapping(controller methods):
 map incoming requests to urls to controller.
+
 Interceptors:
 pre/post logics like filters.
 
