@@ -75,7 +75,7 @@ Types: 1. Single, 2. MultiLevel, 3. Hierarchical.
 java not supported multiple inheritance for to avoid ambiguity problems 
 
 HAS-A RELATIONSHIP:
-1. also called as composition or aggregation 
+1. also called as composition or aggregation or Embedded one class with another class.
 2. mostly implemented by using new Operator
 3. advantages of HAS-A relationship is Re usability
 
