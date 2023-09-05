@@ -61,26 +61,29 @@ Abstraction in Java:
 6.allowed to declare both static and instance variables.
 
 Encapsulation In Java:
-Binding of Data and Corresponding methods into a single Unit is called as Encapsulation.
+The binding of Data and Corresponding methods into a single Unit is called Encapsulation.
 Encapsulation=Data Hiding+Abstraction.
-By using private modifier and one pair of public setter and getter methods.
+By using a private modifier and one pair of public setter and getter methods.
 security.
 
 Inheritance(IS-A Relation):
-Acquiring Properties from Parent to Child is called as Inheritance.
-it is also called as IS-A Relationship 
-using extends keyword we can implement IS-A Relationship
-advantage is re usability.
+Acquiring Properties from Parent to Child is called Inheritance.
+It is also called an IS-A Relationship 
+Using extends keyword we can implement the IS-A Relationship
+The advantage is re-usability.
 Types: 1. Single, 2. MultiLevel, 3. Hierarchical. 
-java not supported multiple inheritance for to avoid ambiguity problems 
+java does not support multiple inheritance to avoid ambiguity problems 
 
 HAS-A RELATIONSHIP:
-1. also called as composition or aggregation or Embedded one class with another class.
-2. mostly implemented by using new Operator
-3. advantages of HAS-A relationship is Re usability
+1. also called as composition[Strong Association] 
+   Example: University-Department
+2. or aggregation[Weak Association] or Embedded one class with another class.
+  Example: Department-Professor.
+3. mostly implemented by using new Operator
+4. The advantage of the HAS-A relationship is Reusability
 
 Polymorphism in java:
-Same name with different forms is the concept of Polymorphism 
+The same name with different forms is the concept of Polymorphism 
 Compile time: Overloading 
 Runtime        : Overriding
 flexibility   
