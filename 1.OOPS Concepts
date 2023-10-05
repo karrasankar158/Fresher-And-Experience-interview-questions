@@ -46,7 +46,7 @@ Sir I would like to know about the job timings and transport facility
 and what will be the job location and salary scale for this job in your organization?
 
 class: class is a blueprint of an object it has properties, methods and blocks, etc...
-object: object is an instance of a class(or a copy).
+object: object is an instance of a class(or a copy of class).
 
 Data Hiding:
 To avoid outside class cannot access our internal data Directly.
