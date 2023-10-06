@@ -63,8 +63,8 @@ Abstraction in Java:
 Encapsulation In Java:
 The binding of Data and Corresponding methods into a single Unit is called Encapsulation.
 Encapsulation=Data Hiding+Abstraction.
-By using a private modifier and one pair of public setter and getter methods.
-security.
+We can achieve Encapsulation by using a private modifier and one pair of public setter and getter methods.
+The advantage is security.
 
 Inheritance(IS-A Relation):
 Acquiring Properties from Parent to Child is called Inheritance.
