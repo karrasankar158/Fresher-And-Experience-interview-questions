@@ -71,8 +71,9 @@ Acquiring Properties from Parent to Child is called Inheritance.
 It is also called an IS-A Relationship 
 Using extends keyword we can implement the IS-A Relationship
 The advantage is re-usability.
-Types: 1. Single, 2. MultiLevel, 3. Hierarchical. 
-java does not support multiple inheritance to avoid ambiguity problems 
+Types of Inheritance: 1. Single, 2. MultiLevel, 3. Hierarchical. 
+java does not support multiple inheritance through classes to avoid ambiguity problems
+but java supports multiple inheritance through interfaces.
 
 HAS-A RELATIONSHIP:
 1. also called as composition[Strong Association] 
