@@ -17,7 +17,16 @@ Spring MVC Flow:
 Request-DS-HM-beanId to DS-DS get Handler object-DS calls Handler method-DS gets LVN+model data keeps in model attribute-
 DS gives LVN to ViewResolver-ViewResolver gives View Object to DS-DS calls render()on View Object-PVC-DS-response to Browser.
  
-ViewResolver:
+ViewResolver[UI pages like JSP]:
+The ViewResolver is an interface that has few implementation classes are there. 
+This component takes the logical view name from DispatcherServlet and gives the View object[View impl class object] 
+the physical view name location. 
+1. InternalResourceViewResolver[Default, useful to use JSP/Servlets components of private area as view components],
+2. UrlBasedViewResolver[Allows to take any technology view component],
+3. ResourceBundleViewResolver[Allows to collect info about physical view components and location from properties file],
+4. XmlViewResolver[ Allows to collect info about physical view components and location from XML file),
+5. BeanNameViewResolver[ Allows to take java classes view components].
+6. TilesViewResolver[ Allows to tiles Framework for Views].
 logical view name 
 prefix
 suffix
@@ -38,7 +47,8 @@ The controller is an interface that has few implementation classes are there.
 10. UrlFilenameViewController.
 
 HandlerMapping[controller methods]:
-map incoming requests to URLs to the controller.
+Map incoming requests to URLs to the controller.
+This component is useful to map incoming URI/URLs with handler/controller classes. 
 The HandlerMapping is an interface that has few implementation classes are there. 
 1. SimpleUrlHandlerMapping[Best in XML driven spring MVC configuration],
 2. BeanNameURLHandlerMapping[Default in XML driven configuration],
