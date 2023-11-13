@@ -22,7 +22,22 @@ logical view name
 prefix
 suffix
 
-HandlerMapping(controller methods):
+Handler[Controller]:
+The most common way to implement the handler in the Spring Web MVC application is as a controller.
+Built-in controller types
+The controller is an interface that has few implementation classes are there. 
+1. AbstractCommandController[For form submission without validations],
+2. SimpleFormController[For form submission with validations],
+3. AbstractWizardFormController[To display and process form that is coming in chain and etc],
+4. MultiActionController[To handle multiple hyperlinks/multiple submits button requests],
+5. AbstractController[ For Hyberlinks], 
+6. AbstractUrlViewController, 
+7. ParameterizableViewController, 
+8. ServletForwardingController, 
+9. ServletWrappingController, 
+10. UrlFilenameViewController
+
+HandlerMapping[controller methods]:
 map incoming requests to urls to controller.
 
 Interceptors:
