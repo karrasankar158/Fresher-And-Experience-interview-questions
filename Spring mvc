@@ -38,7 +38,13 @@ The controller is an interface that has few implementation classes are there.
 10. UrlFilenameViewController.
 
 HandlerMapping[controller methods]:
-map incoming requests to urls to controller.
+map incoming requests to URLs to the controller.
+The HandlerMapping is an interface that has few implementation classes are there. 
+1. SimpleUrlHandlerMapping[Best in XML driven spring MVC configuration],
+2. BeanNameURLHandlerMapping[Default in XML driven configuration],
+3. ControllerClassNameHandlerMapping,
+4. DefaultAnnotationHandlerMapping,
+5. RequestMappingHandlerMapping[Best for annotation driven configuration and default from spring 5.x].
 
 Interceptors:
 pre/post logics like filters.
@@ -48,7 +54,7 @@ getmapping+postmappping
 
 Double Posting Problem:
 Duplicate Form Submission
-Submitting post mode request for multiple times either by pressing back button and submit or using refresh button
+Submitting post mode requests multiple times either by pressing the back button and submit or using the refresh button
 example: payment gateway.
 
 
