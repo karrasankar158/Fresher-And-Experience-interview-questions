@@ -35,7 +35,7 @@ The controller is an interface that has few implementation classes are there.
 7. ParameterizableViewController, 
 8. ServletForwardingController, 
 9. ServletWrappingController, 
-10. UrlFilenameViewController
+10. UrlFilenameViewController.
 
 HandlerMapping[controller methods]:
 map incoming requests to urls to controller.
