@@ -59,6 +59,8 @@ Abstraction in Java:
 4. we can allowed to write both abstract and concrete methods(concrete methods nothing but method with body).
 5.it has one zero parameter constructor.
 6.allowed to declare both static and instance variables.
+7. While using the abstract method in an abstract class mandatory to  declare an abstract keyword 
+   whereas inside the interface abstract keyword is added by default JVM. 
 
 Encapsulation In Java:
 The binding of Data and Corresponding methods into a single Unit is called Encapsulation.
