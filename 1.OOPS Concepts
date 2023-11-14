@@ -60,7 +60,7 @@ Abstraction in Java:
 5.it has one zero parameter constructor.
 6.allowed to declare both static and instance variables.
 7. While using the abstract method in an abstract class mandatory to  declare an abstract keyword 
-   whereas inside the interface abstract keyword is added by default JVM. 
+   whereas inside the interface abstract keyword JVM is added by default. 
 
 Encapsulation In Java:
 The binding of Data and Corresponding methods into a single Unit is called Encapsulation.
