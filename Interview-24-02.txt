@@ -1,0 +1,111 @@
+1. 10:00am=Naveen J [Selected]
+questions:
+1) explain about thread and different ways of creating Thread?
+2) create situation for raising class not found exception?
+3) what are spring bean scopes?
+4) explain about Hashmap Internals?
+5) what is Garbage Collection in java?
+6) What are the differences between this and super keyword?
+7) what is Boiler plate code problem?
+8) Difference between Autowired and Qualifier?
+
+program1: 
+input: take array of integer elements like 70,10,30,14,82,90,65
+by using Traditional for loop sort the elements and display. 
+output: 10,14,30,65,70,82,90.
+
+program2: 
+input: String s="Sample";
+output: elpmaS
+How to reverse a given String?
+
+2. 10:30am=Veerachary [Not joined in meeting]
+questions:
+1) explain about strings and different ways to create string?
+2) difference between String, String buffer,String Builder?
+3) what is marker interface?
+4) How can you handle exceptions in your project?
+5) what are different types of annotations used in your controller class?
+6)  What are the differences between throw and throws?
+7) explain different annotations used in entity or domain class?
+8) Difference between Session and SessionFactroy?
+
+program: 
+input: int a=10;
+converting number into binary(1010)
+replacing 0 to x(1x1x)
+output: 1x1x
+
+3. 11:00am =Bhargavi T[Selected]
+questions:
+1) difference between arrays and collections framework?
+2) what is rest end point?
+3) diffference between level1 and level2 caches?
+4) difference between Comparable and Comparator?
+5) What is Singleton Design pattern?
+6) What are the differences between final, finally, and finalize?
+7) explain about var-args method java 1.5 feature?
+8) Difference between Get and load methods in hibernate?
+
+program: CalculateAveragOfNumbers
+input: 20,9,5,4,9
+step1: use ArrayList(Double) add elements 
+step2: find length of elements[size]
+step3: loooping elements and add into total variable.
+step4: calculate avaerage total/size and print.
+output: 9.4
+
+4. 11:30am=Revathi Madasu[Selected]
+questions:
+1) difference between overloading and overridding?
+2) What is the difference between == operator and .equals() method?
+3) explain about JVM architecture?
+4) create situation for raising Ambigeous error?
+5) Why java is platform independent language? 
+6) how to Prevent[stop] a Thread from Execution?
+7) Difference between Controller and Restcontroller?
+8) what is json?
+
+program: Pattern program
+step1: take size as n=4
+step2: looping i=1 and print k starts from 1.
+print pattern: 1 2 3  4
+               5 6 7  8
+               9 10 11 12
+
+
+5. 12:00pm=[]
+questions:
+1) difference between abstract class and interface?
+2) why string is immutable?
+3) explain about java 8 features?
+4) difference between break and continue?
+5) What is Polymorphism in java?
+6) what is Serialization in java?
+7) What is synchronized keyword in java?
+8) what is Dependency Injection?
+
+program: find third larget value of an Array?
+input: 10,40,50,80,20,90
+sort the array of elements
+find size[length],size-3
+output: 3rd largestelement is: 50.
+
+6. 12:30pm=[]
+1) explain about exception handling?
+2) what is thread safety?
+3) How to create an Immutable class in java?
+4) why generics are introduced in java?
+5) what is constructor?
+6) Difference between arraylist and vector?
+7) Difference between comparator and comparable?
+8) What is autowiring and it types?
+
+program: How to find duplicate characters in a String
+input: String name="ashok sharma";
+step1: read string data
+step2: converting into chars
+step3: finding length of char array
+step4: looping char array
+step5: checking euqlity and print duplicate chars
+output: a,s,h
